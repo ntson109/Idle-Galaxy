@@ -1,0 +1,24 @@
+{
+  "GoldStart" : 120000,
+  "CoinStart" : 10,
+  "RatioBorn" : [
+    1,
+    0.7,
+    0.3
+    ],  
+  "ID_UnityAds_ios" : "",
+  "ID_Inter_android" : "",
+  "ID_Inter_ios" : "",
+  "ID_Banner_ios" : "",
+  "kProductID50" : "consumable",
+  "kProductID300" : "consumable",
+  "kProductID5000": "consumable",
+  "link_ios" : "",
+  "link_android" : "",
+  "string_Share" : "",
+  "introduction": {
+  "warning1" : "",
+  "warning2" : "",
+  "warning3" : ""
+  }
+}
