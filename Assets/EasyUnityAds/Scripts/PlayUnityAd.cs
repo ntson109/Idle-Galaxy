@@ -10,41 +10,46 @@ using UnityEngine.Events;
 using UnityEngine.Advertisements; // only compile Ads code on supported platforms
 #endif
 
-public class PlayUnityAd : MonoBehaviour {
+public class PlayUnityAd : MonoBehaviour
+{
 
-	const string placement = "rewardedVideo";
+    const string placement = "rewardedVideo";
 
-	[System.Serializable] public class mEvent : UnityEvent {}
-	public mEvent onAdAvailable;
-	public mEvent onAdSuccess;
-	public mEvent onAdFail;
+    [System.Serializable] public class mEvent : UnityEvent { }
+    public mEvent onAdAvailable;
+    public mEvent onAdSuccess;
+    public mEvent onAdFail;
 
-	[Tooltip("'watchAdButton' is optional. If an advertisement is available, the button will be set to interactable. To show ad with button, call 'showRewardedAd()'.")]
-	public Button watchAdButton;
+    [Tooltip("'watchAdButton' is optional. If an advertisement is available, the button will be set to interactable. To show ad with button, call 'showRewardedAd()'.")]
+    public Button watchAdButton;
 
-	[Tooltip("Is the ad rewarded? If yes, the callbacks on success/fail will be called and the user can't skip the Ad. Else the default will be played.")]
-	public bool rewardedAd = true;
+    [Tooltip("Is the ad rewarded? If yes, the callbacks on success/fail will be called and the user can't skip the Ad. Else the default will be played.")]
+    public bool rewardedAd = true;
 
-	void Start () {
-		if (watchAdButton != null) {
-			watchAdButton.interactable = false;
-		}
-		StartCoroutine (testForAdvertisement());
+    void Start()
+    {
+        if (watchAdButton != null)
+        {
+            watchAdButton.interactable = false;
+        }
+        StartCoroutine(testForAdvertisement());
 
-		#if !UNITY_ADS
-			Debug.LogWarning("Unity Ads is not enabled.");
-		#endif
-	}
+#if !UNITY_ADS
+        Debug.LogWarning("Unity Ads is not enabled.");
+#endif
+    }
 
-	//Assume advertising is not available at the beginning.
-	bool advertisementAvailable = false;
+    //Assume advertising is not available at the beginning.
+    bool advertisementAvailable = false;
 
-	//cyclic test, if ad is available and enable/disable the 'watchAdButton' and generate 'onAdAvailable' event
-	IEnumerator testForAdvertisement(){
-		yield return new WaitForSecondsRealtime (0.5f);
+    //cyclic test, if ad is available and enable/disable the 'watchAdButton' and generate 'onAdAvailable' event
+    IEnumerator testForAdvertisement()
+    {
+        yield return new WaitForSecondsRealtime(0.5f);
 
-		while (true) {
-			#if UNITY_ADS
+        while (true)
+        {
+#if UNITY_ADS
 			if (( Advertisement.IsReady (placement) && rewardedAd == true) || (Advertisement.IsReady() && rewardedAd == false )) {
 
 				if (watchAdButton != null) {
@@ -63,33 +68,38 @@ public class PlayUnityAd : MonoBehaviour {
 				advertisementAvailable = false;
 			}
 
-			#endif
-				
+#endif
 
-			yield return new WaitForSecondsRealtime (1f);
-		} 
-	}
 
-	/*
+            yield return new WaitForSecondsRealtime(1f);
+        }
+    }
+
+    /*
 	 * Call 'showAd' to start play an ad.
 	 * The type of ad is depending on configuration 'rewardedAd'
 	 */
-	public void showAd(){
-		if (rewardedAd == true) {
-			showRewardedAd ();
-		} else {
-			showDefaultAd ();
-		}
-	}
+    public void showAd()
+    {
+        if (rewardedAd == true)
+        {
+            showRewardedAd();
+        }
+        else
+        {
+            showDefaultAd();
+        }
+    }
 
-	/*
+    /*
 	 * Call 'showRewardedAd' to start play an ad.
 	 * If it fails (stopped or not available), the event 'onAdFail' is invoked.
 	 * If it was successful, the event 'onAdSuccess' is invoked.
 	 */
-	private void showRewardedAd(){
+    private void showRewardedAd()
+    {
 
-		#if UNITY_ADS
+#if UNITY_ADS
 		if (!Advertisement.IsReady(placement))
 		{
 			HandleShowResult(ShowResult.Failed);
@@ -98,16 +108,17 @@ public class PlayUnityAd : MonoBehaviour {
 			var options = new ShowOptions { resultCallback = HandleShowResult };
 			Advertisement.Show(placement, options);
 		}
-		#endif
-	}
+#endif
+    }
 
-	/*
+    /*
 	 * Call 'showDefaultAd' to start play an ad.
 	 * If it fails (stopped or not available), the event 'onAdFail' is invoked.
 	 * If it was successful, the event 'onAdSuccess' is invoked.
 	 */
-	private void showDefaultAd(){
-		#if UNITY_ADS
+    private void showDefaultAd()
+    {
+#if UNITY_ADS
 		if (!Advertisement.IsReady())
 		{
 			HandleShowResult(ShowResult.Failed);
@@ -116,10 +127,10 @@ public class PlayUnityAd : MonoBehaviour {
 			var options = new ShowOptions { resultCallback = HandleShowResult };
 			Advertisement.Show(options);
 		}
-		#endif
-	}
+#endif
+    }
 
-	#if UNITY_ADS
+#if UNITY_ADS
 	private void HandleShowResult(ShowResult result)
 	{
 		switch (result) {
@@ -136,6 +147,6 @@ public class PlayUnityAd : MonoBehaviour {
 			break;
 		}
 	}
-	#endif
+#endif
 
 }

@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using com.shephertz.app42.paas.sdk.csharp;
+using com.shephertz.app42.paas.sdk.csharp.storage;
 
 [RequireComponent(typeof(LoadDataJson))]
 public class GameConfig : MonoBehaviour {
@@ -25,6 +27,7 @@ public class GameConfig : MonoBehaviour {
     public string link_ios;
     public string link_android;
     public string string_Share;
+    public List<string> lstIntroduction = new List<string>();
     public string kProductID50 = "consumable";
     public string kProductID300 = "consumable";
     public string kProductID5000 = "consumable";
@@ -51,6 +54,14 @@ public class GameConfig : MonoBehaviour {
         //            Debug.Log("Failed to authenticate");
         //    });
         //}
+    }
+
+    public void RestoreProgess()
+    {
+        StorageService storageService = App42API.BuildStorageService();
+        storageService.FindDocumentByKeyValue("Db", "Data", "id", GameConfig.id, new UnityCallBack3());
+        //UIManager.Instance.panelSetting.SetActive(false);
+        //UIManager.Instance.PushGiveGold("Waiting ...");
     }
     #endregion
 }

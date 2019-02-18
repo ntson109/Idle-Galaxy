@@ -17,8 +17,8 @@
   "link_android" : "",
   "string_Share" : "",
   "introduction": {
-  "warning1" : "",
-  "warning2" : "",
-  "warning3" : ""
+  "warning1" : "abc",
+  "warning2" : "abc",
+  "warning3" : "abc"
   }
 }

@@ -43,8 +43,8 @@ public class Ads : MonoBehaviour
 
     void Update()
     {
-        timeAds += Time.deltaTime;
-        ShowInterstitialAd();
+        //timeAds += Time.deltaTime;
+        //ShowInterstitialAd();
     }
 
     #region ===ADMOB===
