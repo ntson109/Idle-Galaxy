@@ -13,11 +13,6 @@ public class Ads : MonoBehaviour
     BannerView bannerView;
 
     bool isLoadAds = false;
-    //bool isShowAds = false;
-
-    public GameObject panelPlane;
-    public Text txtPlaneVideoAds;
-    public Text txtPlaneReciveDollar;
 
     [Header("Time")]
     public float timeAds = 1;
