@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -92,5 +93,72 @@ public class UIManager : MonoBehaviour {
             mouseClick.transform.position = mousePos;
         }
     }
+
+    private string[] timeFormat = new string[]
+	{
+		"d",
+		"h",
+		"m",
+		"s"
+	};
+
+    private string[] cashFormat = new string[]
+	{
+		"K",
+		"M",
+		"B",
+		"T"
+	};
+    public string ConvertCash(double cash)
+    {
+        if (cash < 1000.0)
+        {
+            return Math.Round(cash).ToString();
+        }
+        int num = 0;
+        double num2 = 0.0;
+        for (int i = 0; i < cashFormat.Length; i++)
+        {
+            num2 = cash / Math.Pow(1000.0, (double)(i + 1));
+            if (num2 < 1000.0)
+            {
+                num2 = Math.Round(num2, (num2 >= 100.0) ? 0 : 1);
+                num = i;
+                break;
+            }
+        }
+        return num2.ToString() + cashFormat[num];
+    }
+
+    public string ConvertTime(int second)
+    {
+        int num = second / 86400;
+        int num2 = second % 86400 / 3600;
+        int num3 = second % 3600 / 60;
+        int num4 = second % 60;
+        if (num > 0)
+        {
+            return num.ToString() + timeFormat[0] + ((num2 <= 0) ? string.Empty : (num2.ToString() + timeFormat[1]));
+        }
+        if (num2 > 0)
+        {
+            return num2.ToString() + timeFormat[1] + ((num3 <= 0) ? string.Empty : (num3.ToString() + timeFormat[2]));
+        }
+        if (num3 > 0)
+        {
+            return num3.ToString() + timeFormat[2] + ((num4 <= 0) ? string.Empty : (num4.ToString() + timeFormat[3]));
+        }
+        return num4.ToString() + timeFormat[3];
+    }
+
+    public int GetOfflineTime(string dateTime)
+    {
+        if (dateTime == string.Empty)
+        {
+            return 0;
+        }
+        return (int)Mathf.Round((float)DateTime.Now.Subtract(Convert.ToDateTime(dateTime)).TotalSeconds);
+    }
+    
     #endregion
 }
