@@ -46,7 +46,7 @@ public class AppsFlyerAnalytic : MonoBehaviour
 		AppsFlyer.loadConversionData("StartUp");
 
 		// for in app billing validation
-//		 AppsFlyer.createValidateInAppListener ("AppsFlyerTrackerCallbacks", "onInAppBillingSuccess", "onInAppBillingFailure"); 
+        //AppsFlyer.createValidateInAppListener ("AppsFlyerTrackerCallbacks", "onInAppBillingSuccess", "onInAppBillingFailure"); 
 
 		//For Android Uninstall
 		//AppsFlyer.setGCMProjectNumber ("YOUR_GCM_PROJECT_NUMBER");
@@ -55,7 +55,6 @@ public class AppsFlyerAnalytic : MonoBehaviour
 #endif
     }
 
-    // Update is called once per frame
     void Update()
     {
 #if UNITY_IOS
