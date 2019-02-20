@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using EventDispatcher;
 
 public class UIManager : MonoBehaviour {
     public static UIManager Instance = new UIManager();
@@ -14,6 +15,8 @@ public class UIManager : MonoBehaviour {
 
     public Text txtGold;
     public Text txtDiamond;
+
+    //[Header("PANEL")]
     //[Header("MOUSE CLICK")]
     //public GameObject mouseClick;
     //public Canvas parentCanvas;
@@ -271,7 +274,10 @@ public class UIManager : MonoBehaviour {
     #region === UI HOME ===
     public void Btn_Play()
     {
-
+        ScenesManager.Instance.GoToScene(ScenesManager.TypeScene.Main, () =>
+            {
+                this.PostEvent(EventID.START_GAME);
+            });
     }
 
     public void Btn_Yes_NewPlay()
