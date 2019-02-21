@@ -19,7 +19,7 @@ public class MineShaft : MonoBehaviour
 
         public long buyMoreMinePrice;
 
-        public long capacity;
+        public int capacity;
 
         public int miningTime;
 
@@ -43,6 +43,7 @@ public class MineShaft : MonoBehaviour
         public long cost;
     }
 
+    [Serializable]
     public enum TypeUnlock
     {
         GOLD,
@@ -50,6 +51,7 @@ public class MineShaft : MonoBehaviour
         ADS
     }
 
+    [Serializable]
     public enum TypeProduct
     {
         GOLD,
@@ -59,11 +61,19 @@ public class MineShaft : MonoBehaviour
         SP4
     }
 
+    [Serializable]
     public enum StateMineShaft
     {
         NONE,
         LOCK,
         WORKING
+    }
+
+    [Serializable]
+    public struct Product
+    {
+        public TypeProduct type;
+        public long amount;
     }
     #endregion
 
@@ -75,13 +85,14 @@ public class MineShaft : MonoBehaviour
     public StateMineShaft state; //trạng thái
     public bool isAutoWorking;
     public MineShaft nextMineShaft; //mỏ tiếp theo
-    public long numberProduct_Completed; //số sản phẩm làm xong
-    public long numberProduct_PushUp; //số sản phẩm đẩy lên mỏ trên
-    public long numberProduct_Remain; //số sản phẩm thừa
+    public int numberProduct_Completed; //số sản phẩm làm xong
+    public int numberProduct_PushUp; //số sản phẩm đẩy lên mỏ trên
+    public int numberProduct_Remain; //số sản phẩm thừa
     public int timer = 0; //thời gian đang chạy tiến trình Work
     public Transform posProduct_Remain;
     public Transform posProduct_PushUp;
     public Transform posProduct_Complete;
+    public Map mapParent;
 
     [Header("UI")]
     public Text txtTimer;

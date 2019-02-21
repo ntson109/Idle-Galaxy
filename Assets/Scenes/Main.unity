@@ -382,6 +382,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73558e7c9646c2e43be3a88586b90dfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lstPropertiesMap: []
   TimeAd: 0
   ID_UnityAds_ios: 
   ID_Inter_android: 
@@ -1631,7 +1632,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1953369683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1869,6 +1870,7 @@ MonoBehaviour:
     unitPrice: 0
     unlockTime: 0
     speedMining: 0
+  typeMap: 0
   miner: {fileID: 0}
   unlockCost: []
   typeProduct: 0
@@ -1882,6 +1884,7 @@ MonoBehaviour:
   posProduct_Remain: {fileID: 0}
   posProduct_PushUp: {fileID: 0}
   posProduct_Complete: {fileID: 0}
+  mapParent: {fileID: 0}
   txtTimer: {fileID: 0}
   txtTimeMining: {fileID: 0}
   txtNumberMine: {fileID: 0}

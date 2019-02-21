@@ -22,7 +22,7 @@
   "warning3" : "abc"
   },
   "Map_Moon" : {
-	"Map_1" : {
+	"M_1" : {
 		"Unlock_condition" : 0,
 		"Unlock_time" : 0,
 		"Unlock_cost" : [
@@ -66,7 +66,7 @@
 		],
 		"Unit_Price" : 3
 	},
-	"Map_2" :{
+	"M_2" :{
 		"Unlock_condition" : 20,
 		"Unlock_time" : 5,
 		"Unlock_cost" : [
