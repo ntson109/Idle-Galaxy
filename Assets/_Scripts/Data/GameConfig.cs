@@ -17,8 +17,34 @@ public class GameConfig : MonoBehaviour {
         Instance = this;
     }
 
+    [System.Serializable]
+    public struct PropertiesMap
+    {       
+        public int ID;
+        public int Unlock_condition;
+        public int Unlock_time;
+        public long[] Unlock_cost;
+        public List<long> Unlock_reward;
+        public long BuyMine_cost;
+        public List<int> Upgrade_time;
+        public List<int> Upgrade_condition;
+        public List<int> Productivity;
+        public List<long> Upgrade_cost;
+        public int Unit_Price;
+
+        //public void Reset()
+        //{
+        //    this.ID = 0;
+        //    this.Unlock_condition = 0;
+        //    this.Unlock_time = 0;
+        //    this.Unlock_cost = new long[2];
+        //    this.Unlock_reward.Clear();
+        //}
+    }
+
     #region === GAME CONFIG ===
     [Header("GAME CONFIG")]
+    public List<PropertiesMap> lstPropertiesMap = new List<PropertiesMap>();
     public float TimeAd;
     public string ID_UnityAds_ios;
     public string ID_Inter_android;

@@ -38,6 +38,8 @@ public class LoadDataJson : MonoBehaviour
 #endif
         Purchaser.Instance.Init();
     }
+
+    GameConfig.PropertiesMap pM;
     public void LoadGameConfig()
     {
         var objJson = SimpleJSON_DatDz.JSON.Parse(loadJson(gameConfig));
@@ -55,9 +57,52 @@ public class LoadDataJson : MonoBehaviour
             GameConfig.Instance.link_ios = objJson["link_ios"];
             GameConfig.Instance.link_android = objJson["link_android"];
             GameConfig.Instance.string_Share = objJson["string_Share"];
-            for (int j = 0; j < objJson["introduction"].Count; j++)
+            for (int i = 0; i < objJson["introduction"].Count; i++)
             {
-                GameConfig.Instance.lstIntroduction.Add(objJson["introduction"][j]);
+                GameConfig.Instance.lstIntroduction.Add(objJson["introduction"][i]);
+            }
+            for (int i = 0; i < objJson["Map_Moon"].Count; i++)
+            {
+                for (int j = 0; j < objJson["Map_Moon"][i].Count; j++)
+                { 
+                    pM = new GameConfig.PropertiesMap();
+                    pM.ID = i;
+                    pM.Unlock_condition = objJson["Map_Moon"][i]["Unlock_condition"].AsInt;
+                    pM.Unlock_time = objJson["Map_Moon"][i]["Unlock_time"].AsInt;
+                    pM.Unlock_cost = new long[2];
+                    for (int k = 0; k < objJson["Map_Moon"][i]["Unlock_cost"].Count; k++)
+                    {
+                        pM.Unlock_cost[k] = objJson["Map_Moon"][i]["Unlock_cost"][k].AsLong;
+                    }
+                    pM.Unlock_reward = new List<long>();
+                    for (int k = 0; k < objJson["Map_Moon"][i]["Unlock_reward"].Count; k++)
+                    {
+                        pM.Unlock_reward.Add(objJson["Map_Moon"][i]["Unlock_reward"][k].AsLong);
+                    }
+                    pM.BuyMine_cost = objJson["Map_Moon"][i]["BuyMine_cost"].AsInt;
+                    pM.Upgrade_time = new List<int>();
+                    for (int k = 0; k < objJson["Map_Moon"][i]["Upgrade_time"].Count; k++)
+                    {
+                        pM.Upgrade_time.Add(objJson["Map_Moon"][i]["Upgrade_time"][k].AsInt);
+                    }
+                    pM.Upgrade_condition = new List<int>();
+                    for (int k = 0; k < objJson["Map_Moon"][i]["Upgrade_condition"].Count; k++)
+                    {
+                        pM.Upgrade_condition.Add(objJson["Map_Moon"][i]["Upgrade_condition"][k].AsInt);
+                    }
+                    pM.Upgrade_cost = new List<long>();
+                    for (int k = 0; k < objJson["Map_Moon"][i]["Upgrade_cost"].Count; k++)
+                    {
+                        pM.Upgrade_cost.Add(objJson["Map_Moon"][i]["Upgrade_cost"][k].AsLong);
+                    }
+                    pM.Productivity = new List<int>();
+                    for (int k = 0; k < objJson["Map_Moon"][i]["Productivity"].Count; k++)
+                    {
+                        pM.Productivity.Add(objJson["Map_Moon"][i]["Productivity"][k].AsInt);
+                    }
+                    pM.Unit_Price = objJson["Map_Moon"][i]["Unit_Price"].AsInt;                   
+                }
+                GameConfig.Instance.lstPropertiesMap.Add(pM);
             }
         }
     }
