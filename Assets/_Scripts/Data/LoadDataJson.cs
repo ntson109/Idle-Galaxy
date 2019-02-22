@@ -47,6 +47,8 @@ public class LoadDataJson : MonoBehaviour
         Debug.Log("<color=yellow>Done: </color>LoadGameConfig !");
         if (objJson != null)
         {
+            GameConfig.Instance.GoldStart = objJson["GoldStart"].AsLong;
+            GameConfig.Instance.CoinStart = objJson["CoinStart"].AsLong;
             GameConfig.Instance.ID_UnityAds_ios = objJson["ID_UnityAds_ios"];
             GameConfig.Instance.ID_Inter_android = objJson["ID_Inter_android"];
             GameConfig.Instance.ID_Inter_ios = objJson["ID_Inter_ios"];

@@ -13,8 +13,6 @@ public class MineShaft : MonoBehaviour
     {
         public int level;
 
-        public int numberMine;
-
         public long buyMoreMinePrice;
 
         public int capacity;
@@ -29,8 +27,7 @@ public class MineShaft : MonoBehaviour
 
         public void Reset()
         {
-            level = 1;
-            numberMine = 1;
+
         }
     }
 
@@ -78,6 +75,8 @@ public class MineShaft : MonoBehaviour
     [Header("PROPERTIES")]
     public int ID;
     public MineShaft.Properties properties; //thông số cơ bản
+    public int numberMine;
+    public int totalCapacity;
     public int input = 0;
     public TypeMap typeMap;
     public Miner miner; //nhân viên
@@ -136,7 +135,7 @@ public class MineShaft : MonoBehaviour
         if (timer != null)
             txtTimer.text = UIManager.Instance.ToDateTimeString(timer);
 
-        txtNumberMine.text = this.properties.numberMine.ToString();
+        txtNumberMine.text = this.numberMine.ToString();
     }
     #endregion
 
@@ -151,7 +150,8 @@ public class MineShaft : MonoBehaviour
 
         GetInfo();
         this.properties.level = 1;
-        this.properties.numberMine = 1;
+        this.numberMine = 1;
+        this.totalCapacity = this.properties.capacity * this.numberMine;
         this.properties.miningTime = 5;
         this.properties.speedMining = 2;
         this.state = StateMineShaft.NONE;
@@ -202,7 +202,7 @@ public class MineShaft : MonoBehaviour
         this.properties.unlockTime = GameConfig.Instance.lstPropertiesMap[ID].Unlock_time;
         if (ID == 0)
         {
-            this.input = this.properties.capacity;
+            this.input = this.totalCapacity;
             isCanWork = true;
         }
     }
@@ -221,10 +221,10 @@ public class MineShaft : MonoBehaviour
         }
 
         //chạy xong
-        numberProduct_Completed = this.input;
+        numberProduct_Completed = this.input * this.numberMine;
         if (nextMineShaft != null && nextMineShaft.isActiveAndEnabled && nextMineShaft.input == 0)
         {
-            if (numberProduct_Completed <= this.nextMineShaft.properties.capacity)
+            if (numberProduct_Completed <= this.nextMineShaft.totalCapacity)
             {
                 numberProduct_PushUp = numberProduct_Completed;
                 Debug.Log("Chỉ chuyển lên next mine");
@@ -235,7 +235,7 @@ public class MineShaft : MonoBehaviour
             }
             else
             {
-                numberProduct_PushUp = this.nextMineShaft.properties.capacity;
+                numberProduct_PushUp = this.nextMineShaft.totalCapacity;
                 numberProduct_Remain = numberProduct_Completed - numberProduct_PushUp;
                 Debug.Log("Chia hàng chuyển 2 đg");
                 product_PushUp.SetActive(true);
@@ -271,7 +271,7 @@ public class MineShaft : MonoBehaviour
         numberProduct_Completed = numberProduct_PushUp = numberProduct_Remain = 0;
         if (this.ID == 0)
         {
-            this.input = this.properties.capacity;
+            this.input = this.totalCapacity;
             isCanWork = true;
         }
         else
@@ -353,7 +353,7 @@ public class MineShaft : MonoBehaviour
 
     void BuyMoreMineComplete()
     {
-        this.properties.numberMine++;
+        this.numberMine++;
     }
 
     public void Btn_Unlock(TypeUnlock _type)

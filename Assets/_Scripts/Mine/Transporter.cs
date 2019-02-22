@@ -16,7 +16,7 @@ public class Transporter : MonoBehaviour
     {
         this.speed = 1f;
         thisButton = GetComponent<Button>();
-        thisButton.onClick.AddListener(() => Upgrade());
+        thisButton.onClick.AddListener(() => ShowUpgrade());
     }
 
     // Update is called once per frame
@@ -55,7 +55,7 @@ public class Transporter : MonoBehaviour
         this.gameObject.GetComponent<RectTransform>().transform.localScale = new Vector3(-1, 1, 1);
     }
 
-    void Upgrade()
+    void ShowUpgrade()
     {
         Transport();
     }

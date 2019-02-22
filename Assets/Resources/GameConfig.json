@@ -1,11 +1,6 @@
 {
   "GoldStart" : 120000,
   "CoinStart" : 10,
-  "RatioBorn" : [
-    1,
-    0.7,
-    0.3
-    ],  
   "ID_UnityAds_ios" : "",
   "ID_Inter_android" : "",
   "ID_Inter_ios" : "",
