@@ -11,8 +11,6 @@ public class MineShaft : MonoBehaviour
     [Serializable]
     public struct Properties
     {
-        public int ID;
-
         public int level;
 
         public int numberMine;
@@ -77,22 +75,26 @@ public class MineShaft : MonoBehaviour
     }
     #endregion
 
+    [Header("PROPERTIES")]
+    public int ID;
     public MineShaft.Properties properties; //thông số cơ bản
+    public int input = 0;
     public TypeMap typeMap;
     public Miner miner; //nhân viên
     public UnlockCost[] unlockCost;
     public TypeProduct typeProduct; //loại sản phẩm
     public StateMineShaft state; //trạng thái
-    public bool isAutoWorking;
+    private bool isAutoWorking = false;
     public MineShaft nextMineShaft; //mỏ tiếp theo
     public int numberProduct_Completed; //số sản phẩm làm xong
     public int numberProduct_PushUp; //số sản phẩm đẩy lên mỏ trên
     public int numberProduct_Remain; //số sản phẩm thừa
     public int timer = 0; //thời gian đang chạy tiến trình Work
-    public Transform posProduct_Remain;
-    public Transform posProduct_PushUp;
-    public Transform posProduct_Complete;
+    public RectTransform posProduct_Remain;
+    public RectTransform posProduct_PushUp;
+    public RectTransform posProduct_Complete;
     public Map mapParent;
+    private bool isCanWork = false;
 
     [Header("UI")]
     public Text txtTimer;
@@ -121,28 +123,40 @@ public class MineShaft : MonoBehaviour
 
     void LateUpdate()
     {
+        if (!isCanWork && btnWork.gameObject.activeSelf)
+            btnWork.gameObject.SetActive(false);
+        else if (isCanWork && !btnWork.gameObject.activeSelf)
+            btnWork.gameObject.SetActive(true);
+
         if (isAutoWorking && this.state == StateMineShaft.NONE)
         {
             StartCoroutine(Work());
             btnWork.gameObject.SetActive(false);
         }
+        if (timer != null)
+            txtTimer.text = UIManager.Instance.ToDateTimeString(timer);
+
+        txtNumberMine.text = this.properties.numberMine.ToString();
     }
     #endregion
 
     void ON_START_GAME()
     {
         btnWork.onClick.AddListener(() => Btn_Work());
-        btnUpgrade.onClick.AddListener(() => Btn_Upgrade());
+        //btnUpgrade.onClick.AddListener(() => Btn_Upgrade());
         btnBuyMoreMine.onClick.AddListener(() => Btn_BuyMoreMine());
-        btnUnlock_byGold.onClick.AddListener(() => Btn_Unlock(TypeUnlock.GOLD));
-        btnUnlock_byCoin.onClick.AddListener(() => Btn_Unlock(TypeUnlock.COIN));
-        btnUnlock_byAD.onClick.AddListener(() => Btn_Unlock(TypeUnlock.ADS));
-        txtTimeMining.text = UIManager.Instance.ToDateTimeString(this.properties.miningTime);
+        //btnUnlock_byGold.onClick.AddListener(() => Btn_Unlock(TypeUnlock.GOLD));
+        //btnUnlock_byCoin.onClick.AddListener(() => Btn_Unlock(TypeUnlock.COIN));
+        //btnUnlock_byAD.onClick.AddListener(() => Btn_Unlock(TypeUnlock.ADS));
 
+        GetInfo();
         this.properties.level = 1;
-        this.properties.buyMoreMinePrice = GameConfig.Instance.lstPropertiesMap[0].BuyMine_cost * this.properties.level / 10;
+        this.properties.numberMine = 1;
+        this.properties.miningTime = 5;
+        this.properties.speedMining = 2;
         this.state = StateMineShaft.NONE;
         this.RegisterListener(EventID.CHANGE_GOLD_COIN, (param) => ON_CHANGE_GOLD_COIN());
+        txtTimeMining.text = UIManager.Instance.ToDateTimeString(this.properties.miningTime);
     }
 
     void ON_CHANGE_GOLD_COIN()
@@ -180,27 +194,43 @@ public class MineShaft : MonoBehaviour
         }
     }
 
+    void GetInfo()
+    {
+        this.properties.capacity = GameConfig.Instance.lstPropertiesMap[ID].Productivity[0];
+        this.properties.buyMoreMinePrice = GameConfig.Instance.lstPropertiesMap[ID].BuyMine_cost * this.properties.level / 10;
+        this.properties.unitPrice = GameConfig.Instance.lstPropertiesMap[ID].Unit_Price;
+        this.properties.unlockTime = GameConfig.Instance.lstPropertiesMap[ID].Unlock_time;
+        if (ID == 0)
+        {
+            this.input = this.properties.capacity;
+            isCanWork = true;
+        }
+    }
+
     public IEnumerator Work()
     {
         state = StateMineShaft.WORKING;
+        isCanWork = false;
         //diễn anim working
         while (timer < this.properties.miningTime)
         {
-            //Debug.Log("Working");
-            txtTimer.text = UIManager.Instance.ToDateTimeString(timer);
+            Debug.Log("Working");
+            //txtTimer.text = UIManager.Instance.ToDateTimeString(timer);               
             yield return new WaitForSeconds(1f);
             timer++;
         }
 
         //chạy xong
-        numberProduct_Completed = this.properties.capacity;
-        if (nextMineShaft != null)
+        numberProduct_Completed = this.input;
+        if (nextMineShaft != null && nextMineShaft.isActiveAndEnabled && nextMineShaft.input == 0)
         {
             if (numberProduct_Completed <= this.nextMineShaft.properties.capacity)
             {
                 numberProduct_PushUp = numberProduct_Completed;
                 Debug.Log("Chỉ chuyển lên next mine");
                 product_PushUp.SetActive(true);
+                txtProduct_PushUp.text = numberProduct_PushUp.ToString();
+                yield return new WaitForSeconds(0.5f);
                 StartCoroutine(Product_Move_PushUp());
             }
             else
@@ -210,6 +240,9 @@ public class MineShaft : MonoBehaviour
                 Debug.Log("Chia hàng chuyển 2 đg");
                 product_PushUp.SetActive(true);
                 product_Remain.SetActive(true);
+                txtProduct_PushUp.text = numberProduct_PushUp.ToString();
+                txtProduct_Remain.text = numberProduct_Remain.ToString();
+                yield return new WaitForSeconds(0.5f);
                 StartCoroutine(Product_Move_PushUp());
                 StartCoroutine(Product_Move_Remain());
             }
@@ -219,14 +252,33 @@ public class MineShaft : MonoBehaviour
             Debug.Log("Chỉ chuyển lên top");
             numberProduct_Remain = numberProduct_Completed;
             product_Remain.SetActive(true);
+            txtProduct_Remain.text = numberProduct_Remain.ToString();
+            yield return new WaitForSeconds(0.5f);
             StartCoroutine(Product_Move_Remain());
         }
 
         //diễn anime chạy xong
-        yield return new WaitForSeconds(3f);
-        nextMineShaft.GiveInput(numberProduct_PushUp);
-        numberProduct_Completed = numberProduct_PushUp = numberProduct_Remain = 0;
+        yield return new WaitForSeconds(1.75f);
+        if (nextMineShaft != null && nextMineShaft.isActiveAndEnabled && nextMineShaft.input == 0)
+        {
+            nextMineShaft.GiveInput(numberProduct_PushUp);
+        }
+        else
+        {
+            mapParent.AddProduct(numberProduct_Remain, numberProduct_Remain * this.properties.unitPrice);
+        }
 
+        numberProduct_Completed = numberProduct_PushUp = numberProduct_Remain = 0;
+        if (this.ID == 0)
+        {
+            this.input = this.properties.capacity;
+            isCanWork = true;
+        }
+        else
+        {
+            this.input = 0;
+        }
+        timer = 0;
         yield return new WaitForEndOfFrame();
         product_PushUp.transform.position = posProduct_Complete.position;
         product_Remain.transform.position = posProduct_Complete.position;
@@ -234,41 +286,43 @@ public class MineShaft : MonoBehaviour
         if (!isAutoWorking)
             btnWork.gameObject.SetActive(true);
         Debug.Log("Done");
+
     }
 
     IEnumerator Product_Move_PushUp()
     {
-        if (product_PushUp.activeSelf)
+        //if (product_PushUp.activeSelf)
+        //{
+        while (product_PushUp.GetComponent<RectTransform>().transform.position.x > this.posProduct_PushUp.position.x)
         {
-            while (product_PushUp.transform.position.y > this.posProduct_PushUp.position.y)
-            {
-                product_PushUp.transform.position = Vector3.MoveTowards(product_PushUp.transform.position, this.posProduct_PushUp.position, Time.deltaTime * this.properties.speedMining);
-                yield return null;
-            }
-            yield return new WaitForEndOfFrame();
-            product_PushUp.SetActive(false);
+            product_PushUp.GetComponent<RectTransform>().transform.position = Vector3.MoveTowards(product_PushUp.GetComponent<RectTransform>().transform.position, this.posProduct_PushUp.position, Time.deltaTime * this.properties.speedMining);
+            yield return null;
         }
+        yield return new WaitForEndOfFrame();
+        product_PushUp.SetActive(false);
+        //}
     }
 
     IEnumerator Product_Move_Remain()
     {
-        if (product_Remain.activeSelf)
+        //if (product_Remain.activeSelf)
+        //{
+        while (product_Remain.GetComponent<RectTransform>().transform.position.x < this.posProduct_Remain.position.x)
         {
-            while (product_Remain.transform.position.y < this.posProduct_Remain.position.y)
-            {
-                product_Remain.transform.position = Vector3.MoveTowards(product_Remain.transform.position, this.posProduct_Remain.position, Time.deltaTime * this.properties.speedMining);
-                yield return null;
-            }
-            yield return new WaitForEndOfFrame();
-            product_Remain.SetActive(false);
+            product_Remain.GetComponent<RectTransform>().transform.position = Vector3.MoveTowards(product_Remain.GetComponent<RectTransform>().transform.position, this.posProduct_Remain.position, Time.deltaTime * this.properties.speedMining);
+            yield return null;
         }
+        yield return new WaitForEndOfFrame();
+        product_Remain.SetActive(false);
+        //}
     }
 
-    public void GiveInput(long _input)
+    public void GiveInput(int _input)
     {
-        if (this.properties.ID != 1)
+        if (this.ID != 0)
         {
-
+            input = _input;
+            isCanWork = true;
         }
     }
 
@@ -278,7 +332,7 @@ public class MineShaft : MonoBehaviour
             return;
 
         StartCoroutine(Work());
-        btnWork.gameObject.SetActive(false);
+        //btnWork.gameObject.SetActive(false);
     }
 
     void Btn_Upgrade()
@@ -291,7 +345,7 @@ public class MineShaft : MonoBehaviour
 
     }
 
-    void Btn_BuyMoreMine()
+    public void Btn_BuyMoreMine()
     {
         GameManager.Instance.AddGold(-this.properties.buyMoreMinePrice);
         BuyMoreMineComplete();
@@ -323,12 +377,5 @@ public class MineShaft : MonoBehaviour
     {
         state = StateMineShaft.NONE;
         isAutoWorking = false;
-    }
-
-    public Text txtTest1;
-    public Text txtTest2;
-    public void ABC()
-    {
-        txtTest1.gameObject.transform.position = txtTest2.gameObject.transform.position;
     }
 }

@@ -104,6 +104,10 @@ public class LoadDataJson : MonoBehaviour
                 }
                 GameConfig.Instance.lstPropertiesMap.Add(pM);
             }
+            for (int i = 0; i < objJson["CapTransporter"].Count; i++)
+            {
+                GameConfig.Instance.lstCapTransporter.Add(objJson["CapTransporter"][i].AsInt);
+            }
         }
     }
 

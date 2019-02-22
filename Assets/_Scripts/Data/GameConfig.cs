@@ -45,6 +45,7 @@ public class GameConfig : MonoBehaviour {
     #region === GAME CONFIG ===
     [Header("GAME CONFIG")]
     public List<PropertiesMap> lstPropertiesMap = new List<PropertiesMap>();
+    public List<int> lstCapTransporter = new List<int>();
     public float TimeAd;
     public string ID_UnityAds_ios;
     public string ID_Inter_android;

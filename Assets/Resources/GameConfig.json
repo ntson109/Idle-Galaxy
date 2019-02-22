@@ -21,6 +21,11 @@
   "warning2" : "abc",
   "warning3" : "abc"
   },
+  "CapTransporter" : [
+	2,
+	50,
+	100
+  ],
   "Map_Moon" : {
 	"M_1" : {
 		"Unlock_condition" : 0,
