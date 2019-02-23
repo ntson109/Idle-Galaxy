@@ -157,6 +157,11 @@ public class MineShaft : MonoBehaviour
         this.state = StateMineShaft.NONE;
         this.RegisterListener(EventID.CHANGE_GOLD_COIN, (param) => ON_CHANGE_GOLD_COIN());
         txtTimeMining.text = UIManager.Instance.ToDateTimeString(this.properties.miningTime);
+        if (ID == 0)
+        {
+            this.input = this.totalCapacity;
+            isCanWork = true;
+        }
     }
 
     void ON_CHANGE_GOLD_COIN()
@@ -200,11 +205,7 @@ public class MineShaft : MonoBehaviour
         this.properties.buyMoreMinePrice = GameConfig.Instance.lstPropertiesMap[ID].BuyMine_cost * this.properties.level / 10;
         this.properties.unitPrice = GameConfig.Instance.lstPropertiesMap[ID].Unit_Price;
         this.properties.unlockTime = GameConfig.Instance.lstPropertiesMap[ID].Unlock_time;
-        if (ID == 0)
-        {
-            this.input = this.totalCapacity;
-            isCanWork = true;
-        }
+        
     }
 
     public IEnumerator Work()
@@ -267,7 +268,6 @@ public class MineShaft : MonoBehaviour
         {
             mapParent.AddProduct(numberProduct_Remain, numberProduct_Remain * this.properties.unitPrice);
         }
-
         numberProduct_Completed = numberProduct_PushUp = numberProduct_Remain = 0;
         if (this.ID == 0)
         {
@@ -280,8 +280,8 @@ public class MineShaft : MonoBehaviour
         }
         timer = 0;
         yield return new WaitForEndOfFrame();
-        product_PushUp.transform.position = posProduct_Complete.position;
-        product_Remain.transform.position = posProduct_Complete.position;
+        //product_PushUp.transform.position = posProduct_Complete.position;
+        //product_Remain.transform.position = posProduct_Complete.position;
         state = StateMineShaft.NONE;
         if (!isAutoWorking)
             btnWork.gameObject.SetActive(true);
@@ -298,7 +298,9 @@ public class MineShaft : MonoBehaviour
             product_PushUp.GetComponent<RectTransform>().transform.position = Vector3.MoveTowards(product_PushUp.GetComponent<RectTransform>().transform.position, this.posProduct_PushUp.position, Time.deltaTime * this.properties.speedMining);
             yield return null;
         }
+        Debug.Log("a");
         yield return new WaitForEndOfFrame();
+        Debug.Log("a");
         product_PushUp.SetActive(false);
         //}
     }
