@@ -107,6 +107,7 @@ public class MineShaft : MonoBehaviour
     public Button btnUnlock_byCoin;
     public Text txtUnlock_byCoin;
     public Button btnUnlock_byAD;
+    public GameObject panelUnlock;
 
     public GameObject product_PushUp;
     public Text txtProduct_PushUp;
@@ -144,9 +145,9 @@ public class MineShaft : MonoBehaviour
         btnWork.onClick.AddListener(() => Btn_Work());
         //btnUpgrade.onClick.AddListener(() => Btn_Upgrade());
         btnBuyMoreMine.onClick.AddListener(() => Btn_BuyMoreMine());
-        //btnUnlock_byGold.onClick.AddListener(() => Btn_Unlock(TypeUnlock.GOLD));
-        //btnUnlock_byCoin.onClick.AddListener(() => Btn_Unlock(TypeUnlock.COIN));
-        //btnUnlock_byAD.onClick.AddListener(() => Btn_Unlock(TypeUnlock.ADS));
+        btnUnlock_byGold.onClick.AddListener(() => Btn_Unlock(TypeUnlock.GOLD));
+        btnUnlock_byCoin.onClick.AddListener(() => Btn_Unlock(TypeUnlock.COIN));
+        btnUnlock_byAD.onClick.AddListener(() => Btn_Unlock(TypeUnlock.ADS));
 
         GetInfo();
         this.properties.level = 1;
@@ -154,13 +155,23 @@ public class MineShaft : MonoBehaviour
         this.totalCapacity = this.properties.capacity * this.numberMine;
         this.properties.miningTime = 5;
         this.properties.speedMining = 2;
-        this.state = StateMineShaft.NONE;
+        this.state = StateMineShaft.LOCK;
         this.RegisterListener(EventID.CHANGE_GOLD_COIN, (param) => ON_CHANGE_GOLD_COIN());
         txtTimeMining.text = UIManager.Instance.ToDateTimeString(this.properties.miningTime);
         if (ID == 0)
         {
+            this.state = StateMineShaft.NONE;
             this.input = this.totalCapacity;
             isCanWork = true;
+        }
+
+        if (this.state == StateMineShaft.LOCK)
+        {
+            UIManager.Instance.SetActivePanel(panelUnlock);
+        }
+        else
+        {
+            UIManager.Instance.SetDeActivePanel(panelUnlock);
         }
     }
 
@@ -204,8 +215,7 @@ public class MineShaft : MonoBehaviour
         this.properties.capacity = GameConfig.Instance.lstPropertiesMap[ID].Productivity[0];
         this.properties.buyMoreMinePrice = GameConfig.Instance.lstPropertiesMap[ID].BuyMine_cost * this.properties.level / 10;
         this.properties.unitPrice = GameConfig.Instance.lstPropertiesMap[ID].Unit_Price;
-        this.properties.unlockTime = GameConfig.Instance.lstPropertiesMap[ID].Unlock_time;
-        
+        this.properties.unlockTime = GameConfig.Instance.lstPropertiesMap[ID].Unlock_time;        
     }
 
     public IEnumerator Work()
