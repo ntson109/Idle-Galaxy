@@ -257,17 +257,8 @@ public class MineShaft : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
             StartCoroutine(Product_Move_Remain());
         }
-
         //diễn anime chạy xong
         yield return new WaitForSeconds(1.75f);
-        if (nextMineShaft != null && nextMineShaft.isActiveAndEnabled && nextMineShaft.input == 0)
-        {
-            nextMineShaft.GiveInput(numberProduct_PushUp);
-        }
-        else
-        {
-            mapParent.AddProduct(numberProduct_Remain, numberProduct_Remain * this.properties.unitPrice);
-        }
         numberProduct_Completed = numberProduct_PushUp = numberProduct_Remain = 0;
         if (this.ID == 0)
         {
@@ -280,8 +271,6 @@ public class MineShaft : MonoBehaviour
         }
         timer = 0;
         yield return new WaitForEndOfFrame();
-        //product_PushUp.transform.position = posProduct_Complete.position;
-        //product_Remain.transform.position = posProduct_Complete.position;
         state = StateMineShaft.NONE;
         if (!isAutoWorking)
             btnWork.gameObject.SetActive(true);
@@ -295,13 +284,15 @@ public class MineShaft : MonoBehaviour
         //{
         while (product_PushUp.GetComponent<RectTransform>().transform.position.x > this.posProduct_PushUp.position.x)
         {
-            product_PushUp.GetComponent<RectTransform>().transform.position = Vector3.MoveTowards(product_PushUp.GetComponent<RectTransform>().transform.position, this.posProduct_PushUp.position, Time.deltaTime * this.properties.speedMining);
+            //product_PushUp.GetComponent<RectTransform>().transform.position = Vector3.MoveTowards(product_PushUp.GetComponent<RectTransform>().transform.position, this.posProduct_PushUp.position, Time.deltaTime * this.properties.speedMining);
+            product_PushUp.GetComponent<RectTransform>().transform.Translate(Vector3.left * Time.deltaTime * this.properties.speedMining);
             yield return null;
         }
-        Debug.Log("a");
+        
         yield return new WaitForEndOfFrame();
-        Debug.Log("a");
         product_PushUp.SetActive(false);
+        product_PushUp.transform.position = posProduct_Complete.position;
+        nextMineShaft.GiveInput(numberProduct_PushUp);
         //}
     }
 
@@ -311,11 +302,14 @@ public class MineShaft : MonoBehaviour
         //{
         while (product_Remain.GetComponent<RectTransform>().transform.position.x < this.posProduct_Remain.position.x)
         {
-            product_Remain.GetComponent<RectTransform>().transform.position = Vector3.MoveTowards(product_Remain.GetComponent<RectTransform>().transform.position, this.posProduct_Remain.position, Time.deltaTime * this.properties.speedMining);
+            //product_Remain.GetComponent<RectTransform>().transform.position = Vector3.MoveTowards(product_Remain.GetComponent<RectTransform>().transform.position, this.posProduct_Remain.position, Time.deltaTime * this.properties.speedMining);
+            product_Remain.GetComponent<RectTransform>().transform.Translate(Vector3.right * Time.deltaTime * this.properties.speedMining);
             yield return null;
         }
         yield return new WaitForEndOfFrame();
         product_Remain.SetActive(false);
+        product_Remain.transform.position = posProduct_Complete.position;
+        mapParent.AddProduct(numberProduct_Remain, numberProduct_Remain * this.properties.unitPrice);
         //}
     }
 

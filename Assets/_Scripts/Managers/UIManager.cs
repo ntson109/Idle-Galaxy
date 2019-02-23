@@ -277,6 +277,7 @@ public class UIManager : MonoBehaviour {
         ScenesManager.Instance.GoToScene(ScenesManager.TypeScene.Main, () =>
             {
                 this.PostEvent(EventID.START_GAME);
+                GameManager.Instance.stateGame = StateGame.PLAYING;
             });
     }
 

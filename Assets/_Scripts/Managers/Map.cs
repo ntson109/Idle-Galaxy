@@ -22,7 +22,11 @@ public class Map : MonoBehaviour
     }
     void Update()
     {
-
+        if (GameManager.Instance.stateGame == StateGame.PLAYING)
+        {
+            if (!transporter.isTransporting)
+                CheckFullWareHouse();
+        }
     }
 
     void ON_START_GAME()

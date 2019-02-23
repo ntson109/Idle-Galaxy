@@ -5,6 +5,7 @@ using EventDispatcher;
 
 public class GameManager : MonoBehaviour {
     public static GameManager Instance = new GameManager();
+    public StateGame stateGame = StateGame.NONE;
     void Awake()
     {
         if (Instance != null)
@@ -43,4 +44,9 @@ public class GameManager : MonoBehaviour {
         UIManager.Instance.txtDiamond.text = UIManager.Instance.ToLongString(COIN);
         this.PostEvent(EventID.CHANGE_GOLD_COIN);
     }
+}
+
+public enum StateGame{
+    NONE,
+    PLAYING
 }
