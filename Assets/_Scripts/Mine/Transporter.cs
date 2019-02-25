@@ -59,7 +59,7 @@ public class Transporter : MonoBehaviour
         }
         yield return new WaitForEndOfFrame();
         this.gameObject.GetComponent<RectTransform>().transform.localScale = new Vector3(-1, 1, 1);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.75f);
         isTransporting = false;
     }
 

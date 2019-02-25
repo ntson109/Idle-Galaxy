@@ -9,7 +9,7 @@ public class CanvasVisibility : MonoBehaviour {
 
     private Canvas canvas;
 
-    private ScrollRect scrollRect;
+    public ScrollRect scrollRect;
 
     private RectTransform scrollRectViewPort;
 
@@ -20,7 +20,7 @@ public class CanvasVisibility : MonoBehaviour {
     private void Start()
     {
         this.canvas = base.GetComponent<Canvas>();
-        this.scrollRect = base.GetComponentInParent<ScrollRect>();
+        //this.scrollRect = base.GetComponentInParent<ScrollRect>();
         this.scrollRectViewPort = this.scrollRect.viewport;
         this.scrollRect.onValueChanged.AddListener(new UnityAction<Vector2>(this.UpdateCanvasVisibility));
     }

@@ -6,7 +6,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using EventDispatcher;
 
-public class UIManager : MonoBehaviour {
+public class UIManager : MonoBehaviour
+{
     public static UIManager Instance = new UIManager();
 
     [HideInInspector]
@@ -16,11 +17,13 @@ public class UIManager : MonoBehaviour {
     public Text txtGold;
     public Text txtDiamond;
 
-    //[Header("PANEL")]
+    [Header("UI MAIN")]
+    public GameObject panelShowUpgrade;
+    public Button[] lstButtonUpgrade;
     //[Header("MOUSE CLICK")]
     //public GameObject mouseClick;
     //public Canvas parentCanvas;
-   
+
     void Awake()
     {
         if (Instance != null)
@@ -31,7 +34,8 @@ public class UIManager : MonoBehaviour {
     }
 
     #region === START VS UPDATE ===
-    void Start () {
+    void Start()
+    {
         for (int i = 0; i < 4; i++)
         {
             for (int j = 0; j < arrAlphabet.Length; j++)
@@ -39,10 +43,11 @@ public class UIManager : MonoBehaviour {
                 arrAlphabetNeed.Add(arrAlphabet[i] + arrAlphabet[j]);
             }
         }
-	}
-	
-	void Update () {
-	}
+    }
+
+    void Update()
+    {
+    }
     #endregion
 
     #region === SUPPORT ===
@@ -268,7 +273,7 @@ public class UIManager : MonoBehaviour {
         yy,
         zz
     }
-    
+
     #endregion
 
     #region === UI HOME ===
@@ -278,8 +283,8 @@ public class UIManager : MonoBehaviour {
             {
                 this.PostEvent(EventID.START_GAME);
                 GameManager.Instance.stateGame = StateGame.PLAYING;
-                GameManager.Instance.GOLD = GameConfig.Instance.GoldStart;
-                GameManager.Instance.COIN = GameConfig.Instance.CoinStart;
+                GameManager.Instance.AddGold(GameConfig.Instance.GoldStart);
+                GameManager.Instance.AddCoin(GameConfig.Instance.CoinStart);
             });
     }
 
@@ -306,6 +311,16 @@ public class UIManager : MonoBehaviour {
     public void Btn_Rate()
     {
 
+    }
+    #endregion
+
+    #region === UI MAIN ===
+    public void Btn_ShowUpgrade()
+    {
+        if (!panelShowUpgrade.activeSelf)
+            SetActivePanel(panelShowUpgrade);
+        else
+            SetDeActivePanel(panelShowUpgrade);
     }
     #endregion
 }

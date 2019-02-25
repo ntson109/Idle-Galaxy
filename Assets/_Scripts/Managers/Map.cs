@@ -78,6 +78,11 @@ public class Map : MonoBehaviour
             UIManager.Instance.SetDeActivePanel(lstMineShaft[_id + 1].panelUnlock_Condition);
         }
     }
+
+    public void BuyAI(int _id)
+    {
+        lstMineShaft[_id].BuyAI();
+    }
 }
 
 [System.Serializable]
