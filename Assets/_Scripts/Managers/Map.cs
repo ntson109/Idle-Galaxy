@@ -13,7 +13,6 @@ public class Map : MonoBehaviour
     long totalAmount;
     long totalMoney;
     public long moneyPerTurn;
-    //public float valueScrollbar;
 
     [Header("UI")]
     public Text txtAmountProduct;
@@ -71,11 +70,13 @@ public class Map : MonoBehaviour
     {
         if (_id + 1 >= lstMineShaft.Count)
             return;
-
-        if (lstMineShaft[_id].numberMine >= lstMineShaft[_id+1].properties.unlockCondition)
+        if (lstMineShaft[_id + 1].state == MineShaft.StateMineShaft.LOCK)
         {
-            UIManager.Instance.SetActivePanel(lstMineShaft[_id + 1].panelUnlock);
-            UIManager.Instance.SetDeActivePanel(lstMineShaft[_id + 1].panelUnlock_Condition);
+            if (lstMineShaft[_id].numberMine >= lstMineShaft[_id + 1].properties.unlockCondition)
+            {
+                UIManager.Instance.SetActivePanel(lstMineShaft[_id + 1].panelUnlock);
+                UIManager.Instance.SetDeActivePanel(lstMineShaft[_id + 1].panelUnlock_Condition);
+            }
         }
     }
 
@@ -83,12 +84,6 @@ public class Map : MonoBehaviour
     {
         lstMineShaft[_id].BuyAI();
     }
-}
-
-[System.Serializable]
-public struct WareHouse
-{
-    public MineShaft.Product[] lstProduct;
 }
 
 [System.Serializable]

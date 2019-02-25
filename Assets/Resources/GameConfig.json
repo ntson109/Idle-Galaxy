@@ -33,6 +33,7 @@
 		"Unlock_reward" : {
 			"timex2" : 0
 		},
+		"miningTime" : 5,
 		"BuyMine_cost" : 5,
 		"Upgrade_time" : [
 			1,
@@ -78,6 +79,7 @@
 			"timex2" : 60
 		},
 		"BuyMine_cost" : 60,
+		"miningTime" : 10,
 		"Upgrade_time" : [
 			5,
 			7,
@@ -122,6 +124,7 @@
 			"timex2" : 60
 		},
 		"BuyMine_cost" : 682,
+		"miningTime" : 15,
 		"Upgrade_time" : [
 			10,
 			13,
@@ -166,6 +169,7 @@
 			"timex2" : 60
 		},
 		"BuyMine_cost" : 8220,
+		"miningTime" : 20,
 		"Upgrade_time" : [
 			10,
 			13,
@@ -210,6 +214,7 @@
 			"timex2" : 60
 		},
 		"BuyMine_cost" : 106912,
+		"miningTime" : 25,
 		"Upgrade_time" : [
 			10,
 			13,
@@ -254,6 +259,7 @@
 			"timex2" : 60
 		},
 		"BuyMine_cost" : 106912,
+		"miningTime" : 35,
 		"Upgrade_time" : [
 			10,
 			13,

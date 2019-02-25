@@ -18,11 +18,9 @@ public class GameManager : MonoBehaviour {
     public long GOLD;
     public long COIN;
 	void Start () {
-		
 	}
 
-	void Update () {
-		
+	void Update () {		
 	}
 
     public void AddGold(long _value)
@@ -46,7 +44,17 @@ public class GameManager : MonoBehaviour {
     }
 }
 
+[System.Serializable]
 public enum StateGame{
     NONE,
     PLAYING
+}
+
+[System.Serializable]
+public enum Boosted
+{
+    NONE,
+    CAPACITY,
+    SPEED,
+    TIME
 }

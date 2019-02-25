@@ -15,7 +15,6 @@ public class Transporter : MonoBehaviour
 
     void Start()
     {
-        //this.speed = 1f;
         thisButton = GetComponent<Button>();
         thisButton.onClick.AddListener(() => ShowUpgrade());
     }

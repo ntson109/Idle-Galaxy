@@ -71,6 +71,7 @@ public class LoadDataJson : MonoBehaviour
                     pM.ID = i;
                     pM.Unlock_condition = objJson["Map_Moon"][i]["Unlock_condition"].AsInt;
                     pM.Unlock_time = objJson["Map_Moon"][i]["Unlock_time"].AsInt * 60;
+                    pM.miningTime = objJson["Map_Moon"][i]["miningTime"].AsInt;
                     pM.Unlock_cost = new long[2];
                     for (int k = 0; k < objJson["Map_Moon"][i]["Unlock_cost"].Count; k++)
                     {

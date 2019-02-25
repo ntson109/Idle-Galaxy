@@ -23,6 +23,7 @@ public class GameConfig : MonoBehaviour {
         public int ID;
         public int Unlock_condition;
         public int Unlock_time;
+        public int miningTime;
         public long[] Unlock_cost;
         public List<long> Unlock_reward;
         public long BuyMine_cost;

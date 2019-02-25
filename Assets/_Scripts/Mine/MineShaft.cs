@@ -26,11 +26,6 @@ public class MineShaft : MonoBehaviour
         public float speedMining;
 
         public int unlockCondition;
-
-        public void Reset()
-        {
-
-        }
     }
 
     [Serializable]
@@ -136,7 +131,7 @@ public class MineShaft : MonoBehaviour
         else if (isCanWork && !btnWork.gameObject.activeSelf && !isAutoWorking)
             btnWork.gameObject.SetActive(true);
 
-        if (isAutoWorking && this.state == StateMineShaft.IDLE)
+        if (isAutoWorking && this.state == StateMineShaft.IDLE && this.input > 0)
         {
             StartCoroutine(Work());
             btnWork.gameObject.SetActive(false);
@@ -178,7 +173,6 @@ public class MineShaft : MonoBehaviour
         this.properties.level = 1;
         this.numberMine = 1;
         this.totalCapacity = this.properties.capacity * this.numberMine;
-        this.properties.miningTime = 5;
         this.properties.speedMining = 2;
         this.state = StateMineShaft.LOCK;
         this.RegisterListener(EventID.CHANGE_GOLD_COIN, (param) => ON_CHANGE_GOLD_COIN());
@@ -244,6 +238,8 @@ public class MineShaft : MonoBehaviour
         this.properties.unitPrice = GameConfig.Instance.lstPropertiesMap[ID].Unit_Price;
         this.properties.unlockTime = GameConfig.Instance.lstPropertiesMap[ID].Unlock_time;
         this.properties.unlockCondition = GameConfig.Instance.lstPropertiesMap[ID].Unlock_condition;
+        this.properties.miningTime = GameConfig.Instance.lstPropertiesMap[ID].miningTime;
+
         this.unlockCost = new UnlockCost[2];
         this.unlockCost[0].type = TypeUnlock.COIN;
         this.unlockCost[0].cost = GameConfig.Instance.lstPropertiesMap[ID].Unlock_cost[0];
@@ -259,16 +255,14 @@ public class MineShaft : MonoBehaviour
         isCanWork = false;
         //diễn anim working
         while (timer < this.properties.miningTime)
-        {
-            //Debug.Log("Working");
-            //txtTimer.text = UIManager.Instance.ToDateTimeString(timer);               
+        {       
             yield return new WaitForSeconds(1f);
             timer++;
         }
 
         //chạy xong
         numberProduct_Completed = this.input;// *this.numberMine;
-        if (nextMineShaft != null && nextMineShaft.state != StateMineShaft.LOCK && nextMineShaft.isActiveAndEnabled && nextMineShaft.input == 0)
+        if (nextMineShaft != null && nextMineShaft.state != StateMineShaft.LOCK && nextMineShaft.state != StateMineShaft.UNLOCKING && nextMineShaft.isActiveAndEnabled && nextMineShaft.input == 0)
         {
             if (numberProduct_Completed <= this.nextMineShaft.totalCapacity)
             {
