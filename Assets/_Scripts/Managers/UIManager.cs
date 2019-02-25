@@ -278,6 +278,8 @@ public class UIManager : MonoBehaviour {
             {
                 this.PostEvent(EventID.START_GAME);
                 GameManager.Instance.stateGame = StateGame.PLAYING;
+                GameManager.Instance.GOLD = GameConfig.Instance.GoldStart;
+                GameManager.Instance.COIN = GameConfig.Instance.CoinStart;
             });
     }
 

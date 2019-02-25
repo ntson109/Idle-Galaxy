@@ -12,15 +12,14 @@ public class Transporter : MonoBehaviour
     private Button thisButton;
     public Map mapParent;
     public bool isTransporting;
-    // Use this for initialization
+
     void Start()
     {
-        this.speed = 1f;
+        //this.speed = 1f;
         thisButton = GetComponent<Button>();
         thisButton.onClick.AddListener(() => ShowUpgrade());
     }
 
-    // Update is called once per frame
     void Update()
     {
 
@@ -43,7 +42,7 @@ public class Transporter : MonoBehaviour
             this.gameObject.GetComponent<RectTransform>().transform.Translate(Vector3.left * Time.deltaTime * this.speed);
             yield return null;
         }
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.75f);
         mapParent.CompleteTransport();
         yield return new WaitForSeconds(0.5f);
         this.gameObject.GetComponent<RectTransform>().transform.localScale = new Vector3(1, 1, 1);
@@ -66,6 +65,6 @@ public class Transporter : MonoBehaviour
 
     void ShowUpgrade()
     {
-        Transport();
+        //Transport();
     }
 }

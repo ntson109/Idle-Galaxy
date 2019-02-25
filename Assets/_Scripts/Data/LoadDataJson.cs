@@ -66,11 +66,11 @@ public class LoadDataJson : MonoBehaviour
             for (int i = 0; i < objJson["Map_Moon"].Count; i++)
             {
                 for (int j = 0; j < objJson["Map_Moon"][i].Count; j++)
-                { 
+                {
                     pM = new GameConfig.PropertiesMap();
                     pM.ID = i;
                     pM.Unlock_condition = objJson["Map_Moon"][i]["Unlock_condition"].AsInt;
-                    pM.Unlock_time = objJson["Map_Moon"][i]["Unlock_time"].AsInt;
+                    pM.Unlock_time = objJson["Map_Moon"][i]["Unlock_time"].AsInt * 60;
                     pM.Unlock_cost = new long[2];
                     for (int k = 0; k < objJson["Map_Moon"][i]["Unlock_cost"].Count; k++)
                     {
@@ -102,7 +102,7 @@ public class LoadDataJson : MonoBehaviour
                     {
                         pM.Productivity.Add(objJson["Map_Moon"][i]["Productivity"][k].AsInt);
                     }
-                    pM.Unit_Price = objJson["Map_Moon"][i]["Unit_Price"].AsInt;                   
+                    pM.Unit_Price = objJson["Map_Moon"][i]["Unit_Price"].AsInt;
                 }
                 GameConfig.Instance.lstPropertiesMap.Add(pM);
             }
@@ -110,6 +110,7 @@ public class LoadDataJson : MonoBehaviour
             {
                 GameConfig.Instance.lstCapTransporter.Add(objJson["CapTransporter"][i].AsInt);
             }
+            GameConfig.Instance.SpeedTransporter = objJson["SpeedTransporter"].AsFloat;
         }
     }
 

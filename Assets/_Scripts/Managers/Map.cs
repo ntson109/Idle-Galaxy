@@ -13,9 +13,11 @@ public class Map : MonoBehaviour
     long totalAmount;
     long totalMoney;
     public long moneyPerTurn;
+    //public float valueScrollbar;
 
     [Header("UI")]
     public Text txtAmountProduct;
+    public Scrollbar scrollbarVertical;
     void Start()
     {
         this.RegisterListener(EventID.START_GAME, (param) => ON_START_GAME());
@@ -27,6 +29,8 @@ public class Map : MonoBehaviour
             if (!transporter.isTransporting)
                 CheckFullWareHouse();
         }
+
+        txtAmountProduct.text = totalAmount.ToString();
     }
 
     void ON_START_GAME()
@@ -35,6 +39,8 @@ public class Map : MonoBehaviour
         {
             this.transporter.capacity = GameConfig.Instance.lstCapTransporter[0];
         }
+        this.transporter.speed = GameConfig.Instance.SpeedTransporter;
+        scrollbarVertical.value = 0;
     }
 
     public void AddProduct(long _amountProduct, long _value)
@@ -42,7 +48,6 @@ public class Map : MonoBehaviour
         totalAmount += _amountProduct;
         totalMoney += _value;
         CheckFullWareHouse();
-        txtAmountProduct.text = totalAmount.ToString();
     }
 
     void CheckFullWareHouse()
@@ -60,6 +65,18 @@ public class Map : MonoBehaviour
     {
         GameManager.Instance.AddGold(moneyPerTurn);
         moneyPerTurn = 0;
+    }
+
+    public void CheckUnlock(int _id)
+    {
+        if (_id + 1 >= lstMineShaft.Count)
+            return;
+
+        if (lstMineShaft[_id].numberMine >= lstMineShaft[_id+1].properties.unlockCondition)
+        {
+            UIManager.Instance.SetActivePanel(lstMineShaft[_id + 1].panelUnlock);
+            UIManager.Instance.SetDeActivePanel(lstMineShaft[_id + 1].panelUnlock_Condition);
+        }
     }
 }
 

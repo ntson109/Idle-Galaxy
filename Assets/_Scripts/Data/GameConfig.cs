@@ -46,6 +46,7 @@ public class GameConfig : MonoBehaviour {
     [Header("GAME CONFIG")]
     public List<PropertiesMap> lstPropertiesMap = new List<PropertiesMap>();
     public List<int> lstCapTransporter = new List<int>();
+    public float SpeedTransporter;
     public long GoldStart;
     public long CoinStart;
     public float TimeAd;
