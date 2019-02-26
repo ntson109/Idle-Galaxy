@@ -21,6 +21,9 @@ public class GameConfig : MonoBehaviour {
     public struct PropertiesMap
     {       
         public int ID;
+        public string Name;
+        public long Unlock_technology;
+        public long BuyAI;
         public int Unlock_condition;
         public int Unlock_time;
         public int miningTime;

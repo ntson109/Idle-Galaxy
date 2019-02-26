@@ -19,7 +19,10 @@ public class UIManager : MonoBehaviour
 
     [Header("UI MAIN")]
     public GameObject panelShowUpgrade;
+    public Transform scrollViewUpgrade;
     public Button[] lstButtonUpgrade;
+    public Text txtBoost;
+    public Text txtTimeBoost;
     //[Header("MOUSE CLICK")]
     //public GameObject mouseClick;
     //public Canvas parentCanvas;
@@ -86,17 +89,17 @@ public class UIManager : MonoBehaviour
 
     public void SetActivePanel(GameObject _g)
     {
-        if (_g == null)
+        if (_g == null || _g.activeSelf)
             return;
 
         _g.SetActive(true);
-        if (_g.name == "InWall")
-            _g.GetComponent<Animator>().Play("ActivePanel");
+        //if (_g.name == "InWall")
+        //    _g.GetComponent<Animator>().Play("ActivePanel");
     }
 
     public void SetDeActivePanel(GameObject _g)
     {
-        if (_g == null)
+        if (_g == null || !_g.activeSelf)
             return;
 
         _g.SetActive(false);
@@ -318,9 +321,18 @@ public class UIManager : MonoBehaviour
     public void Btn_ShowUpgrade()
     {
         if (!panelShowUpgrade.activeSelf)
+        {
             SetActivePanel(panelShowUpgrade);
+        }
         else
             SetDeActivePanel(panelShowUpgrade);
+    }
+
+    public void Test_Boost()
+    {
+        GameManager.Instance.boost.SetBoost(TypeBoost.GOLD, 2, 30);
+        txtBoost.text = 2.ToString();
+        GameManager.Instance.timer = 30;
     }
     #endregion
 }

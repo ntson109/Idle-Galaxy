@@ -11,6 +11,8 @@ public class MineShaft : MonoBehaviour
     [Serializable]
     public struct Properties
     {
+        public string name;
+
         public int level;
 
         public long buyMoreMinePrice;
@@ -26,6 +28,10 @@ public class MineShaft : MonoBehaviour
         public float speedMining;
 
         public int unlockCondition;
+
+        public long unlockTechnology;
+
+        public long buyAI;
     }
 
     [Serializable]
@@ -82,7 +88,7 @@ public class MineShaft : MonoBehaviour
     public UnlockCost[] unlockCost;
     public TypeProduct typeProduct; //loại sản phẩm
     public StateMineShaft state; //trạng thái
-    private bool isAutoWorking = false;
+    public bool isAutoWorking = false;
     public MineShaft nextMineShaft; //mỏ tiếp theo
     public int numberProduct_Completed; //số sản phẩm làm xong
     public int numberProduct_PushUp; //số sản phẩm đẩy lên mỏ trên
@@ -93,7 +99,9 @@ public class MineShaft : MonoBehaviour
     public RectTransform posProduct_Complete;
     public Map mapParent;
     private bool isCanWork = false;
+    public bool isCanUnlock = false;
     public float timeUnlocking;
+    public RDObj thisRDObj;
 
     [Header("UI")]
     public Text txtTimer;
@@ -169,11 +177,11 @@ public class MineShaft : MonoBehaviour
         btnUnlock_byCoin.onClick.AddListener(() => Btn_Unlock(TypeUnlock.COIN));
         btnUnlock_byAD.onClick.AddListener(() => Btn_Unlock(TypeUnlock.ADS));
 
-        GetInfo();
         this.properties.level = 1;
         this.numberMine = 1;
         this.totalCapacity = this.properties.capacity * this.numberMine;
         this.properties.speedMining = 2;
+        GetInfo();
         this.state = StateMineShaft.LOCK;
         this.RegisterListener(EventID.CHANGE_GOLD_COIN, (param) => ON_CHANGE_GOLD_COIN());
         txtTimeMining.text = UIManager.Instance.ToDateTimeString(this.properties.miningTime);
@@ -184,12 +192,18 @@ public class MineShaft : MonoBehaviour
             isCanWork = true;
         }
 
-        if (this.state == StateMineShaft.LOCK)
+        if (this.state == StateMineShaft.LOCK && isCanUnlock)
         {
             UIManager.Instance.SetActivePanel(panelUnlock_Condition);
             txtUnlock_Condition.text = "Need: " + this.properties.unlockCondition.ToString() + " pre house !";
         }
-        else
+        else if (this.state == StateMineShaft.LOCK && !isCanUnlock)
+        {
+            UIManager.Instance.SetActivePanel(panelUnlock_Condition);
+            txtUnlock_Condition.text = "Need: Unlock technology !";
+        }
+
+        if (this.state != StateMineShaft.LOCK)
         {
             UIManager.Instance.SetDeActivePanel(panelUnlock_Condition);
             UIManager.Instance.SetDeActivePanel(panelUnlock);
@@ -229,12 +243,39 @@ public class MineShaft : MonoBehaviour
                 btnUnlock_byCoin.interactable = false;
             }
         }
+
+        //if (state == StateMineShaft.LOCK && !isCanUnlock && thisRDObj != null)
+        //{
+        //    if (GameManager.Instance.GOLD >= this.properties.unlockTechnology)
+        //    {
+        //        thisRDObj.thisButton.interactable = true;
+        //    }
+        //    else
+        //    {
+        //        thisRDObj.thisButton.interactable = false;
+        //    }
+        //}
+
+        //if ((state == StateMineShaft.IDLE || state == StateMineShaft.WORKING) && !isAutoWorking && thisRDObj != null)
+        //{
+        //    if (GameManager.Instance.GOLD >= this.properties.buyAI)
+        //    {
+        //        thisRDObj.thisButton.interactable = true;
+        //    }
+        //    else
+        //    {
+        //        thisRDObj.thisButton.interactable = false;
+        //    }
+        //}
     }
 
     void GetInfo()
     {
+        this.properties.name = GameConfig.Instance.lstPropertiesMap[ID].Name;
         this.properties.capacity = GameConfig.Instance.lstPropertiesMap[ID].Productivity[0];
-        this.properties.buyMoreMinePrice = GameConfig.Instance.lstPropertiesMap[ID].BuyMine_cost * this.properties.level / 10;
+        this.properties.buyAI = GameConfig.Instance.lstPropertiesMap[ID].BuyAI;
+        this.properties.unlockTechnology = GameConfig.Instance.lstPropertiesMap[ID].Unlock_technology;
+        this.properties.buyMoreMinePrice = GameConfig.Instance.lstPropertiesMap[ID].BuyMine_cost + this.properties.level / 10;
         this.properties.unitPrice = GameConfig.Instance.lstPropertiesMap[ID].Unit_Price;
         this.properties.unlockTime = GameConfig.Instance.lstPropertiesMap[ID].Unlock_time;
         this.properties.unlockCondition = GameConfig.Instance.lstPropertiesMap[ID].Unlock_condition;
@@ -255,7 +296,7 @@ public class MineShaft : MonoBehaviour
         isCanWork = false;
         //diễn anim working
         while (timer < this.properties.miningTime)
-        {       
+        {
             yield return new WaitForSeconds(1f);
             timer++;
         }
@@ -372,8 +413,9 @@ public class MineShaft : MonoBehaviour
 
     public void BuyAI()
     {
-        GameManager.Instance.AddGold(-100);
+        GameManager.Instance.AddGold(-this.properties.buyAI);
         this.isAutoWorking = true;
+        thisRDObj.SetOver(this.properties.name, "Over");
     }
 
     void Btn_Upgrade()
@@ -427,7 +469,7 @@ public class MineShaft : MonoBehaviour
             this.timeUnlocking = this.properties.unlockTime;
             this.state = StateMineShaft.UNLOCKING;
         }
-        
+
     }
 
     public void UnlockComplete()
@@ -435,5 +477,20 @@ public class MineShaft : MonoBehaviour
         state = StateMineShaft.IDLE;
         isAutoWorking = false;
         UIManager.Instance.SetDeActivePanel(panelUnlock);
+        thisRDObj.SetInfo(this.properties.name, "Buy AI", this.properties.buyAI, () =>
+        {
+            this.BuyAI();
+        });
+        thisRDObj.isOver = false;
+        mapParent.machineMax = this.ID;
+    }
+
+    public void UnlockTechnologyComplete()
+    {
+        GameManager.Instance.AddGold(-this.properties.unlockTechnology);
+        isCanUnlock = true;
+        mapParent.CheckUnlock(this.ID - 1);
+        txtUnlock_Condition.text = "Need: " + this.properties.unlockCondition.ToString() + " pre house !";
+        thisRDObj.SetOver(this.properties.name, "Need unlock machine to buy AI");
     }
 }

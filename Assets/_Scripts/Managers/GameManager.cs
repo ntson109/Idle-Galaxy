@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using EventDispatcher;
 
-public class GameManager : MonoBehaviour {
+public class GameManager : MonoBehaviour
+{
     public static GameManager Instance = new GameManager();
-    public StateGame stateGame = StateGame.NONE;
+    
     void Awake()
     {
         if (Instance != null)
@@ -17,15 +18,44 @@ public class GameManager : MonoBehaviour {
 
     public long GOLD;
     public long COIN;
-	void Start () {
-	}
+    public StateGame stateGame = StateGame.NONE;
+    public List<Map> lstMap = new List<Map>();
+    public Boost boost;
+    public float timer;
+    void Start()
+    {
+        boost.SetDefault();
+    }
 
-	void Update () {		
-	}
+    void Update()
+    {
+        if (stateGame == StateGame.PLAYING)
+        {
+            if (boost.type != TypeBoost.NONE)
+            {
+                if(timer <= 0)
+                {
+                    boost.type = TypeBoost.NONE;
+                    timer = 0;
+                    UIManager.Instance.txtBoost.text = "";
+                    //boost.SetDefault();
+                }
+                timer -= Time.deltaTime;
+                UIManager.Instance.txtTimeBoost.text = transformToTime(timer);
+            }
+        }
+    }
+
+    string transformToTime(float time = 0)
+    {
+        int minutes = Mathf.FloorToInt(time / 60F);
+        int seconds = Mathf.FloorToInt(time - minutes * 60);
+        return string.Format("{0:00}:{1:00}", minutes, seconds);
+    }
 
     public void AddGold(long _value)
     {
-        GOLD += _value;
+        GOLD = GOLD + (_value * boost.value);
         if (GOLD <= 0)
             GOLD = 0;
 
@@ -45,16 +75,39 @@ public class GameManager : MonoBehaviour {
 }
 
 [System.Serializable]
-public enum StateGame{
+public enum StateGame
+{
     NONE,
     PLAYING
 }
 
 [System.Serializable]
-public enum Boosted
+public enum TypeBoost
 {
     NONE,
+    GOLD,
     CAPACITY,
     SPEED,
     TIME
+}
+
+public struct Boost
+{
+    public TypeBoost type;
+    public int value;
+    public int time;
+
+    public void SetDefault()
+    {
+        this.type = TypeBoost.NONE;
+        this.value = 1;
+        this.time = 0;
+    }
+
+    public void SetBoost(TypeBoost _type,int _value, int _time)
+    {
+        this.type = _type;
+        this.value = _value;
+        this.time = _time;
+    }
 }
