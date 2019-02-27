@@ -22,7 +22,6 @@ public class GameConfig : MonoBehaviour {
     {       
         public int ID;
         public string Name;
-        public long Unlock_technology;
         public long BuyAI;
         public int Unlock_condition;
         public int Unlock_time;
@@ -35,7 +34,7 @@ public class GameConfig : MonoBehaviour {
         public List<int> Productivity;
         public List<long> Upgrade_cost;
         public int Unit_Price;
-
+        public List<MineShaft.UpgradeSpecial> Upgrade_Special;
         //public void Reset()
         //{
         //    this.ID = 0;

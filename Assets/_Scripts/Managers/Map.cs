@@ -13,9 +13,8 @@ public class Map : MonoBehaviour
     long totalAmount;
     long totalMoney;
     public long moneyPerTurn;
-    public List<RDObj> lstRD = new List<RDObj>();
+    //public List<RDObj> lstRD = new List<RDObj>();
     public GameObject rdPrefabs;
-    public int machineMax = 1;
 
     [Header("UI")]
     public Text txtAmountProduct;
@@ -93,33 +92,33 @@ public class Map : MonoBehaviour
         lstMineShaft[_id].BuyAI();
     }
 
-    public void GetRDObj()
-    {
-        if (lstRD.Count == 6)
-            return;
+    //public void GetRDObj()
+    //{
+    //    if (lstRD.Count == 6)
+    //        return;
 
-        for (int i = 0; i < lstMineShaft.Count; i++)
-        {
-            RDObj rd = Instantiate(rdPrefabs, UIManager.Instance.scrollViewUpgrade.position, Quaternion.identity, UIManager.Instance.scrollViewUpgrade).GetComponent<RDObj>();
-            rd.ID = i;
-            if ((lstMineShaft[i].state == MineShaft.StateMineShaft.IDLE || lstMineShaft[i].state == MineShaft.StateMineShaft.WORKING) && !lstMineShaft[i].isAutoWorking)
-            {
-                rd.SetInfo(lstMineShaft[i].properties.name, "Buy AI",lstMineShaft[i].properties.buyAI, () => {
-                    BuyAI(rd.ID);
-                });
-            }
+    //    for (int i = 0; i < lstMineShaft.Count; i++)
+    //    {
+    //        RDObj rd = Instantiate(rdPrefabs, UIManager.Instance.scrollViewUpgrade.position, Quaternion.identity, UIManager.Instance.scrollViewUpgrade).GetComponent<RDObj>();
+    //        rd.ID = i;
+    //        if ((lstMineShaft[i].state == MineShaft.StateMineShaft.IDLE || lstMineShaft[i].state == MineShaft.StateMineShaft.WORKING) && !lstMineShaft[i].isAutoWorking)
+    //        {
+    //            rd.SetInfo(lstMineShaft[i].properties.name, "Buy AI",lstMineShaft[i].properties.buyAI, () => {
+    //                BuyAI(rd.ID);
+    //            });
+    //        }
 
-            if (lstMineShaft[i].state == MineShaft.StateMineShaft.LOCK)
-            {
-                rd.SetInfo(lstMineShaft[i].properties.name, "Unlock technology " + lstMineShaft[i].properties.name,lstMineShaft[i].properties.unlockTechnology, () =>
-                {
-                    lstMineShaft[rd.ID].UnlockTechnologyComplete();
-                });
-            }
-            lstMineShaft[i].thisRDObj = rd;
-            lstRD.Add(rd);
-        }
-    }
+    //        if (lstMineShaft[i].state == MineShaft.StateMineShaft.LOCK)
+    //        {
+    //            rd.SetInfo(lstMineShaft[i].properties.name, "Unlock technology " + lstMineShaft[i].properties.name,lstMineShaft[i].properties.unlockTechnology, () =>
+    //            {
+    //                lstMineShaft[rd.ID].UnlockTechnologyComplete();
+    //            });
+    //        }
+    //        lstMineShaft[i].thisRDObj = rd;
+    //        lstRD.Add(rd);
+    //    }
+    //}
 }
 
 [System.Serializable]

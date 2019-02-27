@@ -21,7 +21,8 @@ public class GameManager : MonoBehaviour
     public StateGame stateGame = StateGame.NONE;
     public List<Map> lstMap = new List<Map>();
     public Boost boost;
-    public float timer;
+    public float timeBoost;
+
     void Start()
     {
         boost.SetDefault();
@@ -33,15 +34,16 @@ public class GameManager : MonoBehaviour
         {
             if (boost.type != TypeBoost.NONE)
             {
-                if(timer <= 0)
+                if(timeBoost <= 0)
                 {
                     boost.type = TypeBoost.NONE;
-                    timer = 0;
+                    timeBoost = 0;
+                    UIManager.Instance.txtTimeBoost.text = "";
                     UIManager.Instance.txtBoost.text = "";
-                    //boost.SetDefault();
+                    boost.SetDefault();
                 }
-                timer -= Time.deltaTime;
-                UIManager.Instance.txtTimeBoost.text = transformToTime(timer);
+                timeBoost -= Time.deltaTime;
+                UIManager.Instance.txtTimeBoost.text = transformToTime(timeBoost);
             }
         }
     }

@@ -23,6 +23,7 @@ public class UIManager : MonoBehaviour
     public Button[] lstButtonUpgrade;
     public Text txtBoost;
     public Text txtTimeBoost;
+
     //[Header("MOUSE CLICK")]
     //public GameObject mouseClick;
     //public Canvas parentCanvas;
@@ -318,21 +319,11 @@ public class UIManager : MonoBehaviour
     #endregion
 
     #region === UI MAIN ===
-    public void Btn_ShowUpgrade()
-    {
-        if (!panelShowUpgrade.activeSelf)
-        {
-            SetActivePanel(panelShowUpgrade);
-        }
-        else
-            SetDeActivePanel(panelShowUpgrade);
-    }
-
     public void Test_Boost()
     {
         GameManager.Instance.boost.SetBoost(TypeBoost.GOLD, 2, 30);
         txtBoost.text = 2.ToString();
-        GameManager.Instance.timer = 30;
+        GameManager.Instance.timeBoost = 30;
     }
     #endregion
 }

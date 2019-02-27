@@ -25,7 +25,6 @@
   "Map_Moon" : {
 	"M_1" : {
 		"Name" : "Machine1",
-		"Unlock_technology" : 100,
 		"BuyAI" : 200,
 		"Unlock_condition" : 0,
 		"Unlock_time" : 0,
@@ -69,12 +68,34 @@
 			6,
 			7
 		],
+		"Upgrade_Special" : {
+			"1" : {
+				"name" : "AI Control",
+				"description" : "Automate work",
+				"price" : 100,
+				"time" : 0,
+				"coinMax" : 10
+			},
+			"2" : {
+				"name" : "Explore System",
+				"description" : "x2 price",
+				"price" : 100,
+				"time" : 10,
+				"coinMax" : 10
+			},
+			"3" : {
+				"name" : "Laser drilling Tech",
+				"description" : "/2 time",
+				"price" : 100,
+				"time" : 10,
+				"coinMax" : 10
+			}
+		},
 		"Unit_Price" : 3
 	},
 	"M_2" :{
 		"Name" : "Machine2",
 		"BuyAI" : 200,
-		"Unlock_technology" : 150,
 		"Unlock_condition" : 20,
 		"Unlock_time" : 5,
 		"Unlock_cost" : [
@@ -117,11 +138,33 @@
 			6,
 			7
 		],
+		"Upgrade_Special" : {
+			"1" : {
+				"name" : "AI Control",
+				"description" : "Automate work",
+				"price" : 100,
+				"time" : 0,
+				"coinMax" : 10
+			},
+			"2" : {
+				"name" : "ThermalSoftenning Tech",
+				"description" : "/2 time",
+				"price" : 100,
+				"time" : 10,
+				"coinMax" : 10
+			},
+			"3" : {
+				"name" : "Nuclear enriching Tech",
+				"description" : "x2 price",
+				"price" : 100,
+				"time" : 10,
+				"coinMax" : 10
+			}
+		},
 		"Unit_Price" : 4
 	},
 	"M_3" :{
 		"Name" : "Machine3",
-		"Unlock_technology" : 150,
 		"BuyAI" : 200,
 		"Unlock_condition" : 50,
 		"Unlock_time" : 10,
@@ -165,11 +208,33 @@
 			6,
 			7
 		],
+		"Upgrade_Special" : {
+			"1" : {
+				"name" : "AI Control",
+				"description" : "Automate work",
+				"price" : 100,
+				"time" : 0,
+				"coinMax" : 10
+			},
+			"2" : {
+				"name" : "ThermalSoftenning Tech",
+				"description" : "/2 time",
+				"price" : 100,
+				"time" : 10,
+				"coinMax" : 10
+			},
+			"3" : {
+				"name" : "Nuclear enriching Tech",
+				"description" : "x2 price",
+				"price" : 100,
+				"time" : 10,
+				"coinMax" : 10
+			}
+		},
 		"Unit_Price" : 5
 	},
 	"M_4" :{
 		"Name" : "Machine4",
-		"Unlock_technology" : 150,
 		"BuyAI" : 200,
 		"Unlock_condition" : 100,
 		"Unlock_time" : 20,
@@ -213,11 +278,33 @@
 			6,
 			7
 		],
+		"Upgrade_Special" : {
+			"1" : {
+				"name" : "AI Control",
+				"description" : "Automate work",
+				"price" : 100,
+				"time" : 0,
+				"coinMax" : 10
+			},
+			"2" : {
+				"name" : "ThermalSoftenning Tech",
+				"description" : "/2 time",
+				"price" : 100,
+				"time" : 10,
+				"coinMax" : 10
+			},
+			"3" : {
+				"name" : "Nuclear enriching Tech",
+				"description" : "x2 price",
+				"price" : 100,
+				"time" : 10,
+				"coinMax" : 10
+			}
+		},
 		"Unit_Price" : 6
 	},
 	"M_5" :{
 		"Name" : "Machine5",
-		"Unlock_technology" : 150,
 		"BuyAI" : 200,
 		"Unlock_condition" : 200,
 		"Unlock_time" : 30,
@@ -261,11 +348,33 @@
 			6,
 			7
 		],
+		"Upgrade_Special" : {
+			"1" : {
+				"name" : "AI Control",
+				"description" : "Automate work",
+				"price" : 100,
+				"time" : 0,
+				"coinMax" : 10
+			},
+			"2" : {
+				"name" : "ThermalSoftenning Tech",
+				"description" : "/2 time",
+				"price" : 100,
+				"time" : 10,
+				"coinMax" : 10
+			},
+			"3" : {
+				"name" : "Nuclear enriching Tech",
+				"description" : "x2 price",
+				"price" : 100,
+				"time" : 10,
+				"coinMax" : 10
+			}
+		},
 		"Unit_Price" : 7
 	},
 	"M_6" :{
 		"Name" : "Machine6",
-		"Unlock_technology" : 550,
 		"BuyAI" : 200,
 		"Unlock_condition" : 500,
 		"Unlock_time" : 60,
@@ -309,6 +418,29 @@
 			6,
 			7
 		],
+		"Upgrade_Special" : {
+			"1" : {
+				"name" : "AI Control",
+				"description" : "Automate work",
+				"price" : 100,
+				"time" : 0,
+				"coinMax" : 10
+			},
+			"2" : {
+				"name" : "ThermalSoftenning Tech",
+				"description" : "/2 time",
+				"price" : 100,
+				"time" : 10,
+				"coinMax" : 10
+			},
+			"3" : {
+				"name" : "Nuclear enriching Tech",
+				"description" : "x2 price",
+				"price" : 100,
+				"time" : 10,
+				"coinMax" : 10
+			}
+		},
 		"Unit_Price" : 10
   }
 }

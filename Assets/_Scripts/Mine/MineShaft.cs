@@ -29,9 +29,11 @@ public class MineShaft : MonoBehaviour
 
         public int unlockCondition;
 
-        public long unlockTechnology;
-
         public long buyAI;
+
+        public long upgradePrice;
+
+        public int upgradeTime;
     }
 
     [Serializable]
@@ -75,6 +77,17 @@ public class MineShaft : MonoBehaviour
         public TypeProduct type;
         public long amount;
     }
+
+    [Serializable]
+    public struct UpgradeSpecial
+    {
+        public string name;
+        public string description;
+        public bool state;
+        public long price;
+        public float time;
+        public int coinMax;
+    }
     #endregion
 
     [Header("PROPERTIES")]
@@ -88,6 +101,7 @@ public class MineShaft : MonoBehaviour
     public UnlockCost[] unlockCost;
     public TypeProduct typeProduct; //loại sản phẩm
     public StateMineShaft state; //trạng thái
+    public List<UpgradeSpecial> lstUpgradeSpecial;
     public bool isAutoWorking = false;
     public MineShaft nextMineShaft; //mỏ tiếp theo
     public int numberProduct_Completed; //số sản phẩm làm xong
@@ -101,7 +115,8 @@ public class MineShaft : MonoBehaviour
     private bool isCanWork = false;
     public bool isCanUnlock = false;
     public float timeUnlocking;
-    public RDObj thisRDObj;
+    public float timeUpgrading;
+    public bool isUpgrading;
 
     [Header("UI")]
     public Text txtTimer;
@@ -119,6 +134,7 @@ public class MineShaft : MonoBehaviour
     public GameObject panelUnlock_Condition;
     public Text txtUnlock_Condition;
     public Text txtTimeUnlock;
+    public Text txtTimeUpgrade;
 
     public GameObject product_PushUp;
     public Text txtProduct_PushUp;
@@ -158,6 +174,17 @@ public class MineShaft : MonoBehaviour
             timeUnlocking -= Time.deltaTime;
             txtTimeUnlock.text = transformToTime(timeUnlocking);
         }
+
+        if (isUpgrading)
+        {
+            if (timeUpgrading <= 0)
+            {
+                isUpgrading = false;
+                timeUpgrading = 0;
+            }
+            timeUpgrading -= Time.deltaTime;
+            txtTimeUpgrade.text = transformToTime(timeUpgrading);
+        }
     }
     #endregion
 
@@ -184,6 +211,7 @@ public class MineShaft : MonoBehaviour
         GetInfo();
         this.state = StateMineShaft.LOCK;
         this.RegisterListener(EventID.CHANGE_GOLD_COIN, (param) => ON_CHANGE_GOLD_COIN());
+        this.RegisterListener(EventID.CHANGE_GOLD_COIN, (param) => ON_UPGRADE_COMPLETE(param));
         txtTimeMining.text = UIManager.Instance.ToDateTimeString(this.properties.miningTime);
         if (ID == 0)
         {
@@ -243,43 +271,26 @@ public class MineShaft : MonoBehaviour
                 btnUnlock_byCoin.interactable = false;
             }
         }
-
-        //if (state == StateMineShaft.LOCK && !isCanUnlock && thisRDObj != null)
-        //{
-        //    if (GameManager.Instance.GOLD >= this.properties.unlockTechnology)
-        //    {
-        //        thisRDObj.thisButton.interactable = true;
-        //    }
-        //    else
-        //    {
-        //        thisRDObj.thisButton.interactable = false;
-        //    }
-        //}
-
-        //if ((state == StateMineShaft.IDLE || state == StateMineShaft.WORKING) && !isAutoWorking && thisRDObj != null)
-        //{
-        //    if (GameManager.Instance.GOLD >= this.properties.buyAI)
-        //    {
-        //        thisRDObj.thisButton.interactable = true;
-        //    }
-        //    else
-        //    {
-        //        thisRDObj.thisButton.interactable = false;
-        //    }
-        //}
     }
 
     void GetInfo()
     {
         this.properties.name = GameConfig.Instance.lstPropertiesMap[ID].Name;
-        this.properties.capacity = GameConfig.Instance.lstPropertiesMap[ID].Productivity[0];
+        this.properties.capacity = GameConfig.Instance.lstPropertiesMap[ID].Productivity[this.properties.level - 1];
         this.properties.buyAI = GameConfig.Instance.lstPropertiesMap[ID].BuyAI;
-        this.properties.unlockTechnology = GameConfig.Instance.lstPropertiesMap[ID].Unlock_technology;
+        this.properties.upgradePrice = GameConfig.Instance.lstPropertiesMap[ID].Upgrade_cost[this.properties.level - 1];
+        this.properties.upgradeTime = GameConfig.Instance.lstPropertiesMap[ID].Upgrade_time[this.properties.level - 1];
         this.properties.buyMoreMinePrice = GameConfig.Instance.lstPropertiesMap[ID].BuyMine_cost + this.properties.level / 10;
         this.properties.unitPrice = GameConfig.Instance.lstPropertiesMap[ID].Unit_Price;
         this.properties.unlockTime = GameConfig.Instance.lstPropertiesMap[ID].Unlock_time;
         this.properties.unlockCondition = GameConfig.Instance.lstPropertiesMap[ID].Unlock_condition;
         this.properties.miningTime = GameConfig.Instance.lstPropertiesMap[ID].miningTime;
+
+        this.lstUpgradeSpecial = new List<UpgradeSpecial>();
+        for (int i = 0; i < GameConfig.Instance.lstPropertiesMap[ID].Upgrade_Special.Count; i++)
+        {
+            this.lstUpgradeSpecial.Add(GameConfig.Instance.lstPropertiesMap[ID].Upgrade_Special[i]);
+        }
 
         this.unlockCost = new UnlockCost[2];
         this.unlockCost[0].type = TypeUnlock.COIN;
@@ -408,24 +419,63 @@ public class MineShaft : MonoBehaviour
             return;
 
         StartCoroutine(Work());
-        //btnWork.gameObject.SetActive(false);
     }
 
     public void BuyAI()
     {
-        GameManager.Instance.AddGold(-this.properties.buyAI);
-        this.isAutoWorking = true;
-        thisRDObj.SetOver(this.properties.name, "Over");
+        //GameManager.Instance.AddGold(-this.properties.buyAI);
+        //this.isAutoWorking = true;
+        //GameManager.Instance.upgradeObj.btnBuyAI.thisButton.interactable = false;
+    }
+
+    void Btn_ShowUpgrade()
+    {
+        //string descriptionAI;
+        //if (!isAutoWorking)
+        //{
+        //    descriptionAI = "Buy AI";
+        //    GameManager.Instance.upgradeObj.btnBuyAI.thisButton.interactable = true;
+        //}
+        //else
+        //{
+        //    descriptionAI = "Over AI";
+        //    GameManager.Instance.upgradeObj.btnBuyAI.thisButton.interactable = false;
+        //}
+        //GameManager.Instance.upgradeObj.SetInfoUpgrade(
+        //    "Name AI",
+        //    descriptionAI,
+        //    this.properties.name,
+        //    this.properties.level.ToString(),
+        //    this.properties.capacity.ToString(),
+        //    this.properties.miningTime.ToString(),
+        //    this.properties.unitPrice.ToString(),
+        //    this.properties.buyAI,
+        //    this.properties.upgradePrice,
+        //    () => this.BuyAI(),
+        //    () => this.Btn_Upgrade()
+        //    );
     }
 
     void Btn_Upgrade()
     {
-        UpgradeComplete();
+        GameManager.Instance.AddGold(-this.properties.upgradePrice);
+        //GameManager.Instance.upgradeObj.SetUpgrading(this.properties.upgradeTime, () => UpgradeFast());
     }
 
-    void UpgradeComplete()
+    void UpgradeFast()
     {
+        //GameManager.Instance.upgradeObj.SetUpgradeFast(10, () => GameManager.Instance.upgradeObj.timeUpgrading /= 2, () => UpgradeCoin());
+    }
 
+    void UpgradeCoin()
+    {
+        //GameManager.Instance.AddCoin(-10);
+    }
+
+    void ON_UPGRADE_COMPLETE(object param)
+    {
+        //if()
+        //GameManager.Instance.upgradeObj.isUpgrading = false;
     }
 
     public void Btn_BuyMoreMine()
@@ -477,20 +527,6 @@ public class MineShaft : MonoBehaviour
         state = StateMineShaft.IDLE;
         isAutoWorking = false;
         UIManager.Instance.SetDeActivePanel(panelUnlock);
-        thisRDObj.SetInfo(this.properties.name, "Buy AI", this.properties.buyAI, () =>
-        {
-            this.BuyAI();
-        });
-        thisRDObj.isOver = false;
-        mapParent.machineMax = this.ID;
-    }
 
-    public void UnlockTechnologyComplete()
-    {
-        GameManager.Instance.AddGold(-this.properties.unlockTechnology);
-        isCanUnlock = true;
-        mapParent.CheckUnlock(this.ID - 1);
-        txtUnlock_Condition.text = "Need: " + this.properties.unlockCondition.ToString() + " pre house !";
-        thisRDObj.SetOver(this.properties.name, "Need unlock machine to buy AI");
     }
 }

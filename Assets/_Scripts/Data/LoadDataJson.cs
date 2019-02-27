@@ -70,7 +70,6 @@ public class LoadDataJson : MonoBehaviour
                     pM = new GameConfig.PropertiesMap();
                     pM.ID = i;
                     pM.Name = objJson["Map_Moon"][i]["Name"];
-                    pM.Unlock_technology = objJson["Map_Moon"][i]["Unlock_technology"].AsInt;
                     pM.BuyAI = objJson["Map_Moon"][i]["BuyAI"].AsLong;
                     pM.Unlock_condition = objJson["Map_Moon"][i]["Unlock_condition"].AsInt;
                     pM.Unlock_time = objJson["Map_Moon"][i]["Unlock_time"].AsInt * 60;
@@ -105,6 +104,17 @@ public class LoadDataJson : MonoBehaviour
                     for (int k = 0; k < objJson["Map_Moon"][i]["Productivity"].Count; k++)
                     {
                         pM.Productivity.Add(objJson["Map_Moon"][i]["Productivity"][k].AsInt);
+                    }
+                    pM.Upgrade_Special = new List<MineShaft.UpgradeSpecial>();
+                    for (int k = 0; k < objJson["Map_Moon"][i]["Upgrade_Special"].Count; k++)
+                    {
+                        MineShaft.UpgradeSpecial temp = new MineShaft.UpgradeSpecial();
+                        temp.name = objJson["Map_Moon"][i]["Upgrade_Special"][k]["name"];
+                        temp.description = objJson["Map_Moon"][i]["Upgrade_Special"][k]["description"];
+                        temp.price = objJson["Map_Moon"][i]["Upgrade_Special"][k]["price"].AsLong;
+                        temp.time = objJson["Map_Moon"][i]["Upgrade_Special"][k]["time"].AsFloat;
+                        temp.coinMax = objJson["Map_Moon"][i]["Upgrade_Special"][k]["coinMax"].AsInt;
+                        pM.Upgrade_Special.Add(temp);
                     }
                     pM.Unit_Price = objJson["Map_Moon"][i]["Unit_Price"].AsInt;
                 }
