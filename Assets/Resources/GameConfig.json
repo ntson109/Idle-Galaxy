@@ -73,23 +73,24 @@
 				"name" : "AI Control",
 				"description" : "Automate work",
 				"price" : 100,
-				"time" : 0,
+				"time" : 1,
 				"coinMax" : 10
 			},
 			"2" : {
-				"name" : "Explore System",
-				"description" : "x2 price",
-				"price" : 100,
-				"time" : 10,
-				"coinMax" : 10
-			},
-			"3" : {
 				"name" : "Laser drilling Tech",
 				"description" : "/2 time",
 				"price" : 100,
-				"time" : 10,
+				"time" : 1,
+				"coinMax" : 10
+			},
+			"3" : {
+				"name" : "Explore System",
+				"description" : "x2 price",
+				"price" : 100,
+				"time" : 1,
 				"coinMax" : 10
 			}
+			
 		},
 		"Unit_Price" : 3
 	},
@@ -143,7 +144,7 @@
 				"name" : "AI Control",
 				"description" : "Automate work",
 				"price" : 100,
-				"time" : 0,
+				"time" : 1,
 				"coinMax" : 10
 			},
 			"2" : {
@@ -213,7 +214,7 @@
 				"name" : "AI Control",
 				"description" : "Automate work",
 				"price" : 100,
-				"time" : 0,
+				"time" : 1,
 				"coinMax" : 10
 			},
 			"2" : {
@@ -283,7 +284,7 @@
 				"name" : "AI Control",
 				"description" : "Automate work",
 				"price" : 100,
-				"time" : 0,
+				"time" : 1,
 				"coinMax" : 10
 			},
 			"2" : {
@@ -353,7 +354,7 @@
 				"name" : "AI Control",
 				"description" : "Automate work",
 				"price" : 100,
-				"time" : 0,
+				"time" : 1,
 				"coinMax" : 10
 			},
 			"2" : {
@@ -423,7 +424,7 @@
 				"name" : "AI Control",
 				"description" : "Automate work",
 				"price" : 100,
-				"time" : 0,
+				"time" : 1,
 				"coinMax" : 10
 			},
 			"2" : {

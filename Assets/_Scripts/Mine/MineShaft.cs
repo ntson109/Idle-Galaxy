@@ -101,7 +101,10 @@ public class MineShaft : MonoBehaviour
     public UnlockCost[] unlockCost;
     public TypeProduct typeProduct; //loại sản phẩm
     public StateMineShaft state; //trạng thái
-    public List<UpgradeSpecial> lstUpgradeSpecial;
+    public List<UpgradeObj_Special> lstUpgradeSpecial;
+    public UpgradeObj_Special.Type[] typeUpgradeSpecial;
+    public float[] timeUpgradeSpecial;
+    public int[] timeUpgradeSpecial_Max;
     public bool isAutoWorking = false;
     public MineShaft nextMineShaft; //mỏ tiếp theo
     public int numberProduct_Completed; //số sản phẩm làm xong
@@ -113,10 +116,7 @@ public class MineShaft : MonoBehaviour
     public RectTransform posProduct_Complete;
     public Map mapParent;
     private bool isCanWork = false;
-    public bool isCanUnlock = false;
     public float timeUnlocking;
-    public float timeUpgrading;
-    public bool isUpgrading;
 
     [Header("UI")]
     public Text txtTimer;
@@ -134,7 +134,6 @@ public class MineShaft : MonoBehaviour
     public GameObject panelUnlock_Condition;
     public Text txtUnlock_Condition;
     public Text txtTimeUnlock;
-    public Text txtTimeUpgrade;
 
     public GameObject product_PushUp;
     public Text txtProduct_PushUp;
@@ -150,40 +149,45 @@ public class MineShaft : MonoBehaviour
 
     void LateUpdate()
     {
-        if (!isCanWork && btnWork.gameObject.activeSelf)
-            btnWork.gameObject.SetActive(false);
-        else if (isCanWork && !btnWork.gameObject.activeSelf && !isAutoWorking)
-            btnWork.gameObject.SetActive(true);
-
-        if (isAutoWorking && this.state == StateMineShaft.IDLE && this.input > 0)
+        if (GameManager.Instance.stateGame == StateGame.PLAYING)
         {
-            StartCoroutine(Work());
-            btnWork.gameObject.SetActive(false);
-        }
+            if (!isCanWork && btnWork.gameObject.activeSelf)
+                btnWork.gameObject.SetActive(false);
+            else if (isCanWork && !btnWork.gameObject.activeSelf && !isAutoWorking)
+                btnWork.gameObject.SetActive(true);
 
-        txtTimer.text = UIManager.Instance.ToDateTimeString(timer);
-        txtNumberMine.text = this.numberMine.ToString();
-
-        if (this.state == StateMineShaft.UNLOCKING)
-        {
-            if (timeUnlocking <= 0)
+            if (isAutoWorking && this.state == StateMineShaft.IDLE && this.input > 0)
             {
-                UnlockComplete();
-                timeUnlocking = 0;
+                StartCoroutine(Work());
+                btnWork.gameObject.SetActive(false);
             }
-            timeUnlocking -= Time.deltaTime;
-            txtTimeUnlock.text = transformToTime(timeUnlocking);
-        }
 
-        if (isUpgrading)
-        {
-            if (timeUpgrading <= 0)
+            txtTimer.text = UIManager.Instance.ToDateTimeString(timer);
+            txtNumberMine.text = this.numberMine.ToString();
+
+            if (this.state == StateMineShaft.UNLOCKING)
             {
-                isUpgrading = false;
-                timeUpgrading = 0;
+                if (timeUnlocking <= 0)
+                {
+                    UnlockComplete();
+                    timeUnlocking = 0;
+                }
+                timeUnlocking -= Time.deltaTime;
+                txtTimeUnlock.text = transformToTime(timeUnlocking);
             }
-            timeUpgrading -= Time.deltaTime;
-            txtTimeUpgrade.text = transformToTime(timeUpgrading);
+
+            for (int i = 0; i < this.typeUpgradeSpecial.Length; i++)
+            {
+                if (this.typeUpgradeSpecial[i] == UpgradeObj_Special.Type.UPGRADING)
+                {
+                    if (this.timeUpgradeSpecial[i] <= 0)
+                    {
+                        this.timeUpgradeSpecial[i] = 0;
+                        SpecialUpgrade_Complete_1(i);
+                    }
+                    this.timeUpgradeSpecial[i] -= Time.deltaTime;
+                }
+            }
         }
     }
     #endregion
@@ -198,7 +202,7 @@ public class MineShaft : MonoBehaviour
     void ON_START_GAME()
     {
         btnWork.onClick.AddListener(() => Btn_Work());
-        btnUpgrade.onClick.AddListener(() => Btn_Upgrade());
+        btnUpgrade.onClick.AddListener(() => Btn_ShowUpgrade());
         btnBuyMoreMine.onClick.AddListener(() => Btn_BuyMoreMine());
         btnUnlock_byGold.onClick.AddListener(() => Btn_Unlock(TypeUnlock.GOLD));
         btnUnlock_byCoin.onClick.AddListener(() => Btn_Unlock(TypeUnlock.COIN));
@@ -220,15 +224,10 @@ public class MineShaft : MonoBehaviour
             isCanWork = true;
         }
 
-        if (this.state == StateMineShaft.LOCK && isCanUnlock)
+        if (this.state == StateMineShaft.LOCK)
         {
             UIManager.Instance.SetActivePanel(panelUnlock_Condition);
             txtUnlock_Condition.text = "Need: " + this.properties.unlockCondition.ToString() + " pre house !";
-        }
-        else if (this.state == StateMineShaft.LOCK && !isCanUnlock)
-        {
-            UIManager.Instance.SetActivePanel(panelUnlock_Condition);
-            txtUnlock_Condition.text = "Need: Unlock technology !";
         }
 
         if (this.state != StateMineShaft.LOCK)
@@ -286,10 +285,25 @@ public class MineShaft : MonoBehaviour
         this.properties.unlockCondition = GameConfig.Instance.lstPropertiesMap[ID].Unlock_condition;
         this.properties.miningTime = GameConfig.Instance.lstPropertiesMap[ID].miningTime;
 
-        this.lstUpgradeSpecial = new List<UpgradeSpecial>();
         for (int i = 0; i < GameConfig.Instance.lstPropertiesMap[ID].Upgrade_Special.Count; i++)
         {
-            this.lstUpgradeSpecial.Add(GameConfig.Instance.lstPropertiesMap[ID].Upgrade_Special[i]);
+            this.lstUpgradeSpecial.Add(GameManager.Instance.lstUpgradeSpecial[i]);
+        }
+
+        this.typeUpgradeSpecial = new UpgradeObj_Special.Type[3];
+        for (int i = 0; i < this.typeUpgradeSpecial.Length; i++)
+        {
+            this.typeUpgradeSpecial[i] = UpgradeObj_Special.Type.NONE;
+        }
+        this.timeUpgradeSpecial = new float[3];
+        for (int i = 0; i < this.timeUpgradeSpecial.Length; i++)
+        {
+            this.timeUpgradeSpecial[i] = GameConfig.Instance.lstPropertiesMap[ID].Upgrade_Special[i].time;
+        }
+        this.timeUpgradeSpecial_Max = new int[3];
+        for (int i = 0; i < this.timeUpgradeSpecial_Max.Length; i++)
+        {
+            this.timeUpgradeSpecial_Max[i] = (int)GameConfig.Instance.lstPropertiesMap[ID].Upgrade_Special[i].time;
         }
 
         this.unlockCost = new UnlockCost[2];
@@ -421,50 +435,72 @@ public class MineShaft : MonoBehaviour
         StartCoroutine(Work());
     }
 
-    public void BuyAI()
+    public void BuySpecialUpgrade(int _id)
     {
-        //GameManager.Instance.AddGold(-this.properties.buyAI);
-        //this.isAutoWorking = true;
-        //GameManager.Instance.upgradeObj.btnBuyAI.thisButton.interactable = false;
+
+        if (this.lstUpgradeSpecial[_id].type == UpgradeObj_Special.Type.NONE)
+        {
+            GameManager.Instance.AddGold(-GameConfig.Instance.lstPropertiesMap[ID].Upgrade_Special[_id].price);
+            this.lstUpgradeSpecial[_id].type = UpgradeObj_Special.Type.UPGRADING;
+            this.typeUpgradeSpecial[_id] = UpgradeObj_Special.Type.UPGRADING;
+        }
+    }
+
+    void SpecialUpgrade_Complete_1(int _id)
+    {
+        if (this.lstUpgradeSpecial[_id].type == UpgradeObj_Special.Type.UPGRADING)
+        {
+            SpecialUpgrade_Complete_2(_id);
+            this.lstUpgradeSpecial[_id].type = UpgradeObj_Special.Type.UPGRADED;
+            this.typeUpgradeSpecial[_id] = UpgradeObj_Special.Type.UPGRADED;
+            this.lstUpgradeSpecial[_id].SetBought();
+        }
+
+    }
+
+    void SpecialUpgrade_Complete_2(int _id)
+    {
+        switch (_id)
+        {
+            case 0:
+                this.isAutoWorking = true;
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            default:
+                break;
+        }
     }
 
     void Btn_ShowUpgrade()
     {
-        //string descriptionAI;
-        //if (!isAutoWorking)
-        //{
-        //    descriptionAI = "Buy AI";
-        //    GameManager.Instance.upgradeObj.btnBuyAI.thisButton.interactable = true;
-        //}
-        //else
-        //{
-        //    descriptionAI = "Over AI";
-        //    GameManager.Instance.upgradeObj.btnBuyAI.thisButton.interactable = false;
-        //}
-        //GameManager.Instance.upgradeObj.SetInfoUpgrade(
-        //    "Name AI",
-        //    descriptionAI,
-        //    this.properties.name,
-        //    this.properties.level.ToString(),
-        //    this.properties.capacity.ToString(),
-        //    this.properties.miningTime.ToString(),
-        //    this.properties.unitPrice.ToString(),
-        //    this.properties.buyAI,
-        //    this.properties.upgradePrice,
-        //    () => this.BuyAI(),
-        //    () => this.Btn_Upgrade()
-        //    );
+        UIManager.Instance.SetActivePanel(UIManager.Instance.panelShowUpgrade);
+
+        for (int i = 0; i < this.lstUpgradeSpecial.Count; i++)
+        {
+            int _coin = (int)((timeUpgradeSpecial[i] * GameConfig.Instance.lstPropertiesMap[ID].Upgrade_Special[i].coinMax) / timeUpgradeSpecial_Max[i]);
+            GameManager.Instance.lstUpgradeSpecial[i].SetInfo(
+                i,
+                this,
+                GameConfig.Instance.lstPropertiesMap[ID].Upgrade_Special[i].name,
+                GameConfig.Instance.lstPropertiesMap[ID].Upgrade_Special[i].description,
+                GameConfig.Instance.lstPropertiesMap[ID].Upgrade_Special[i].price,
+                this.typeUpgradeSpecial[i],
+                _coin
+                );
+        }
     }
 
     void Btn_Upgrade()
     {
         GameManager.Instance.AddGold(-this.properties.upgradePrice);
-        //GameManager.Instance.upgradeObj.SetUpgrading(this.properties.upgradeTime, () => UpgradeFast());
     }
 
-    void UpgradeFast()
+    public void UpgradeAds(int _id)
     {
-        //GameManager.Instance.upgradeObj.SetUpgradeFast(10, () => GameManager.Instance.upgradeObj.timeUpgrading /= 2, () => UpgradeCoin());
+        this.timeUpgradeSpecial[_id] /= 3;
     }
 
     void UpgradeCoin()
@@ -527,6 +563,5 @@ public class MineShaft : MonoBehaviour
         state = StateMineShaft.IDLE;
         isAutoWorking = false;
         UIManager.Instance.SetDeActivePanel(panelUnlock);
-
     }
 }

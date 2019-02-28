@@ -112,7 +112,7 @@ public class LoadDataJson : MonoBehaviour
                         temp.name = objJson["Map_Moon"][i]["Upgrade_Special"][k]["name"];
                         temp.description = objJson["Map_Moon"][i]["Upgrade_Special"][k]["description"];
                         temp.price = objJson["Map_Moon"][i]["Upgrade_Special"][k]["price"].AsLong;
-                        temp.time = objJson["Map_Moon"][i]["Upgrade_Special"][k]["time"].AsFloat;
+                        temp.time = objJson["Map_Moon"][i]["Upgrade_Special"][k]["time"].AsFloat * 60;
                         temp.coinMax = objJson["Map_Moon"][i]["Upgrade_Special"][k]["coinMax"].AsInt;
                         pM.Upgrade_Special.Add(temp);
                     }

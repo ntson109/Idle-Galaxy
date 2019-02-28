@@ -6,26 +6,27 @@ using EventDispatcher;
 
 public class UpgradeObj_Special : MonoBehaviour
 {
-    public int ID;
-    public bool isUpgrading = false;
-    public float timeUpgrading;
-    public Text txtNameAI;
-    public Text txtDescriptionAI;
-    public Text txtName;
-    public Text txtLevel;
-    public Text txtCapacity;
-    public Text txtMiningTime;
-    public Text txtUnitPrice;
-    public Text txtPriceUpgrade;
-    public Text txtPriceAI;
-    public MyButton btnBuyAI;
-    public MyButton btnUpgrade;
-    public Text txtTimeUpgrading;
+    [System.Serializable]
+    public enum Type
+    {
+        NONE,
+        UPGRADING,
+        UPGRADED
+    }
 
-    [Header("UP FAST")]
-    public Text txtPriceFast;
-    public MyButton btnCoinfast;
-    public MyButton btnAdsFast;
+    public int ID;
+    public Type type;
+    public Text txtName;
+    public Text txtDescription;
+    public Text txtTime;
+    public Text txtPrice;
+    public Text txtCoin;
+    public MyButton btnBuy;
+    public MyButton btnBuyNow;
+    public Button btnBuyAds;
+    private MineShaft thisMineShaft;
+    public GameObject panelTime;
+
     // Use this for initialization
     void Start()
     {
@@ -35,6 +36,10 @@ public class UpgradeObj_Special : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (thisMineShaft != null && type == Type.UPGRADING)
+        {
+            txtTime.text = transformToTime(thisMineShaft.timeUpgradeSpecial[ID]);
+        }
     }
 
     string transformToTime(float time = 0)
@@ -44,44 +49,57 @@ public class UpgradeObj_Special : MonoBehaviour
         return string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
-    public void SetInfoUpgrade(string _nameAI, string _DescriptionAI, string _name, string _level, string _capacity, string _miningTime, string _unitPrice, long _priceAI, long _priceUp, UnityEngine.Events.UnityAction _actionBtnAI, UnityEngine.Events.UnityAction _actionBtnUp)
+    public void SetInfo(int _id, MineShaft _mineShaft, string _name, string _description, long _price, UpgradeObj_Special.Type _type, int _coin)
     {
-        if (!UIManager.Instance.panelShowUpgrade.activeSelf)
-        {
-            UIManager.Instance.SetActivePanel(UIManager.Instance.panelShowUpgrade);
-        }
-        else
-        {
-            UIManager.Instance.SetDeActivePanel(UIManager.Instance.panelShowUpgrade);
-        }
-
-        txtNameAI.text = _nameAI;
-        txtDescriptionAI.text = _DescriptionAI;
+        this.gameObject.SetActive(true);
+        this.ID = _id;
         txtName.text = _name;
-        txtLevel.text = _level;
-        txtCapacity.text = _capacity;
-        txtMiningTime.text = _miningTime;
-        txtUnitPrice.text = _unitPrice;
+        txtDescription.text = _description;
+        txtPrice.text = UIManager.Instance.ToLongString(_price);
+        type = _type;
+        thisMineShaft = _mineShaft;
+        btnBuy.thisPrice = _price;
+        btnBuyNow.thisPrice = _coin;
+        txtCoin.text = UIManager.Instance.ToLongString(_coin);
 
-        btnBuyAI.thisPrice = _priceAI;
-        btnUpgrade.thisPrice = _priceUp;
-        btnBuyAI.thisButton.onClick.AddListener(_actionBtnAI);
-        btnUpgrade.thisButton.onClick.AddListener(_actionBtnUp);
+        switch (type)
+        {
+            case Type.NONE:
+                GameManager.Instance.AddGold(0);
+                panelTime.SetActive(false);
+                break;
+            case Type.UPGRADING:
+                panelTime.SetActive(true);
+                break;
+            case Type.UPGRADED:
+                btnBuy.thisPrice = long.MaxValue;
+                SetBought();
+                break;
+            default:
+                break;
+        }
     }
 
-    public void SetUpgrading(int _time,UnityEngine.Events.UnityAction _actionBtnUp)
+    public void SetBought()
     {
-        btnUpgrade.thisButton.onClick.RemoveAllListeners();
-        timeUpgrading = _time;
-        isUpgrading = true;
-        btnUpgrade.thisButton.onClick.AddListener(_actionBtnUp);
+        panelTime.SetActive(false);
+        btnBuy.thisButton.interactable = false;
+        txtDescription.text = "Bought !!!";
     }
 
-    public void SetUpgradeFast(long _price, UnityEngine.Events.UnityAction _actionAds, UnityEngine.Events.UnityAction _actionCoin)
+    public void BtnBuy()
     {
-        btnUpgrade.thisButton.onClick.RemoveAllListeners();
-        txtPriceFast.text = _price.ToString();
-        btnAdsFast.thisButton.onClick.AddListener(_actionAds);
-        btnCoinfast.thisButton.onClick.AddListener(_actionCoin);
+        thisMineShaft.BuySpecialUpgrade(this.ID);
+
+        panelTime.SetActive(true);
+    }
+
+    public void BtnBuyNow()
+    {
+
+    }
+    public void BtnBuyAds()
+    {
+        thisMineShaft.UpgradeAds(this.ID);
     }
 }

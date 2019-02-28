@@ -921,6 +921,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 0
   properties:
+    name: 
     level: 1
     buyMoreMinePrice: 5
     capacity: 1
@@ -929,6 +930,9 @@ MonoBehaviour:
     unlockTime: 0
     speedMining: 0
     unlockCondition: 0
+    buyAI: 0
+    upgradePrice: 0
+    upgradeTime: 0
   numberMine: 0
   totalCapacity: 0
   input: 0
@@ -937,6 +941,10 @@ MonoBehaviour:
   unlockCost: []
   typeProduct: 1
   state: 0
+  lstUpgradeSpecial: []
+  typeUpgradeSpecial: 
+  timeUpgradeSpecial: []
+  isAutoWorking: 0
   nextMineShaft: {fileID: 0}
   numberProduct_Completed: 0
   numberProduct_PushUp: 0

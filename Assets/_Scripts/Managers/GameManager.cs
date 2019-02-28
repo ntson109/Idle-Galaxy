@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     public List<Map> lstMap = new List<Map>();
     public Boost boost;
     public float timeBoost;
+    public List<UpgradeObj_Special> lstUpgradeSpecial;
 
     void Start()
     {

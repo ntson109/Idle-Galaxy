@@ -19,8 +19,6 @@ public class UIManager : MonoBehaviour
 
     [Header("UI MAIN")]
     public GameObject panelShowUpgrade;
-    public Transform scrollViewUpgrade;
-    public Button[] lstButtonUpgrade;
     public Text txtBoost;
     public Text txtTimeBoost;
 
@@ -324,6 +322,12 @@ public class UIManager : MonoBehaviour
         GameManager.Instance.boost.SetBoost(TypeBoost.GOLD, 2, 30);
         txtBoost.text = 2.ToString();
         GameManager.Instance.timeBoost = 30;
+    }
+
+    public void TestMoney()
+    {
+        GameManager.Instance.AddGold(100);
+        GameManager.Instance.AddCoin(100);
     }
     #endregion
 }
