@@ -6,7 +6,7 @@ using EventDispatcher;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance = new GameManager();
-    
+
     void Awake()
     {
         if (Instance != null)
@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
         {
             if (boost.type != TypeBoost.NONE)
             {
-                if(timeBoost <= 0)
+                if (timeBoost <= 0)
                 {
                     boost.type = TypeBoost.NONE;
                     timeBoost = 0;
@@ -44,16 +44,9 @@ public class GameManager : MonoBehaviour
                     boost.SetDefault();
                 }
                 timeBoost -= Time.deltaTime;
-                UIManager.Instance.txtTimeBoost.text = transformToTime(timeBoost);
+                UIManager.Instance.txtTimeBoost.text = UIManager.Instance.transformToTime(timeBoost);
             }
         }
-    }
-
-    string transformToTime(float time = 0)
-    {
-        int minutes = Mathf.FloorToInt(time / 60F);
-        int seconds = Mathf.FloorToInt(time - minutes * 60);
-        return string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
     public void AddGold(long _value)
@@ -107,7 +100,7 @@ public struct Boost
         this.time = 0;
     }
 
-    public void SetBoost(TypeBoost _type,int _value, int _time)
+    public void SetBoost(TypeBoost _type, int _value, int _time)
     {
         this.type = _type;
         this.value = _value;

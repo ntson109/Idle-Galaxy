@@ -51,15 +51,15 @@ public class MineShaft : MonoBehaviour
         ADS
     }
 
-    [Serializable]
-    public enum TypeProduct
-    {
-        GOLD,
-        SP1,
-        SP2,
-        SP3,
-        SP4
-    }
+    //[Serializable]
+    //public enum TypeProduct
+    //{
+    //    GOLD,
+    //    SP1,
+    //    SP2,
+    //    SP3,
+    //    SP4
+    //}
 
     [Serializable]
     public enum StateMineShaft
@@ -71,12 +71,12 @@ public class MineShaft : MonoBehaviour
         WORKING
     }
 
-    [Serializable]
-    public struct Product
-    {
-        public TypeProduct type;
-        public long amount;
-    }
+    //[Serializable]
+    //public struct Product
+    //{
+    //    public TypeProduct type;
+    //    public long amount;
+    //}
 
     [Serializable]
     public struct UpgradeSpecial
@@ -99,7 +99,7 @@ public class MineShaft : MonoBehaviour
     public TypeMap typeMap;
     public Miner miner; //nhân viên
     public UnlockCost[] unlockCost;
-    public TypeProduct typeProduct; //loại sản phẩm
+    //public TypeProduct typeProduct; //loại sản phẩm
     public StateMineShaft state; //trạng thái
     public List<UpgradeObj_Special> lstUpgradeSpecial;
     public UpgradeObj_Special.Type[] typeUpgradeSpecial;
@@ -120,7 +120,6 @@ public class MineShaft : MonoBehaviour
 
     [Header("UI")]
     public Text txtTimer;
-    public Text txtTimeMining;
     public Text txtNumberMine;
     public Button btnWork;
     public Button btnUpgrade;
@@ -216,7 +215,6 @@ public class MineShaft : MonoBehaviour
         this.state = StateMineShaft.LOCK;
         this.RegisterListener(EventID.CHANGE_GOLD_COIN, (param) => ON_CHANGE_GOLD_COIN());
         this.RegisterListener(EventID.CHANGE_GOLD_COIN, (param) => ON_UPGRADE_COMPLETE(param));
-        txtTimeMining.text = UIManager.Instance.ToDateTimeString(this.properties.miningTime);
         if (ID == 0)
         {
             this.state = StateMineShaft.IDLE;
@@ -319,13 +317,16 @@ public class MineShaft : MonoBehaviour
     {
         state = StateMineShaft.WORKING;
         isCanWork = false;
-        //diễn anim working
-        while (timer < this.properties.miningTime)
+        timer = this.properties.miningTime;
+        if (timer >= 2)
         {
-            yield return new WaitForSeconds(1f);
-            timer++;
+            //diễn anim working
+            while (timer > 0)
+            {
+                yield return new WaitForSeconds(1f);
+                timer--;
+            }
         }
-
         //chạy xong
         numberProduct_Completed = this.input;// *this.numberMine;
         if (nextMineShaft != null && nextMineShaft.state != StateMineShaft.LOCK && nextMineShaft.state != StateMineShaft.UNLOCKING && nextMineShaft.isActiveAndEnabled && nextMineShaft.input == 0)
@@ -363,7 +364,7 @@ public class MineShaft : MonoBehaviour
             StartCoroutine(Product_Move_Remain());
         }
         //diễn anime chạy xong
-        yield return new WaitForSeconds(1.75f);
+        yield return new WaitForSeconds(1.5f);
         numberProduct_Completed = numberProduct_PushUp = numberProduct_Remain = 0;
         if (this.ID == 0)
         {

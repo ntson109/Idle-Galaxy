@@ -53,6 +53,12 @@ public class UIManager : MonoBehaviour
     #endregion
 
     #region === SUPPORT ===
+    public string transformToTime(float time = 0)
+    {
+        int minutes = Mathf.FloorToInt(time / 60F);
+        int seconds = Mathf.FloorToInt(time - minutes * 60);
+        return string.Format("{0:00}:{1:00}", minutes, seconds);
+    }
     public string ConvertNumber(long number)
     {
         string smoney = string.Format("{0:#,##0}", number);
@@ -119,6 +125,7 @@ public class UIManager : MonoBehaviour
         //}
     }
 
+    //================================================
     private string[] timeFormat = new string[]
 	{
 		"d",
@@ -155,6 +162,7 @@ public class UIManager : MonoBehaviour
         return num2.ToString() + cashFormat[num];
     }
 
+    //2h46m
     public string ConvertTime(int second)
     {
         int num = second / 86400;
@@ -176,6 +184,8 @@ public class UIManager : MonoBehaviour
         return num4.ToString() + timeFormat[3];
     }
 
+    //================================================
+    //2:46:40s
     public string ToDateTimeString(int seconds)
     {
         int num = seconds / 3600;
@@ -187,19 +197,12 @@ public class UIManager : MonoBehaviour
         }
         if (num2 > 0)
         {
-            return num2.ToString("00") + ":" + num3.ToString("00") + "s";
+            return num2.ToString() + ":" + num3.ToString("00") + "s";
+            //eturn num2.ToString("00") + ":" + num3.ToString("00") + "s";
         }
-        return num3.ToString("00") + "s";
-    }
-
-    public int GetOfflineTime(string dateTime)
-    {
-        if (dateTime == string.Empty)
-        {
-            return 0;
-        }
-        return (int)Mathf.Round((float)DateTime.Now.Subtract(Convert.ToDateTime(dateTime)).TotalSeconds);
-    }
+        return num3.ToString() + "s";
+        //return num3.ToString("00") + "s";
+    }   
 
     public string ToDoubleString(double pValue)
     {
@@ -274,6 +277,16 @@ public class UIManager : MonoBehaviour
         xx,
         yy,
         zz
+    }
+
+    //================================================
+    public int GetOfflineTime(string dateTime)
+    {
+        if (dateTime == string.Empty)
+        {
+            return 0;
+        }
+        return (int)Mathf.Round((float)DateTime.Now.Subtract(Convert.ToDateTime(dateTime)).TotalSeconds);
     }
 
     #endregion
