@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     public Boost boost;
     public float timeBoost;
     public List<UpgradeObj_Special> lstUpgradeSpecial;
+    public UpgradeObj_Level upgradeLevel;
 
     void Start()
     {
@@ -65,7 +66,7 @@ public class GameManager : MonoBehaviour
         if (COIN <= 0)
             COIN = 0;
 
-        UIManager.Instance.txtDiamond.text = UIManager.Instance.ToLongString(COIN);
+        UIManager.Instance.txtCoin.text = UIManager.Instance.ToLongString(COIN);
         this.PostEvent(EventID.CHANGE_GOLD_COIN);
     }
 }

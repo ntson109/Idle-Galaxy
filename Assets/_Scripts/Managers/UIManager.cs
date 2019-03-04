@@ -15,10 +15,13 @@ public class UIManager : MonoBehaviour
     private string[] arrAlphabet = new string[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" };
 
     public Text txtGold;
-    public Text txtDiamond;
+    public Text txtCoin;
 
     [Header("UI MAIN")]
     public GameObject panelShowUpgrade;
+    public GameObject panelCoinAds;
+    public Text txtCoin_panelCoinAds;
+    public MyButton btnCoin_panelCoinAds;
     public Text txtBoost;
     public Text txtTimeBoost;
 
@@ -49,6 +52,10 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.Instance.stateGame == StateGame.PLAYING)
+        {
+            HideIfClickedOutside(panelCoinAds);
+        }
     }
     #endregion
 
@@ -123,6 +130,18 @@ public class UIManager : MonoBehaviour
         //    Vector3 mousePos = parentCanvas.transform.TransformPoint(click) + new Vector3(0.2f, -0.3f, 0);
         //    mouseClick.transform.position = mousePos;
         //}
+    }
+
+    private void HideIfClickedOutside(GameObject panel)
+    {
+        if (Input.GetMouseButton(0) && panel.activeSelf &&
+            !RectTransformUtility.RectangleContainsScreenPoint(
+                panel.GetComponent<RectTransform>(),
+                Input.mousePosition,
+                Camera.main))
+        {
+            panel.SetActive(false);
+        }
     }
 
     //================================================
@@ -202,7 +221,7 @@ public class UIManager : MonoBehaviour
         }
         return num3.ToString() + "s";
         //return num3.ToString("00") + "s";
-    }   
+    }
 
     public string ToDoubleString(double pValue)
     {
@@ -330,6 +349,14 @@ public class UIManager : MonoBehaviour
     #endregion
 
     #region === UI MAIN ===
+
+    public void ShowPanelCoinAds(int _coin, UnityEngine.Events.UnityAction _action)
+    {
+        SetActivePanel(panelCoinAds);
+        btnCoin_panelCoinAds.thisPrice = _coin;
+        btnCoin_panelCoinAds.type = MyButton.Type.COIN;
+        btnCoin_panelCoinAds.thisButton.onClick.AddListener(_action);
+    }
     public void Test_Boost()
     {
         GameManager.Instance.boost.SetBoost(TypeBoost.GOLD, 2, 30);

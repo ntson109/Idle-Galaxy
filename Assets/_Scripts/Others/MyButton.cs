@@ -7,8 +7,15 @@ using EventDispatcher;
 [RequireComponent(typeof(Button))]
 public class MyButton : MonoBehaviour
 {
+    public enum Type
+    {
+        GOLD,
+        COIN
+    }
+
     public Button thisButton;
     public long thisPrice = 0;
+    public Type type;
 
     void Start()
     {
@@ -19,13 +26,27 @@ public class MyButton : MonoBehaviour
 
     void ON_CHANGE_GOLD_COIN()
     {
-        if (GameManager.Instance.GOLD >= thisPrice)
+        if (type == Type.GOLD)
         {
-            thisButton.interactable = true;
+            if (GameManager.Instance.GOLD >= thisPrice)
+            {
+                thisButton.interactable = true;
+            }
+            else
+            {
+                thisButton.interactable = false;
+            }
         }
-        else
+        else if (type == Type.COIN)
         {
-            thisButton.interactable = false;
+            if (GameManager.Instance.COIN >= thisPrice)
+            {
+                thisButton.interactable = true;
+            }
+            else
+            {
+                thisButton.interactable = false;
+            }
         }
     }
 }

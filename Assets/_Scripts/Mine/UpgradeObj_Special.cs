@@ -26,6 +26,7 @@ public class UpgradeObj_Special : MonoBehaviour
     public Button btnBuyAds;
     private MineShaft thisMineShaft;
     public GameObject panelTime;
+    int coin;
 
     // Use this for initialization
     void Start()
@@ -59,13 +60,16 @@ public class UpgradeObj_Special : MonoBehaviour
         type = _type;
         thisMineShaft = _mineShaft;
         btnBuy.thisPrice = _price;
-        btnBuyNow.thisPrice = _coin;
-        txtCoin.text = UIManager.Instance.ToLongString(_coin);
-
+        btnBuy.type = MyButton.Type.GOLD;
+        coin = _coin;
+        btnBuyNow.thisPrice = coin;
+        btnBuyNow.type = MyButton.Type.COIN;
+        txtCoin.text = UIManager.Instance.ToLongString(coin);
+        
+        GameManager.Instance.AddGold(0);
         switch (type)
         {
             case Type.NONE:
-                GameManager.Instance.AddGold(0);
                 panelTime.SetActive(false);
                 break;
             case Type.UPGRADING:
@@ -96,7 +100,7 @@ public class UpgradeObj_Special : MonoBehaviour
 
     public void BtnBuyNow()
     {
-
+        thisMineShaft.UpgradeCoin(this.ID, coin);
     }
     public void BtnBuyAds()
     {

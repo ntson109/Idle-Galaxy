@@ -17,8 +17,8 @@
   "warning3" : "abc"
   },
   "CapTransporter" : [
-	15,
-	50,
+	5,
+	25,
 	100
   ],
   "SpeedTransporter" : 1,
@@ -35,7 +35,13 @@
 		"Unlock_reward" : {
 			"timex2" : 0
 		},
-		"miningTime" : 5,
+		"miningTime" : [
+			3,
+			3,
+			2,
+			2,
+			1
+		],
 		"BuyMine_cost" : 5,
 		"Upgrade_time" : [
 			1,
@@ -63,10 +69,10 @@
 			1,
 			2,
 			3,
-			4,
 			5,
-			6,
-			7
+			5,
+			5,
+			10
 		],
 		"Upgrade_Special" : {
 			"1" : {
@@ -92,7 +98,11 @@
 			}
 			
 		},
-		"Unit_Price" : 3
+		"Unit_Price" : [
+			1,
+			2,
+			3
+		]
 	},
 	"M_2" :{
 		"Name" : "Machine2",
@@ -107,7 +117,13 @@
 			"timex2" : 60
 		},
 		"BuyMine_cost" : 60,
-		"miningTime" : 10,
+		"miningTime" : [
+			3,
+			3,
+			2,
+			2,
+			1
+		],
 		"Upgrade_time" : [
 			5,
 			7,
@@ -162,7 +178,11 @@
 				"coinMax" : 10
 			}
 		},
-		"Unit_Price" : 4
+		"Unit_Price" : [
+			1,
+			2,
+			3
+		]
 	},
 	"M_3" :{
 		"Name" : "Machine3",
@@ -177,7 +197,13 @@
 			"timex2" : 60
 		},
 		"BuyMine_cost" : 682,
-		"miningTime" : 15,
+		"miningTime" : [
+			3,
+			3,
+			2,
+			2,
+			1
+		],
 		"Upgrade_time" : [
 			10,
 			13,
@@ -232,7 +258,11 @@
 				"coinMax" : 10
 			}
 		},
-		"Unit_Price" : 5
+		"Unit_Price" : [
+			1,
+			2,
+			3
+		]
 	},
 	"M_4" :{
 		"Name" : "Machine4",
@@ -247,7 +277,13 @@
 			"timex2" : 60
 		},
 		"BuyMine_cost" : 8220,
-		"miningTime" : 20,
+		"miningTime" : [
+			3,
+			3,
+			2,
+			2,
+			1
+		],
 		"Upgrade_time" : [
 			10,
 			13,
@@ -302,7 +338,11 @@
 				"coinMax" : 10
 			}
 		},
-		"Unit_Price" : 6
+		"Unit_Price" : [
+			1,
+			2,
+			3
+		]
 	},
 	"M_5" :{
 		"Name" : "Machine5",
@@ -317,7 +357,13 @@
 			"timex2" : 60
 		},
 		"BuyMine_cost" : 106912,
-		"miningTime" : 25,
+		"miningTime" : [
+			3,
+			3,
+			2,
+			2,
+			1
+		],
 		"Upgrade_time" : [
 			10,
 			13,
@@ -372,7 +418,11 @@
 				"coinMax" : 10
 			}
 		},
-		"Unit_Price" : 7
+		"Unit_Price" : [
+			1,
+			2,
+			3
+		]
 	},
 	"M_6" :{
 		"Name" : "Machine6",
@@ -387,7 +437,13 @@
 			"timex2" : 60
 		},
 		"BuyMine_cost" : 106912,
-		"miningTime" : 35,
+		"miningTime" : [
+			3,
+			3,
+			2,
+			2,
+			1
+		],
 		"Upgrade_time" : [
 			10,
 			13,
@@ -442,6 +498,10 @@
 				"coinMax" : 10
 			}
 		},
-		"Unit_Price" : 10
+		"Unit_Price" : [
+			1,
+			2,
+			3
+		]
   }
 }

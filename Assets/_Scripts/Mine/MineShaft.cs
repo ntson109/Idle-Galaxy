@@ -119,16 +119,21 @@ public class MineShaft : MonoBehaviour
     public RectTransform posProduct_Complete_1;
     public Map mapParent;
     private bool isCanWork = false;
-    public float timeUnlocking;
+    private float timeUnlocking;
+
+    public UpgradeObj_Level.Type typeUpgradeSLevel;
+    public float timeUpgradeLevel;
+    private float timeUpgradeLevel_Max;
 
     [Header("UI")]
     public Text txtName;
     public Text txtLevel;
     public Text txtTimer;
     public Text txtNumberMine;
+    public Text txtMoreMinePrice;
     public Button btnWork;
     public Button btnUpgrade;
-    public Button btnBuyMoreMine;
+    public MyButton btnBuyMoreMine;
     public Button btnUnlock_byGold;
     public Text txtUnlock_byGold;
     public Button btnUnlock_byCoin;
@@ -194,6 +199,16 @@ public class MineShaft : MonoBehaviour
                     this.timeUpgradeSpecial[i] -= Time.deltaTime;
                 }
             }
+
+            if (this.typeUpgradeSLevel == UpgradeObj_Level.Type.UPGRADING)
+            {
+                if (this.timeUpgradeLevel <= 0)
+                {
+                    this.timeUpgradeLevel = 0;
+                    UpgradeLevel_Complete();
+                }
+                this.timeUpgradeLevel -= Time.deltaTime;
+            }
         }
     }
     #endregion
@@ -209,7 +224,7 @@ public class MineShaft : MonoBehaviour
     {
         btnWork.onClick.AddListener(() => Btn_Work());
         btnUpgrade.onClick.AddListener(() => Btn_ShowUpgrade());
-        btnBuyMoreMine.onClick.AddListener(() => Btn_BuyMoreMine());
+        btnBuyMoreMine.thisButton.onClick.AddListener(() => Btn_BuyMoreMine());
         btnUnlock_byGold.onClick.AddListener(() => Btn_Unlock(TypeUnlock.GOLD));
         btnUnlock_byCoin.onClick.AddListener(() => Btn_Unlock(TypeUnlock.COIN));
         btnUnlock_byAD.onClick.AddListener(() => Btn_Unlock(TypeUnlock.ADS));
@@ -217,12 +232,10 @@ public class MineShaft : MonoBehaviour
         this.properties.level = 1;
         this.txtLevel.text = "Level " + this.properties.level.ToString();
         this.numberMine = 1;
-        this.totalCapacity = this.properties.capacity * this.numberMine;
         this.properties.speedMining = 1;
         GetInfo();
         this.state = StateMineShaft.LOCK;
         this.RegisterListener(EventID.CHANGE_GOLD_COIN, (param) => ON_CHANGE_GOLD_COIN());
-        this.RegisterListener(EventID.CHANGE_GOLD_COIN, (param) => ON_UPGRADE_COMPLETE(param));
         if (ID == 0)
         {
             this.state = StateMineShaft.IDLE;
@@ -247,14 +260,14 @@ public class MineShaft : MonoBehaviour
     {
         if (state != StateMineShaft.LOCK)
         {
-            if (GameManager.Instance.GOLD >= this.properties.buyMoreMinePrice)
-            {
-                btnBuyMoreMine.interactable = true;
-            }
-            else
-            {
-                btnBuyMoreMine.interactable = false;
-            }
+            //if (GameManager.Instance.GOLD >= this.properties.buyMoreMinePrice)
+            //{
+            //    btnBuyMoreMine.interactable = true;
+            //}
+            //else
+            //{
+            //    btnBuyMoreMine.interactable = false;
+            //}
         }
         else
         {
@@ -283,14 +296,18 @@ public class MineShaft : MonoBehaviour
         this.properties.name = GameConfig.Instance.lstPropertiesMap[ID].Name;
         this.txtName.text = this.properties.name;
         this.properties.capacity = GameConfig.Instance.lstPropertiesMap[ID].Productivity[this.properties.level - 1];
+        this.totalCapacity = this.properties.capacity * this.numberMine;
         this.properties.buyAI = GameConfig.Instance.lstPropertiesMap[ID].BuyAI;
         this.properties.upgradePrice = GameConfig.Instance.lstPropertiesMap[ID].Upgrade_cost[this.properties.level - 1];
         this.properties.upgradeTime = GameConfig.Instance.lstPropertiesMap[ID].Upgrade_time[this.properties.level - 1];
         this.properties.buyMoreMinePrice = GameConfig.Instance.lstPropertiesMap[ID].BuyMine_cost + this.properties.level / 10;
-        this.properties.unitPrice = GameConfig.Instance.lstPropertiesMap[ID].Unit_Price;
+        btnBuyMoreMine.thisPrice = this.properties.buyMoreMinePrice;
+        btnBuyMoreMine.type = MyButton.Type.GOLD;
+        txtMoreMinePrice.text = UIManager.Instance.ToLongString(btnBuyMoreMine.thisPrice);
+        this.properties.unitPrice = GameConfig.Instance.lstPropertiesMap[ID].Unit_Price[this.properties.level - 1];
         this.properties.unlockTime = GameConfig.Instance.lstPropertiesMap[ID].Unlock_time;
         this.properties.unlockCondition = GameConfig.Instance.lstPropertiesMap[ID].Unlock_condition;
-        this.properties.miningTime = GameConfig.Instance.lstPropertiesMap[ID].miningTime;
+        this.properties.miningTime = GameConfig.Instance.lstPropertiesMap[ID].miningTime[this.properties.level - 1];
 
         for (int i = 0; i < GameConfig.Instance.lstPropertiesMap[ID].Upgrade_Special.Count; i++)
         {
@@ -350,7 +367,6 @@ public class MineShaft : MonoBehaviour
         product_Complete.SetActive(false);
         product_Complete.GetComponent<RectTransform>().transform.position = posProduct_Complete_1.position;
         //chạy xong
-        // *this.numberMine;
         if (nextMineShaft != null && nextMineShaft.state != StateMineShaft.LOCK && nextMineShaft.state != StateMineShaft.UNLOCKING && nextMineShaft.isActiveAndEnabled && nextMineShaft.input == 0)
         {
             if (numberProduct_Completed <= this.nextMineShaft.totalCapacity)
@@ -360,7 +376,7 @@ public class MineShaft : MonoBehaviour
                 product_PushUp.SetActive(true);
                 txtProduct_PushUp.text = numberProduct_PushUp.ToString();
                 yield return new WaitForSeconds(0.15f);
-                product_PushUp.transform.DOLocalPath(new Vector3[] { posProduct_PushUp.position, posProduct_PushUp_1.position }, this.properties.speedMining).OnComplete(() =>
+                product_PushUp.transform.DOLocalPath(new Vector3[] { posProduct_PushUp.localPosition, posProduct_PushUp_1.localPosition }, 0.5f * this.properties.speedMining).OnComplete(() =>
                 {
                     product_PushUp.SetActive(false);
                     product_PushUp.transform.position = posProduct_Complete.position;
@@ -378,13 +394,13 @@ public class MineShaft : MonoBehaviour
                 txtProduct_PushUp.text = numberProduct_PushUp.ToString();
                 txtProduct_Remain.text = numberProduct_Remain.ToString();
                 yield return new WaitForSeconds(0.15f);
-                product_PushUp.transform.DOLocalPath(new Vector3[] { posProduct_PushUp.position, posProduct_PushUp_1.position }, 0.5f * this.properties.speedMining).OnComplete(() =>
+                product_PushUp.transform.DOLocalPath(new Vector3[] { posProduct_PushUp.localPosition, posProduct_PushUp_1.localPosition }, 0.5f * this.properties.speedMining).OnComplete(() =>
                 {
                     product_PushUp.SetActive(false);
                     product_PushUp.transform.position = posProduct_Complete.position;
                     nextMineShaft.GiveInput(numberProduct_PushUp);
                 });
-                product_Remain.transform.DOPath(new Vector3[] { posProduct_Remain.position }, 0.5f * this.properties.speedMining).OnComplete(() =>
+                product_Remain.transform.DOLocalPath(new Vector3[] { posProduct_Remain.localPosition }, 0.5f * this.properties.speedMining).OnComplete(() =>
                 {
                     product_Remain.SetActive(false);
                     product_Remain.transform.position = posProduct_Complete.position;
@@ -400,8 +416,8 @@ public class MineShaft : MonoBehaviour
             numberProduct_Remain = numberProduct_Completed;
             product_Remain.SetActive(true);
             txtProduct_Remain.text = numberProduct_Remain.ToString();
-            yield return new WaitForSeconds(0.2f);
-            product_Remain.transform.DOPath(new Vector3[] { posProduct_Remain.position }, 0.5f * this.properties.speedMining).OnComplete(() =>
+            yield return new WaitForSeconds(0.15f);
+            product_Remain.transform.DOLocalPath(new Vector3[] { posProduct_Remain.localPosition }, 0.5f * this.properties.speedMining).OnComplete(() =>
             {
                 product_Remain.SetActive(false);
                 product_Remain.transform.position = posProduct_Complete.position;
@@ -513,8 +529,10 @@ public class MineShaft : MonoBehaviour
                 this.isAutoWorking = true;
                 break;
             case 1:
+                this.properties.miningTime /= 2;
                 break;
             case 2:
+                this.properties.unitPrice *= 2;
                 break;
             default:
                 break;
@@ -538,11 +556,40 @@ public class MineShaft : MonoBehaviour
                 _coin
                 );
         }
+
+        GameManager.Instance.upgradeLevel.SetInfo(this, typeUpgradeSLevel);
     }
 
-    void Btn_Upgrade()
+
+
+    public void Btn_UpgradeLevel()
     {
-        GameManager.Instance.AddGold(-this.properties.upgradePrice);
+        if (typeUpgradeSLevel == UpgradeObj_Level.Type.NONE)
+        {
+            GameManager.Instance.AddGold(-this.properties.upgradePrice);
+            timeUpgradeLevel = GameConfig.Instance.lstPropertiesMap[ID].Upgrade_time[this.properties.level - 1];
+            typeUpgradeSLevel = UpgradeObj_Level.Type.UPGRADING;
+            GameManager.Instance.upgradeLevel.Upgrading();
+        }
+    }
+
+    public void UpgradeLevel_Coin()
+    {
+
+        GameManager.Instance.AddCoin(-10);
+        UpgradeLevel_Complete();
+    }
+
+    private void UpgradeLevel_Complete()
+    {
+        this.properties.level += 1;
+        txtLevel.text = "Level " + this.properties.level;
+        this.properties.capacity = GameConfig.Instance.lstPropertiesMap[ID].Productivity[this.properties.level - 1];
+        this.properties.miningTime = GameConfig.Instance.lstPropertiesMap[ID].miningTime[this.properties.level - 1];
+        this.properties.unitPrice = GameConfig.Instance.lstPropertiesMap[ID].Unit_Price[this.properties.level - 1];
+        typeUpgradeSLevel = UpgradeObj_Level.Type.NONE;
+
+        GameManager.Instance.upgradeLevel.SetInfo(this, typeUpgradeSLevel);
     }
 
     public void UpgradeAds(int _id)
@@ -550,19 +597,17 @@ public class MineShaft : MonoBehaviour
         this.timeUpgradeSpecial[_id] /= 3;
     }
 
-    void UpgradeCoin()
+    public void UpgradeCoin(int _id, int _coin)
     {
-        //GameManager.Instance.AddCoin(-10);
-    }
-
-    void ON_UPGRADE_COMPLETE(object param)
-    {
-        //if()
-        //GameManager.Instance.upgradeObj.isUpgrading = false;
+        this.timeUpgradeSpecial[_id] = 0;
+        GameManager.Instance.AddCoin(-_coin);
     }
 
     public void Btn_BuyMoreMine()
     {
+        this.properties.buyMoreMinePrice = GameConfig.Instance.lstPropertiesMap[ID].BuyMine_cost + this.numberMine / 10;
+        btnBuyMoreMine.thisPrice = this.properties.buyMoreMinePrice;
+        txtMoreMinePrice.text = UIManager.Instance.ToLongString(btnBuyMoreMine.thisPrice);
         GameManager.Instance.AddGold(-this.properties.buyMoreMinePrice);
         BuyMoreMineComplete();
     }
