@@ -98,7 +98,7 @@ public class MineShaft : MonoBehaviour
     public int totalCapacity;
     public int input = 0;
     public TypeMap typeMap;
-    public Miner miner; //nhân viên
+    //public Miner miner; //nhân viên
     public UnlockCost[] unlockCost;
     //public TypeProduct typeProduct; //loại sản phẩm
     public StateMineShaft state; //trạng thái
@@ -114,7 +114,7 @@ public class MineShaft : MonoBehaviour
     public int timer = 0; //thời gian đang chạy tiến trình Work
     public RectTransform posProduct_Remain;
     public RectTransform posProduct_PushUp;
-    public RectTransform posProduct_PushUp_1;
+    //public RectTransform posProduct_PushUp_1;
     public RectTransform posProduct_Complete;
     public RectTransform posProduct_Complete_1;
     public Map mapParent;
@@ -376,7 +376,7 @@ public class MineShaft : MonoBehaviour
                 product_PushUp.SetActive(true);
                 txtProduct_PushUp.text = numberProduct_PushUp.ToString();
                 yield return new WaitForSeconds(0.15f);
-                product_PushUp.transform.DOLocalPath(new Vector3[] { posProduct_PushUp.localPosition, posProduct_PushUp_1.localPosition }, 0.5f * this.properties.speedMining).OnComplete(() =>
+                product_PushUp.transform.DOLocalPath(new Vector3[] { posProduct_PushUp.localPosition}, 0.5f * this.properties.speedMining).OnComplete(() =>
                 {
                     product_PushUp.SetActive(false);
                     product_PushUp.transform.position = posProduct_Complete.position;
@@ -394,7 +394,7 @@ public class MineShaft : MonoBehaviour
                 txtProduct_PushUp.text = numberProduct_PushUp.ToString();
                 txtProduct_Remain.text = numberProduct_Remain.ToString();
                 yield return new WaitForSeconds(0.15f);
-                product_PushUp.transform.DOLocalPath(new Vector3[] { posProduct_PushUp.localPosition, posProduct_PushUp_1.localPosition }, 0.5f * this.properties.speedMining).OnComplete(() =>
+                product_PushUp.transform.DOLocalPath(new Vector3[] { posProduct_PushUp.localPosition}, 0.5f * this.properties.speedMining).OnComplete(() =>
                 {
                     product_PushUp.SetActive(false);
                     product_PushUp.transform.position = posProduct_Complete.position;
