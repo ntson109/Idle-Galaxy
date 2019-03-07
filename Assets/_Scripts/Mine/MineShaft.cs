@@ -354,31 +354,31 @@ public class MineShaft : MonoBehaviour
     {
         if (this.numberMine <= 10)
         {
-            this.properties.buyMoreMinePrice = GameConfig.Instance.lstPropertiesMap[ID].BuyMine_cost + (this.ID + 1) * 1 * this.numberMine;
+            this.properties.buyMoreMinePrice = GameConfig.Instance.lstPropertiesMap[ID].BuyMine_cost + (this.ID + 1) * 1 * (this.numberMine+1);
         }
         else if (this.numberMine <= 20)
         {
-            this.properties.buyMoreMinePrice = GameConfig.Instance.lstPropertiesMap[ID].BuyMine_cost + (this.ID + 1) * 2 * this.numberMine;
+            this.properties.buyMoreMinePrice = GameConfig.Instance.lstPropertiesMap[ID].BuyMine_cost + (this.ID + 1) * 2 * (this.numberMine + 1);
         }
         else if (this.numberMine <= 50)
         {
-            this.properties.buyMoreMinePrice = GameConfig.Instance.lstPropertiesMap[ID].BuyMine_cost + (this.ID + 1) * 3 * this.numberMine;
+            this.properties.buyMoreMinePrice = GameConfig.Instance.lstPropertiesMap[ID].BuyMine_cost + (this.ID + 1) * 3 * (this.numberMine + 1);
         }
         else if (this.numberMine <= 100)
         {
-            this.properties.buyMoreMinePrice = GameConfig.Instance.lstPropertiesMap[ID].BuyMine_cost + (this.ID + 1) * 4 * this.numberMine;
+            this.properties.buyMoreMinePrice = GameConfig.Instance.lstPropertiesMap[ID].BuyMine_cost + (this.ID + 1) * 4 * (this.numberMine + 1);
         }
         else if (this.numberMine <= 200)
         {
-            this.properties.buyMoreMinePrice = GameConfig.Instance.lstPropertiesMap[ID].BuyMine_cost + (this.ID + 1) * 5 * this.numberMine;
+            this.properties.buyMoreMinePrice = GameConfig.Instance.lstPropertiesMap[ID].BuyMine_cost + (this.ID + 1) * 5 * (this.numberMine + 1);
         }
         else if (this.numberMine <= 500)
         {
-            this.properties.buyMoreMinePrice = GameConfig.Instance.lstPropertiesMap[ID].BuyMine_cost + (this.ID + 1) * 6 * this.numberMine;
+            this.properties.buyMoreMinePrice = GameConfig.Instance.lstPropertiesMap[ID].BuyMine_cost + (this.ID + 1) * 6 * (this.numberMine + 1);
         }
         else if (this.numberMine > 500)
         {
-            this.properties.buyMoreMinePrice = GameConfig.Instance.lstPropertiesMap[ID].BuyMine_cost + (this.ID + 1) * 7 * this.numberMine;
+            this.properties.buyMoreMinePrice = GameConfig.Instance.lstPropertiesMap[ID].BuyMine_cost + (this.ID + 1) * 7 * (this.numberMine + 1);
         }
     }
 
