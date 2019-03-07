@@ -151,6 +151,12 @@ public class MineShaft : MonoBehaviour
     public GameObject product_Remain;
     public Text txtProduct_Remain;
 
+    [Header("ANIM")]
+    public Animator workAnim;
+    public Animator pushAnim;
+    public Image imgWorkBar;
+    public Sprite sprLight0;
+
     #region === START VS UPDATE ===
     void Start()
     {
@@ -175,6 +181,11 @@ public class MineShaft : MonoBehaviour
 
             txtTimer.text = UIManager.Instance.ToDateTimeString(timer);
             txtNumberMine.text = this.numberMine.ToString();
+
+            if (this.state == StateMineShaft.WORKING)
+            {
+                imgWorkBar.fillAmount += (1.0f / timer)* Time.deltaTime;
+            }
 
             if (this.state == StateMineShaft.UNLOCKING)
             {
@@ -344,6 +355,8 @@ public class MineShaft : MonoBehaviour
         state = StateMineShaft.WORKING;
         isCanWork = false;
         timer = this.properties.miningTime;
+        if (workAnim != null)
+            workAnim.enabled = true;
         if (timer >= 1)
         {
             //diễn anim working
@@ -357,10 +370,10 @@ public class MineShaft : MonoBehaviour
         numberProduct_Completed = this.input;
         product_Complete.SetActive(true);
         yield return new WaitForEndOfFrame();
-        txtProduct_Complete.text = numberProduct_Completed.ToString();
+        txtProduct_Complete.text = "";// numberProduct_Completed.ToString();
         while (product_Complete.GetComponent<RectTransform>().transform.position.y < this.posProduct_Complete.position.y)
         {
-            product_Complete.GetComponent<RectTransform>().transform.Translate(Vector3.up * Time.deltaTime * this.properties.speedMining * 2f);
+            product_Complete.GetComponent<RectTransform>().transform.Translate(Vector3.up * Time.deltaTime * this.properties.speedMining * 3f);
             yield return null;
         }
 
@@ -375,9 +388,15 @@ public class MineShaft : MonoBehaviour
                 Debug.Log("Chỉ chuyển lên next mine");
                 product_PushUp.SetActive(true);
                 txtProduct_PushUp.text = numberProduct_PushUp.ToString();
+                txtProduct_Remain.text = "";                
                 yield return new WaitForSeconds(0.15f);
-                product_PushUp.transform.DOLocalPath(new Vector3[] { posProduct_PushUp.localPosition}, 0.5f * this.properties.speedMining).OnComplete(() =>
+                if (pushAnim != null)
                 {
+                    pushAnim.enabled = true;
+                    pushAnim.Play("LightPushUp");
+                }
+                product_PushUp.transform.DOLocalPath(new Vector3[] { posProduct_PushUp.localPosition }, 0.5f * this.properties.speedMining).OnComplete(() =>
+                {                   
                     product_PushUp.SetActive(false);
                     product_PushUp.transform.position = posProduct_Complete.position;
                     nextMineShaft.GiveInput(numberProduct_PushUp);
@@ -394,8 +413,16 @@ public class MineShaft : MonoBehaviour
                 txtProduct_PushUp.text = numberProduct_PushUp.ToString();
                 txtProduct_Remain.text = numberProduct_Remain.ToString();
                 yield return new WaitForSeconds(0.15f);
-                product_PushUp.transform.DOLocalPath(new Vector3[] { posProduct_PushUp.localPosition}, 0.5f * this.properties.speedMining).OnComplete(() =>
+                if (pushAnim != null)
                 {
+                    pushAnim.enabled = true;
+                    pushAnim.Play("LightPushUp");
+                }
+                    
+                product_PushUp.transform.DOLocalPath(new Vector3[] { posProduct_PushUp.localPosition }, 0.5f * this.properties.speedMining).OnComplete(() =>
+                {
+                    if (pushAnim != null)
+                        pushAnim.enabled = true;
                     product_PushUp.SetActive(false);
                     product_PushUp.transform.position = posProduct_Complete.position;
                     nextMineShaft.GiveInput(numberProduct_PushUp);
@@ -416,6 +443,7 @@ public class MineShaft : MonoBehaviour
             numberProduct_Remain = numberProduct_Completed;
             product_Remain.SetActive(true);
             txtProduct_Remain.text = numberProduct_Remain.ToString();
+            txtProduct_PushUp.text = "";
             yield return new WaitForSeconds(0.15f);
             product_Remain.transform.DOLocalPath(new Vector3[] { posProduct_Remain.localPosition }, 0.5f * this.properties.speedMining).OnComplete(() =>
             {
@@ -439,7 +467,15 @@ public class MineShaft : MonoBehaviour
         }
         timer = 0;
         yield return new WaitForEndOfFrame();
+        if (workAnim != null)
+            workAnim.enabled = false;
+        if (pushAnim != null)
+        {
+            pushAnim.enabled = false;
+            pushAnim.gameObject.GetComponent<Image>().sprite = sprLight0;
+        }
         state = StateMineShaft.IDLE;
+        imgWorkBar.fillAmount = 0f;
         if (!isAutoWorking)
             btnWork.gameObject.SetActive(true);
         Debug.Log("Done");
