@@ -388,23 +388,23 @@ public class MineShaft : MonoBehaviour
         {
             this.properties.upgradePrice = GameConfig.Instance.lstPropertiesMap[ID].Upgrade_cost[this.properties.level - 1]*(GameConfig.Instance.lstPropertiesMap[ID].BuyMine_cost + (this.ID + 1) * 1 * 1);
         }
-        else if (this.numberMine <= 2)
+        else if (this.numberMine == 2)
         {
             this.properties.upgradePrice = GameConfig.Instance.lstPropertiesMap[ID].Upgrade_cost[this.properties.level - 1] * (GameConfig.Instance.lstPropertiesMap[ID].BuyMine_cost + (this.ID + 1) * 2 * 11);
         }
-        else if (this.numberMine <= 3)
+        else if (this.numberMine == 3)
         {
             this.properties.upgradePrice = GameConfig.Instance.lstPropertiesMap[ID].Upgrade_cost[this.properties.level - 1] * (GameConfig.Instance.lstPropertiesMap[ID].BuyMine_cost + (this.ID + 1) * 3 * 21);
         }
-        else if (this.numberMine <= 4)
+        else if (this.numberMine == 4)
         {
             this.properties.upgradePrice = GameConfig.Instance.lstPropertiesMap[ID].Upgrade_cost[this.properties.level - 1] * (GameConfig.Instance.lstPropertiesMap[ID].BuyMine_cost + (this.ID + 1) * 4 * 51);
         }
-        else if (this.numberMine <= 5)
+        else if (this.numberMine == 5)
         {
             this.properties.upgradePrice = GameConfig.Instance.lstPropertiesMap[ID].Upgrade_cost[this.properties.level - 1] * (GameConfig.Instance.lstPropertiesMap[ID].BuyMine_cost + (this.ID + 1) * 5 * 101);
         }
-        else if (this.numberMine <= 6)
+        else if (this.numberMine == 6)
         {
             this.properties.upgradePrice = GameConfig.Instance.lstPropertiesMap[ID].Upgrade_cost[this.properties.level - 1] * (GameConfig.Instance.lstPropertiesMap[ID].BuyMine_cost + (this.ID + 1) * 6 * 201);
         }

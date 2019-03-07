@@ -50,40 +50,49 @@ public class UpgradeObj_Level : MonoBehaviour
     {
         thisMineShaft = _mine;
         type = _type;
-        if (thisMineShaft.numberMine >= GameConfig.Instance.lstPropertiesMap[thisMineShaft.ID].Upgrade_condition[thisMineShaft.properties.level - 1])
+        if (thisMineShaft.properties.level < 7)
         {
-            btnUpgrade.thisPrice = thisMineShaft.properties.upgradePrice;
-            txtPrice.text = "Upgrade\n" + btnUpgrade.thisPrice;
-            imgCondition.enabled = true;
+            if (thisMineShaft.numberMine >= GameConfig.Instance.lstPropertiesMap[thisMineShaft.ID].Upgrade_condition[thisMineShaft.properties.level - 1])
+            {
+                btnUpgrade.thisPrice = thisMineShaft.properties.upgradePrice;
+                txtPrice.text = "Upgrade\n" + btnUpgrade.thisPrice;
+                imgCondition.enabled = true;
+            }
+            else
+            {
+                btnUpgrade.thisPrice = long.MaxValue;
+                btnUpgrade.thisButton.interactable = false;
+                txtPrice.text = "Upgrade";
+                imgCondition.enabled = false;
+            }
+            GameManager.Instance.AddGold(0);
+            txtName.text = thisMineShaft.properties.name;
+            txtDescription.text = "Level " + thisMineShaft.properties.level + " -> " + (thisMineShaft.properties.level + 1);
+            txtCondition.text = "Need : " + GameConfig.Instance.lstPropertiesMap[thisMineShaft.ID].Upgrade_condition[thisMineShaft.properties.level - 1] + " mine";
+            txtLv_cur.text = thisMineShaft.properties.level.ToString();
+            txtLv_next.text = (thisMineShaft.properties.level + 1).ToString();
+            txtCap_cur.text = GameConfig.Instance.lstPropertiesMap[thisMineShaft.ID].Productivity[thisMineShaft.properties.level - 1].ToString();
+            txtCap_next.text = GameConfig.Instance.lstPropertiesMap[thisMineShaft.ID].Productivity[thisMineShaft.properties.level].ToString();
+            txtTime_cur.text = UIManager.Instance.ToDateTimeString(GameConfig.Instance.lstPropertiesMap[thisMineShaft.ID].miningTime[thisMineShaft.properties.level - 1]);
+            txtTime_next.text = UIManager.Instance.ToDateTimeString(GameConfig.Instance.lstPropertiesMap[thisMineShaft.ID].miningTime[thisMineShaft.properties.level]);
+            txtUnitPrice_cur.text = GameConfig.Instance.lstPropertiesMap[thisMineShaft.ID].Unit_Price[thisMineShaft.properties.level - 1].ToString();
+            txtUnitPrice_next.text = GameConfig.Instance.lstPropertiesMap[thisMineShaft.ID].Unit_Price[thisMineShaft.properties.level].ToString();
+            btnUpgrade.type = MyButton.Type.GOLD;
+
+            if (type == Type.UPGRADING)
+            {
+                btnUpgrade.thisButton.onClick.RemoveAllListeners();
+                btnUpgrade.thisButton.onClick.AddListener(() =>
+                {
+                    UIManager.Instance.ShowPanelCoinAds(10, () => UpgradeCoin());
+                });
+            }
         }
         else
         {
-            btnUpgrade.thisPrice = long.MaxValue;
             btnUpgrade.thisButton.interactable = false;
-            txtPrice.text = "Upgrade";
-            imgCondition.enabled = false;
-        }
-        GameManager.Instance.AddGold(0);
-        txtName.text = thisMineShaft.properties.name;
-        txtDescription.text = "Level " + thisMineShaft.properties.level + " -> " + (thisMineShaft.properties.level + 1);
-        txtCondition.text = "Need : " + GameConfig.Instance.lstPropertiesMap[thisMineShaft.ID].Upgrade_condition[thisMineShaft.properties.level - 1] + " mine";
-        txtLv_cur.text = thisMineShaft.properties.level.ToString();
-        txtLv_next.text = (thisMineShaft.properties.level + 1).ToString();
-        txtCap_cur.text = GameConfig.Instance.lstPropertiesMap[thisMineShaft.ID].Productivity[thisMineShaft.properties.level - 1].ToString();
-        txtCap_next.text = GameConfig.Instance.lstPropertiesMap[thisMineShaft.ID].Productivity[thisMineShaft.properties.level].ToString();
-        txtTime_cur.text = UIManager.Instance.ToDateTimeString(GameConfig.Instance.lstPropertiesMap[thisMineShaft.ID].miningTime[thisMineShaft.properties.level - 1]);
-        txtTime_next.text = UIManager.Instance.ToDateTimeString(GameConfig.Instance.lstPropertiesMap[thisMineShaft.ID].miningTime[thisMineShaft.properties.level]);
-        txtUnitPrice_cur.text = GameConfig.Instance.lstPropertiesMap[thisMineShaft.ID].Unit_Price[thisMineShaft.properties.level - 1].ToString();
-        txtUnitPrice_next.text = GameConfig.Instance.lstPropertiesMap[thisMineShaft.ID].Unit_Price[thisMineShaft.properties.level].ToString();
-        btnUpgrade.type = MyButton.Type.GOLD;
-
-        if (type == Type.UPGRADING)
-        {
-            btnUpgrade.thisButton.onClick.RemoveAllListeners();
-            btnUpgrade.thisButton.onClick.AddListener(() =>
-            {
-                UIManager.Instance.ShowPanelCoinAds(10, () => UpgradeCoin());
-            });
+            txtPrice.text = "Max";
+            txtDescription.text = "Max level";
         }
     }
 
