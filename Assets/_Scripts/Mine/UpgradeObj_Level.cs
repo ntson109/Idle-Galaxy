@@ -50,7 +50,20 @@ public class UpgradeObj_Level : MonoBehaviour
     {
         thisMineShaft = _mine;
         type = _type;
-
+        if (thisMineShaft.numberMine >= GameConfig.Instance.lstPropertiesMap[thisMineShaft.ID].Upgrade_condition[thisMineShaft.properties.level - 1])
+        {
+            btnUpgrade.thisPrice = thisMineShaft.properties.upgradePrice;
+            txtPrice.text = "Upgrade\n" + btnUpgrade.thisPrice;
+            imgCondition.enabled = true;
+        }
+        else
+        {
+            btnUpgrade.thisPrice = long.MaxValue;
+            btnUpgrade.thisButton.interactable = false;
+            txtPrice.text = "Upgrade";
+            imgCondition.enabled = false;
+        }
+        GameManager.Instance.AddGold(0);
         txtName.text = thisMineShaft.properties.name;
         txtDescription.text = "Level " + thisMineShaft.properties.level + " -> " + (thisMineShaft.properties.level + 1);
         txtCondition.text = "Need : " + GameConfig.Instance.lstPropertiesMap[thisMineShaft.ID].Upgrade_condition[thisMineShaft.properties.level - 1] + " mine";
@@ -63,20 +76,6 @@ public class UpgradeObj_Level : MonoBehaviour
         txtUnitPrice_cur.text = GameConfig.Instance.lstPropertiesMap[thisMineShaft.ID].Unit_Price[thisMineShaft.properties.level - 1].ToString();
         txtUnitPrice_next.text = GameConfig.Instance.lstPropertiesMap[thisMineShaft.ID].Unit_Price[thisMineShaft.properties.level].ToString();
         btnUpgrade.type = MyButton.Type.GOLD;
-
-        if (thisMineShaft.numberMine >= GameConfig.Instance.lstPropertiesMap[thisMineShaft.ID].Upgrade_condition[thisMineShaft.properties.level - 1])
-        {
-            btnUpgrade.thisPrice = GameConfig.Instance.lstPropertiesMap[thisMineShaft.ID].Upgrade_cost[thisMineShaft.properties.level - 1];
-            txtPrice.text = "Upgrade\n" + btnUpgrade.thisPrice;
-            imgCondition.enabled = true;
-        }
-        else
-        {
-            btnUpgrade.thisPrice = long.MaxValue;
-            txtPrice.text = "Upgrade";
-            imgCondition.enabled = false;
-        }
-        GameManager.Instance.AddGold(0);
 
         if (type == Type.UPGRADING)
         {
@@ -96,10 +95,19 @@ public class UpgradeObj_Level : MonoBehaviour
     public void Upgrade()
     {
         thisMineShaft.Btn_UpgradeLevel();
+
+        btnUpgrade.thisButton.onClick.RemoveAllListeners();
+        btnUpgrade.thisButton.onClick.AddListener(() =>
+        {
+            UIManager.Instance.ShowPanelCoinAds(10, () => UpgradeCoin());
+        });
     }
 
     void UpgradeCoin()
     {
+        thisMineShaft.UpgradeLevel_Coin();
 
+        btnUpgrade.thisButton.onClick.RemoveAllListeners();
+        btnUpgrade.thisButton.onClick.AddListener(() => Upgrade());
     }
 }

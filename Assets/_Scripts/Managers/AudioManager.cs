@@ -30,8 +30,8 @@ public class AudioManager : MonoBehaviour
 
     public Sound[] musics;
 
-    public Slider sliderSound;
-    public Slider sliderMusic;
+    //public Slider sliderSound;
+    //public Slider sliderMusic;
 
     private void Awake()
     {
@@ -67,7 +67,7 @@ public class AudioManager : MonoBehaviour
         {
             if (PlayerPrefs.GetInt("Volume Sound") == 0)
             {
-                sliderSound.value = 0;
+                //sliderSound.value = 0;
                 MuteAll(true);
             }
         }
@@ -80,7 +80,7 @@ public class AudioManager : MonoBehaviour
         {
             if (PlayerPrefs.GetInt("Volume Music") == 0)
             {
-                sliderMusic.value = 0;
+                //sliderMusic.value = 0;
                 MuteAll(true, true);
             }
         }

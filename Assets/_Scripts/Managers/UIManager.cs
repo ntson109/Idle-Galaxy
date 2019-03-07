@@ -313,12 +313,14 @@ public class UIManager : MonoBehaviour
     #region === UI HOME ===
     public void Btn_Play()
     {
+        AudioManager.Instance.Play("Click");
         ScenesManager.Instance.GoToScene(ScenesManager.TypeScene.Main, () =>
             {
                 this.PostEvent(EventID.START_GAME);
                 GameManager.Instance.stateGame = StateGame.PLAYING;
                 GameManager.Instance.AddGold(GameConfig.Instance.GoldStart);
                 GameManager.Instance.AddCoin(GameConfig.Instance.CoinStart);
+                AudioManager.Instance.Play("GamePlay", true);
             });
     }
 
@@ -354,6 +356,7 @@ public class UIManager : MonoBehaviour
     {
         SetActivePanel(panelCoinAds);
         btnCoin_panelCoinAds.thisPrice = _coin;
+        txtCoin_panelCoinAds.text = btnCoin_panelCoinAds.thisPrice.ToString();
         btnCoin_panelCoinAds.type = MyButton.Type.COIN;
         btnCoin_panelCoinAds.thisButton.onClick.AddListener(_action);
     }
