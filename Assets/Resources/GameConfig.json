@@ -44,7 +44,9 @@
 			1,
 			1
 		],
-		"BuyMine_cost" : 5,
+		"MoreMine_cost_1" : 5,
+		"MoreMine_cost_2" : 1,
+		"MoreMine_cost_3" : 200,
 		"Upgrade_time" : [
 			1,
 			2,
@@ -124,7 +126,9 @@
 		"Unlock_reward" : {
 			"timex2" : 60
 		},
-		"BuyMine_cost" : 60,
+		"MoreMine_cost_1" : 50,
+		"MoreMine_cost_2" : 2,
+		"MoreMine_cost_3" : 170,
 		"miningTime" : [
 			10,
 			10,
@@ -212,7 +216,9 @@
 		"Unlock_reward" : {
 			"timex2" : 60
 		},
-		"BuyMine_cost" : 682,
+		"MoreMine_cost_1" : 500,
+		"MoreMine_cost_2" : 5,
+		"MoreMine_cost_3" : 140,
 		"miningTime" : [
 			10,
 			10,
@@ -300,7 +306,9 @@
 		"Unlock_reward" : {
 			"timex2" : 60
 		},
-		"BuyMine_cost" : 8220,
+		"MoreMine_cost_1" : 5000,
+		"MoreMine_cost_2" : 10,
+		"MoreMine_cost_3" : 110,
 		"miningTime" : [
 			10,
 			10,
@@ -388,7 +396,9 @@
 		"Unlock_reward" : {
 			"timex2" : 60
 		},
-		"BuyMine_cost" : 106912,
+		"MoreMine_cost_1" : 50000,
+		"MoreMine_cost_2" : 100,
+		"MoreMine_cost_3" : 80,
 		"miningTime" : [
 			10,
 			10,
@@ -476,7 +486,9 @@
 		"Unlock_reward" : {
 			"timex2" : 60
 		},
-		"BuyMine_cost" : 106912,
+		"MoreMine_cost_1" : 1000000,
+		"MoreMine_cost_2" : 1000,
+		"MoreMine_cost_3" : 50,
 		"miningTime" : [
 			10,
 			10,

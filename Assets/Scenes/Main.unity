@@ -300,8 +300,8 @@ MonoBehaviour:
   properties:
     name: 
     level: 1
-    buyMoreMinePrice: 5
-    capacity: 1
+    buyMoreMinePrice: 0
+    capacity: 0
     miningTime: 0
     unitPrice: 0
     unlockTime: 0
@@ -3586,8 +3586,8 @@ MonoBehaviour:
   properties:
     name: 
     level: 1
-    buyMoreMinePrice: 5
-    capacity: 1
+    buyMoreMinePrice: 0
+    capacity: 0
     miningTime: 0
     unitPrice: 0
     unlockTime: 0
@@ -6520,8 +6520,8 @@ MonoBehaviour:
   properties:
     name: 
     level: 1
-    buyMoreMinePrice: 5
-    capacity: 1
+    buyMoreMinePrice: 0
+    capacity: 0
     miningTime: 0
     unitPrice: 0
     unlockTime: 0
@@ -30859,8 +30859,8 @@ MonoBehaviour:
   properties:
     name: 
     level: 1
-    buyMoreMinePrice: 5
-    capacity: 1
+    buyMoreMinePrice: 0
+    capacity: 0
     miningTime: 0
     unitPrice: 0
     unlockTime: 0
@@ -32178,8 +32178,8 @@ MonoBehaviour:
   properties:
     name: 
     level: 1
-    buyMoreMinePrice: 5
-    capacity: 1
+    buyMoreMinePrice: 0
+    capacity: 0
     miningTime: 0
     unitPrice: 0
     unlockTime: 0

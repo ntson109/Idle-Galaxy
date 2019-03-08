@@ -92,7 +92,9 @@ public class LoadDataJson : MonoBehaviour
                         pM.Unlock_reward.Add(objJson["Map_Moon"][i]["Unlock_reward"][k].AsLong);
                     }
 
-                    pM.BuyMine_cost = objJson["Map_Moon"][i]["BuyMine_cost"].AsInt;
+                    pM.MoreMine_cost_1 = objJson["Map_Moon"][i]["MoreMine_cost_1"].AsInt;
+                    pM.MoreMine_cost_2 = objJson["Map_Moon"][i]["MoreMine_cost_2"].AsInt;
+                    pM.MoreMine_cost_3 = objJson["Map_Moon"][i]["MoreMine_cost_3"].AsInt;
 
                     pM.Upgrade_time = new List<int>();
                     for (int k = 0; k < objJson["Map_Moon"][i]["Upgrade_time"].Count; k++)

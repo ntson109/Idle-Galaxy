@@ -28,7 +28,9 @@ public class GameConfig : MonoBehaviour {
         public List<int> miningTime;
         public long[] Unlock_cost;
         public List<long> Unlock_reward;
-        public long BuyMine_cost;
+        public int MoreMine_cost_2;
+        public int MoreMine_cost_1;
+        public int MoreMine_cost_3;
         public List<int> Upgrade_time;
         public List<int> Upgrade_condition;
         public List<int> Productivity;
