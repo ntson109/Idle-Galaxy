@@ -14,7 +14,18 @@ public class MyButton : MonoBehaviour
     }
 
     public Button thisButton;
-    public long thisPrice = 0;
+    //private long m_thisPrice;
+    public long thisPrice;
+    //{
+    //        get {
+    //            return m_thisPrice;
+    //        }
+    //        set{
+    //            m_thisPrice = value;
+    //            ON_CHANGE_GOLD_COIN();
+    //        }
+    //    }
+
     public Type type;
 
     void Start()

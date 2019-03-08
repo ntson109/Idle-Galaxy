@@ -95,6 +95,7 @@ public class MineShaft : MonoBehaviour
     public int ID;
     public MineShaft.Properties properties; //thông số cơ bản    
     public int numberMine;
+    int xMoreMine = 1;
     public int totalCapacity;
     public int input = 0;
     public TypeMap typeMap;
@@ -131,9 +132,11 @@ public class MineShaft : MonoBehaviour
     public Text txtTimer;
     public Text txtNumberMine;
     public Text txtMoreMinePrice;
+    public Text txtX;
     public Button btnWork;
     public Button btnUpgrade;
     public MyButton btnBuyMoreMine;
+    public Button btnX;
     public Button btnUnlock_byGold;
     public Text txtUnlock_byGold;
     public Button btnUnlock_byCoin;
@@ -156,6 +159,7 @@ public class MineShaft : MonoBehaviour
     public Animator pushAnim;
     public Image imgWorkBar;
     public Sprite sprLight0;
+    public GameObject imgAI;
 
     #region === START VS UPDATE ===
     void Start()
@@ -184,7 +188,7 @@ public class MineShaft : MonoBehaviour
 
             if (this.state == StateMineShaft.WORKING)
             {
-                imgWorkBar.fillAmount += (1.000f /timer) * Time.deltaTime;
+                imgWorkBar.fillAmount += (1.000f / this.properties.miningTime) * Time.deltaTime;
             }
 
             if (this.state == StateMineShaft.UNLOCKING)
@@ -236,6 +240,7 @@ public class MineShaft : MonoBehaviour
         btnWork.onClick.AddListener(() => Btn_Work());
         btnUpgrade.onClick.AddListener(() => Btn_ShowUpgrade());
         btnBuyMoreMine.thisButton.onClick.AddListener(() => Btn_BuyMoreMine());
+        btnX.onClick.AddListener(() => Btn_X());
         btnUnlock_byGold.onClick.AddListener(() => Btn_Unlock(TypeUnlock.GOLD));
         btnUnlock_byCoin.onClick.AddListener(() => Btn_Unlock(TypeUnlock.COIN));
         btnUnlock_byAD.onClick.AddListener(() => Btn_Unlock(TypeUnlock.ADS));
@@ -244,6 +249,8 @@ public class MineShaft : MonoBehaviour
         this.txtLevel.text = "Level " + this.properties.level.ToString();
         this.numberMine = 1;
         this.properties.speedMining = 1;
+        xMoreMine = 1;
+        txtX.text = "x" + xMoreMine;
         GetInfo();
         this.state = StateMineShaft.LOCK;
         this.RegisterListener(EventID.CHANGE_GOLD_COIN, (param) => ON_CHANGE_GOLD_COIN());
@@ -311,10 +318,7 @@ public class MineShaft : MonoBehaviour
         this.properties.buyAI = GameConfig.Instance.lstPropertiesMap[ID].BuyAI;
         this.properties.upgradeTime = GameConfig.Instance.lstPropertiesMap[ID].Upgrade_time[this.properties.level - 1];
         GetPriceMoreMine();
-        GetPriceUpgradeCost();
-        btnBuyMoreMine.thisPrice = this.properties.buyMoreMinePrice;
-        btnBuyMoreMine.type = MyButton.Type.GOLD;
-        txtMoreMinePrice.text = UIManager.Instance.ToLongString(btnBuyMoreMine.thisPrice);
+        GetPriceUpgradeCost();        
         this.properties.unitPrice = GameConfig.Instance.lstPropertiesMap[ID].Unit_Price[this.properties.level - 1];
         this.properties.unlockTime = GameConfig.Instance.lstPropertiesMap[ID].Unlock_time;
         this.properties.unlockCondition = GameConfig.Instance.lstPropertiesMap[ID].Unlock_condition;
@@ -350,43 +354,57 @@ public class MineShaft : MonoBehaviour
         txtUnlock_byGold.text = UIManager.Instance.ToLongString(this.unlockCost[1].cost) + "$";
     }
 
+    long _temp;
+    long _temp_2;
     void GetPriceMoreMine()
     {
-        if (this.numberMine <= 10)
+        _temp = _temp_2 = 0;
+        int a = this.numberMine;
+        for (int i = 0; i < xMoreMine; i++)
         {
-            this.properties.buyMoreMinePrice = GameConfig.Instance.lstPropertiesMap[ID].BuyMine_cost + (this.ID + 1) * 1 * (this.numberMine+1);
+            if (this.numberMine <= 10)
+            {
+                _temp_2 = GameConfig.Instance.lstPropertiesMap[ID].BuyMine_cost + (this.ID + 1) * 1 * (a + 1);
+            }
+            else if (this.numberMine <= 20)
+            {
+                _temp_2 = GameConfig.Instance.lstPropertiesMap[ID].BuyMine_cost + (this.ID + 1) * 2 * (a + 1);
+            }
+            else if (this.numberMine <= 50)
+            {
+                _temp_2 = GameConfig.Instance.lstPropertiesMap[ID].BuyMine_cost + (this.ID + 1) * 3 * (a + 1);
+            }
+            else if (this.numberMine <= 100)
+            {
+                _temp_2 = GameConfig.Instance.lstPropertiesMap[ID].BuyMine_cost + (this.ID + 1) * 4 * (a + 1);
+            }
+            else if (this.numberMine <= 200)
+            {
+                _temp_2 = GameConfig.Instance.lstPropertiesMap[ID].BuyMine_cost + (this.ID + 1) * 5 * (a + 1);
+            }
+            else if (this.numberMine <= 500)
+            {
+                _temp_2 = GameConfig.Instance.lstPropertiesMap[ID].BuyMine_cost + (this.ID + 1) * 6 * (a + 1);
+            }
+            else if (this.numberMine > 500)
+            {
+                _temp_2 = GameConfig.Instance.lstPropertiesMap[ID].BuyMine_cost + (this.ID + 1) * 7 * (a + 1);
+            }
+            _temp += _temp_2;
+            a++;
         }
-        else if (this.numberMine <= 20)
-        {
-            this.properties.buyMoreMinePrice = GameConfig.Instance.lstPropertiesMap[ID].BuyMine_cost + (this.ID + 1) * 2 * (this.numberMine + 1);
-        }
-        else if (this.numberMine <= 50)
-        {
-            this.properties.buyMoreMinePrice = GameConfig.Instance.lstPropertiesMap[ID].BuyMine_cost + (this.ID + 1) * 3 * (this.numberMine + 1);
-        }
-        else if (this.numberMine <= 100)
-        {
-            this.properties.buyMoreMinePrice = GameConfig.Instance.lstPropertiesMap[ID].BuyMine_cost + (this.ID + 1) * 4 * (this.numberMine + 1);
-        }
-        else if (this.numberMine <= 200)
-        {
-            this.properties.buyMoreMinePrice = GameConfig.Instance.lstPropertiesMap[ID].BuyMine_cost + (this.ID + 1) * 5 * (this.numberMine + 1);
-        }
-        else if (this.numberMine <= 500)
-        {
-            this.properties.buyMoreMinePrice = GameConfig.Instance.lstPropertiesMap[ID].BuyMine_cost + (this.ID + 1) * 6 * (this.numberMine + 1);
-        }
-        else if (this.numberMine > 500)
-        {
-            this.properties.buyMoreMinePrice = GameConfig.Instance.lstPropertiesMap[ID].BuyMine_cost + (this.ID + 1) * 7 * (this.numberMine + 1);
-        }
+        this.properties.buyMoreMinePrice = _temp;
+        btnBuyMoreMine.thisPrice = this.properties.buyMoreMinePrice;
+        btnBuyMoreMine.type = MyButton.Type.GOLD;
+        txtMoreMinePrice.text = UIManager.Instance.ToLongString(btnBuyMoreMine.thisPrice);
+        GameManager.Instance.AddGold(0);
     }
 
     void GetPriceUpgradeCost()
     {
         if (this.properties.level == 1)
         {
-            this.properties.upgradePrice = GameConfig.Instance.lstPropertiesMap[ID].Upgrade_cost[this.properties.level - 1]*(GameConfig.Instance.lstPropertiesMap[ID].BuyMine_cost + (this.ID + 1) * 1 * 1);
+            this.properties.upgradePrice = GameConfig.Instance.lstPropertiesMap[ID].Upgrade_cost[this.properties.level - 1] * (GameConfig.Instance.lstPropertiesMap[ID].BuyMine_cost + (this.ID + 1) * 1 * 1);
         }
         else if (this.numberMine == 2)
         {
@@ -534,6 +552,8 @@ public class MineShaft : MonoBehaviour
             pushAnim.enabled = false;
             pushAnim.gameObject.GetComponent<Image>().sprite = sprLight0;
         }
+        txtProduct_Remain.text = "";
+        txtProduct_PushUp.text = "";
         state = StateMineShaft.IDLE;
         imgWorkBar.fillAmount = 0f;
         if (!isAutoWorking)
@@ -623,6 +643,7 @@ public class MineShaft : MonoBehaviour
         {
             case 0:
                 this.isAutoWorking = true;
+                imgAI.SetActive(true);
                 break;
             case 1:
                 this.properties.miningTime /= 2;
@@ -652,7 +673,7 @@ public class MineShaft : MonoBehaviour
                 this.typeUpgradeSpecial[i],
                 _coin
                 );
-        }       
+        }
     }
 
 
@@ -684,7 +705,7 @@ public class MineShaft : MonoBehaviour
         this.properties.miningTime = GameConfig.Instance.lstPropertiesMap[ID].miningTime[this.properties.level - 1];
         this.properties.unitPrice = GameConfig.Instance.lstPropertiesMap[ID].Unit_Price[this.properties.level - 1];
         typeUpgradeSLevel = UpgradeObj_Level.Type.NONE;
-        
+
         GameManager.Instance.upgradeLevel.SetInfo(this, typeUpgradeSLevel);
     }
 
@@ -699,25 +720,38 @@ public class MineShaft : MonoBehaviour
         GameManager.Instance.AddCoin(-_coin);
     }
 
+    #region === MORE MINE  ===
+    public void Btn_X()
+    {
+        if (xMoreMine == 1)
+        {
+            xMoreMine = 10;
+        }
+        else if (xMoreMine == 10)
+        {
+            xMoreMine = 1;
+        }
+        txtX.text = "x" + xMoreMine;
+        GetPriceMoreMine();
+    }
     public void Btn_BuyMoreMine()
     {
-        AudioManager.Instance.Play("Click");
-        GetPriceMoreMine();
-        btnBuyMoreMine.thisPrice = this.properties.buyMoreMinePrice;
-        txtMoreMinePrice.text = UIManager.Instance.ToLongString(btnBuyMoreMine.thisPrice);
+        AudioManager.Instance.Play("Click");        
         GameManager.Instance.AddGold(-this.properties.buyMoreMinePrice);
         BuyMoreMineComplete();
     }
 
+    
     void BuyMoreMineComplete()
     {
-        this.numberMine++;
+        this.numberMine += xMoreMine;
+        GetPriceMoreMine();
         mapParent.CheckUnlock(this.ID);
         this.totalCapacity = this.properties.capacity * numberMine;
         if (this.ID == 0)
             this.input = this.totalCapacity;
     }
-
+    #endregion
     public void ShowUnlockPanel()
     {
         UIManager.Instance.SetActivePanel(panelUnlock);

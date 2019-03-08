@@ -338,9 +338,11 @@ MonoBehaviour:
   txtTimer: {fileID: 1759345279}
   txtNumberMine: {fileID: 1963757878}
   txtMoreMinePrice: {fileID: 960014039}
+  txtX: {fileID: 2102763479}
   btnWork: {fileID: 1417249286}
   btnUpgrade: {fileID: 1919934479}
   btnBuyMoreMine: {fileID: 684110148}
+  btnX: {fileID: 684110149}
   btnUnlock_byGold: {fileID: 758917261}
   txtUnlock_byGold: {fileID: 985326287}
   btnUnlock_byCoin: {fileID: 221134268}
@@ -353,13 +355,14 @@ MonoBehaviour:
   product_Complete: {fileID: 1838141853}
   txtProduct_Complete: {fileID: 1886622938}
   product_PushUp: {fileID: 1405408747}
-  txtProduct_PushUp: {fileID: 185243981}
+  txtProduct_PushUp: {fileID: 2113727441}
   product_Remain: {fileID: 145930864}
-  txtProduct_Remain: {fileID: 1688790918}
+  txtProduct_Remain: {fileID: 2048992046}
   workAnim: {fileID: 1850037022}
   pushAnim: {fileID: 747004607}
   imgWorkBar: {fileID: 1732304293}
   sprLight0: {fileID: 21300000, guid: 12c339b55334f6d42aef404dd10a04bc, type: 3}
+  imgAI: {fileID: 198763827}
 --- !u!114 &18186558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3621,9 +3624,11 @@ MonoBehaviour:
   txtTimer: {fileID: 645161027}
   txtNumberMine: {fileID: 1234807560}
   txtMoreMinePrice: {fileID: 89492923}
+  txtX: {fileID: 788214514}
   btnWork: {fileID: 218689756}
   btnUpgrade: {fileID: 1264420126}
   btnBuyMoreMine: {fileID: 1926124371}
+  btnX: {fileID: 730343688}
   btnUnlock_byGold: {fileID: 454831138}
   txtUnlock_byGold: {fileID: 1516523167}
   btnUnlock_byCoin: {fileID: 1976080567}
@@ -3643,6 +3648,7 @@ MonoBehaviour:
   pushAnim: {fileID: 409244697}
   imgWorkBar: {fileID: 1659205103}
   sprLight0: {fileID: 21300000, guid: 12c339b55334f6d42aef404dd10a04bc, type: 3}
+  imgAI: {fileID: 960272106}
 --- !u!114 &210509642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6552,9 +6558,11 @@ MonoBehaviour:
   txtTimer: {fileID: 1695552400}
   txtNumberMine: {fileID: 1536823771}
   txtMoreMinePrice: {fileID: 309219961}
+  txtX: {fileID: 45871089}
   btnWork: {fileID: 881903880}
   btnUpgrade: {fileID: 690489871}
   btnBuyMoreMine: {fileID: 1341588292}
+  btnX: {fileID: 1341588293}
   btnUnlock_byGold: {fileID: 33681148}
   txtUnlock_byGold: {fileID: 246103988}
   btnUnlock_byCoin: {fileID: 999745951}
@@ -6574,6 +6582,7 @@ MonoBehaviour:
   pushAnim: {fileID: 944792147}
   imgWorkBar: {fileID: 1044818394}
   sprLight0: {fileID: 21300000, guid: 12c339b55334f6d42aef404dd10a04bc, type: 3}
+  imgAI: {fileID: 652498155}
 --- !u!114 &334518073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7064,7 +7073,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 10
+  m_Text: 
 --- !u!222 &349388615
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10605,7 +10614,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 10
+  m_Text: 
 --- !u!222 &554308578
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -12614,7 +12623,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 10
+  m_Text: 
 --- !u!222 &664944331
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13387,7 +13396,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 10
+  m_Text: 
 --- !u!222 &713960778
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13624,8 +13633,8 @@ MonoBehaviour:
   properties:
     name: 
     level: 1
-    buyMoreMinePrice: 5
-    capacity: 1
+    buyMoreMinePrice: 0
+    capacity: 0
     miningTime: 0
     unitPrice: 0
     unlockTime: 0
@@ -13662,9 +13671,11 @@ MonoBehaviour:
   txtTimer: {fileID: 1161452240}
   txtNumberMine: {fileID: 1779591417}
   txtMoreMinePrice: {fileID: 926436309}
+  txtX: {fileID: 1034688098}
   btnWork: {fileID: 482060046}
   btnUpgrade: {fileID: 641816916}
   btnBuyMoreMine: {fileID: 1794786372}
+  btnX: {fileID: 718784307}
   btnUnlock_byGold: {fileID: 1163224906}
   txtUnlock_byGold: {fileID: 2061172967}
   btnUnlock_byCoin: {fileID: 1254556498}
@@ -13684,6 +13695,7 @@ MonoBehaviour:
   pushAnim: {fileID: 2122381413}
   imgWorkBar: {fileID: 2010364776}
   sprLight0: {fileID: 21300000, guid: 12c339b55334f6d42aef404dd10a04bc, type: 3}
+  imgAI: {fileID: 373004}
 --- !u!114 &721756212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14775,7 +14787,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 10
+  m_Text: 
 --- !u!222 &767459874
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -22205,7 +22217,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 10
+  m_Text: 
 --- !u!222 &1171420190
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -24707,7 +24719,7 @@ GameObject:
   - component: {fileID: 1385774770}
   - component: {fileID: 1385774769}
   m_Layer: 5
-  m_Name: PushUp
+  m_Name: Remain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24765,7 +24777,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 10
+  m_Text: 
 --- !u!222 &1385774770
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -26799,7 +26811,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 10
+  m_Text: 
 --- !u!222 &1524440733
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -27506,7 +27518,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 10
+  m_Text: 
 --- !u!222 &1594802507
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -30885,9 +30897,11 @@ MonoBehaviour:
   txtTimer: {fileID: 1932564424}
   txtNumberMine: {fileID: 1113907958}
   txtMoreMinePrice: {fileID: 426416894}
+  txtX: {fileID: 974736661}
   btnWork: {fileID: 997567969}
   btnUpgrade: {fileID: 278967104}
   btnBuyMoreMine: {fileID: 1777024281}
+  btnX: {fileID: 1306551091}
   btnUnlock_byGold: {fileID: 500265745}
   txtUnlock_byGold: {fileID: 1422728719}
   btnUnlock_byCoin: {fileID: 309162599}
@@ -30907,6 +30921,7 @@ MonoBehaviour:
   pushAnim: {fileID: 660353778}
   imgWorkBar: {fileID: 1170103494}
   sprLight0: {fileID: 21300000, guid: 12c339b55334f6d42aef404dd10a04bc, type: 3}
+  imgAI: {fileID: 604451302}
 --- !u!114 &1744427196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32201,9 +32216,11 @@ MonoBehaviour:
   txtTimer: {fileID: 178686463}
   txtNumberMine: {fileID: 783950704}
   txtMoreMinePrice: {fileID: 128129272}
+  txtX: {fileID: 1764410925}
   btnWork: {fileID: 2122022677}
   btnUpgrade: {fileID: 997505841}
   btnBuyMoreMine: {fileID: 948407737}
+  btnX: {fileID: 948407738}
   btnUnlock_byGold: {fileID: 279303721}
   txtUnlock_byGold: {fileID: 39021348}
   btnUnlock_byCoin: {fileID: 1993443688}
@@ -32216,13 +32233,14 @@ MonoBehaviour:
   product_Complete: {fileID: 636795143}
   txtProduct_Complete: {fileID: 1483064598}
   product_PushUp: {fileID: 2091920276}
-  txtProduct_PushUp: {fileID: 213029096}
+  txtProduct_PushUp: {fileID: 1966862422}
   product_Remain: {fileID: 1086871627}
-  txtProduct_Remain: {fileID: 1701720084}
+  txtProduct_Remain: {fileID: 1385774769}
   workAnim: {fileID: 1337654044}
   pushAnim: {fileID: 1457547734}
   imgWorkBar: {fileID: 111029894}
   sprLight0: {fileID: 21300000, guid: 12c339b55334f6d42aef404dd10a04bc, type: 3}
+  imgAI: {fileID: 1824327703}
 --- !u!1 &1809800761
 GameObject:
   m_ObjectHideFlags: 0
@@ -35264,7 +35282,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 10
+  m_Text: 
 --- !u!222 &1966862423
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -36756,7 +36774,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 10
+  m_Text: 
 --- !u!222 &2048992047
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -38255,7 +38273,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 10
+  m_Text: 
 --- !u!222 &2113727442
 CanvasRenderer:
   m_ObjectHideFlags: 0

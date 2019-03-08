@@ -355,6 +355,7 @@ public class UIManager : MonoBehaviour
     public void ShowPanelCoinAds(int _coin, UnityEngine.Events.UnityAction _action)
     {
         SetActivePanel(panelCoinAds);
+        btnCoin_panelCoinAds.thisButton.onClick.RemoveAllListeners();
         btnCoin_panelCoinAds.thisPrice = _coin;
         txtCoin_panelCoinAds.text = btnCoin_panelCoinAds.thisPrice.ToString();
         btnCoin_panelCoinAds.type = MyButton.Type.COIN;
@@ -369,8 +370,8 @@ public class UIManager : MonoBehaviour
 
     public void TestMoney()
     {
-        GameManager.Instance.AddGold(100);
-        GameManager.Instance.AddCoin(100);
+        GameManager.Instance.AddGold(10000);
+        GameManager.Instance.AddCoin(10000);
     }
     #endregion
 }
