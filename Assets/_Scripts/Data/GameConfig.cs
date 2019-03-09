@@ -30,7 +30,7 @@ public class GameConfig : MonoBehaviour {
         public List<long> Unlock_reward;
         public int MoreMine_cost_2;
         public int MoreMine_cost_1;
-        public int MoreMine_cost_3;
+        public float MoreMine_cost_3;
         public List<int> Upgrade_time;
         public List<int> Upgrade_condition;
         public List<int> Productivity;
