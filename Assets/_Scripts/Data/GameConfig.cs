@@ -49,8 +49,7 @@ public class GameConfig : MonoBehaviour {
 
     #region === GAME CONFIG ===
     [Header("GAME CONFIG")]
-    public List<PropertiesMap> lstPropertiesMap = new List<PropertiesMap>();
-    public List<int> lstCapTransporter = new List<int>();
+    public List<PropertiesMap> lstPropertiesMap = new List<PropertiesMap>();   
     public float SpeedTransporter;
     public long GoldStart;
     public long CoinStart;
@@ -66,6 +65,9 @@ public class GameConfig : MonoBehaviour {
     public string kProductID50 = "consumable";
     public string kProductID300 = "consumable";
     public string kProductID5000 = "consumable";
+    public List<int> lstCapTransporter = new List<int>();
+    public float UFO_speed;
+    public int UFO_time;
     #endregion
 
     #region === APP42 ===

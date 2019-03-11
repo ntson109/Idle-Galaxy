@@ -99,14 +99,13 @@ public class MineShaft : MonoBehaviour
     public double pricePreMine;
     public int totalCapacity;
     public int input = 0;
-    public TypeMap typeMap;
-    //public Miner miner; //nhân viên
+    //public TypeMap typeMap;
     public UnlockCost[] unlockCost;
     //public TypeProduct typeProduct; //loại sản phẩm
     public StateMineShaft state; //trạng thái
     public List<UpgradeObj_Special> lstUpgradeSpecial;
-    public UpgradeObj_Special.Type[] typeUpgradeSpecial;
-    public float[] timeUpgradeSpecial;
+    public List<UpgradeObj_Special.Type> typeUpgradeSpecial = new List<UpgradeObj_Special.Type>();
+    public List<float> timeUpgradeSpecial = new List<float>();
     public int[] timeUpgradeSpecial_Max;
     public bool isAutoWorking = false;
     public MineShaft nextMineShaft; //mỏ tiếp theo
@@ -121,9 +120,9 @@ public class MineShaft : MonoBehaviour
     public RectTransform posProduct_Complete_1;
     public Map mapParent;
     private bool isCanWork = false;
-    private float timeUnlocking;
+    public float timeUnlocking;
 
-    public UpgradeObj_Level.Type typeUpgradeSLevel;
+    public UpgradeObj_Level.Type typeUpgradeLevel;
     public float timeUpgradeLevel;
     private float timeUpgradeLevel_Max;
 
@@ -165,7 +164,7 @@ public class MineShaft : MonoBehaviour
     #region === START VS UPDATE ===
     void Start()
     {
-        typeMap = TypeMap.MOON;
+        //typeMap = TypeMap.MOON;
         this.RegisterListener(EventID.START_GAME, (param) => ON_START_GAME());
     }
 
@@ -203,7 +202,7 @@ public class MineShaft : MonoBehaviour
                 txtTimeUnlock.text = transformToTime(timeUnlocking);
             }
 
-            for (int i = 0; i < this.typeUpgradeSpecial.Length; i++)
+            for (int i = 0; i < this.typeUpgradeSpecial.Count; i++)
             {
                 if (this.typeUpgradeSpecial[i] == UpgradeObj_Special.Type.UPGRADING)
                 {
@@ -216,7 +215,7 @@ public class MineShaft : MonoBehaviour
                 }
             }
 
-            if (this.typeUpgradeSLevel == UpgradeObj_Level.Type.UPGRADING)
+            if (this.typeUpgradeLevel == UpgradeObj_Level.Type.UPGRADING)
             {
                 if (this.timeUpgradeLevel <= 0)
                 {
@@ -246,14 +245,9 @@ public class MineShaft : MonoBehaviour
         btnUnlock_byCoin.onClick.AddListener(() => Btn_Unlock(TypeUnlock.COIN));
         btnUnlock_byAD.onClick.AddListener(() => Btn_Unlock(TypeUnlock.ADS));
 
-        this.properties.level = 1;
-        this.txtLevel.text = "Level " + this.properties.level.ToString();
-        this.numberMine = 1;
-        this.properties.speedMining = 1;
-        xMoreMine = 1;
-        txtX.text = "x" + xMoreMine;
         GetInfo();
-        this.state = StateMineShaft.LOCK;
+
+        this.RegisterListener(EventID.SKIP_TIME, (param) => ON_SKIP_TIME());
         this.RegisterListener(EventID.CHANGE_GOLD_COIN, (param) => ON_CHANGE_GOLD_COIN());
         if (ID == 0)
         {
@@ -310,37 +304,59 @@ public class MineShaft : MonoBehaviour
         }
     }
 
+    void ON_SKIP_TIME()
+    {
+        timeUnlocking -= GameManager.Instance.timeSkip;
+        timeUpgradeLevel -= GameManager.Instance.timeSkip;
+        for (int i = 0; i < this.typeUpgradeSpecial.Count; i++)
+        {
+            this.timeUpgradeSpecial[i] -= GameManager.Instance.timeSkip;
+        }
+    }
+
     void GetInfo()
     {
+        if (PlayerPrefs.GetInt(KeyPrefs.IS_CONTINUE) == 0)
+        {
+            this.properties.level = 1;
+            this.numberMine = 1;
+            this.properties.capacity = GameConfig.Instance.lstPropertiesMap[ID].Productivity[this.properties.level - 1];
+            this.properties.miningTime = GameConfig.Instance.lstPropertiesMap[ID].miningTime[this.properties.level - 1];
+            for (int i = 0; i < 3; i++)
+            {
+                this.typeUpgradeSpecial.Add(UpgradeObj_Special.Type.NONE);
+            }
+
+            for (int i = 0; i < 3; i++)
+            {
+                this.timeUpgradeSpecial.Add(GameConfig.Instance.lstPropertiesMap[ID].Upgrade_Special[i].time);
+            }
+            this.properties.buyMoreMinePrice = GameConfig.Instance.lstPropertiesMap[ID].MoreMine_cost_1;
+            this.state = StateMineShaft.LOCK;
+        }
+
+        this.txtLevel.text = "Level " + this.properties.level.ToString();
+        this.properties.speedMining = 1;
+        xMoreMine = 1;
+        txtX.text = "x" + xMoreMine;
+
         this.properties.name = GameConfig.Instance.lstPropertiesMap[ID].Name;
         this.txtName.text = this.properties.name;
-        this.properties.capacity = GameConfig.Instance.lstPropertiesMap[ID].Productivity[this.properties.level - 1];
+
         this.totalCapacity = this.properties.capacity * this.numberMine;
         this.properties.buyAI = GameConfig.Instance.lstPropertiesMap[ID].BuyAI;
         this.properties.upgradeTime = GameConfig.Instance.lstPropertiesMap[ID].Upgrade_time[this.properties.level - 1];
-        this.properties.buyMoreMinePrice = GameConfig.Instance.lstPropertiesMap[ID].MoreMine_cost_1;
         GetPriceMoreMine();
         GetPriceUpgradeCost();
         this.properties.unitPrice = GameConfig.Instance.lstPropertiesMap[ID].Unit_Price[this.properties.level - 1];
         this.properties.unlockTime = GameConfig.Instance.lstPropertiesMap[ID].Unlock_time;
         this.properties.unlockCondition = GameConfig.Instance.lstPropertiesMap[ID].Unlock_condition;
-        this.properties.miningTime = GameConfig.Instance.lstPropertiesMap[ID].miningTime[this.properties.level - 1];
 
         for (int i = 0; i < GameConfig.Instance.lstPropertiesMap[ID].Upgrade_Special.Count; i++)
         {
             this.lstUpgradeSpecial.Add(GameManager.Instance.lstUpgradeSpecial[i]);
         }
 
-        this.typeUpgradeSpecial = new UpgradeObj_Special.Type[3];
-        for (int i = 0; i < this.typeUpgradeSpecial.Length; i++)
-        {
-            this.typeUpgradeSpecial[i] = UpgradeObj_Special.Type.NONE;
-        }
-        this.timeUpgradeSpecial = new float[3];
-        for (int i = 0; i < this.timeUpgradeSpecial.Length; i++)
-        {
-            this.timeUpgradeSpecial[i] = GameConfig.Instance.lstPropertiesMap[ID].Upgrade_Special[i].time;
-        }
         this.timeUpgradeSpecial_Max = new int[3];
         for (int i = 0; i < this.timeUpgradeSpecial_Max.Length; i++)
         {
@@ -678,7 +694,7 @@ public class MineShaft : MonoBehaviour
     {
         UIManager.Instance.SetActivePanel(UIManager.Instance.panelShowUpgrade);
         AudioManager.Instance.Play("Click");
-        GameManager.Instance.upgradeLevel.SetInfo(this, typeUpgradeSLevel);
+        GameManager.Instance.upgradeLevel.SetInfo(this, typeUpgradeLevel);
         for (int i = 0; i < this.lstUpgradeSpecial.Count; i++)
         {
             int _coin = (int)((timeUpgradeSpecial[i] * GameConfig.Instance.lstPropertiesMap[ID].Upgrade_Special[i].coinMax) / timeUpgradeSpecial_Max[i]);
@@ -698,11 +714,11 @@ public class MineShaft : MonoBehaviour
 
     public void Btn_UpgradeLevel()
     {
-        if (typeUpgradeSLevel == UpgradeObj_Level.Type.NONE)
+        if (typeUpgradeLevel == UpgradeObj_Level.Type.NONE)
         {
             GameManager.Instance.AddGold(-this.properties.upgradePrice);
             timeUpgradeLevel = GameConfig.Instance.lstPropertiesMap[ID].Upgrade_time[this.properties.level - 1];
-            typeUpgradeSLevel = UpgradeObj_Level.Type.UPGRADING;
+            typeUpgradeLevel = UpgradeObj_Level.Type.UPGRADING;
             GameManager.Instance.upgradeLevel.Upgrading();
         }
     }
@@ -722,9 +738,9 @@ public class MineShaft : MonoBehaviour
         this.properties.capacity = GameConfig.Instance.lstPropertiesMap[ID].Productivity[this.properties.level - 1];
         this.properties.miningTime = GameConfig.Instance.lstPropertiesMap[ID].miningTime[this.properties.level - 1];
         this.properties.unitPrice = GameConfig.Instance.lstPropertiesMap[ID].Unit_Price[this.properties.level - 1];
-        typeUpgradeSLevel = UpgradeObj_Level.Type.NONE;
+        typeUpgradeLevel = UpgradeObj_Level.Type.NONE;
 
-        GameManager.Instance.upgradeLevel.SetInfo(this, typeUpgradeSLevel);
+        GameManager.Instance.upgradeLevel.SetInfo(this, typeUpgradeLevel);
     }
 
     public void UpgradeAds(int _id)

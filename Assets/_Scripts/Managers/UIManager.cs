@@ -25,6 +25,16 @@ public class UIManager : MonoBehaviour
     public Text txtBoost;
     public Text txtTimeBoost;
 
+    [Header("UFO")]
+    public GameObject panelUFO;
+    public GameObject panelUFO_Gold;
+    public GameObject panelUFO_CoinVideo;
+    public Text txtGold_UFO;
+    public Text txtCoin_UFO;
+    public Image imgReward;
+    public Text txtReward_UFO;
+    public Sprite[] lstSprReward;
+
     //[Header("MOUSE CLICK")]
     //public GameObject mouseClick;
     //public Canvas parentCanvas;
@@ -55,6 +65,7 @@ public class UIManager : MonoBehaviour
         if (GameManager.Instance.stateGame == StateGame.PLAYING)
         {
             HideIfClickedOutside(panelCoinAds);
+           
         }
     }
     #endregion
@@ -336,12 +347,18 @@ public class UIManager : MonoBehaviour
 
     public void Btn_Continue()
     {
-
+        AudioManager.Instance.Play("Click");
+        ScenesManager.Instance.GoToScene(ScenesManager.TypeScene.Main, () =>
+        {           
+            GameManager.Instance.stateGame = StateGame.PLAYING;
+            DataPlayer.Instance.LoadDataPlayer();
+            AudioManager.Instance.Play("GamePlay", true);
+        });
     }
 
     public void Btn_Share()
     {
-
+        DataPlayer.Instance.SaveDataPlayer();
     }
 
     public void Btn_Rate()

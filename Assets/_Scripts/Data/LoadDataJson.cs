@@ -59,6 +59,8 @@ public class LoadDataJson : MonoBehaviour
             GameConfig.Instance.link_ios = objJson["link_ios"];
             GameConfig.Instance.link_android = objJson["link_android"];
             GameConfig.Instance.string_Share = objJson["string_Share"];
+            GameConfig.Instance.UFO_speed = objJson["UFO_speed"].AsFloat;
+            GameConfig.Instance.UFO_time = objJson["UFO_time"].AsInt;
             for (int i = 0; i < objJson["introduction"].Count; i++)
             {
                 GameConfig.Instance.lstIntroduction.Add(objJson["introduction"][i]);
@@ -145,6 +147,7 @@ public class LoadDataJson : MonoBehaviour
                 GameConfig.Instance.lstCapTransporter.Add(objJson["CapTransporter"][i].AsInt);
             }
             GameConfig.Instance.SpeedTransporter = objJson["SpeedTransporter"].AsFloat;
+            GameManager.Instance.UFO.speed = GameConfig.Instance.UFO_speed;
         }
     }
 

@@ -10,8 +10,8 @@ public class Map : MonoBehaviour
     public List<MineShaft> lstMineShaft;
     public GameObject spaceShip;
     public Transporter transporter;
-    long totalAmount;
-    long totalMoney;
+    public long totalAmount;
+    public long totalMoney;
     public long moneyPerTurn;
     public GameObject rdPrefabs;
 

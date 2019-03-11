@@ -25,6 +25,14 @@ public class GameManager : MonoBehaviour
     public List<UpgradeObj_Special> lstUpgradeSpecial;
     public UpgradeObj_Level upgradeLevel;
 
+    [Header("UFO")]
+    public UFO UFO;
+    public float timeFlyingUFO;
+    public int timeSkip;
+
+    [Header("Spin")]
+    public int countSpin;
+
     void Start()
     {
         boost.SetDefault();
@@ -47,12 +55,36 @@ public class GameManager : MonoBehaviour
                 timeBoost -= Time.deltaTime;
                 UIManager.Instance.txtTimeBoost.text = UIManager.Instance.transformToTime(timeBoost);
             }
+
+            if (!UFO.isOpening)
+            {
+                if (timeFlyingUFO >= GameConfig.Instance.UFO_time)
+                {
+                    UFO.Move();
+                    timeFlyingUFO = 0;
+                }
+                else
+                {
+                    timeFlyingUFO += Time.deltaTime;
+                }
+            }
         }
     }
 
     public void AddGold(long _value)
     {
-        GOLD = GOLD + (_value * boost.value);
+        if (boost.type == TypeBoost.GOLD)
+        {
+            if (_value >= 0)
+                GOLD = GOLD + (_value * 2);
+            else
+                GOLD = GOLD + (_value);
+        }
+        else
+        {
+            GOLD = GOLD + (_value);
+        }
+
         if (GOLD <= 0)
             GOLD = 0;
 
@@ -83,28 +115,23 @@ public enum TypeBoost
 {
     NONE,
     GOLD,
-    CAPACITY,
-    SPEED,
-    TIME
+    SPEED
 }
 
 public struct Boost
 {
     public TypeBoost type;
-    public int value;
     public int time;
 
     public void SetDefault()
     {
         this.type = TypeBoost.NONE;
-        this.value = 1;
         this.time = 0;
     }
 
     public void SetBoost(TypeBoost _type, int _value, int _time)
     {
         this.type = _type;
-        this.value = _value;
         this.time = _time;
     }
 }

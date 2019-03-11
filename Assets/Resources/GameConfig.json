@@ -16,6 +16,8 @@
   "warning2" : "abc",
   "warning3" : "abc"
   },
+  "UFO_speed" : 4,
+  "UFO_time" : 60,
   "CapTransporter" : [
 	5,
 	25,
