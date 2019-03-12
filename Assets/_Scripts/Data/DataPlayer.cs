@@ -168,7 +168,7 @@ public class DataPlayer : MonoBehaviour
             StartCoroutine(IE_LoadDataPlayer(objJson));
         }
     }
-    //"gold":"9999974", "coin":"10010", "lstMap":[ {"typeMap":"1", "totalAmount":"0", "totalMoney":"0"} ], "boost":{"type":"1", "time":"0.0"}, "transporter":{"ID":"0", "level":"3", "capacity":"5"}, "countSpin":"0", "lsMineShaft":[ {"typeMap":"0", "
+
     IEnumerator IE_LoadDataPlayer(SimpleJSON_DatDz.JSONNode objJson)
     {
 

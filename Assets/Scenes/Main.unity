@@ -15300,8 +15300,8 @@ MonoBehaviour:
   txtUnlock_byCoin: {fileID: 1040083006}
   btnUnlock_byAD: {fileID: 377597817}
   panelUnlock: {fileID: 2039154673}
-  panelUnlock_Condition: {fileID: 905228060}
-  txtUnlock_Condition: {fileID: 1542847503}
+  panelUnlock_Condition: {fileID: 0}
+  txtUnlock_Condition: {fileID: 0}
   txtTimeUnlock: {fileID: 195315800}
   product_Complete: {fileID: 1622778683}
   txtProduct_Complete: {fileID: 1359603988}
@@ -34253,7 +34253,7 @@ MonoBehaviour:
   time: 0
   posBeginTransport: {fileID: 2070181280}
   posEndTransport: {fileID: 393272637}
-  thisButton: {fileID: 1664874653}
+  thisButton: {fileID: 1385136895}
   mapParent: {fileID: 302750175}
   isTransporting: 0
 --- !u!114 &1664874653

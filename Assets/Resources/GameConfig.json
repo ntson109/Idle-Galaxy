@@ -127,7 +127,7 @@
 	"M_2" :{
 		"Name" : "Machine2",
 		"BuyAI" : 200,
-		"Unlock_condition" : 20,
+		"Unlock_condition" : 0,
 		"Unlock_time" : 5,
 		"Unlock_cost" : [
 			10,
@@ -217,7 +217,7 @@
 	"M_3" :{
 		"Name" : "Machine3",
 		"BuyAI" : 200,
-		"Unlock_condition" : 50,
+		"Unlock_condition" : 0,
 		"Unlock_time" : 10,
 		"Unlock_cost" : [
 			20,
@@ -307,7 +307,7 @@
 	"M_4" :{
 		"Name" : "Machine4",
 		"BuyAI" : 200,
-		"Unlock_condition" : 100,
+		"Unlock_condition" : 0,
 		"Unlock_time" : 20,
 		"Unlock_cost" : [
 			100,
@@ -397,7 +397,7 @@
 	"M_5" :{
 		"Name" : "Machine5",
 		"BuyAI" : 200,
-		"Unlock_condition" : 200,
+		"Unlock_condition" : 0,
 		"Unlock_time" : 30,
 		"Unlock_cost" : [
 			100,
@@ -487,7 +487,7 @@
 	"M_6" :{
 		"Name" : "Machine6",
 		"BuyAI" : 200,
-		"Unlock_condition" : 500,
+		"Unlock_condition" : 0,
 		"Unlock_time" : 60,
 		"Unlock_cost" : [
 			100,

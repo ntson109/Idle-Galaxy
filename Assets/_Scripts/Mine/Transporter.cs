@@ -21,6 +21,7 @@ public class Transporter : MonoBehaviour
     void Start()
     {
         thisButton.onClick.AddListener(() => ShowUpgrade());
+        isTransporting = false;
     }
 
     void Update()
@@ -52,9 +53,9 @@ public class Transporter : MonoBehaviour
             this.gameObject.GetComponent<RectTransform>().transform.Translate(Vector3.left * Time.deltaTime * this.speed);
             yield return null;
         }
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForEndOfFrame();
         mapParent.CompleteTransport();
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.25f);
         this.gameObject.GetComponent<RectTransform>().transform.localScale = new Vector3(1, 1, 1);
         StartCoroutine(TurnBack());
     }
@@ -69,7 +70,7 @@ public class Transporter : MonoBehaviour
         }
         yield return new WaitForEndOfFrame();
         this.gameObject.GetComponent<RectTransform>().transform.localScale = new Vector3(-1, 1, 1);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.35f);
         isTransporting = false;
     }
 

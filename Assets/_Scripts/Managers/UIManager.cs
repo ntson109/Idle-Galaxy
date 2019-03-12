@@ -459,7 +459,7 @@ public class UIManager : MonoBehaviour
     public void TestMoney()
     {
         GameManager.Instance.AddGold(10000000);
-        GameManager.Instance.AddCoin(10000);
+        GameManager.Instance.AddCoin(100);
     }
     #endregion
 }

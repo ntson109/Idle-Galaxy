@@ -259,7 +259,7 @@ public class MineShaft : MonoBehaviour
         if (this.state == StateMineShaft.LOCK)
         {
             UIManager.Instance.SetActivePanel(panelUnlock_Condition);
-            txtUnlock_Condition.text = "Need: " + this.properties.unlockCondition.ToString() + " pre house !";
+            txtUnlock_Condition.text = "Need: unlock pre house !";
         }
 
         if (this.state != StateMineShaft.LOCK)
@@ -796,13 +796,7 @@ public class MineShaft : MonoBehaviour
     }
     #endregion
 
-    #region === UNLOCK ===
-    public void ShowUnlockPanel()
-    {
-        UIManager.Instance.SetActivePanel(panelUnlock);
-        UIManager.Instance.SetDeActivePanel(panelUnlock_Condition);
-    }
-
+    #region === UNLOCK ===   
     public void Btn_Unlock(TypeUnlock _type)
     {
         //diễn anim unlock
@@ -831,6 +825,7 @@ public class MineShaft : MonoBehaviour
     {
         state = StateMineShaft.IDLE;
         isAutoWorking = false;
+        mapParent.CheckUnlock(this.ID);
         UIManager.Instance.SetDeActivePanel(panelUnlock);
     }
     #endregion
