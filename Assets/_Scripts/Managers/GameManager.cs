@@ -28,14 +28,54 @@ public class GameManager : MonoBehaviour
     [Header("UFO")]
     public UFO UFO;
     public float timeFlyingUFO;
-    public int timeSkip;
 
     [Header("Spin")]
-    public int countSpin;
+    public int countSpin = 0;
 
+    long test = 5;
+    long test_2;
     void Start()
     {
-        boost.SetDefault();
+        //boost.SetDefault();
+        //for (int i = 1; i <= 500; i++)
+        //{
+        //    if (i <= 100)
+        //    {
+        //        test_2 = (long)(test * 0.05f);
+        //    }
+        //    else
+        //    {
+        //        test_2 = (long)(test * 0.015f);
+        //    }
+        //    if (test_2 <= 2)
+        //        test_2 = 2;
+        //    test += test_2;
+        //    if (i == 10)
+        //    {
+        //        Debug.Log(test);
+        //    }
+
+        //    if (i == 50)
+        //    {
+        //        Debug.Log(test);
+        //    }
+
+        //    if (i == 100)
+        //    {
+        //        Debug.Log(test);
+        //    }
+
+        //    if (i == 200)
+        //    {
+        //        Debug.Log(test);
+        //    }
+
+        //    if (i == 500)
+        //    {
+        //        Debug.Log(test);
+        //    }
+        //}
+        
     }
 
     void Update()

@@ -18,12 +18,20 @@
   },
   "UFO_speed" : 4,
   "UFO_time" : 60,
-  "CapTransporter" : [
-	5,
-	25,
-	100
-  ],
-  "SpeedTransporter" : 1,
+  "Transporter" : {
+	"NameTransport" : "The Flash",
+	"TimeTransport" : 3,
+	"Capacity_1" : 5,
+	"Capacity_2" : 0.05,
+	"Capacity_3" : 0.015,
+	"Cost" : [
+		5,
+		50,
+		1000,
+		50000,
+		5000000
+	]
+  },
   "Map_Moon" : {
 	"M_1" : {
 		"Name" : "Machine1",
@@ -165,13 +173,13 @@
 			500
 		],
 		"Productivity" : [
-			1,
-			2,
-			3,
-			4,
-			5,
-			6,
-			7
+			10,
+			20,
+			30,
+			40,
+			50,
+			60,
+			70
 		],
 		"Upgrade_Special" : {
 			"1" : {
@@ -222,13 +230,13 @@
 		"MoreMine_cost_2" : 5,
 		"MoreMine_cost_3" : 1.07,
 		"miningTime" : [
+			30,
+			30,
+			15,
+			15,
 			10,
 			10,
-			5,
-			5,
-			2,
-			2,
-			1
+			5
 		],
 		"Upgrade_time" : [
 			10,
@@ -255,13 +263,13 @@
 			500
 		],
 		"Productivity" : [
-			1,
-			2,
-			3,
-			4,
-			5,
-			6,
-			7
+			100,
+			120,
+			140,
+			160,
+			180,
+			200,
+			220
 		],
 		"Upgrade_Special" : {
 			"1" : {
@@ -312,13 +320,13 @@
 		"MoreMine_cost_2" : 10,
 		"MoreMine_cost_3" : 1.08,
 		"miningTime" : [
-			10,
-			10,
-			5,
-			5,
-			2,
-			2,
-			1
+			180,
+			180,
+			60,
+			60,
+			30,
+			20,
+			10
 		],
 		"Upgrade_time" : [
 			10,
@@ -345,13 +353,13 @@
 			500
 		],
 		"Productivity" : [
-			1,
-			2,
-			3,
-			4,
-			5,
-			6,
-			7
+			250,
+			300,
+			350,
+			400,
+			450,
+			500,
+			550
 		],
 		"Upgrade_Special" : {
 			"1" : {
@@ -402,13 +410,13 @@
 		"MoreMine_cost_2" : 100,
 		"MoreMine_cost_3" : 1.09,
 		"miningTime" : [
-			10,
-			10,
-			5,
-			5,
-			2,
-			2,
-			1
+			600,
+			600,
+			300,
+			300,
+			120,
+			60,
+			60
 		],
 		"Upgrade_time" : [
 			10,
@@ -435,13 +443,13 @@
 			500
 		],
 		"Productivity" : [
-			1,
-			2,
-			3,
-			4,
-			5,
-			6,
-			7
+			600,
+			700,
+			800,
+			900,
+			1000,
+			1100,
+			1200
 		],
 		"Upgrade_Special" : {
 			"1" : {
@@ -492,13 +500,13 @@
 		"MoreMine_cost_2" : 1000,
 		"MoreMine_cost_3" : 1.1,
 		"miningTime" : [
-			10,
-			10,
-			5,
-			5,
-			2,
-			2,
-			1
+			1500,
+			1200,
+			600,
+			600,
+			300,
+			300,
+			120
 		],
 		"Upgrade_time" : [
 			10,
@@ -525,13 +533,13 @@
 			500
 		],
 		"Productivity" : [
-			1,
-			2,
-			3,
-			4,
-			5,
-			6,
-			7
+			1500,
+			1700,
+			1900,
+			2100,
+			2300,
+			2600,
+			3000
 		],
 		"Upgrade_Special" : {
 			"1" : {

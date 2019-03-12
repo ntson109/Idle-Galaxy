@@ -42,12 +42,16 @@ public class MapJSON
     public long totalAmount;
 
     public long totalMoney;
+
+    public TransporterJSON transporter;
 }
 
 [System.Serializable]
 public class TransporterJSON
 {
+    public int level;
 
+    public long capacity;
 }
 
 [System.Serializable]

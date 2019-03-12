@@ -30,9 +30,7 @@ public class MyButton : MonoBehaviour
 
     void Start()
     {
-        thisButton = GetComponent<Button>();
         this.RegisterListener(EventID.CHANGE_GOLD_COIN, (param) => ON_CHANGE_GOLD_COIN());
-
     }
 
     void ON_CHANGE_GOLD_COIN()

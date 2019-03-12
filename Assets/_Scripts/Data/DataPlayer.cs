@@ -3,20 +3,22 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using EventDispatcher;
+using System;
 
 public class DataPlayer : MonoBehaviour
 {
     public static DataPlayer Instance;
+    private DateTime dateNowPlayer;
     void Awake()
     {
         if (Instance != null)
         {
             return;
         }
-        //if (!PlayerPrefs.HasKey("DateTimeOutGame"))
-        //{
-        //    PlayerPrefs.SetString("DateTimeOutGame", DateTime.Now.ToString());
-        //}
+        if (!PlayerPrefs.HasKey(KeyPrefs.TIME_QUIT_GAME))
+        {
+            PlayerPrefs.SetString(KeyPrefs.TIME_QUIT_GAME, DateTime.Now.ToString());
+        }
         Instance = this;
     }
     [HideInInspector]
@@ -63,6 +65,7 @@ public class DataPlayer : MonoBehaviour
         for (int i = 0; i < GameManager.Instance.lstMap.Count; i++)
         {
             MapJSON m = new MapJSON();
+            m.transporter = new TransporterJSON();
             if (GameManager.Instance.lstMap[i].type == TypeMap.MOON)
             {
                 m.typeMap = 1;
@@ -72,13 +75,15 @@ public class DataPlayer : MonoBehaviour
                 m.typeMap = 2;
             }
             m.totalAmount = GameManager.Instance.lstMap[i].totalAmount;
-            m.totalMoney = GameManager.Instance.lstMap[i].totalMoney;
+            m.totalMoney = GameManager.Instance.lstMap[i].totalMoney;         
+            m.transporter.level = GameManager.Instance.lstMap[i].transporter.level;
+            m.transporter.capacity = GameManager.Instance.lstMap[i].transporter.capacity;
             data.lstMap.Add(m);
         }
 
         data.lsMineShaft = new List<MineShaftJSON>();
         for (int i = 0; i < GameManager.Instance.lstMap.Count; i++)
-        {
+        {            
             for (int j = 0; j < GameManager.Instance.lstMap[i].lstMineShaft.Count; j++)
             {
                 MineShaftJSON m = new MineShaftJSON();
@@ -153,6 +158,7 @@ public class DataPlayer : MonoBehaviour
 
     public void LoadDataPlayer()
     {
+        dateNowPlayer = DateTime.Now;
         string _path = Path.Combine(Application.persistentDataPath, "DataPlayer.json");
         string dataAsJson = File.ReadAllText(_path);
         var objJson = SimpleJSON_DatDz.JSON.Parse(dataAsJson);
@@ -162,7 +168,7 @@ public class DataPlayer : MonoBehaviour
             StartCoroutine(IE_LoadDataPlayer(objJson));
         }
     }
-
+    //"gold":"9999974", "coin":"10010", "lstMap":[ {"typeMap":"1", "totalAmount":"0", "totalMoney":"0"} ], "boost":{"type":"1", "time":"0.0"}, "transporter":{"ID":"0", "level":"3", "capacity":"5"}, "countSpin":"0", "lsMineShaft":[ {"typeMap":"0", "
     IEnumerator IE_LoadDataPlayer(SimpleJSON_DatDz.JSONNode objJson)
     {
 
@@ -181,6 +187,8 @@ public class DataPlayer : MonoBehaviour
             }
             GameManager.Instance.lstMap[i].totalAmount = objJson["lstMap"][i]["totalAmount"].AsLong;
             GameManager.Instance.lstMap[i].totalMoney = objJson["lstMap"][i]["totalMoney"].AsLong;
+            GameManager.Instance.lstMap[i].transporter.level = objJson["lstMap"][i]["transporter"]["level"].AsInt;
+            GameManager.Instance.lstMap[i].transporter.capacity = objJson["lstMap"][i]["transporter"]["capacity"].AsLong;
         }
 
         if (objJson["boost"]["type"] == 1)
@@ -251,6 +259,30 @@ public class DataPlayer : MonoBehaviour
 
         yield return new WaitForEndOfFrame();
         ScenesManager.Instance.isNextScene = true;
-        this.PostEvent(EventID.START_GAME);
+        this.PostEvent(EventID.START_GAME);        
+        UIManager.Instance.timeOffline = UIManager.Instance.GetOfflineTime(PlayerPrefs.GetString(KeyPrefs.TIME_QUIT_GAME));
+        UIManager.Instance.goldOffline = UnityEngine.Random.Range(100, 500);
+        UIManager.Instance.ShowPanelOffline();
+    }
+
+    private void OnDestroy()
+    {
+        SaveDataPlayer();
+
+        PlayerPrefs.SetString(KeyPrefs.TIME_QUIT_GAME, DateTime.Now.ToString());
+    }
+
+    private void OnApplicationPause(bool pause)
+    {
+        if (pause == true)
+        {
+            SaveDataPlayer();
+
+            PlayerPrefs.SetString(KeyPrefs.TIME_QUIT_GAME, DateTime.Now.ToString());
+        }
+        else
+        {
+            dateNowPlayer = DateTime.Now;
+        }
     }
 }

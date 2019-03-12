@@ -18,25 +18,22 @@ public class SpinManager : MonoBehaviour
         Instance = this;
     }
 
-    
+
 
     public void Spin()
     {
-        //if (GameManager.Instance.countSpin > 0 && !UIManager.Instance.lsItem[6].isOnItem && !UIManager.Instance.isSpinning)
-        //{
-        //    UIManager.Instance.isSpinning = true;
-        //    GameManager.Instance.countSpin--;
-        //    if (GameManager.Instance.countSpin <= 0)
-        //    {
-        //        UIManager.Instance.imgCheckTime.fillAmount = 1;
-        //        UIManager.Instance.lsItem[6].timeItem = 10 * 60;
-        //        UIManager.Instance.lsItem[6].timeItemTatol = 10 * 60;
-        //        UIManager.Instance.lsItem[6].isOnItem = true;
-        //    }
-        //    UIManager.Instance.txtCountSpinMain.text = "x" + GameManager.Instance.countSpin;
-        //    UIManager.Instance.txtCountSpin.text = "x" + GameManager.Instance.countSpin;
-        //    StartCoroutine(RotationSpin());
-        //}
+        if (GameManager.Instance.countSpin > 0 && !UIManager.Instance.isSpinning)
+        {
+            UIManager.Instance.isSpinning = true;
+            GameManager.Instance.countSpin--;
+            if (GameManager.Instance.countSpin <= 0)
+            {
+                //UIManager.Instance.imgCheckTime.fillAmount = 1;
+            }
+            UIManager.Instance.txtCountSpinMain.text = "x" + GameManager.Instance.countSpin;
+            UIManager.Instance.txtCountSpin.text = "x" + GameManager.Instance.countSpin;
+            StartCoroutine(RotationSpin());
+        }
     }
 
     public IEnumerator RotationSpin()
@@ -122,7 +119,7 @@ public class SpinManager : MonoBehaviour
 
     public void AddGive(double dollar)
     {
-       
+        Debug.Log(dollar);
         //int locationEnd = GameManager.Instance.lsLocation.Count - 1;
         //int jobEnd = GameManager.Instance.lsLocation[locationEnd].countType;
         //double dollarRecive = 0;
@@ -159,7 +156,7 @@ public class SpinManager : MonoBehaviour
         //    UIManager.Instance.adsSpin.SetActive(true);
         //    UIManager.Instance.bgSpin.color = new Color32(255, 255, 255, 128);
         //}
-        //UIManager.Instance.isSpinning = false;
+        UIManager.Instance.isSpinning = false;
 
     }
 
@@ -179,7 +176,7 @@ public class SpinManager : MonoBehaviour
         //        UIManager.Instance.lsItem[6].isOnItem = false;
         //    }
         //}
-        transform.DOKill();
-        StopAllCoroutines();
+        if (!UIManager.Instance.isSpinning)
+            transform.DOKill();
     }
 }

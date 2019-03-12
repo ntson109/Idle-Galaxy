@@ -9,6 +9,7 @@ using EventDispatcher;
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance = new UIManager();
+    public bool isNewPlayer = true;
 
     [HideInInspector]
     public List<string> arrAlphabetNeed = new List<string>();
@@ -25,6 +26,18 @@ public class UIManager : MonoBehaviour
     public Text txtBoost;
     public Text txtTimeBoost;
 
+    [Header("TRANSPORTER")]
+    public GameObject panelUpgradeTransporter;
+    public MyButton btnUpTrans;
+    public Text txtNameTrans;
+    public Text txtLevelTrans;
+    public Text txtLevelTrans_Up;
+    public Text txtCapTrans;
+    public Text txtCapTrans_Up;
+    public Text txtTimeTrans;
+    public Text txtTimeTrans_Up;
+    public Text txtPriceTrans;
+
     [Header("UFO")]
     public GameObject panelUFO;
     public GameObject panelUFO_Gold;
@@ -34,6 +47,16 @@ public class UIManager : MonoBehaviour
     public Image imgReward;
     public Text txtReward_UFO;
     public Sprite[] lstSprReward;
+
+    [Header("OFFLINE")]
+    public GameObject panelOffline;
+    public Text txtTittleOffline;
+    public Text txtGoldOffline;
+
+    [Header("SPIN")]
+    public GameObject panelSpin;
+    public Text txtCountSpin;
+    public Text txtCountSpinMain;
 
     //[Header("MOUSE CLICK")]
     //public GameObject mouseClick;
@@ -65,7 +88,7 @@ public class UIManager : MonoBehaviour
         if (GameManager.Instance.stateGame == StateGame.PLAYING)
         {
             HideIfClickedOutside(panelCoinAds);
-           
+            UIManager.Instance.txtCountSpinMain.text = "x" + GameManager.Instance.countSpin;
         }
     }
     #endregion
@@ -160,7 +183,7 @@ public class UIManager : MonoBehaviour
 	{
 		"d",
 		"h",
-		"m",
+		"mins",
 		"s"
 	};
 
@@ -316,7 +339,7 @@ public class UIManager : MonoBehaviour
         {
             return 0;
         }
-        return (int)Mathf.Round((float)DateTime.Now.Subtract(Convert.ToDateTime(dateTime)).TotalSeconds);
+        return (int)Mathf.Round((float)DateTime.Now.Subtract(Convert.ToDateTime(dateTime)).TotalMinutes);
     }
 
     #endregion
@@ -325,6 +348,7 @@ public class UIManager : MonoBehaviour
     public void Btn_Play()
     {
         AudioManager.Instance.Play("Click");
+        isNewPlayer = true;
         ScenesManager.Instance.GoToScene(ScenesManager.TypeScene.Main, () =>
             {
                 this.PostEvent(EventID.START_GAME);
@@ -348,8 +372,9 @@ public class UIManager : MonoBehaviour
     public void Btn_Continue()
     {
         AudioManager.Instance.Play("Click");
+        isNewPlayer = false;
         ScenesManager.Instance.GoToScene(ScenesManager.TypeScene.Main, () =>
-        {           
+        {
             GameManager.Instance.stateGame = StateGame.PLAYING;
             DataPlayer.Instance.LoadDataPlayer();
             AudioManager.Instance.Play("GamePlay", true);
@@ -378,6 +403,52 @@ public class UIManager : MonoBehaviour
         btnCoin_panelCoinAds.type = MyButton.Type.COIN;
         btnCoin_panelCoinAds.thisButton.onClick.AddListener(_action);
     }
+
+    #region === OFFLINE ===
+    public void ShowPanelOffline()
+    {
+        SetActivePanel(panelOffline);
+        txtTittleOffline.text = "You are offline: \n" + ConvertTime(timeOffline * 60);
+        txtGoldOffline.text = ToLongString(goldOffline);
+    }
+
+    public int timeOffline;
+    public long goldOffline;
+    int xOffline = 1;
+    public void Btn_ReceiveOffline()
+    {
+        this.PostEvent(EventID.SKIP_TIME, timeOffline * 60);
+        GameManager.Instance.AddGold(goldOffline * xOffline);
+        SetDeActivePanel(panelOffline);
+    }
+
+    public void x2_ReceiveOffline()
+    {
+        xOffline = 2;
+        txtGoldOffline.text = ToLongString(goldOffline * xOffline);
+    }
+    #endregion
+
+    #region === SPIN ===
+    public bool isSpinning;
+
+    public void Btn_ShowSpin()
+    {
+        if (GameManager.Instance.countSpin > 0)
+        {
+            SetActivePanel(panelSpin);
+            txtCountSpin.text = "x" + GameManager.Instance.countSpin;
+        }
+    }
+
+    public void Btn_CloseSpin()
+    {
+        if (!isSpinning)
+        {
+            SetDeActivePanel(panelSpin);
+        }
+    }
+    #endregion
     public void Test_Boost()
     {
         GameManager.Instance.boost.SetBoost(TypeBoost.GOLD, 2, 30);

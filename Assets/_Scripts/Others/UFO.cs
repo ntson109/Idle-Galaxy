@@ -82,9 +82,8 @@ public class UFO : MonoBehaviour
         {
             GameManager.Instance.AddCoin(_value * x);
             GameManager.Instance.countSpin++;
-            GameManager.Instance.timeSkip = timeSkip;
             GameManager.Instance.AddGold(goldReward * x);
-            this.PostEvent(EventID.SKIP_TIME);
+            this.PostEvent(EventID.SKIP_TIME, timeSkip);
         }
         UIManager.Instance.SetDeActivePanel(UIManager.Instance.panelUFO);
         isOpening = false;

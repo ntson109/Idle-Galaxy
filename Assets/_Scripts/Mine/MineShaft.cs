@@ -247,7 +247,7 @@ public class MineShaft : MonoBehaviour
 
         GetInfo();
 
-        this.RegisterListener(EventID.SKIP_TIME, (param) => ON_SKIP_TIME());
+        this.RegisterListener(EventID.SKIP_TIME, (param) => ON_SKIP_TIME(param));
         this.RegisterListener(EventID.CHANGE_GOLD_COIN, (param) => ON_CHANGE_GOLD_COIN());
         if (ID == 0)
         {
@@ -266,6 +266,11 @@ public class MineShaft : MonoBehaviour
         {
             UIManager.Instance.SetDeActivePanel(panelUnlock_Condition);
             UIManager.Instance.SetDeActivePanel(panelUnlock);
+        }
+
+        if(isAutoWorking)
+        {
+            imgAI.SetActive(true);
         }
     }
 
@@ -304,19 +309,20 @@ public class MineShaft : MonoBehaviour
         }
     }
 
-    void ON_SKIP_TIME()
+    void ON_SKIP_TIME(object param)
     {
-        timeUnlocking -= GameManager.Instance.timeSkip;
-        timeUpgradeLevel -= GameManager.Instance.timeSkip;
+        int a = (int)param;
+        timeUnlocking -= a;
+        timeUpgradeLevel -= a;
         for (int i = 0; i < this.typeUpgradeSpecial.Count; i++)
         {
-            this.timeUpgradeSpecial[i] -= GameManager.Instance.timeSkip;
+            this.timeUpgradeSpecial[i] -= a;
         }
     }
 
     void GetInfo()
     {
-        if (PlayerPrefs.GetInt(KeyPrefs.IS_CONTINUE) == 0)
+        if (UIManager.Instance.isNewPlayer)
         {
             this.properties.level = 1;
             this.numberMine = 1;

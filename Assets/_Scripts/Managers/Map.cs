@@ -35,11 +35,11 @@ public class Map : MonoBehaviour
 
     void ON_START_GAME()
     {
-        if (this.type == TypeMap.MOON)
+        if (UIManager.Instance.isNewPlayer)
         {
-            this.transporter.capacity = GameConfig.Instance.lstCapTransporter[0];
+            this.transporter.SetInfo(1, GameConfig.Instance.Capacity_1, 5);           
         }
-        this.transporter.speed = GameConfig.Instance.SpeedTransporter;
+
         scrollbarVertical.value = 0;
     }
 
