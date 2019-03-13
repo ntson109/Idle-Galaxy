@@ -66,7 +66,7 @@ public class UFO : MonoBehaviour
             UIManager.Instance.SetDeActivePanel(UIManager.Instance.panelUFO_Gold);
             int a = Random.Range(1, 100);
             UIManager.Instance.txtCoin_UFO.text = a.ToString();
-            UIManager.Instance.imgReward.sprite = UIManager.Instance.lstSprReward[0];
+            UIManager.Instance.imgRewardUFO.sprite = UIManager.Instance.lstSprReward[0];
             UIManager.Instance.txtReward_UFO.text = "Ad";
             btnOk.onClick.AddListener(() => Btn_OK(a, 1));
         }
@@ -95,20 +95,20 @@ public class UFO : MonoBehaviour
         x = 2;
         if (r == 0) //luot quay Spin
         {
-            UIManager.Instance.imgReward.sprite = UIManager.Instance.lstSprReward[2];
+            UIManager.Instance.imgRewardUFO.sprite = UIManager.Instance.lstSprReward[2];
             UIManager.Instance.txtReward_UFO.text = "1";
             countSpin = 1;
         }
         else if (r == 1) //skip thoi gian
         {
             timeSkip = Random.Range(5, 16);
-            UIManager.Instance.imgReward.sprite = UIManager.Instance.lstSprReward[3];
+            UIManager.Instance.imgRewardUFO.sprite = UIManager.Instance.lstSprReward[3];
             UIManager.Instance.txtReward_UFO.text = "-" + timeSkip + "mins";
         }
         else //nhan gold
         {
             goldReward = Random.Range(1000, 5000);
-            UIManager.Instance.imgReward.sprite = UIManager.Instance.lstSprReward[1];
+            UIManager.Instance.imgRewardUFO.sprite = UIManager.Instance.lstSprReward[1];
             UIManager.Instance.txtReward_UFO.text = UIManager.Instance.ToLongString(goldReward);
         }
     }

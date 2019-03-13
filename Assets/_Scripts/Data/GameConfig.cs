@@ -37,14 +37,6 @@ public class GameConfig : MonoBehaviour {
         public List<long> Upgrade_cost;
         public List<int> Unit_Price;
         public List<MineShaft.UpgradeSpecial> Upgrade_Special;
-        //public void Reset()
-        //{
-        //    this.ID = 0;
-        //    this.Unlock_condition = 0;
-        //    this.Unlock_time = 0;
-        //    this.Unlock_cost = new long[2];
-        //    this.Unlock_reward.Clear();
-        //}
     }
 
     #region === GAME CONFIG ===
@@ -72,6 +64,9 @@ public class GameConfig : MonoBehaviour {
     public float Capacity_3;
     public float UFO_speed;
     public int UFO_time;
+    public List<float> lstRewardSpin_Gold = new List<float>();
+    public List<int> lstRewardSpin_Time = new List<int>();
+    public List<int> lstRewardSpin_Coin = new List<int>();
     #endregion
 
     #region === APP42 ===

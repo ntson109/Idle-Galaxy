@@ -151,6 +151,20 @@ public class LoadDataJson : MonoBehaviour
                 GameConfig.Instance.lstCostTransporter.Add(objJson["Transporter"]["Cost"][i].AsLong);
             }
             GameManager.Instance.UFO.speed = GameConfig.Instance.UFO_speed;
+
+
+            for (int j = 0; j < objJson["Spin"]["Gold"].Count; j++)
+            {
+                GameConfig.Instance.lstRewardSpin_Gold.Add(objJson["Spin"]["Gold"][j].AsFloat);
+            }
+            for (int j = 0; j < objJson["Spin"]["TimeSkip"].Count; j++)
+            {
+                GameConfig.Instance.lstRewardSpin_Time.Add(objJson["Spin"]["TimeSkip"][j].AsInt);
+            }
+            for (int j = 0; j < objJson["Spin"]["Coin"].Count; j++)
+            {
+                GameConfig.Instance.lstRewardSpin_Coin.Add(objJson["Spin"]["Coin"][j].AsInt);
+            }
         }
     }
 

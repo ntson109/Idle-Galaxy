@@ -44,7 +44,7 @@ public class UIManager : MonoBehaviour
     public GameObject panelUFO_CoinVideo;
     public Text txtGold_UFO;
     public Text txtCoin_UFO;
-    public Image imgReward;
+    public Image imgRewardUFO;
     public Text txtReward_UFO;
     public Sprite[] lstSprReward;
 
@@ -57,7 +57,15 @@ public class UIManager : MonoBehaviour
     public GameObject panelSpin;
     public Text txtCountSpin;
     public Text txtCountSpinMain;
-
+    public Button btnReceiveSpin;
+    public GameObject panelReceiveSpin;
+    public Sprite[] sprRewardSpin;
+    public GameObject receiveSpin_normal;
+    public Image imgRewardSpin;
+    public Text txtRewardSpin;
+    public GameObject receiveSpin_random;
+    public Text txtRewardSpin_randomGold;
+    public Text txtRewardSpin_randomCoin;
     //[Header("MOUSE CLICK")]
     //public GameObject mouseClick;
     //public Canvas parentCanvas;

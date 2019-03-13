@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
+using EventDispatcher;
 
 public class SpinManager : MonoBehaviour
 {
 
     public static SpinManager Instance;
+    public long goldReward;
+    public int coinReward;
+    public int timeReward;
 
     void Awake()
     {
@@ -57,107 +61,131 @@ public class SpinManager : MonoBehaviour
         }
         if (Zspin > 4.5f && Zspin <= 28.5f)
         {
-            AddGive(1);
+
         }
         else if (Zspin > 28.5f && Zspin <= 52.5f)
         {
-            AddGive(2);
+
         }
         else if (Zspin > 52.5f && Zspin <= 75.5f)
         {
-            AddGive(3);
+
         }
         else if (Zspin > 75.5f && Zspin <= 99.5f)
         {
-            AddGive(4);
+
         }
         else if (Zspin > 99.5f && Zspin <= 122.5f)
         {
-            AddGive(5);
+
         }
         else if (Zspin > 122.5f && Zspin <= 146.5f)
         {
-            AddGive(1);
+
         }
         else if (Zspin > 146.5f && Zspin <= 170.5f)
         {
-            AddGive(2);
+
         }
         else if (Zspin > 170.5f && Zspin <= 193.5f)
         {
-            AddGive(3);
+
         }
         else if (Zspin > 193.5f && Zspin <= 217.5f)
         {
-            AddGive(4);
+
         }
         else if (Zspin > 217.5f && Zspin <= 242.5f)
         {
-            AddGive(1);
+
         }
         else if (Zspin > 242.5f && Zspin <= 266.5f)
         {
-            AddGive(2);
+
         }
         else if (Zspin > 266.5f && Zspin <= 290.5f)
         {
-            AddGive(3);
+
         }
         else if (Zspin > 290.5f && Zspin <= 315.5f)
         {
-            AddGive(4);
+
         }
         else if (Zspin > 315.5f && Zspin <= 340.5f)
         {
-            AddGive(1);
+
         }
         else if (Zspin > 340.5f && Zspin <= 364.5f)
         {
-            AddGive(2);
+
         }
     }
 
-    public void AddGive(double dollar)
+    public IEnumerator RewardSpin(int _type, float _value = 0)
     {
-        Debug.Log(dollar);
-        //int locationEnd = GameManager.Instance.lsLocation.Count - 1;
-        //int jobEnd = GameManager.Instance.lsLocation[locationEnd].countType;
-        //double dollarRecive = 0;
-        //if (GameManager.Instance.lsLocation.Count > 1)
-        //{
-        //    if (jobEnd == -1)
-        //    {
-        //        locationEnd--;
-        //        jobEnd = GameManager.Instance.lsLocation[locationEnd].countType;
-        //    }
-        //    dollarRecive = GameManager.Instance.lsLocation[locationEnd].lsWorking[jobEnd].price;
-        //}
-        //else
-        //{
-        //    if (jobEnd == -1)
-        //    {
-        //        dollarRecive = GameManager.Instance.lsLocation[0].lsWorking[0].price;
-        //    }
-        //    else
-        //    {
-        //        dollarRecive = GameManager.Instance.lsLocation[locationEnd].lsWorking[jobEnd].price;
-        //    }
-        //}
-        //StartCoroutine(IEOpenGive(dollar * dollarRecive / 2.5f));
+        UIManager.Instance.btnReceiveSpin.onClick.RemoveAllListeners();
+        yield return new WaitForSeconds(1f);
+        UIManager.Instance.SetActivePanel(UIManager.Instance.panelReceiveSpin);
+        switch (_type)
+        {
+            case 0:
+                goldReward = (long)(_value * GameManager.Instance.GOLD);
+                UIManager.Instance.receiveSpin_random.SetActive(false);
+                UIManager.Instance.receiveSpin_normal.SetActive(true);
+                UIManager.Instance.imgRewardSpin.sprite = UIManager.Instance.sprRewardSpin[_type];
+                UIManager.Instance.txtRewardSpin.text = UIManager.Instance.ToLongString(goldReward);
+                break;
+            case 1:
+                timeReward = (int)_value;
+                UIManager.Instance.receiveSpin_random.SetActive(false);
+                UIManager.Instance.receiveSpin_normal.SetActive(true);
+                UIManager.Instance.imgRewardSpin.sprite = UIManager.Instance.sprRewardSpin[_type];
+                UIManager.Instance.txtRewardSpin.text = "-" + UIManager.Instance.ConvertTime(timeReward * 3600);
+                break;
+            case 2:
+                coinReward = (int)_value;
+                UIManager.Instance.receiveSpin_random.SetActive(false);
+                UIManager.Instance.receiveSpin_normal.SetActive(true);
+                UIManager.Instance.imgRewardSpin.sprite = UIManager.Instance.sprRewardSpin[_type];
+                UIManager.Instance.txtRewardSpin.text = coinReward.ToString();
+                break;
+            case 3:
+                goldReward = (long)Random.Range(GameManager.Instance.GOLD * 0.05f, GameManager.Instance.GOLD * 0.15f);
+                coinReward = Random.Range(5, 50);
+                UIManager.Instance.receiveSpin_random.SetActive(true);
+                UIManager.Instance.receiveSpin_normal.SetActive(false);
+                UIManager.Instance.txtRewardSpin_randomCoin.text = coinReward.ToString();
+                UIManager.Instance.txtRewardSpin_randomGold.text = UIManager.Instance.ToLongString(goldReward);
+                break;
+            default:
+                break;
+        }
+        UIManager.Instance.btnReceiveSpin.onClick.AddListener(() => ReceiveSpin(_type));
+        UIManager.Instance.isSpinning = false;
     }
 
-    public IEnumerator IEOpenGive(double dollar)
+    public void ReceiveSpin(int _type)
     {
-        yield return new WaitForSeconds(1f);
-        //GameManager.Instance.dollar += dollar;
-        //UIManager.Instance.PushGiveGold("You have recived " + UIManager.Instance.ConvertNumber(dollar) + " dollar");
-        //if (GameManager.Instance.countSpin <= 0)
-        //{
-        //    UIManager.Instance.adsSpin.SetActive(true);
-        //    UIManager.Instance.bgSpin.color = new Color32(255, 255, 255, 128);
-        //}
-        UIManager.Instance.isSpinning = false;
-
+        switch (_type)
+        {
+            case 0:
+                GameManager.Instance.AddGold(goldReward);
+                break;
+            case 1:
+                this.PostEvent(EventID.SKIP_TIME, timeReward);
+                break;
+            case 2:
+                GameManager.Instance.AddCoin(coinReward);
+                break;
+            case 3:
+                GameManager.Instance.AddGold(goldReward);
+                GameManager.Instance.AddCoin(coinReward);
+                break;
+            default:
+                break;
+        }
+        UIManager.Instance.SetDeActivePanel(UIManager.Instance.panelReceiveSpin);
+        goldReward = coinReward = timeReward = 0;
     }
 
     public void CloseSpin()
