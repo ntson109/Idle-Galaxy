@@ -545,7 +545,7 @@ public class MineShaft : MonoBehaviour
                 {
                     product_Remain.SetActive(false);
                     product_Remain.transform.position = posProduct_Complete.position;
-                    mapParent.AddProduct(numberProduct_Remain, numberProduct_Remain * (long)this.properties.unitPrice);
+                    mapParent.AddProduct(numberProduct_Remain, (long)(numberProduct_Remain *this.properties.unitPrice));
                 });
                 //StartCoroutine(Product_Move_PushUp());
                 //StartCoroutine(Product_Move_Remain());
@@ -563,7 +563,7 @@ public class MineShaft : MonoBehaviour
             {
                 product_Remain.SetActive(false);
                 product_Remain.transform.position = posProduct_Complete.position;
-                mapParent.AddProduct(numberProduct_Remain, numberProduct_Remain * (long)this.properties.unitPrice);
+                mapParent.AddProduct(numberProduct_Remain, (long)(numberProduct_Remain * this.properties.unitPrice));
             });
             //StartCoroutine(Product_Move_Remain());
         }
@@ -629,7 +629,7 @@ public class MineShaft : MonoBehaviour
         yield return new WaitForEndOfFrame();
         product_Remain.SetActive(false);
         product_Remain.transform.position = posProduct_Complete.position;
-        mapParent.AddProduct(numberProduct_Remain, numberProduct_Remain * (long)this.properties.unitPrice);
+        mapParent.AddProduct(numberProduct_Remain, (long)(numberProduct_Remain * this.properties.unitPrice));
         //}
     }
 
@@ -686,10 +686,13 @@ public class MineShaft : MonoBehaviour
                 imgAI.SetActive(true);
                 break;
             case 1:
-                this.properties.miningTime /= 2;
+                this.properties.unitPrice *= 2;
                 break;
             case 2:
                 this.properties.unitPrice *= 2;
+                break;
+            case 3:
+                this.properties.capacity *= 2;
                 break;
             default:
                 break;

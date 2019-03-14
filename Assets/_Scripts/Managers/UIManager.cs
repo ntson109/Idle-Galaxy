@@ -413,16 +413,16 @@ public class UIManager : MonoBehaviour
     }
 
     #region === OFFLINE ===
+    public int timeOffline;
+    public long goldOffline;
+    int xOffline = 1;
+
     public void ShowPanelOffline()
     {
         SetActivePanel(panelOffline);
         txtTittleOffline.text = "You are offline: \n" + ConvertTime(timeOffline * 60);
         txtGoldOffline.text = ToLongString(goldOffline);
     }
-
-    public int timeOffline;
-    public long goldOffline;
-    int xOffline = 1;
     public void Btn_ReceiveOffline()
     {
         this.PostEvent(EventID.SKIP_TIME, timeOffline * 60);
@@ -466,7 +466,7 @@ public class UIManager : MonoBehaviour
 
     public void TestMoney()
     {
-        //GameManager.Instance.AddGold(10000000);
+        GameManager.Instance.AddGold(1000);
         GameManager.Instance.AddCoin(100);
     }
     #endregion
