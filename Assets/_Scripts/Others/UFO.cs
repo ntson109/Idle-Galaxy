@@ -56,7 +56,7 @@ public class UFO : MonoBehaviour
         {
             UIManager.Instance.SetActivePanel(UIManager.Instance.panelUFO_Gold);
             UIManager.Instance.SetDeActivePanel(UIManager.Instance.panelUFO_CoinVideo);
-            int a = Random.Range(100, 1000);
+            long a = (long)(Random.Range(GameConfig.Instance.UFO_rate_gold[0], GameConfig.Instance.UFO_rate_gold[1])* GameManager.Instance.GOLD);
             UIManager.Instance.txtGold_UFO.text = UIManager.Instance.ToLongString(a);
             btnOk.onClick.AddListener(() => Btn_OK(a, 0));
         }
@@ -64,7 +64,7 @@ public class UFO : MonoBehaviour
         {
             UIManager.Instance.SetActivePanel(UIManager.Instance.panelUFO_CoinVideo);
             UIManager.Instance.SetDeActivePanel(UIManager.Instance.panelUFO_Gold);
-            int a = Random.Range(1, 100);
+            int a = (int)(Random.Range(GameConfig.Instance.UFO_rate_coin[0], GameConfig.Instance.UFO_rate_coin[1]) * GameManager.Instance.COIN);
             UIManager.Instance.txtCoin_UFO.text = a.ToString();
             UIManager.Instance.imgRewardUFO.sprite = UIManager.Instance.lstSprReward[0];
             UIManager.Instance.txtReward_UFO.text = "Ad";
@@ -72,7 +72,7 @@ public class UFO : MonoBehaviour
         }
     }
 
-    public void Btn_OK(int _value, int _type)
+    public void Btn_OK(long _value, int _type)
     {
         if (_type == 0)
         {

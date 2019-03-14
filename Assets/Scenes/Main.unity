@@ -307,7 +307,6 @@ MonoBehaviour:
     unlockTime: 0
     speedMining: 0
     unlockCondition: 0
-    buyAI: 0
     upgradePrice: 0
     upgradeTime: 0
   numberMine: 0
@@ -4131,7 +4130,6 @@ MonoBehaviour:
     unlockTime: 0
     speedMining: 0
     unlockCondition: 0
-    buyAI: 0
     upgradePrice: 0
     upgradeTime: 0
   numberMine: 0
@@ -7493,7 +7491,6 @@ MonoBehaviour:
     unlockTime: 0
     speedMining: 0
     unlockCondition: 0
-    buyAI: 0
     upgradePrice: 0
     upgradeTime: 0
   numberMine: 0
@@ -8845,6 +8842,8 @@ MonoBehaviour:
   Capacity_3: 0
   UFO_speed: 0
   UFO_time: 0
+  UFO_rate_gold: []
+  UFO_rate_coin: []
   lstRewardSpin_Gold: []
   lstRewardSpin_Time: 
   lstRewardSpin_Coin: 
@@ -8893,6 +8892,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gold: 0
   coin: 0
+  freeGold1s: 0
   lstMap: []
   boost:
     type: 0
@@ -15583,7 +15583,6 @@ MonoBehaviour:
     unlockTime: 0
     speedMining: 0
     unlockCondition: 0
-    buyAI: 0
     upgradePrice: 0
     upgradeTime: 0
   numberMine: 0
@@ -36751,7 +36750,6 @@ MonoBehaviour:
     unlockTime: 0
     speedMining: 0
     unlockCondition: 0
-    buyAI: 0
     upgradePrice: 0
     upgradeTime: 0
   numberMine: 0
@@ -38496,7 +38494,6 @@ MonoBehaviour:
     unlockTime: 0
     speedMining: 0
     unlockCondition: 0
-    buyAI: 0
     upgradePrice: 0
     upgradeTime: 0
   numberMine: 0

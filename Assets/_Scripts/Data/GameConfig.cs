@@ -22,7 +22,7 @@ public class GameConfig : MonoBehaviour {
     {       
         public int ID;
         public string Name;
-        public long BuyAI;
+        //public long BuyAI;
         public int Unlock_condition;
         public int Unlock_time;
         public List<int> miningTime;
@@ -35,7 +35,7 @@ public class GameConfig : MonoBehaviour {
         public List<int> Upgrade_condition;
         public List<int> Productivity;
         public List<long> Upgrade_cost;
-        public List<int> Unit_Price;
+        public List<double> Unit_Price;
         public List<MineShaft.UpgradeSpecial> Upgrade_Special;
     }
 
@@ -64,6 +64,8 @@ public class GameConfig : MonoBehaviour {
     public float Capacity_3;
     public float UFO_speed;
     public int UFO_time;
+    public float[] UFO_rate_gold;
+    public float[] UFO_rate_coin;
     public List<float> lstRewardSpin_Gold = new List<float>();
     public List<int> lstRewardSpin_Time = new List<int>();
     public List<int> lstRewardSpin_Coin = new List<int>();

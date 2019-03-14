@@ -61,6 +61,12 @@ public class LoadDataJson : MonoBehaviour
             GameConfig.Instance.string_Share = objJson["string_Share"];
             GameConfig.Instance.UFO_speed = objJson["UFO_speed"].AsFloat;
             GameConfig.Instance.UFO_time = objJson["UFO_time"].AsInt;
+            GameConfig.Instance.UFO_rate_gold = new float[2];
+            GameConfig.Instance.UFO_rate_gold[0] = objJson["UFO_rate_Gold"][0].AsFloat;
+            GameConfig.Instance.UFO_rate_gold[1] = objJson["UFO_rate_Gold"][1].AsFloat;
+            GameConfig.Instance.UFO_rate_coin = new float[2];
+            GameConfig.Instance.UFO_rate_coin[0] = objJson["UFO_rate_Coin"][0].AsFloat;
+            GameConfig.Instance.UFO_rate_coin[1] = objJson["UFO_rate_Coin"][1].AsFloat;
             for (int i = 0; i < objJson["introduction"].Count; i++)
             {
                 GameConfig.Instance.lstIntroduction.Add(objJson["introduction"][i]);
@@ -72,7 +78,7 @@ public class LoadDataJson : MonoBehaviour
                     pM = new GameConfig.PropertiesMap();
                     pM.ID = i;
                     pM.Name = objJson["Map_Moon"][i]["Name"];
-                    pM.BuyAI = objJson["Map_Moon"][i]["BuyAI"].AsLong;
+                    //pM.BuyAI = objJson["Map_Moon"][i]["BuyAI"].AsLong;
                     pM.Unlock_condition = objJson["Map_Moon"][i]["Unlock_condition"].AsInt;
                     pM.Unlock_time = objJson["Map_Moon"][i]["Unlock_time"].AsInt * 60;
 
@@ -134,10 +140,10 @@ public class LoadDataJson : MonoBehaviour
                         pM.Upgrade_Special.Add(temp);
                     }
 
-                    pM.Unit_Price = new List<int>();
+                    pM.Unit_Price = new List<double>();
                     for (int k = 0; k < objJson["Map_Moon"][i]["Unit_Price"].Count; k++)
                     {
-                        pM.Unit_Price.Add(objJson["Map_Moon"][i]["Unit_Price"][k].AsInt);
+                        pM.Unit_Price.Add(objJson["Map_Moon"][i]["Unit_Price"][k].AsDouble);
                     }
                 }
                 GameConfig.Instance.lstPropertiesMap.Add(pM);

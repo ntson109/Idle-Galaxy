@@ -28,6 +28,9 @@ public class DataPlayer : MonoBehaviour
     public long coin;
 
     [HideInInspector]
+    public long freeGold1s;
+
+    [HideInInspector]
     public List<MapJSON> lstMap;
 
     [HideInInspector]
@@ -44,7 +47,7 @@ public class DataPlayer : MonoBehaviour
         DataPlayer data = new DataPlayer();
         data.gold = GameManager.Instance.GOLD;
         data.coin = GameManager.Instance.COIN;
-
+        data.freeGold1s = GetFreeGoldPerSecond();
         data.boost = new BoostJSON();
         if (GameManager.Instance.boost.type == TypeBoost.NONE)
         {
@@ -75,7 +78,7 @@ public class DataPlayer : MonoBehaviour
                 m.typeMap = 2;
             }
             m.totalAmount = GameManager.Instance.lstMap[i].totalAmount;
-            m.totalMoney = GameManager.Instance.lstMap[i].totalMoney;         
+            m.totalMoney = GameManager.Instance.lstMap[i].totalMoney;
             m.transporter.level = GameManager.Instance.lstMap[i].transporter.level;
             m.transporter.capacity = GameManager.Instance.lstMap[i].transporter.capacity;
             data.lstMap.Add(m);
@@ -83,7 +86,7 @@ public class DataPlayer : MonoBehaviour
 
         data.lsMineShaft = new List<MineShaftJSON>();
         for (int i = 0; i < GameManager.Instance.lstMap.Count; i++)
-        {            
+        {
             for (int j = 0; j < GameManager.Instance.lstMap[i].lstMineShaft.Count; j++)
             {
                 MineShaftJSON m = new MineShaftJSON();
@@ -259,10 +262,26 @@ public class DataPlayer : MonoBehaviour
 
         yield return new WaitForEndOfFrame();
         ScenesManager.Instance.isNextScene = true;
-        this.PostEvent(EventID.START_GAME);        
+        this.PostEvent(EventID.START_GAME);
         UIManager.Instance.timeOffline = UIManager.Instance.GetOfflineTime(PlayerPrefs.GetString(KeyPrefs.TIME_QUIT_GAME));
-        UIManager.Instance.goldOffline = UnityEngine.Random.Range(100, 500);
+        UIManager.Instance.goldOffline = objJson["freeGold1s"].AsLong * UIManager.Instance.timeOffline;
         UIManager.Instance.ShowPanelOffline();
+    }
+
+    long GetFreeGoldPerSecond()
+    {
+        long _gold = 0;
+        for (int i = 0; i < GameManager.Instance.lstMap.Count; i++)
+        {
+            for (int j = 0; j < GameManager.Instance.lstMap[i].lstMineShaft.Count; j++)
+            {
+                if (GameManager.Instance.lstMap[i].lstMineShaft[j].state != MineShaft.StateMineShaft.LOCK && GameManager.Instance.lstMap[i].lstMineShaft[j].state != MineShaft.StateMineShaft.UNLOCKING)
+                {
+                    _gold += (long)(((GameManager.Instance.lstMap[i].lstMineShaft[j].numberMine * GameManager.Instance.lstMap[i].lstMineShaft[j].properties.capacity) / GameManager.Instance.lstMap[i].lstMineShaft[j].properties.miningTime) * GameManager.Instance.lstMap[i].lstMineShaft[j].properties.unitPrice);
+                }
+            }
+        }
+        return _gold;
     }
 
     private void OnDestroy()

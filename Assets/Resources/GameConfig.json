@@ -34,6 +34,14 @@
 	]
   },
   "UFO_speed" : 4,
+  "UFO_rate_Gold" : [
+	1,
+	10
+  ],
+  "UFO_rate_Coin" : [
+	1,
+	10
+  ],
   "UFO_time" : 60,
   "Transporter" : {
 	"NameTransport" : "The Flash",
@@ -52,7 +60,6 @@
   "Map_Moon" : {
 	"M_1" : {
 		"Name" : "Machine1",
-		"BuyAI" : 200,
 		"Unlock_condition" : 0,
 		"Unlock_time" : 0,
 		"Unlock_cost" : [
@@ -150,12 +157,11 @@
 	},
 	"M_2" :{
 		"Name" : "Machine2",
-		"BuyAI" : 200,
 		"Unlock_condition" : 0,
 		"Unlock_time" : 5,
 		"Unlock_cost" : [
-			10,
-			500
+			20,
+			5000000
 		],
 		"Unlock_reward" : {
 			"timex2" : 60
@@ -247,12 +253,11 @@
 	},
 	"M_3" :{
 		"Name" : "Machine3",
-		"BuyAI" : 200,
 		"Unlock_condition" : 0,
 		"Unlock_time" : 10,
 		"Unlock_cost" : [
 			20,
-			500
+			5000000
 		],
 		"Unlock_reward" : {
 			"timex2" : 60
@@ -344,12 +349,11 @@
 	},
 	"M_4" :{
 		"Name" : "Machine4",
-		"BuyAI" : 200,
 		"Unlock_condition" : 0,
 		"Unlock_time" : 20,
 		"Unlock_cost" : [
-			100,
-			500
+			40,
+			500000000
 		],
 		"Unlock_reward" : {
 			"timex2" : 60
@@ -367,12 +371,12 @@
 			60
 		],
 		"Upgrade_time" : [
-			10,
-			13,
-			16,
+			15,
 			19,
-			21,
-			23
+			23,
+			27,
+			31,
+			34
 		],
 		"Upgrade_condition" : [
 			5,
@@ -430,23 +434,22 @@
 			}
 		},
 		"Unit_Price" : [
-			20000,
-			20000,
-			20000,
-			50000,
-			50000,
-			100000,
-			100000
+			200000,
+			200000,
+			200000,
+			200000,
+			200000,
+			200000,
+			200000
 		]
 	},
 	"M_5" :{
 		"Name" : "Machine5",
-		"BuyAI" : 200,
 		"Unlock_condition" : 0,
 		"Unlock_time" : 30,
 		"Unlock_cost" : [
-			100,
-			500
+			70,
+			5000000000
 		],
 		"Unlock_reward" : {
 			"timex2" : 60
@@ -455,29 +458,29 @@
 		"MoreMine_cost_2" : 100,
 		"MoreMine_cost_3" : 1.09,
 		"miningTime" : [
+			3600,
+			3000,
+			2400,
+			1800,
+			1200,
 			600,
-			600,
-			300,
-			300,
-			120,
-			60,
-			60
+			300
 		],
 		"Upgrade_time" : [
-			10,
-			13,
-			16,
-			19,
-			21,
-			23
+			20,
+			25,
+			30,
+			35,
+			40,
+			45
 		],
 		"Upgrade_condition" : [
+			5,
 			10,
+			15,
 			20,
-			50,
-			100,
-			200,
-			500
+			30,
+			40
 		],
 		"Upgrade_cost" : [
 			10,
@@ -488,55 +491,61 @@
 			500
 		],
 		"Productivity" : [
-			600,
-			700,
-			800,
-			900,
-			1000,
-			1100,
-			1200
+			10,
+			15,
+			20,
+			25,
+			30,
+			35,
+			40
 		],
 		"Upgrade_Special" : {
 			"1" : {
 				"name" : "AI Control",
 				"description" : "Automate work",
-				"price" : 100,
-				"time" : 1,
+				"price" : 500000000,
+				"time" : 5,
 				"coinMax" : 10
 			},
 			"2" : {
 				"name" : "ThermalSoftenning Tech",
-				"description" : "/2 time",
-				"price" : 100,
-				"time" : 10,
+				"description" : "x2 price",
+				"price" : 5000000000,
+				"time" : 25,
 				"coinMax" : 10
 			},
 			"3" : {
-				"name" : "Nuclear enriching Tech",
+				"name" : "Up 3",
 				"description" : "x2 price",
-				"price" : 100,
-				"time" : 10,
+				"price" : 10000000000,
+				"time" : 30,
+				"coinMax" : 10
+			},
+			"4" : {
+				"name" : "Nuclear enriching Tech",
+				"description" : "x2 productivity",
+				"price" : 20000000000,
+				"time" : 35,
 				"coinMax" : 10
 			}
 		},
 		"Unit_Price" : [
-			1000000,
-			1000000,
-			1000000,
-			2000000,
-			2000000,
-			5000000,
-			5000000
+			200000000,
+			200000000,
+			200000000,
+			200000000,
+			200000000,
+			200000000,
+			200000000
 		]
 	},
 	"M_6" :{
 		"Name" : "Machine6",
-		"BuyAI" : 200,
 		"Unlock_condition" : 0,
 		"Unlock_time" : 60,
 		"Unlock_cost" : [
 			100,
-			500
+			5000000000
 		],
 		"Unlock_reward" : {
 			"timex2" : 60
@@ -545,13 +554,13 @@
 		"MoreMine_cost_2" : 1000,
 		"MoreMine_cost_3" : 1.1,
 		"miningTime" : [
-			1500,
-			1200,
-			600,
-			600,
-			300,
-			300,
-			120
+			7200,
+			5400,
+			3600,
+			3000,
+			2400,
+			1800,
+			1200
 		],
 		"Upgrade_time" : [
 			10,
@@ -562,12 +571,12 @@
 			23
 		],
 		"Upgrade_condition" : [
+			5,
 			10,
+			15,
 			20,
-			50,
-			100,
-			200,
-			500
+			25,
+			30
 		],
 		"Upgrade_cost" : [
 			10,
@@ -578,45 +587,52 @@
 			500
 		],
 		"Productivity" : [
-			1500,
-			1700,
-			1900,
-			2100,
-			2300,
-			2600,
-			3000
+			1,
+			2,
+			3,
+			4,
+			5,
+			6,
+			7
 		],
 		"Upgrade_Special" : {
 			"1" : {
 				"name" : "AI Control",
 				"description" : "Automate work",
-				"price" : 100,
-				"time" : 1,
+				"price" : 50000000000,
+				"time" : 6,
 				"coinMax" : 10
 			},
 			"2" : {
 				"name" : "ThermalSoftenning Tech",
-				"description" : "/2 time",
-				"price" : 100,
-				"time" : 10,
+				"description" : "x2 price",
+				"price" : 50000000000,
+				"time" : 30,
 				"coinMax" : 10
 			},
 			"3" : {
 				"name" : "Nuclear enriching Tech",
 				"description" : "x2 price",
-				"price" : 100,
-				"time" : 10,
+				"price" : 500000000000,
+				"time" : 35,
+				"coinMax" : 10
+			},
+			"4" : {
+				"name" : "Nuclear enriching Tech",
+				"description" : "x2 productivity",
+				"price" : 1000000000000,
+				"time" : 40,
 				"coinMax" : 10
 			}
 		},
 		"Unit_Price" : [
-			50000000,
-			50000000,
-			50000000,
-			100000000,
-			100000000,
-			200000000,
-			200000000
+			20000000000,
+			20000000000,
+			20000000000,
+			20000000000,
+			20000000000,
+			20000000000,
+			20000000000
 		]
   }
 }
