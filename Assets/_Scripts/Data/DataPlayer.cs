@@ -265,6 +265,8 @@ public class DataPlayer : MonoBehaviour
         this.PostEvent(EventID.START_GAME);
         UIManager.Instance.timeOffline = UIManager.Instance.GetOfflineTime(PlayerPrefs.GetString(KeyPrefs.TIME_QUIT_GAME));
         UIManager.Instance.goldOffline = objJson["freeGold1s"].AsLong * UIManager.Instance.timeOffline * 60;
+        if (UIManager.Instance.goldOffline < 100)
+            UIManager.Instance.goldOffline = 100;
         UIManager.Instance.ShowPanelOffline();
     }
 
