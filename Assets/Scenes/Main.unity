@@ -343,7 +343,7 @@ MonoBehaviour:
   btnWork: {fileID: 1417249286}
   btnUpgrade: {fileID: 1919934479}
   btnBuyMoreMine: {fileID: 684110148}
-  btnX: {fileID: 684110149}
+  btnX: {fileID: 1682446087}
   btnUnlock_byGold: {fileID: 758917261}
   txtUnlock_byGold: {fileID: 985326287}
   btnUnlock_byCoin: {fileID: 221134268}
@@ -7527,7 +7527,7 @@ MonoBehaviour:
   btnWork: {fileID: 881903880}
   btnUpgrade: {fileID: 690489871}
   btnBuyMoreMine: {fileID: 1341588292}
-  btnX: {fileID: 1341588293}
+  btnX: {fileID: 1733431383}
   btnUnlock_byGold: {fileID: 33681148}
   txtUnlock_byGold: {fileID: 246103988}
   btnUnlock_byCoin: {fileID: 999745951}
