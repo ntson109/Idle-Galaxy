@@ -82,10 +82,10 @@
 		"MoreMine_cost_3" : 1.05,
 		"Upgrade_time" : [
 			1,
-			2,
-			3,
-			4,
-			5
+			8,
+			21,
+			40,
+			65
 		],
 		"Upgrade_condition" : [
 			20,
@@ -95,12 +95,12 @@
 			500
 		],
 		"Upgrade_cost" : [
-			10,
-			20,
-			50,
 			100,
-			200,
-			500
+			100,
+			100,
+			100,
+			100,
+			100
 		],
 		"Productivity" : [
 			2,
@@ -114,28 +114,28 @@
 			"1" : {
 				"name" : "AI Control",
 				"description" : "Automate work",
-				"price" : 50,
+				"price" : 100,
 				"time" : 1,
 				"coinMax" : 10
 			},
 			"2" : {
 				"name" : "Laser drilling Tech",
 				"description" : "x2 price",
-				"price" : 500,
+				"price" : 100,
 				"time" : 5,
 				"coinMax" : 10
 			},
 			"3" : {
 				"name" : "Up 3",
 				"description" : "x2 price",
-				"price" : 5000,
+				"price" : 100,
 				"time" : 10,
 				"coinMax" : 10
 			},
 			"4" : {
 				"name" : "Explore System",
 				"description" : "x2 productivity",
-				"price" : 50000,
+				"price" : 100,
 				"time" : 15,
 				"coinMax" : 10
 			}
@@ -173,12 +173,11 @@
 			1
 		],
 		"Upgrade_time" : [
-			5,
-			7,
-			3,
-			11,
-			13,
-			15
+			2,
+			10,
+			24,
+			44,
+			70
 		],
 		"Upgrade_condition" : [
 			10,
@@ -189,12 +188,12 @@
 			400
 		],
 		"Upgrade_cost" : [
-			10,
-			20,
-			50,
 			100,
-			200,
-			500
+			100,
+			100,
+			100,
+			100,
+			100
 		],
 		"Productivity" : [
 			5,
@@ -208,28 +207,28 @@
 			"1" : {
 				"name" : "AI Control",
 				"description" : "Automate work",
-				"price" : 500,
+				"price" : 100,
 				"time" : 2,
 				"coinMax" : 10
 			},
 			"2" : {
 				"name" : "ThermalSoftenning Tech",
 				"description" : "x2 price",
-				"price" : 5000,
+				"price" : 100,
 				"time" : 10,
 				"coinMax" : 10
 			},
 			"3" : {
 				"name" : "Up 3",
 				"description" : "x2 price",
-				"price" : 50000,
+				"price" : 100,
 				"time" : 15,
 				"coinMax" : 10
 			},
 			"4" : {
 				"name" : "Nuclear enriching Tech",
 				"description" : "x2 productivity",
-				"price" : 500000,
+				"price" : 100,
 				"time" : 20,
 				"coinMax" : 10
 			}
@@ -266,12 +265,11 @@
 			5
 		],
 		"Upgrade_time" : [
-			10,
-			13,
-			16,
-			19,
-			21,
-			23
+			3,
+			12,
+			27,
+			48,
+			75
 		],
 		"Upgrade_condition" : [
 			10,
@@ -282,12 +280,12 @@
 			300
 		],
 		"Upgrade_cost" : [
-			10,
-			20,
-			50,
 			100,
-			200,
-			500
+			100,
+			100,
+			100,
+			100,
+			100
 		],
 		"Productivity" : [
 			40,
@@ -301,21 +299,21 @@
 			"1" : {
 				"name" : "AI Control",
 				"description" : "Automate work",
-				"price" : 50000,
+				"price" : 100,
 				"time" : 3,
 				"coinMax" : 10
 			},
 			"2" : {
 				"name" : "ThermalSoftenning Tech",
 				"description" : "x2 price",
-				"price" :500000,
+				"price" :100,
 				"time" : 15,
 				"coinMax" : 10
 			},
 			"3" : {
 				"name" : "Up 3",
 				"description" : "x2 price",
-				"price" : 5000000,
+				"price" : 100,
 				"time" : 20,
 				"coinMax" : 10
 			},
@@ -323,7 +321,7 @@
 				"name" : "Nuclear enriching Tech",
 				"description" : "x2 productivity",
 				"price" : 100,
-				"time" : 50000000,
+				"time" : 25,
 				"coinMax" : 10
 			}
 		},
@@ -367,20 +365,19 @@
 			34
 		],
 		"Upgrade_condition" : [
-			10,
-			20,
-			50,
-			100,
-			150,
-			200
+			4,
+			14,
+			30,
+			52,
+			80
 		],
 		"Upgrade_cost" : [
-			10,
-			20,
-			50,
 			100,
-			200,
-			500
+			100,
+			100,
+			100,
+			100,
+			100
 		],
 		"Productivity" : [
 			100,
@@ -394,28 +391,28 @@
 			"1" : {
 				"name" : "AI Control",
 				"description" : "Automate work",
-				"price" : 5000000,
+				"price" : 100,
 				"time" : 4,
 				"coinMax" : 10
 			},
 			"2" : {
 				"name" : "ThermalSoftenning Tech",
 				"description" : "x2 price",
-				"price" : 50000000,
+				"price" : 100,
 				"time" : 20,
 				"coinMax" : 10
 			},
 			"3" : {
 				"name" : "Nuclear enriching Tech",
 				"description" : "x2 price",
-				"price" : 500000000,
+				"price" : 100,
 				"time" : 25,
 				"coinMax" : 10
 			},
 			"4" : {
 				"name" : "Nuclear enriching Tech",
 				"description" : "x2 productivity",
-				"price" : 5000000000,
+				"price" : 100,
 				"time" : 30,
 				"coinMax" : 10
 			}
@@ -452,12 +449,11 @@
 			30
 		],
 		"Upgrade_time" : [
-			20,
-			25,
-			30,
-			35,
-			40,
-			45
+			5,
+			16,
+			33,
+			56,
+			85
 		],
 		"Upgrade_condition" : [
 			5,
@@ -468,12 +464,12 @@
 			100
 		],
 		"Upgrade_cost" : [
-			10,
-			20,
-			50,
 			100,
-			200,
-			500
+			100,
+			100,
+			100,
+			100,
+			100
 		],
 		"Productivity" : [
 			600,
@@ -487,28 +483,28 @@
 			"1" : {
 				"name" : "AI Control",
 				"description" : "Automate work",
-				"price" : 500000000,
+				"price" : 100,
 				"time" : 5,
 				"coinMax" : 10
 			},
 			"2" : {
 				"name" : "ThermalSoftenning Tech",
 				"description" : "x2 price",
-				"price" : 5000000000,
+				"price" : 100,
 				"time" : 25,
 				"coinMax" : 10
 			},
 			"3" : {
 				"name" : "Up 3",
 				"description" : "x2 price",
-				"price" : 10000000000,
+				"price" : 100,
 				"time" : 30,
 				"coinMax" : 10
 			},
 			"4" : {
 				"name" : "Nuclear enriching Tech",
 				"description" : "x2 productivity",
-				"price" : 20000000000,
+				"price" : 100,
 				"time" : 35,
 				"coinMax" : 10
 			}
@@ -545,12 +541,11 @@
 			60
 		],
 		"Upgrade_time" : [
-			10,
-			13,
-			16,
-			19,
-			21,
-			23
+			6,
+			18,
+			36,
+			60,
+			90
 		],
 		"Upgrade_condition" : [
 			5,
@@ -561,12 +556,12 @@
 			50
 		],
 		"Upgrade_cost" : [
-			10,
-			20,
-			50,
 			100,
-			200,
-			500
+			100,
+			100,
+			100,
+			100,
+			100
 		],
 		"Productivity" : [
 			2400,
@@ -580,28 +575,28 @@
 			"1" : {
 				"name" : "AI Control",
 				"description" : "Automate work",
-				"price" : 50000000000,
+				"price" : 100,
 				"time" : 6,
 				"coinMax" : 10
 			},
 			"2" : {
 				"name" : "ThermalSoftenning Tech",
 				"description" : "x2 price",
-				"price" : 50000000000,
+				"price" : 100,
 				"time" : 30,
 				"coinMax" : 10
 			},
 			"3" : {
 				"name" : "Nuclear enriching Tech",
 				"description" : "x2 price",
-				"price" : 500000000000,
+				"price" : 100,
 				"time" : 35,
 				"coinMax" : 10
 			},
 			"4" : {
 				"name" : "Nuclear enriching Tech",
 				"description" : "x2 productivity",
-				"price" : 1000000000000,
+				"price" : 100,
 				"time" : 40,
 				"coinMax" : 10
 			}
