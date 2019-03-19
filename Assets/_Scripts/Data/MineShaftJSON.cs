@@ -23,6 +23,8 @@ public class MineShaftJSON
 
     public int state;
 
+    public int input;
+
     public List<float> timeUpgradeSpecial;
 
     public List<int> stateUpgradeSpecial;

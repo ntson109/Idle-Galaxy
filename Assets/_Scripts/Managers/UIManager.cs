@@ -19,6 +19,7 @@ public class UIManager : MonoBehaviour
     public Text txtCoin;
 
     [Header("UI MAIN")]
+    public Button btnContinue;
     public GameObject panelShowUpgrade;
     public GameObject panelCoinAds;
     public Text txtCoin_panelCoinAds;
@@ -88,6 +89,15 @@ public class UIManager : MonoBehaviour
             {
                 arrAlphabetNeed.Add(arrAlphabet[i] + arrAlphabet[j]);
             }
+        }
+
+        if (PlayerPrefs.GetInt(KeyPrefs.IS_CONTINUE) == 1)
+        {
+            btnContinue.interactable = true;
+        }
+        else
+        {
+            btnContinue.interactable = false;
         }
     }
 
@@ -466,7 +476,7 @@ public class UIManager : MonoBehaviour
 
     public void TestMoney()
     {
-        //GameManager.Instance.AddGold(10000000000);
+        GameManager.Instance.AddGold(100000);
         GameManager.Instance.AddCoin(100);
     }
     #endregion

@@ -29341,7 +29341,7 @@ GameObject:
   - component: {fileID: 1385774770}
   - component: {fileID: 1385774769}
   m_Layer: 5
-  m_Name: Remain
+  m_Name: PushUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31689,7 +31689,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -344}
-  m_SizeDelta: {x: 300, y: 300}
+  m_SizeDelta: {x: 418, y: 156}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1523022420
 MonoBehaviour:
@@ -31762,7 +31762,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 91857adec8ebd4041aafd13e70deca34, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fdb8fee7c76bbaa48868b27a2ef943e0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -34732,7 +34732,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 300, y: 300}
+  m_SizeDelta: {x: 474, y: 323}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1664691104
 MonoBehaviour:
@@ -34805,7 +34805,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 91857adec8ebd4041aafd13e70deca34, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9bedc38c40ace5449b76318673e96831, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -38543,9 +38543,9 @@ MonoBehaviour:
   product_Complete: {fileID: 636795143}
   txtProduct_Complete: {fileID: 1483064598}
   product_PushUp: {fileID: 2091920276}
-  txtProduct_PushUp: {fileID: 1966862422}
+  txtProduct_PushUp: {fileID: 1385774769}
   product_Remain: {fileID: 1086871627}
-  txtProduct_Remain: {fileID: 1385774769}
+  txtProduct_Remain: {fileID: 1966862422}
   workAnim: {fileID: 1337654044}
   pushAnim: {fileID: 1457547734}
   imgWorkBar: {fileID: 111029894}
@@ -42231,7 +42231,7 @@ GameObject:
   - component: {fileID: 1966862423}
   - component: {fileID: 1966862422}
   m_Layer: 5
-  m_Name: PushUp
+  m_Name: Remain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

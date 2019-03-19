@@ -179,7 +179,7 @@ public class MineShaft : MonoBehaviour
 
             if (isAutoWorking && this.state == StateMineShaft.IDLE && this.input > 0)
             {
-                StartCoroutine(Work());
+                LetWork();
                 btnWork.gameObject.SetActive(false);
             }
 
@@ -268,7 +268,7 @@ public class MineShaft : MonoBehaviour
             UIManager.Instance.SetDeActivePanel(panelUnlock);
         }
 
-        if(isAutoWorking)
+        if (isAutoWorking)
         {
             imgAI.SetActive(true);
         }
@@ -464,11 +464,19 @@ public class MineShaft : MonoBehaviour
     }
 
     #region === WORK ===
+
+    public void LetWork()
+    {
+        StartCoroutine(Work());
+    }
     public IEnumerator Work()
     {
         state = StateMineShaft.WORKING;
         isCanWork = false;
-        timer = this.properties.miningTime;
+        if (timer == 0)
+        {
+            timer = this.properties.miningTime;
+        }
         if (workAnim != null)
             workAnim.enabled = true;
         if (timer >= 1)
@@ -545,7 +553,7 @@ public class MineShaft : MonoBehaviour
                 {
                     product_Remain.SetActive(false);
                     product_Remain.transform.position = posProduct_Complete.position;
-                    mapParent.AddProduct(numberProduct_Remain, (long)(numberProduct_Remain *this.properties.unitPrice));
+                    mapParent.AddProduct(numberProduct_Remain, (long)(numberProduct_Remain * this.properties.unitPrice));
                 });
                 //StartCoroutine(Product_Move_PushUp());
                 //StartCoroutine(Product_Move_Remain());
@@ -647,7 +655,7 @@ public class MineShaft : MonoBehaviour
         if (state == StateMineShaft.LOCK)
             return;
 
-        StartCoroutine(Work());
+        LetWork();
     }
 
     #endregion
@@ -799,7 +807,7 @@ public class MineShaft : MonoBehaviour
     }
     #endregion
 
-    #region === UNLOCK ===   
+    #region === UNLOCK ===
     public void Btn_Unlock(TypeUnlock _type)
     {
         //diễn anim unlock

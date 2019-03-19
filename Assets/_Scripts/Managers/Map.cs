@@ -39,6 +39,17 @@ public class Map : MonoBehaviour
         {
             this.transporter.SetInfo(1, GameConfig.Instance.Capacity_1, 5);           
         }
+        else
+        {
+            for (int i = 0; i < lstMineShaft.Count; i++)
+            {
+                if (lstMineShaft[i].state == MineShaft.StateMineShaft.WORKING)
+                {
+                    lstMineShaft[i].LetWork();
+                    lstMineShaft[i].imgWorkBar.fillAmount = (float)lstMineShaft[i].timer / (float)lstMineShaft[i].properties.miningTime;
+                }
+            }
+        }
 
         scrollbarVertical.value = 0;
     }

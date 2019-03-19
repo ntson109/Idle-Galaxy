@@ -105,6 +105,7 @@ public class DataPlayer : MonoBehaviour
                 m.buyMoreMinePrice = GameManager.Instance.lstMap[i].lstMineShaft[j].properties.buyMoreMinePrice;
                 m.miningTime = GameManager.Instance.lstMap[i].lstMineShaft[j].properties.miningTime;
                 m.capacity = GameManager.Instance.lstMap[i].lstMineShaft[j].properties.capacity;
+                m.input = GameManager.Instance.lstMap[i].lstMineShaft[j].input;
                 if (GameManager.Instance.lstMap[i].lstMineShaft[j].state == MineShaft.StateMineShaft.LOCK)
                 {
                     m.state = 1;
@@ -221,7 +222,7 @@ public class DataPlayer : MonoBehaviour
                 GameManager.Instance.lstMap[0].lstMineShaft[i].properties.buyMoreMinePrice = objJson["lsMineShaft"][i]["buyMoreMinePrice"].AsLong;
                 GameManager.Instance.lstMap[0].lstMineShaft[i].properties.capacity = objJson["lsMineShaft"][i]["capacity"].AsInt;
                 GameManager.Instance.lstMap[0].lstMineShaft[i].properties.miningTime = objJson["lsMineShaft"][i]["miningTime"].AsInt;
-
+                GameManager.Instance.lstMap[0].lstMineShaft[i].input = objJson["lsMineShaft"][i]["input"].AsInt;
                 if (objJson["lsMineShaft"][i]["state"].AsInt == 1)
                     GameManager.Instance.lstMap[0].lstMineShaft[i].state = MineShaft.StateMineShaft.LOCK;
                 else if (objJson["lsMineShaft"][i]["state"].AsInt == 2)
