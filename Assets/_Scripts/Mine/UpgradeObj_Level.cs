@@ -50,7 +50,7 @@ public class UpgradeObj_Level : MonoBehaviour
     {
         thisMineShaft = _mine;
         type = _type;
-        if (thisMineShaft.properties.level < 7)
+        if (thisMineShaft.properties.level < 6)
         {
             if (thisMineShaft.numberMine >= GameConfig.Instance.lstPropertiesMap[thisMineShaft.ID].Upgrade_condition[thisMineShaft.properties.level - 1])
             {

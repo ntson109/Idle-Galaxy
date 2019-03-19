@@ -191,8 +191,9 @@ public class DataPlayer : MonoBehaviour
             }
             GameManager.Instance.lstMap[i].totalAmount = objJson["lstMap"][i]["totalAmount"].AsLong;
             GameManager.Instance.lstMap[i].totalMoney = objJson["lstMap"][i]["totalMoney"].AsLong;
-            GameManager.Instance.lstMap[i].transporter.level = objJson["lstMap"][i]["transporter"]["level"].AsInt;
-            GameManager.Instance.lstMap[i].transporter.capacity = objJson["lstMap"][i]["transporter"]["capacity"].AsLong;
+            //GameManager.Instance.lstMap[i].transporter.level = objJson["lstMap"][i]["transporter"]["level"].AsInt;
+            //GameManager.Instance.lstMap[i].transporter.capacity = objJson["lstMap"][i]["transporter"]["capacity"].AsLong;
+            GameManager.Instance.lstMap[i].transporter.SetInfo(objJson["lstMap"][i]["transporter"]["level"].AsInt, objJson["lstMap"][i]["transporter"]["capacity"].AsLong, 5);
         }
 
         if (objJson["boost"]["type"] == 1)

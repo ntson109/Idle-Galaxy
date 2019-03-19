@@ -45,7 +45,10 @@ public class Map : MonoBehaviour
             {
                 if (lstMineShaft[i].state == MineShaft.StateMineShaft.WORKING)
                 {
-                    lstMineShaft[i].LetWork();
+                    if (i != 0)
+                    {
+                        lstMineShaft[i].LetWork();
+                    }                    
                     lstMineShaft[i].imgWorkBar.fillAmount = (float)lstMineShaft[i].timer / (float)lstMineShaft[i].properties.miningTime;
                 }
             }
