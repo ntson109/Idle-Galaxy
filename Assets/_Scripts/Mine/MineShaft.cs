@@ -52,16 +52,6 @@ public class MineShaft : MonoBehaviour
         ADS
     }
 
-    //[Serializable]
-    //public enum TypeProduct
-    //{
-    //    GOLD,
-    //    SP1,
-    //    SP2,
-    //    SP3,
-    //    SP4
-    //}
-
     [Serializable]
     public enum StateMineShaft
     {
@@ -71,13 +61,6 @@ public class MineShaft : MonoBehaviour
         UPGRADING,
         WORKING
     }
-
-    //[Serializable]
-    //public struct Product
-    //{
-    //    public TypeProduct type;
-    //    public long amount;
-    //}
 
     [Serializable]
     public struct UpgradeSpecial
@@ -115,7 +98,6 @@ public class MineShaft : MonoBehaviour
     public int timer = 0; //thời gian đang chạy tiến trình Work
     public RectTransform posProduct_Remain;
     public RectTransform posProduct_PushUp;
-    //public RectTransform posProduct_PushUp_1;
     public RectTransform posProduct_Complete;
     public RectTransform posProduct_Complete_1;
     public Map mapParent;
@@ -260,6 +242,17 @@ public class MineShaft : MonoBehaviour
         {
             UIManager.Instance.SetActivePanel(panelUnlock_Condition);
             txtUnlock_Condition.text = "Need: unlock pre house !";
+
+            if (ID >= 1 && mapParent.lstMineShaft[ID - 1].state != StateMineShaft.LOCK && mapParent.lstMineShaft[ID - 1].state != StateMineShaft.UNLOCKING)
+            {
+                UIManager.Instance.SetDeActivePanel(panelUnlock_Condition);
+            }
+
+            if (ID == 1)
+            {
+                UIManager.Instance.SetDeActivePanel(panelUnlock_Condition);
+                UIManager.Instance.SetActivePanel(panelUnlock);
+            }
         }
 
         if (this.state != StateMineShaft.LOCK)

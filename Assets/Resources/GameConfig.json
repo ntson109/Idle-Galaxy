@@ -108,7 +108,7 @@
 			4,
 			4,
 			8,
-			8
+			16
 		],
 		"Upgrade_Special" : {
 			"1" : {
@@ -357,19 +357,18 @@
 			10
 		],
 		"Upgrade_time" : [
-			15,
-			19,
-			23,
-			27,
-			31,
-			34
-		],
-		"Upgrade_condition" : [
 			4,
 			14,
 			30,
 			52,
 			80
+		],
+		"Upgrade_condition" : [
+			20,
+			50,
+			100,
+			150,
+			200
 		],
 		"Upgrade_cost" : [
 			100,
@@ -456,7 +455,6 @@
 			85
 		],
 		"Upgrade_condition" : [
-			5,
 			10,
 			20,
 			30,
@@ -549,7 +547,6 @@
 		],
 		"Upgrade_condition" : [
 			5,
-			5,
 			10,
 			20,
 			30,
@@ -609,5 +606,15 @@
 			1000000,
 			1000000
 		]
+  },
+  "Map_Earth" : {
+	"E_1" : {
+		"Name" : "Ship 1",
+		"Unlock_time" : 10,
+		"Unlock_cost" : [
+			20,
+			5000000
+		],
+	}
   }
 }

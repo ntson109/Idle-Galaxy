@@ -51,6 +51,11 @@ public class Map : MonoBehaviour
                     }                    
                     lstMineShaft[i].imgWorkBar.fillAmount = (float)lstMineShaft[i].timer / (float)lstMineShaft[i].properties.miningTime;
                 }
+
+                if (lstMineShaft[i].state != MineShaft.StateMineShaft.LOCK && lstMineShaft[i].state != MineShaft.StateMineShaft.UNLOCKING)
+                {
+                    CheckUnlock(i);
+                }
             }
         }
 
