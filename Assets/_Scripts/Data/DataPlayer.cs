@@ -46,7 +46,8 @@ public class DataPlayer : MonoBehaviour
         DataPlayer data = new DataPlayer();
         data.gold = GameManager.Instance.GOLD;
         data.coin = GameManager.Instance.COIN;
-        data.freeGold1s = GetFreeGoldPerSecond();
+        //data.freeGold1s = GetFreeGoldPerSecond();
+        PlayerPrefs.SetString(KeyPrefs.GOLD_OFFLINE, GetFreeGoldPerSecond().ToString());
         data.boost = new BoostJSON();
         if (GameManager.Instance.boost.type == TypeBoost.NONE)
         {
@@ -258,7 +259,8 @@ public class DataPlayer : MonoBehaviour
         ScenesManager.Instance.isNextScene = true;
         this.PostEvent(EventID.START_GAME);
         UIManager.Instance.timeOffline = UIManager.Instance.GetOfflineTime(PlayerPrefs.GetString(KeyPrefs.TIME_QUIT_GAME));
-        UIManager.Instance.goldOffline = objJson["freeGold1s"].AsLong * UIManager.Instance.timeOffline * 60;
+        //UIManager.Instance.goldOffline = objJson["freeGold1s"].AsLong * UIManager.Instance.timeOffline * 60;
+        UIManager.Instance.goldOffline = long.Parse(PlayerPrefs.GetString(KeyPrefs.GOLD_OFFLINE)) * UIManager.Instance.timeOffline * 60;
         if (UIManager.Instance.goldOffline < 100)
             UIManager.Instance.goldOffline = 100;
         UIManager.Instance.ShowPanelOffline();
@@ -301,11 +303,17 @@ public class DataPlayer : MonoBehaviour
         }
         else
         {
-            UIManager.Instance.timeOffline = UIManager.Instance.GetOfflineTime(PlayerPrefs.GetString(KeyPrefs.TIME_QUIT_GAME));
-            UIManager.Instance.goldOffline = GetFreeGoldPerSecond() * UIManager.Instance.timeOffline * 60;
-            if (UIManager.Instance.goldOffline < 100)
-                UIManager.Instance.goldOffline = 100;
-            UIManager.Instance.ShowPanelOffline();
+            if (GameManager.Instance.stateGame == StateGame.PLAYING)
+            {
+                UIManager.Instance.timeOffline = UIManager.Instance.GetOfflineTime(PlayerPrefs.GetString(KeyPrefs.TIME_QUIT_GAME));
+                if (UIManager.Instance.timeOffline <= 0)
+                    UIManager.Instance.timeOffline = 1;
+                //UIManager.Instance.goldOffline = GetFreeGoldPerSecond() * UIManager.Instance.timeOffline * 60;
+                UIManager.Instance.goldOffline = long.Parse(PlayerPrefs.GetString(KeyPrefs.GOLD_OFFLINE)) * UIManager.Instance.timeOffline * 60;
+                if (UIManager.Instance.goldOffline < 100)
+                    UIManager.Instance.goldOffline = 100;
+                UIManager.Instance.ShowPanelOffline();
+            }
         }
     }
 }

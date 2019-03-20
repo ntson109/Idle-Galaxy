@@ -7,4 +7,6 @@ public class KeyPrefs
     public static string IS_CONTINUE = "IsContinue";
 
     public static string TIME_QUIT_GAME = "TimeQuitGame";
+
+    public static string GOLD_OFFLINE = "GoldOffline";
 }
