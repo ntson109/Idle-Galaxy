@@ -58,7 +58,6 @@ public class MineShaft : MonoBehaviour
         IDLE,
         LOCK,
         UNLOCKING,
-        UPGRADING,
         WORKING
     }
 
@@ -167,6 +166,10 @@ public class MineShaft : MonoBehaviour
 
             txtTimer.text = UIManager.Instance.ToDateTimeString(timer);
             txtNumberMine.text = this.numberMine.ToString();
+            if (nextMineShaft != null && nextMineShaft.state != StateMineShaft.LOCK && nextMineShaft.state != StateMineShaft.UNLOCKING && nextMineShaft.isActiveAndEnabled)
+            {
+                txtProduct_PushUp.text = numberProduct_PushUp + "/" + this.nextMineShaft.totalCapacity;
+            }
 
             if (this.state == StateMineShaft.WORKING)
             {
@@ -305,11 +308,44 @@ public class MineShaft : MonoBehaviour
     void ON_SKIP_TIME(object param)
     {
         int a = (int)param;
-        timeUnlocking -= a;
-        timeUpgradeLevel -= a;
+
+        if (state == StateMineShaft.UNLOCKING)
+        {
+            if (timeUnlocking > a)
+            {
+                timeUnlocking -= a;
+            }
+            else
+            {
+                timeUnlocking = 0;
+            }
+        }
+
+        if (this.typeUpgradeLevel == UpgradeObj_Level.Type.UPGRADING)
+        {
+            if (timeUpgradeLevel > a)
+            {
+                timeUpgradeLevel -= a;
+            }
+            else
+            {
+                timeUpgradeLevel = 0;
+            }
+        }
+
         for (int i = 0; i < this.typeUpgradeSpecial.Count; i++)
         {
-            this.timeUpgradeSpecial[i] -= a;
+            if (this.typeUpgradeSpecial[i] == UpgradeObj_Special.Type.UPGRADING)
+            {
+                if (this.timeUpgradeSpecial[i] > a)
+                {
+                    this.timeUpgradeSpecial[i] -= a;
+                }
+                else
+                {
+                    this.timeUpgradeSpecial[i] = 0;
+                }
+            }
         }
     }
 
@@ -379,39 +415,6 @@ public class MineShaft : MonoBehaviour
         pricePreMine = this.properties.buyMoreMinePrice;
         for (int i = 0; i < xMoreMine; i++)
         {
-            //if (this.numberMine <= 10)
-            //{
-            //    _temp_2 = GameConfig.Instance.lstPropertiesMap[ID].MoreMine_cost_2 + (this.ID + 1) * 1 * (a + 1);
-            //}
-            //else if (this.numberMine <= 20)
-            //{
-            //    _temp_2 = GameConfig.Instance.lstPropertiesMap[ID].MoreMine_cost_2 + (this.ID + 1) * 2 * (a + 1);
-            //}
-            //else if (this.numberMine <= 50)
-            //{
-            //    _temp_2 = GameConfig.Instance.lstPropertiesMap[ID].MoreMine_cost_2 + (this.ID + 1) * 3 * (a + 1);
-            //}
-            //else if (this.numberMine <= 100)
-            //{
-            //    _temp_2 = GameConfig.Instance.lstPropertiesMap[ID].MoreMine_cost_2 + (this.ID + 1) * 4 * (a + 1);
-            //}
-            //else if (this.numberMine <= 200)
-            //{
-            //    _temp_2 = GameConfig.Instance.lstPropertiesMap[ID].MoreMine_cost_2 + (this.ID + 1) * 5 * (a + 1);
-            //}
-            //else if (this.numberMine <= 500)
-            //{
-            //    _temp_2 = GameConfig.Instance.lstPropertiesMap[ID].MoreMine_cost_2 + (this.ID + 1) * 6 * (a + 1);
-            //}
-            //else if (this.numberMine > 500)
-            //{
-            //    _temp_2 = GameConfig.Instance.lstPropertiesMap[ID].MoreMine_cost_2 + (this.ID + 1) * 7 * (a + 1);
-            //}
-            //double t = pricePreMine * ((float)(GameConfig.Instance.lstPropertiesMap[ID].MoreMine_cost_3 + a + 1) / (float)GameConfig.Instance.lstPropertiesMap[ID].MoreMine_cost_3);
-            //if (t - (long)t > 0.5f)
-            //{
-            //    t += 1;
-            //}
             double t = pricePreMine * GameConfig.Instance.lstPropertiesMap[ID].MoreMine_cost_3;
             if (t - (long)t > 0.5f)
             {
@@ -558,7 +561,6 @@ public class MineShaft : MonoBehaviour
             numberProduct_Remain = numberProduct_Completed;
             product_Remain.SetActive(true);
             txtProduct_Remain.text = numberProduct_Remain.ToString();
-            txtProduct_PushUp.text = "";
             yield return new WaitForSeconds(0.15f);
             product_Remain.transform.DOLocalPath(new Vector3[] { posProduct_Remain.localPosition }, 0.5f * this.properties.speedMining).OnComplete(() =>
             {
@@ -590,7 +592,6 @@ public class MineShaft : MonoBehaviour
             pushAnim.gameObject.GetComponent<Image>().sprite = sprLight0;
         }
         txtProduct_Remain.text = "";
-        txtProduct_PushUp.text = "";
         state = StateMineShaft.IDLE;
         imgWorkBar.fillAmount = 0f;
         if (!isAutoWorking)

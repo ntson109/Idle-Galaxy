@@ -8,7 +8,6 @@ using System;
 public class DataPlayer : MonoBehaviour
 {
     public static DataPlayer Instance;
-    private DateTime dateNowPlayer;
     void Awake()
     {
         if (Instance != null)
@@ -122,10 +121,6 @@ public class DataPlayer : MonoBehaviour
                 {
                     m.state = 4;
                 }
-                else if (GameManager.Instance.lstMap[i].lstMineShaft[j].state == MineShaft.StateMineShaft.UPGRADING)
-                {
-                    m.state = 5;
-                }
 
                 m.timeUpgradeSpecial = new List<float>();
                 for (int k = 0; k < GameManager.Instance.lstMap[i].lstMineShaft[j].timeUpgradeSpecial.Count; k++)
@@ -162,7 +157,6 @@ public class DataPlayer : MonoBehaviour
 
     public void LoadDataPlayer()
     {
-        dateNowPlayer = DateTime.Now;
         string _path = Path.Combine(Application.persistentDataPath, "DataPlayer.json");
         string dataAsJson = File.ReadAllText(_path);
         var objJson = SimpleJSON_DatDz.JSON.Parse(dataAsJson);
@@ -232,8 +226,6 @@ public class DataPlayer : MonoBehaviour
                     GameManager.Instance.lstMap[0].lstMineShaft[i].state = MineShaft.StateMineShaft.IDLE;
                 else if (objJson["lsMineShaft"][i]["state"].AsInt == 4)
                     GameManager.Instance.lstMap[0].lstMineShaft[i].state = MineShaft.StateMineShaft.WORKING;
-                else if (objJson["lsMineShaft"][i]["state"].AsInt == 5)
-                    GameManager.Instance.lstMap[0].lstMineShaft[i].state = MineShaft.StateMineShaft.UPGRADING;
 
                 for (int j = 0; j < objJson["lsMineShaft"][i]["timeUpgradeSpecial"].Count; j++)
                 {
@@ -282,6 +274,10 @@ public class DataPlayer : MonoBehaviour
                 if (GameManager.Instance.lstMap[i].lstMineShaft[j].state != MineShaft.StateMineShaft.LOCK && GameManager.Instance.lstMap[i].lstMineShaft[j].state != MineShaft.StateMineShaft.UNLOCKING)
                 {
                     _gold += (long)(((GameManager.Instance.lstMap[i].lstMineShaft[j].numberMine * GameManager.Instance.lstMap[i].lstMineShaft[j].properties.capacity) / GameManager.Instance.lstMap[i].lstMineShaft[j].properties.miningTime) * GameManager.Instance.lstMap[i].lstMineShaft[j].properties.unitPrice);
+                    if (_gold >= long.MaxValue)
+                        _gold = long.MaxValue / 2;
+                    if (_gold <= 0)
+                        _gold = 100000;
                 }
             }
         }
@@ -305,7 +301,11 @@ public class DataPlayer : MonoBehaviour
         }
         else
         {
-            dateNowPlayer = DateTime.Now;
+            UIManager.Instance.timeOffline = UIManager.Instance.GetOfflineTime(PlayerPrefs.GetString(KeyPrefs.TIME_QUIT_GAME));
+            UIManager.Instance.goldOffline = GetFreeGoldPerSecond() * UIManager.Instance.timeOffline * 60;
+            if (UIManager.Instance.goldOffline < 100)
+                UIManager.Instance.goldOffline = 100;
+            UIManager.Instance.ShowPanelOffline();
         }
     }
 }
