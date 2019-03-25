@@ -71,6 +71,17 @@ public class MineShaft : MonoBehaviour
         public float time;
         public int coinMax;
     }
+
+    [Serializable]
+    public struct Store
+    {
+        public MineShaft mineShaft;
+        public int level;
+        public int value;
+        public int capacity;
+        public long cost;
+    }
+
     #endregion
 
     [Header("PROPERTIES")]
@@ -83,7 +94,6 @@ public class MineShaft : MonoBehaviour
     public int input = 0;
     //public TypeMap typeMap;
     public UnlockCost[] unlockCost;
-    //public TypeProduct typeProduct; //loại sản phẩm
     public StateMineShaft state; //trạng thái
     public List<UpgradeObj_Special> lstUpgradeSpecial;
     public List<UpgradeObj_Special.Type> typeUpgradeSpecial = new List<UpgradeObj_Special.Type>();
@@ -91,6 +101,7 @@ public class MineShaft : MonoBehaviour
     public int[] timeUpgradeSpecial_Max;
     public bool isAutoWorking = false;
     public MineShaft nextMineShaft; //mỏ tiếp theo
+    public MineShaft preMineShaft;
     public int numberProduct_Completed; //số sản phẩm làm xong
     public int numberProduct_PushUp; //số sản phẩm đẩy lên mỏ trên
     public int numberProduct_Remain; //số sản phẩm thừa
@@ -106,6 +117,9 @@ public class MineShaft : MonoBehaviour
     public UpgradeObj_Level.Type typeUpgradeLevel;
     public float timeUpgradeLevel;
     private float timeUpgradeLevel_Max;
+
+    public Store store;
+    public Button btnStore;
 
     [Header("UI")]
     public Text txtName;
@@ -158,19 +172,40 @@ public class MineShaft : MonoBehaviour
             else if (isCanWork && !btnWork.gameObject.activeSelf && !isAutoWorking)
                 btnWork.gameObject.SetActive(true);
 
-            if (isAutoWorking && this.state == StateMineShaft.IDLE && this.input > 0)
+            if (this.ID == 0)
             {
-                LetWork();
-                btnWork.gameObject.SetActive(false);
+                if (isAutoWorking && this.state == StateMineShaft.IDLE && this.input > 0)
+                {
+                    LetWork();
+                    btnWork.gameObject.SetActive(false);
+                }
+            }
+            else
+            {
+                if (isAutoWorking && this.state == StateMineShaft.IDLE && this.preMineShaft.store.value > 0)
+                {
+                    LetWork();
+                    btnWork.gameObject.SetActive(false);
+                }
             }
 
             txtTimer.text = UIManager.Instance.ToDateTimeString(timer);
             txtNumberMine.text = this.numberMine.ToString();
-            if (nextMineShaft != null && nextMineShaft.state != StateMineShaft.LOCK && nextMineShaft.state != StateMineShaft.UNLOCKING && nextMineShaft.isActiveAndEnabled)
-            {
-                txtProduct_PushUp.text = numberProduct_PushUp + "/" + this.nextMineShaft.totalCapacity;
-            }
-
+            //if (nextMineShaft != null && nextMineShaft.state != StateMineShaft.LOCK && nextMineShaft.state != StateMineShaft.UNLOCKING && nextMineShaft.isActiveAndEnabled)
+            //{
+            //    //txtProduct_PushUp.text = numberProduct_PushUp + "/" + this.nextMineShaft.totalCapacity;
+            //    if (this.store.value < this.nextMineShaft.totalCapacity)
+            //    {
+            //        this.nextMineShaft.GiveInput(this.store.value);
+            //        this.store.value = 0;
+            //    }
+            //    else
+            //    {
+            //        this.nextMineShaft.GiveInput(this.nextMineShaft.totalCapacity);
+            //        this.store.value -= this.nextMineShaft.totalCapacity;
+            //    }
+            //}
+            txtProduct_PushUp.text = this.store.value + "/" + this.store.capacity;
             if (this.state == StateMineShaft.WORKING)
             {
                 imgWorkBar.fillAmount += (1.000f / this.properties.miningTime) * Time.deltaTime;
@@ -226,6 +261,10 @@ public class MineShaft : MonoBehaviour
         btnUpgrade.onClick.AddListener(() => Btn_ShowUpgrade());
         btnBuyMoreMine.thisButton.onClick.AddListener(() => Btn_BuyMoreMine());
         btnX.onClick.AddListener(() => Btn_X());
+        if (this.ID < 5)
+        {
+            btnStore.onClick.AddListener(() => Btn_ShowUpgrade_Store());
+        }        
         btnUnlock_byGold.onClick.AddListener(() => Btn_Unlock(TypeUnlock.GOLD));
         btnUnlock_byCoin.onClick.AddListener(() => Btn_Unlock(TypeUnlock.COIN));
         btnUnlock_byAD.onClick.AddListener(() => Btn_Unlock(TypeUnlock.ADS));
@@ -368,8 +407,12 @@ public class MineShaft : MonoBehaviour
             }
             this.properties.buyMoreMinePrice = GameConfig.Instance.lstPropertiesMap[ID].MoreMine_cost_1;
             this.state = StateMineShaft.LOCK;
+            this.store.level = 1;
+            this.store.value = 0;
+            this.store.capacity = GameConfig.Instance.lstPropertiesMap[ID].Store_Capacity;
         }
 
+        this.store.mineShaft = this;
         this.txtLevel.text = "Level " + this.properties.level.ToString();
         this.properties.speedMining = 1;
         xMoreMine = 1;
@@ -379,7 +422,6 @@ public class MineShaft : MonoBehaviour
         this.txtName.text = this.properties.name;
 
         this.totalCapacity = this.properties.capacity * this.numberMine;
-        //this.properties.buyAI = GameConfig.Instance.lstPropertiesMap[ID].BuyAI;
         this.properties.upgradeTime = GameConfig.Instance.lstPropertiesMap[ID].Upgrade_time[this.properties.level - 1];
         GetPriceMoreMine();
         GetPriceUpgradeCost();
@@ -469,6 +511,18 @@ public class MineShaft : MonoBehaviour
     {
         state = StateMineShaft.WORKING;
         isCanWork = false;
+        if (this.ID != 0)
+        {
+            if (this.totalCapacity <= this.preMineShaft.store.value)
+            {
+                this.input = this.totalCapacity;
+            }
+            else
+            {
+                this.input = this.preMineShaft.store.value;
+            }
+            this.preMineShaft.store.value -= this.input;
+        }
         if (timer == 0)
         {
             timer = this.properties.miningTime;
@@ -484,7 +538,6 @@ public class MineShaft : MonoBehaviour
                 timer--;
             }
         }
-
         numberProduct_Completed = this.input;
         product_Complete.SetActive(true);
         yield return new WaitForEndOfFrame();
@@ -498,9 +551,9 @@ public class MineShaft : MonoBehaviour
         product_Complete.SetActive(false);
         product_Complete.GetComponent<RectTransform>().transform.position = posProduct_Complete_1.position;
         //chạy xong
-        if (nextMineShaft != null && nextMineShaft.state != StateMineShaft.LOCK && nextMineShaft.state != StateMineShaft.UNLOCKING && nextMineShaft.isActiveAndEnabled && nextMineShaft.input == 0)
+        if (nextMineShaft != null && nextMineShaft.state != StateMineShaft.LOCK && nextMineShaft.state != StateMineShaft.UNLOCKING && nextMineShaft.isActiveAndEnabled && this.store.capacity - this.store.value > 0)
         {
-            if (numberProduct_Completed <= this.nextMineShaft.totalCapacity)
+            if (numberProduct_Completed <= this.store.capacity - this.store.value)// this.nextMineShaft.totalCapacity)
             {
                 numberProduct_PushUp = numberProduct_Completed;
                 Debug.Log("Chỉ chuyển lên next mine");
@@ -517,13 +570,15 @@ public class MineShaft : MonoBehaviour
                 {
                     product_PushUp.SetActive(false);
                     product_PushUp.transform.position = posProduct_Complete.position;
-                    nextMineShaft.GiveInput(numberProduct_PushUp);
+                    this.store.value += numberProduct_PushUp;
+                    //nextMineShaft.GiveInput(numberProduct_PushUp);
                 });
                 //StartCoroutine(Product_Move_PushUp());
             }
             else
             {
-                numberProduct_PushUp = this.nextMineShaft.totalCapacity;
+                //numberProduct_PushUp = this.nextMineShaft.totalCapacity;
+                numberProduct_PushUp = this.store.capacity - this.store.value;
                 numberProduct_Remain = numberProduct_Completed - numberProduct_PushUp;
                 Debug.Log("Chia hàng chuyển 2 đg");
                 product_PushUp.SetActive(true);
@@ -543,7 +598,8 @@ public class MineShaft : MonoBehaviour
                         pushAnim.enabled = true;
                     product_PushUp.SetActive(false);
                     product_PushUp.transform.position = posProduct_Complete.position;
-                    nextMineShaft.GiveInput(numberProduct_PushUp);
+                    this.store.value += numberProduct_PushUp;
+                    //nextMineShaft.GiveInput(numberProduct_PushUp);
                 });
                 product_Remain.transform.DOLocalPath(new Vector3[] { posProduct_Remain.localPosition }, 0.5f * this.properties.speedMining).OnComplete(() =>
                 {
@@ -580,8 +636,16 @@ public class MineShaft : MonoBehaviour
         }
         else
         {
-            this.input = 0;
+            if (this.totalCapacity <= this.preMineShaft.store.value)
+            {
+                this.input = this.totalCapacity;
+            }
+            else
+            {
+                this.input = this.preMineShaft.store.value;
+            }
         }
+
         timer = 0;
         yield return new WaitForEndOfFrame();
         if (workAnim != null)
@@ -600,49 +664,49 @@ public class MineShaft : MonoBehaviour
 
     }
 
-    IEnumerator Product_Move_PushUp()
-    {
-        //if (product_PushUp.activeSelf)
-        //{
-        while (product_PushUp.GetComponent<RectTransform>().transform.position.x > this.posProduct_PushUp.position.x)
-        {
-            //product_PushUp.GetComponent<RectTransform>().transform.position = Vector3.MoveTowards(product_PushUp.GetComponent<RectTransform>().transform.position, this.posProduct_PushUp.position, Time.deltaTime * this.properties.speedMining);
-            product_PushUp.GetComponent<RectTransform>().transform.Translate(Vector3.left * Time.deltaTime * this.properties.speedMining);
-            yield return null;
-        }
+    //IEnumerator Product_Move_PushUp()
+    //{
+    //    //if (product_PushUp.activeSelf)
+    //    //{
+    //    while (product_PushUp.GetComponent<RectTransform>().transform.position.x > this.posProduct_PushUp.position.x)
+    //    {
+    //        //product_PushUp.GetComponent<RectTransform>().transform.position = Vector3.MoveTowards(product_PushUp.GetComponent<RectTransform>().transform.position, this.posProduct_PushUp.position, Time.deltaTime * this.properties.speedMining);
+    //        product_PushUp.GetComponent<RectTransform>().transform.Translate(Vector3.left * Time.deltaTime * this.properties.speedMining);
+    //        yield return null;
+    //    }
 
-        yield return new WaitForEndOfFrame();
-        product_PushUp.SetActive(false);
-        product_PushUp.transform.position = posProduct_Complete.position;
-        nextMineShaft.GiveInput(numberProduct_PushUp);
-        //}
-    }
+    //    yield return new WaitForEndOfFrame();
+    //    product_PushUp.SetActive(false);
+    //    product_PushUp.transform.position = posProduct_Complete.position;
+    //    nextMineShaft.GiveInput(numberProduct_PushUp);
+    //    //}
+    //}
 
-    IEnumerator Product_Move_Remain()
-    {
-        //if (product_Remain.activeSelf)
-        //{
-        while (product_Remain.GetComponent<RectTransform>().transform.position.x < this.posProduct_Remain.position.x)
-        {
-            //product_Remain.GetComponent<RectTransform>().transform.position = Vector3.MoveTowards(product_Remain.GetComponent<RectTransform>().transform.position, this.posProduct_Remain.position, Time.deltaTime * this.properties.speedMining);
-            product_Remain.GetComponent<RectTransform>().transform.Translate(Vector3.right * Time.deltaTime * this.properties.speedMining);
-            yield return null;
-        }
-        yield return new WaitForEndOfFrame();
-        product_Remain.SetActive(false);
-        product_Remain.transform.position = posProduct_Complete.position;
-        mapParent.AddProduct(numberProduct_Remain, (long)(numberProduct_Remain * this.properties.unitPrice));
-        //}
-    }
+    //IEnumerator Product_Move_Remain()
+    //{
+    //    //if (product_Remain.activeSelf)
+    //    //{
+    //    while (product_Remain.GetComponent<RectTransform>().transform.position.x < this.posProduct_Remain.position.x)
+    //    {
+    //        //product_Remain.GetComponent<RectTransform>().transform.position = Vector3.MoveTowards(product_Remain.GetComponent<RectTransform>().transform.position, this.posProduct_Remain.position, Time.deltaTime * this.properties.speedMining);
+    //        product_Remain.GetComponent<RectTransform>().transform.Translate(Vector3.right * Time.deltaTime * this.properties.speedMining);
+    //        yield return null;
+    //    }
+    //    yield return new WaitForEndOfFrame();
+    //    product_Remain.SetActive(false);
+    //    product_Remain.transform.position = posProduct_Complete.position;
+    //    mapParent.AddProduct(numberProduct_Remain, (long)(numberProduct_Remain * this.properties.unitPrice));
+    //    //}
+    //}
 
-    public void GiveInput(int _input)
-    {
-        if (this.ID != 0)
-        {
-            input = _input;
-            isCanWork = true;
-        }
-    }
+    //public void GiveInput(int _input)
+    //{
+    //    if (this.ID != 0)
+    //    {
+    //        input = _input;
+    //        isCanWork = true;
+    //    }
+    //}
 
     public void Btn_Work()
     {
@@ -832,6 +896,45 @@ public class MineShaft : MonoBehaviour
         isAutoWorking = false;
         mapParent.CheckUnlock(this.ID);
         UIManager.Instance.SetDeActivePanel(panelUnlock);
+    }
+    #endregion
+
+    #region === STORE ===
+    int capStoreWillUp;
+    void Btn_ShowUpgrade_Store()
+    {
+        GetStoreCost();
+        GetSoreCapacity();
+        UIManager.Instance.SetActivePanel(UIManager.Instance.panelUpgradeStore);
+        UIManager.Instance.btnUpStore.thisButton.onClick.RemoveAllListeners();
+        UIManager.Instance.txtNameStore.text = "Store Machine " + (this.ID+1);
+        UIManager.Instance.txtLevelStore.text = this.store.level.ToString();
+        UIManager.Instance.txtLevelStores_Up.text = (this.store.level + 1).ToString();
+        UIManager.Instance.txtCapStore.text = UIManager.Instance.ToLongString(this.store.capacity);
+        UIManager.Instance.txtCapStore_Up.text = UIManager.Instance.ToLongString(this.capStoreWillUp);
+        UIManager.Instance.btnUpStore.thisPrice = this.store.cost;
+        UIManager.Instance.txtPriceStore.text = "Upgrade\n" + UIManager.Instance.ToLongString(this.store.cost);
+        UIManager.Instance.btnUpStore.type = MyButton.Type.GOLD;
+        UIManager.Instance.btnUpStore.thisButton.onClick.AddListener(() => Upgrade_Store());
+    }
+
+    void Upgrade_Store()
+    {
+        GameManager.Instance.AddGold(-this.store.cost);
+        this.store.level += 1;
+        this.store.capacity = capStoreWillUp;;
+        Btn_ShowUpgrade_Store();
+    }
+
+    
+    void GetStoreCost()
+    {
+        this.store.cost = 100;
+    }
+
+    void GetSoreCapacity()
+    {
+        capStoreWillUp = this.store.capacity + 10;
     }
     #endregion
 }

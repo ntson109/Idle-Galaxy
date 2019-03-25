@@ -144,6 +144,10 @@ public class DataPlayer : MonoBehaviour
                 m.timeUnlocking = GameManager.Instance.lstMap[i].lstMineShaft[j].timeUnlocking;
                 m.timeUpgradeLevel = GameManager.Instance.lstMap[i].lstMineShaft[j].timeUpgradeLevel;
 
+                m.store = new StoreJSON();
+                m.store.level = GameManager.Instance.lstMap[i].lstMineShaft[j].store.level;
+                m.store.value = GameManager.Instance.lstMap[i].lstMineShaft[j].store.value;
+                m.store.capacity = GameManager.Instance.lstMap[i].lstMineShaft[j].store.capacity;
                 data.lsMineShaft.Add(m);
             }
         }
@@ -252,6 +256,9 @@ public class DataPlayer : MonoBehaviour
                 GameManager.Instance.lstMap[0].lstMineShaft[i].isAutoWorking = objJson["lsMineShaft"][i]["isAutoWorking"].AsBool;
                 GameManager.Instance.lstMap[0].lstMineShaft[i].timeUnlocking = objJson["lsMineShaft"][i]["timeUnlocking"].AsFloat;
                 GameManager.Instance.lstMap[0].lstMineShaft[i].timeUpgradeLevel = objJson["lsMineShaft"][i]["timeUpgradeLevel"].AsFloat;
+                GameManager.Instance.lstMap[0].lstMineShaft[i].store.level = objJson["lsMineShaft"][i]["store"]["level"].AsInt;
+                GameManager.Instance.lstMap[0].lstMineShaft[i].store.value = objJson["lsMineShaft"][i]["store"]["value"].AsInt;
+                GameManager.Instance.lstMap[0].lstMineShaft[i].store.capacity = objJson["lsMineShaft"][i]["store"]["capacity"].AsInt;
             }
         }
 

@@ -37,6 +37,7 @@ public class GameConfig : MonoBehaviour {
         public List<long> Upgrade_cost;
         public List<double> Unit_Price;
         public List<MineShaft.UpgradeSpecial> Upgrade_Special;
+        public int Store_Capacity;
     }
 
     #region === GAME CONFIG ===
@@ -60,8 +61,7 @@ public class GameConfig : MonoBehaviour {
     public string NameTransport;
     public int TimeTransport;
     public int Capacity_1;
-    public float Capacity_2;
-    public float Capacity_3;
+    public float[] Capacity_2;
     public float UFO_speed;
     public int UFO_time;
     public float[] UFO_rate_gold;
@@ -69,6 +69,7 @@ public class GameConfig : MonoBehaviour {
     public List<float> lstRewardSpin_Gold = new List<float>();
     public List<int> lstRewardSpin_Time = new List<int>();
     public List<int> lstRewardSpin_Coin = new List<int>();
+    
     #endregion
 
     #region === APP42 ===

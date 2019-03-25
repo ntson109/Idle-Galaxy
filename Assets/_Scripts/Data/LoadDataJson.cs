@@ -67,6 +67,7 @@ public class LoadDataJson : MonoBehaviour
             GameConfig.Instance.UFO_rate_coin = new float[2];
             GameConfig.Instance.UFO_rate_coin[0] = objJson["UFO_rate_Coin"][0].AsFloat;
             GameConfig.Instance.UFO_rate_coin[1] = objJson["UFO_rate_Coin"][1].AsFloat;
+
             for (int i = 0; i < objJson["introduction"].Count; i++)
             {
                 GameConfig.Instance.lstIntroduction.Add(objJson["introduction"][i]);
@@ -145,13 +146,20 @@ public class LoadDataJson : MonoBehaviour
                     {
                         pM.Unit_Price.Add(objJson["Map_Moon"][i]["Unit_Price"][k].AsDouble);
                     }
+
+                    pM.Store_Capacity = objJson["Map_Moon"][i]["Store_Capacity"].AsInt;
                 }
                 GameConfig.Instance.lstPropertiesMap.Add(pM);
             }
             GameConfig.Instance.TimeTransport = objJson["Transporter"]["TimeTransport"].AsInt;
             GameConfig.Instance.Capacity_1 = objJson["Transporter"]["Capacity_1"].AsInt;
-            GameConfig.Instance.Capacity_2 = objJson["Transporter"]["Capacity_2"].AsFloat;
-            GameConfig.Instance.Capacity_3 = objJson["Transporter"]["Capacity_3"].AsFloat;
+
+            GameConfig.Instance.Capacity_2 = new float[objJson["Transporter"]["Capacity_2"].Count];
+            for (int j = 0; j < GameConfig.Instance.Capacity_2.Length; j++)
+            {
+                GameConfig.Instance.Capacity_2[j] = objJson["Transporter"]["Capacity_2"][j].AsFloat;
+            }
+            
             for (int i = 0; i < objJson["Transporter"]["Cost"].Count; i++)
             {
                 GameConfig.Instance.lstCostTransporter.Add(objJson["Transporter"]["Cost"][i].AsLong);

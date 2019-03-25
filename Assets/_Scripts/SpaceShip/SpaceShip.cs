@@ -11,9 +11,7 @@ public class SpaceShip : MonoBehaviour
     [Serializable]
     public struct Properties
     {
-        public string name;
-
-        public int level;
+        public string name;       
 
         public int capacity;
 
@@ -37,6 +35,7 @@ public class SpaceShip : MonoBehaviour
     #endregion
 
     public int ID;
+    public int level;
     public SpaceShip.Properties properties; //thông số cơ bản
     public StateSpaceShip state;
     public int numberShip;
@@ -69,7 +68,20 @@ public class SpaceShip : MonoBehaviour
 
     void SetInfo()
     {
+        txtName.text = this.properties.name;
+        txtLevel.text = this.level.ToString();
+        if (UIManager.Instance.isNewPlayer)
+        {
+            this.state = StateSpaceShip.LOCK;
+            if (this.ID == 0)
+            {
+                this.state = StateSpaceShip.WORKING;
+            }
+        }
+        else
+        {
 
+        }
     }
 
 

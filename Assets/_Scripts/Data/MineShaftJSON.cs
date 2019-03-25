@@ -34,6 +34,18 @@ public class MineShaftJSON
     public float timeUnlocking;
 
     public float timeUpgradeLevel;
+
+    public StoreJSON store;
+}
+
+[System.Serializable]
+public class StoreJSON
+{
+    public int level;
+
+    public int value;
+
+    public long capacity;
 }
 
 [System.Serializable]

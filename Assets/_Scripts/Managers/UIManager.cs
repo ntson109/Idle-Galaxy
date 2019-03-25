@@ -39,6 +39,16 @@ public class UIManager : MonoBehaviour
     public Text txtTimeTrans_Up;
     public Text txtPriceTrans;
 
+    [Header("TRANSPORTER")]
+    public GameObject panelUpgradeStore;
+    public MyButton btnUpStore;
+    public Text txtNameStore;
+    public Text txtLevelStore;
+    public Text txtLevelStores_Up;
+    public Text txtCapStore;
+    public Text txtCapStore_Up;
+    public Text txtPriceStore;
+
     [Header("UFO")]
     public GameObject panelUFO;
     public GameObject panelUFO_Gold;

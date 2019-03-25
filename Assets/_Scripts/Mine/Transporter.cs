@@ -95,10 +95,10 @@ public class Transporter : MonoBehaviour
 
     void GetCapacityUp()
     {
-        if (this.level <= 100)
+        if (this.level <= 10)
         {
-            double t = this.capacity + this.capacity * GameConfig.Instance.Capacity_2;
-            if ((this.capacity * GameConfig.Instance.Capacity_2) < 2)
+            double t = this.capacity + this.capacity * GameConfig.Instance.Capacity_2[0];
+            if ((this.capacity * GameConfig.Instance.Capacity_2[0]) < 2)
             {
                 t = this.capacity + 2;
             }
@@ -108,9 +108,38 @@ public class Transporter : MonoBehaviour
             }
             this.capacityWillUp = (long)t;
         }
-        else
+        else if (this.level <= 20)
         {
-            this.capacityWillUp = (long)(this.capacity + this.capacity * GameConfig.Instance.Capacity_3);
+            double t = this.capacity + this.capacity * GameConfig.Instance.Capacity_2[1];
+            if ((this.capacity * GameConfig.Instance.Capacity_2[1]) < 2)
+            {
+                t = this.capacity + 2;
+            }
+            if (t - (long)t > 0.5f)
+            {
+                t += 1;
+            }
+            this.capacityWillUp = (long)t;
+        }
+        else if (this.level <= 50)
+        {
+            this.capacityWillUp = (long)(this.capacity + this.capacity * GameConfig.Instance.Capacity_2[2]);
+        }
+        else if (this.level <= 100)
+        {
+            this.capacityWillUp = (long)(this.capacity + this.capacity * GameConfig.Instance.Capacity_2[3]);
+        }
+        else if (this.level <= 200)
+        {
+            this.capacityWillUp = (long)(this.capacity + this.capacity * GameConfig.Instance.Capacity_2[4]);
+        }
+        else if (this.level <= 500)
+        {
+            this.capacityWillUp = (long)(this.capacity + this.capacity * GameConfig.Instance.Capacity_2[5]);
+        }
+        else if (this.level > 500)
+        {
+            this.capacityWillUp = (long)(this.capacity + this.capacity * GameConfig.Instance.Capacity_2[5]);
         }
     }
 
