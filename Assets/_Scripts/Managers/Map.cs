@@ -10,7 +10,7 @@ public class Map : MonoBehaviour
     public List<MineShaft> lstMineShaft;
     public GameObject spaceShip;
     public Transporter transporter;
-    public long totalAmount;
+    //public long totalAmount;
     public long totalMoney;
     public long moneyPerTurn;
     public GameObject rdPrefabs;
@@ -64,18 +64,25 @@ public class Map : MonoBehaviour
 
     public void AddProduct(long _amountProduct, long _value)
     {
-        totalAmount += _amountProduct;
+        //totalAmount += _amountProduct;
         totalMoney += _value;
         CheckFullWareHouse();
     }
 
     void CheckFullWareHouse()
     {
-        if (totalAmount >= transporter.capacity)
-        {           
-            moneyPerTurn = (totalMoney * transporter.capacity) / totalAmount;
+        //if (totalAmount >= transporter.capacity)
+        //{           
+        //    moneyPerTurn = (totalMoney * transporter.capacity) / totalAmount;
+        //    totalMoney -= moneyPerTurn;
+        //    totalAmount -= transporter.capacity;
+        //    transporter.Transport();
+        //}
+
+        if (totalMoney >= transporter.capacity)
+        {
+            moneyPerTurn = transporter.capacity;
             totalMoney -= moneyPerTurn;
-            totalAmount -= transporter.capacity;
             transporter.Transport();
         }
     }

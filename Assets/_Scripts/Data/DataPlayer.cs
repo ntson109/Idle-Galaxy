@@ -77,7 +77,7 @@ public class DataPlayer : MonoBehaviour
             {
                 m.typeMap = 2;
             }
-            m.totalAmount = GameManager.Instance.lstMap[i].totalAmount;
+            //m.totalAmount = GameManager.Instance.lstMap[i].totalAmount;
             m.totalMoney = GameManager.Instance.lstMap[i].totalMoney;
             m.transporter.level = GameManager.Instance.lstMap[i].transporter.level;
             m.transporter.capacity = GameManager.Instance.lstMap[i].transporter.capacity;
@@ -190,7 +190,7 @@ public class DataPlayer : MonoBehaviour
             {
                 GameManager.Instance.lstMap[i].type = TypeMap.MOON;
             }
-            GameManager.Instance.lstMap[i].totalAmount = objJson["lstMap"][i]["totalAmount"].AsLong;
+            //GameManager.Instance.lstMap[i].totalAmount = objJson["lstMap"][i]["totalAmount"].AsLong;
             GameManager.Instance.lstMap[i].totalMoney = objJson["lstMap"][i]["totalMoney"].AsLong;
             //GameManager.Instance.lstMap[i].transporter.level = objJson["lstMap"][i]["transporter"]["level"].AsInt;
             //GameManager.Instance.lstMap[i].transporter.capacity = objJson["lstMap"][i]["transporter"]["capacity"].AsLong;

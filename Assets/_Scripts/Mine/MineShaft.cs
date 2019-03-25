@@ -896,6 +896,8 @@ public class MineShaft : MonoBehaviour
         isAutoWorking = false;
         mapParent.CheckUnlock(this.ID);
         UIManager.Instance.SetDeActivePanel(panelUnlock);
+
+        //hiện bảng Reward
     }
     #endregion
 
