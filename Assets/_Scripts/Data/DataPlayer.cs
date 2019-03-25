@@ -81,6 +81,7 @@ public class DataPlayer : MonoBehaviour
             m.totalMoney = GameManager.Instance.lstMap[i].totalMoney;
             m.transporter.level = GameManager.Instance.lstMap[i].transporter.level;
             m.transporter.capacity = GameManager.Instance.lstMap[i].transporter.capacity;
+            m.transporter.price = GameManager.Instance.lstMap[i].transporter.price;
             data.lstMap.Add(m);
         }
 
@@ -106,6 +107,7 @@ public class DataPlayer : MonoBehaviour
                 m.miningTime = GameManager.Instance.lstMap[i].lstMineShaft[j].properties.miningTime;
                 m.capacity = GameManager.Instance.lstMap[i].lstMineShaft[j].properties.capacity;
                 m.input = GameManager.Instance.lstMap[i].lstMineShaft[j].input;
+                m.workBar = GameManager.Instance.lstMap[i].lstMineShaft[j].imgWorkBar.fillAmount;
                 if (GameManager.Instance.lstMap[i].lstMineShaft[j].state == MineShaft.StateMineShaft.LOCK)
                 {
                     m.state = 1;
@@ -192,7 +194,7 @@ public class DataPlayer : MonoBehaviour
             GameManager.Instance.lstMap[i].totalMoney = objJson["lstMap"][i]["totalMoney"].AsLong;
             //GameManager.Instance.lstMap[i].transporter.level = objJson["lstMap"][i]["transporter"]["level"].AsInt;
             //GameManager.Instance.lstMap[i].transporter.capacity = objJson["lstMap"][i]["transporter"]["capacity"].AsLong;
-            GameManager.Instance.lstMap[i].transporter.SetInfo(objJson["lstMap"][i]["transporter"]["level"].AsInt, objJson["lstMap"][i]["transporter"]["capacity"].AsLong, 5);
+            GameManager.Instance.lstMap[i].transporter.SetInfo(objJson["lstMap"][i]["transporter"]["level"].AsInt, objJson["lstMap"][i]["transporter"]["capacity"].AsLong, objJson["lstMap"][i]["transporter"]["price"].AsLong);
         }
 
         if (objJson["boost"]["type"] == 1)
@@ -223,6 +225,7 @@ public class DataPlayer : MonoBehaviour
                 GameManager.Instance.lstMap[0].lstMineShaft[i].properties.capacity = objJson["lsMineShaft"][i]["capacity"].AsInt;
                 GameManager.Instance.lstMap[0].lstMineShaft[i].properties.miningTime = objJson["lsMineShaft"][i]["miningTime"].AsInt;
                 GameManager.Instance.lstMap[0].lstMineShaft[i].input = objJson["lsMineShaft"][i]["input"].AsInt;
+                GameManager.Instance.lstMap[0].lstMineShaft[i].imgWorkBar.fillAmount = objJson["lsMineShaft"][i]["workBar"].AsFloat;
                 if (objJson["lsMineShaft"][i]["state"].AsInt == 1)
                     GameManager.Instance.lstMap[0].lstMineShaft[i].state = MineShaft.StateMineShaft.LOCK;
                 else if (objJson["lsMineShaft"][i]["state"].AsInt == 2)
@@ -266,6 +269,8 @@ public class DataPlayer : MonoBehaviour
         ScenesManager.Instance.isNextScene = true;
         this.PostEvent(EventID.START_GAME);
         UIManager.Instance.timeOffline = UIManager.Instance.GetOfflineTime(PlayerPrefs.GetString(KeyPrefs.TIME_QUIT_GAME));
+        if (UIManager.Instance.timeOffline <= 0)
+            UIManager.Instance.timeOffline = 1;
         //UIManager.Instance.goldOffline = objJson["freeGold1s"].AsLong * UIManager.Instance.timeOffline * 60;
         UIManager.Instance.goldOffline = long.Parse(PlayerPrefs.GetString(KeyPrefs.GOLD_OFFLINE)) * UIManager.Instance.timeOffline * 60;
         if (UIManager.Instance.goldOffline < 100)

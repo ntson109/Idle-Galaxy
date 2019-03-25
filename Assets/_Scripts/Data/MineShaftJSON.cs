@@ -35,6 +35,8 @@ public class MineShaftJSON
 
     public float timeUpgradeLevel;
 
+    public float workBar;
+
     public StoreJSON store;
 }
 
@@ -66,6 +68,8 @@ public class TransporterJSON
     public int level;
 
     public long capacity;
+
+    public long price;
 }
 
 [System.Serializable]

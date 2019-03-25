@@ -9,7 +9,7 @@ public class Transporter : MonoBehaviour
     public long capacity;
     public float speed;
     public long price;
-    public float time;
+    //public float time;
     long capacityWillUp;
     float speedWillUp;
     public RectTransform posBeginTransport;
@@ -22,6 +22,7 @@ public class Transporter : MonoBehaviour
     {
         thisButton.onClick.AddListener(() => ShowUpgrade());
         isTransporting = false;
+        this.speed = 5;
     }
 
     void Update()
@@ -29,11 +30,11 @@ public class Transporter : MonoBehaviour
 
     }
 
-    public void SetInfo(int _level, long _cap, float _speed)
+    public void SetInfo(int _level, long _cap, long _price)
     {
         this.level = _level;
         this.capacity = _cap;
-        this.speed = _speed;
+        this.price = _price;
     }
 
     public void Transport()
@@ -85,8 +86,8 @@ public class Transporter : MonoBehaviour
         UIManager.Instance.txtLevelTrans_Up.text = (this.level + 1).ToString();
         UIManager.Instance.txtCapTrans.text = UIManager.Instance.ToLongString(this.capacity);
         UIManager.Instance.txtCapTrans_Up.text = UIManager.Instance.ToLongString(this.capacityWillUp);
-        UIManager.Instance.txtTimeTrans.text = this.time.ToString();
-        UIManager.Instance.txtTimeTrans_Up.text = this.time.ToString();
+        //UIManager.Instance.txtTimeTrans.text = this.time.ToString();
+        //UIManager.Instance.txtTimeTrans_Up.text = this.time.ToString();
         UIManager.Instance.btnUpTrans.thisPrice = this.price;
         UIManager.Instance.txtPriceTrans.text = "Upgrade\n" + UIManager.Instance.ToLongString(this.price);
         UIManager.Instance.btnUpTrans.type = MyButton.Type.GOLD;
@@ -97,49 +98,31 @@ public class Transporter : MonoBehaviour
     {
         if (this.level <= 10)
         {
-            double t = this.capacity + this.capacity * GameConfig.Instance.Capacity_2[0];
-            if ((this.capacity * GameConfig.Instance.Capacity_2[0]) < 2)
-            {
-                t = this.capacity + 2;
-            }
-            if (t - (long)t > 0.5f)
-            {
-                t += 1;
-            }
-            this.capacityWillUp = (long)t;
+            this.capacityWillUp = this.capacity + GameConfig.Instance.Capacity_2[0];
         }
         else if (this.level <= 20)
         {
-            double t = this.capacity + this.capacity * GameConfig.Instance.Capacity_2[1];
-            if ((this.capacity * GameConfig.Instance.Capacity_2[1]) < 2)
-            {
-                t = this.capacity + 2;
-            }
-            if (t - (long)t > 0.5f)
-            {
-                t += 1;
-            }
-            this.capacityWillUp = (long)t;
+            this.capacityWillUp = this.capacity + GameConfig.Instance.Capacity_2[1];
         }
         else if (this.level <= 50)
         {
-            this.capacityWillUp = (long)(this.capacity + this.capacity * GameConfig.Instance.Capacity_2[2]);
+            this.capacityWillUp = this.capacity + GameConfig.Instance.Capacity_2[2];
         }
         else if (this.level <= 100)
         {
-            this.capacityWillUp = (long)(this.capacity + this.capacity * GameConfig.Instance.Capacity_2[3]);
+            this.capacityWillUp = this.capacity + GameConfig.Instance.Capacity_2[3];
         }
         else if (this.level <= 200)
         {
-            this.capacityWillUp = (long)(this.capacity + this.capacity * GameConfig.Instance.Capacity_2[4]);
+            this.capacityWillUp = this.capacity + GameConfig.Instance.Capacity_2[4];
         }
         else if (this.level <= 500)
         {
-            this.capacityWillUp = (long)(this.capacity + this.capacity * GameConfig.Instance.Capacity_2[5]);
+            this.capacityWillUp = this.capacity + GameConfig.Instance.Capacity_2[5];
         }
         else if (this.level > 500)
         {
-            this.capacityWillUp = (long)(this.capacity + this.capacity * GameConfig.Instance.Capacity_2[5]);
+            this.capacityWillUp = this.capacity + GameConfig.Instance.Capacity_2[6];
         }
     }
 
@@ -147,31 +130,40 @@ public class Transporter : MonoBehaviour
     {
         if (this.level <= 10)
         {
-            this.price = GameConfig.Instance.lstCostTransporter[0];
+            double t = this.price + this.price * GameConfig.Instance.Cost_2[0];
+            if ((this.price * GameConfig.Instance.Cost_2[0]) < 2)
+            {
+                t = this.price + 2;
+            }
+            if (t - (long)t > 0.5f)
+            {
+                t += 1;
+            }
+            this.price = (long)t;
         }
         else if (this.level <= 20)
         {
-            this.price = GameConfig.Instance.lstCostTransporter[1];
+            this.price = (long)(this.price + this.price * GameConfig.Instance.Cost_2[1]);
         }
         else if (this.level <= 50)
         {
-            this.price = GameConfig.Instance.lstCostTransporter[2];
+            this.price = (long)(this.price + this.price * GameConfig.Instance.Cost_2[2]);
         }
         else if (this.level <= 100)
         {
-            this.price = GameConfig.Instance.lstCostTransporter[3];
+            this.price = (long)(this.price + this.price * GameConfig.Instance.Cost_2[3]);
         }
         else if (this.level <= 200)
         {
-            this.price = GameConfig.Instance.lstCostTransporter[4];
+            this.price = (long)(this.price + this.price * GameConfig.Instance.Cost_2[4]);
         }
         else if (this.level <= 500)
         {
-            this.price = GameConfig.Instance.lstCostTransporter[4];
+            this.price = (long)(this.price + this.price * GameConfig.Instance.Cost_2[5]);
         }
         else if (this.level > 500)
         {
-            this.price = GameConfig.Instance.lstCostTransporter[4];
+            this.price = (long)(this.price + this.price * GameConfig.Instance.Cost_2[6]);
         }
     }
 

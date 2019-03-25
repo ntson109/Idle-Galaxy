@@ -903,19 +903,22 @@ public class MineShaft : MonoBehaviour
     int capStoreWillUp;
     void Btn_ShowUpgrade_Store()
     {
-        GetStoreCost();
-        GetSoreCapacity();
-        UIManager.Instance.SetActivePanel(UIManager.Instance.panelUpgradeStore);
-        UIManager.Instance.btnUpStore.thisButton.onClick.RemoveAllListeners();
-        UIManager.Instance.txtNameStore.text = "Store Machine " + (this.ID+1);
-        UIManager.Instance.txtLevelStore.text = this.store.level.ToString();
-        UIManager.Instance.txtLevelStores_Up.text = (this.store.level + 1).ToString();
-        UIManager.Instance.txtCapStore.text = UIManager.Instance.ToLongString(this.store.capacity);
-        UIManager.Instance.txtCapStore_Up.text = UIManager.Instance.ToLongString(this.capStoreWillUp);
-        UIManager.Instance.btnUpStore.thisPrice = this.store.cost;
-        UIManager.Instance.txtPriceStore.text = "Upgrade\n" + UIManager.Instance.ToLongString(this.store.cost);
-        UIManager.Instance.btnUpStore.type = MyButton.Type.GOLD;
-        UIManager.Instance.btnUpStore.thisButton.onClick.AddListener(() => Upgrade_Store());
+        if (nextMineShaft != null && nextMineShaft.state != StateMineShaft.LOCK && nextMineShaft.state != StateMineShaft.UNLOCKING)
+        {
+            GetStoreCost();
+            GetSoreCapacity();
+            UIManager.Instance.SetActivePanel(UIManager.Instance.panelUpgradeStore);
+            UIManager.Instance.btnUpStore.thisButton.onClick.RemoveAllListeners();
+            UIManager.Instance.txtNameStore.text = "Store Machine " + (this.ID + 1);
+            UIManager.Instance.txtLevelStore.text = this.store.level.ToString();
+            UIManager.Instance.txtLevelStores_Up.text = (this.store.level + 1).ToString();
+            UIManager.Instance.txtCapStore.text = UIManager.Instance.ToLongString(this.store.capacity);
+            UIManager.Instance.txtCapStore_Up.text = UIManager.Instance.ToLongString(this.capStoreWillUp);
+            UIManager.Instance.btnUpStore.thisPrice = this.store.cost;
+            UIManager.Instance.txtPriceStore.text = "Upgrade\n" + UIManager.Instance.ToLongString(this.store.cost);
+            UIManager.Instance.btnUpStore.type = MyButton.Type.GOLD;
+            UIManager.Instance.btnUpStore.thisButton.onClick.AddListener(() => Upgrade_Store());
+        }
     }
 
     void Upgrade_Store()

@@ -60,8 +60,10 @@ public class GameConfig : MonoBehaviour {
     public List<long> lstCostTransporter = new List<long>();
     public string NameTransport;
     public int TimeTransport;
+    public int Cost_1;
+    public float[] Cost_2;
     public int Capacity_1;
-    public float[] Capacity_2;
+    public int[] Capacity_2;
     public float UFO_speed;
     public int UFO_time;
     public float[] UFO_rate_gold;

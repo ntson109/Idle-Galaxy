@@ -30,14 +30,14 @@ public class Map : MonoBehaviour
                 CheckFullWareHouse();
         }
 
-        txtAmountProduct.text = totalAmount.ToString();
+        txtAmountProduct.text = UIManager.Instance.ToLongString(totalMoney); //totalAmount.ToString();
     }
 
     void ON_START_GAME()
     {
         if (UIManager.Instance.isNewPlayer)
         {
-            this.transporter.SetInfo(1, GameConfig.Instance.Capacity_1, 5);           
+            this.transporter.SetInfo(1, GameConfig.Instance.Capacity_1, GameConfig.Instance.Cost_1);           
         }
         else
         {
@@ -49,7 +49,7 @@ public class Map : MonoBehaviour
                     {
                         lstMineShaft[i].LetWork();
                     }                    
-                    lstMineShaft[i].imgWorkBar.fillAmount = (float)lstMineShaft[i].timer / (float)lstMineShaft[i].properties.miningTime;
+                    //lstMineShaft[i].imgWorkBar.fillAmount = (float)lstMineShaft[i].timer / (float)lstMineShaft[i].properties.miningTime;
                 }
 
                 if (lstMineShaft[i].state != MineShaft.StateMineShaft.LOCK && lstMineShaft[i].state != MineShaft.StateMineShaft.UNLOCKING)

@@ -152,12 +152,20 @@ public class LoadDataJson : MonoBehaviour
                 GameConfig.Instance.lstPropertiesMap.Add(pM);
             }
             GameConfig.Instance.TimeTransport = objJson["Transporter"]["TimeTransport"].AsInt;
+            GameConfig.Instance.NameTransport = objJson["Transporter"]["NameTransport"];
+            GameConfig.Instance.Cost_1 = objJson["Transporter"]["Cost_1"].AsInt;
             GameConfig.Instance.Capacity_1 = objJson["Transporter"]["Capacity_1"].AsInt;
 
-            GameConfig.Instance.Capacity_2 = new float[objJson["Transporter"]["Capacity_2"].Count];
+            GameConfig.Instance.Cost_2 = new float[objJson["Transporter"]["Cost_2"].Count];
+            for (int j = 0; j < GameConfig.Instance.Cost_2.Length; j++)
+            {
+                GameConfig.Instance.Cost_2[j] = objJson["Transporter"]["Cost_2"][j].AsFloat;
+            }
+
+            GameConfig.Instance.Capacity_2 = new int[objJson["Transporter"]["Capacity_2"].Count];
             for (int j = 0; j < GameConfig.Instance.Capacity_2.Length; j++)
             {
-                GameConfig.Instance.Capacity_2[j] = objJson["Transporter"]["Capacity_2"][j].AsFloat;
+                GameConfig.Instance.Capacity_2[j] = objJson["Transporter"]["Capacity_2"][j].AsInt;
             }
             
             for (int i = 0; i < objJson["Transporter"]["Cost"].Count; i++)
