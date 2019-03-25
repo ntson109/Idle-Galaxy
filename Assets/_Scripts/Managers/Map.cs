@@ -14,6 +14,7 @@ public class Map : MonoBehaviour
     public long totalMoney;
     public long moneyPerTurn;
     public GameObject rdPrefabs;
+    float timeTransport;
 
     [Header("UI")]
     public Text txtAmountProduct;
@@ -27,7 +28,17 @@ public class Map : MonoBehaviour
         if (GameManager.Instance.stateGame == StateGame.PLAYING)
         {
             if (!transporter.isTransporting)
-                CheckFullWareHouse();
+            {
+                if (timeTransport >= 1.5f)
+                {
+                    CheckFullWareHouse();
+                    //timeTransport = 0;
+                }
+                else
+                {
+                    timeTransport += Time.deltaTime;
+                }
+            }
         }
 
         txtAmountProduct.text = UIManager.Instance.ToLongString(totalMoney); //totalAmount.ToString();
@@ -79,11 +90,26 @@ public class Map : MonoBehaviour
         //    transporter.Transport();
         //}
 
-        if (totalMoney >= transporter.capacity)
+        //if (totalMoney >= transporter.capacity)
+        //{
+        //    moneyPerTurn = transporter.capacity;
+        //    totalMoney -= moneyPerTurn;
+        //    transporter.Transport();
+        //}
+
+        if (totalMoney > 0)
         {
-            moneyPerTurn = transporter.capacity;
+            if (transporter.capacity > totalMoney)
+            {
+                moneyPerTurn = totalMoney;
+            }
+            else
+            {
+                moneyPerTurn = transporter.capacity;
+            }
             totalMoney -= moneyPerTurn;
             transporter.Transport();
+            timeTransport = 0;
         }
     }
 
