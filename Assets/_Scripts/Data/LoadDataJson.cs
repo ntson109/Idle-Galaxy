@@ -147,27 +147,30 @@ public class LoadDataJson : MonoBehaviour
                         pM.Unit_Price.Add(objJson["Map_Moon"][i]["Unit_Price"][k].AsDouble);
                     }
 
-                    pM.Store_Capacity = objJson["Map_Moon"][i]["Store_Capacity"].AsInt;
+                    pM.Store_Cost_1 = objJson["Map_Moon"][i]["Store_Cost_1"].AsInt;
+                    pM.Store_Cost_2 = objJson["Map_Moon"][i]["Store_Cost_2"].AsFloat;
+                    pM.Store_Capacity_1 = objJson["Map_Moon"][i]["Store_Capacity_1"].AsInt;
+                    pM.Store_Capacity_2 = objJson["Map_Moon"][i]["Store_Capacity_2"].AsInt;
                 }
                 GameConfig.Instance.lstPropertiesMap.Add(pM);
             }
             GameConfig.Instance.TimeTransport = objJson["Transporter"]["TimeTransport"].AsInt;
             GameConfig.Instance.NameTransport = objJson["Transporter"]["NameTransport"];
-            GameConfig.Instance.Cost_1 = objJson["Transporter"]["Cost_1"].AsInt;
-            GameConfig.Instance.Capacity_1 = objJson["Transporter"]["Capacity_1"].AsInt;
+            GameConfig.Instance.Trans_Cost_1 = objJson["Transporter"]["Cost_1"].AsInt;
+            GameConfig.Instance.Trans_Capacity_1 = objJson["Transporter"]["Capacity_1"].AsInt;
 
-            GameConfig.Instance.Cost_2 = new float[objJson["Transporter"]["Cost_2"].Count];
-            for (int j = 0; j < GameConfig.Instance.Cost_2.Length; j++)
+            GameConfig.Instance.Trans_Cost_2 = new float[objJson["Transporter"]["Cost_2"].Count];
+            for (int j = 0; j < GameConfig.Instance.Trans_Cost_2.Length; j++)
             {
-                GameConfig.Instance.Cost_2[j] = objJson["Transporter"]["Cost_2"][j].AsFloat;
+                GameConfig.Instance.Trans_Cost_2[j] = objJson["Transporter"]["Cost_2"][j].AsFloat;
             }
 
-            GameConfig.Instance.Capacity_2 = new int[objJson["Transporter"]["Capacity_2"].Count];
-            for (int j = 0; j < GameConfig.Instance.Capacity_2.Length; j++)
+            GameConfig.Instance.Trans_Capacity_2 = new int[objJson["Transporter"]["Capacity_2"].Count];
+            for (int j = 0; j < GameConfig.Instance.Trans_Capacity_2.Length; j++)
             {
-                GameConfig.Instance.Capacity_2[j] = objJson["Transporter"]["Capacity_2"][j].AsInt;
+                GameConfig.Instance.Trans_Capacity_2[j] = objJson["Transporter"]["Capacity_2"][j].AsInt;
             }
-            
+
             for (int i = 0; i < objJson["Transporter"]["Cost"].Count; i++)
             {
                 GameConfig.Instance.lstCostTransporter.Add(objJson["Transporter"]["Cost"][i].AsLong);

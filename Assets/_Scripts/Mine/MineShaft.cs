@@ -119,7 +119,7 @@ public class MineShaft : MonoBehaviour
     private float timeUpgradeLevel_Max;
 
     public Store store;
-    public Button btnStore;
+    public MyButton btnStore;
 
     [Header("UI")]
     public Text txtName;
@@ -263,8 +263,9 @@ public class MineShaft : MonoBehaviour
         btnX.onClick.AddListener(() => Btn_X());
         if (this.ID < 5)
         {
-            btnStore.onClick.AddListener(() => Btn_ShowUpgrade_Store());
-        }        
+            btnStore.type = MyButton.Type.GOLD;
+            btnStore.thisButton.onClick.AddListener(() => Upgrade_Store());
+        }
         btnUnlock_byGold.onClick.AddListener(() => Btn_Unlock(TypeUnlock.GOLD));
         btnUnlock_byCoin.onClick.AddListener(() => Btn_Unlock(TypeUnlock.COIN));
         btnUnlock_byAD.onClick.AddListener(() => Btn_Unlock(TypeUnlock.ADS));
@@ -409,7 +410,8 @@ public class MineShaft : MonoBehaviour
             this.state = StateMineShaft.LOCK;
             this.store.level = 1;
             this.store.value = 0;
-            this.store.capacity = GameConfig.Instance.lstPropertiesMap[ID].Store_Capacity;
+            this.store.capacity = GameConfig.Instance.lstPropertiesMap[ID].Store_Capacity_1;
+            this.store.cost = GameConfig.Instance.lstPropertiesMap[ID].Store_Cost_1;
         }
 
         this.store.mineShaft = this;
@@ -447,6 +449,9 @@ public class MineShaft : MonoBehaviour
         this.unlockCost[1].cost = GameConfig.Instance.lstPropertiesMap[ID].Unlock_cost[1];
         txtUnlock_byCoin.text = UIManager.Instance.ToLongString(this.unlockCost[0].cost);
         txtUnlock_byGold.text = UIManager.Instance.ToLongString(this.unlockCost[1].cost) + "$";
+
+        GetStoreCost();
+        GetSoreCapacity();
     }
 
     double _temp;
@@ -903,43 +908,55 @@ public class MineShaft : MonoBehaviour
 
     #region === STORE ===
     int capStoreWillUp;
-    void Btn_ShowUpgrade_Store()
-    {
-        if (nextMineShaft != null && nextMineShaft.state != StateMineShaft.LOCK && nextMineShaft.state != StateMineShaft.UNLOCKING)
-        {
-            GetStoreCost();
-            GetSoreCapacity();
-            UIManager.Instance.SetActivePanel(UIManager.Instance.panelUpgradeStore);
-            UIManager.Instance.btnUpStore.thisButton.onClick.RemoveAllListeners();
-            UIManager.Instance.txtNameStore.text = "Store Machine " + (this.ID + 1);
-            UIManager.Instance.txtLevelStore.text = this.store.level.ToString();
-            UIManager.Instance.txtLevelStores_Up.text = (this.store.level + 1).ToString();
-            UIManager.Instance.txtCapStore.text = UIManager.Instance.ToLongString(this.store.capacity);
-            UIManager.Instance.txtCapStore_Up.text = UIManager.Instance.ToLongString(this.capStoreWillUp);
-            UIManager.Instance.btnUpStore.thisPrice = this.store.cost;
-            UIManager.Instance.txtPriceStore.text = "Upgrade\n" + UIManager.Instance.ToLongString(this.store.cost);
-            UIManager.Instance.btnUpStore.type = MyButton.Type.GOLD;
-            UIManager.Instance.btnUpStore.thisButton.onClick.AddListener(() => Upgrade_Store());
-        }
-    }
+    //void Btn_ShowUpgrade_Store()
+    //{
+    //    if (nextMineShaft != null && nextMineShaft.state != StateMineShaft.LOCK && nextMineShaft.state != StateMineShaft.UNLOCKING)
+    //    {
+    //        GetStoreCost();
+    //        GetSoreCapacity();
+    //        UIManager.Instance.SetActivePanel(UIManager.Instance.panelUpgradeStore);
+    //        UIManager.Instance.btnUpStore.thisButton.onClick.RemoveAllListeners();
+    //        UIManager.Instance.txtNameStore.text = "Store Machine " + (this.ID + 1);
+    //        UIManager.Instance.txtLevelStore.text = this.store.level.ToString();
+    //        UIManager.Instance.txtLevelStores_Up.text = (this.store.level + 1).ToString();
+    //        UIManager.Instance.txtCapStore.text = UIManager.Instance.ToLongString(this.store.capacity);
+    //        UIManager.Instance.txtCapStore_Up.text = UIManager.Instance.ToLongString(this.capStoreWillUp);
+    //        UIManager.Instance.btnUpStore.thisPrice = this.store.cost;
+    //        UIManager.Instance.txtPriceStore.text = "Upgrade\n" + UIManager.Instance.ToLongString(this.store.cost);
+    //        UIManager.Instance.btnUpStore.type = MyButton.Type.GOLD;
+    //        UIManager.Instance.btnUpStore.thisButton.onClick.AddListener(() => Upgrade_Store());
+    //    }
+    //}
 
     void Upgrade_Store()
     {
         GameManager.Instance.AddGold(-this.store.cost);
         this.store.level += 1;
-        this.store.capacity = capStoreWillUp;;
-        Btn_ShowUpgrade_Store();
+        this.store.capacity = capStoreWillUp;
+        GetStoreCost();
+        GetSoreCapacity();
     }
 
-    
+
     void GetStoreCost()
     {
-        this.store.cost = 100;
+        double t = this.store.cost + this.store.cost * GameConfig.Instance.lstPropertiesMap[ID].Store_Cost_2;
+        //if ((this.store.cost * GameConfig.Instance.Trans_Cost_2[0]) < 2)
+        //{
+        //    t = this.store.cost + 2;
+        //}
+        if (t - (long)t > 0.5f)
+        {
+            t += 1;
+        }
+        this.store.cost = (long)t;
+        if (btnStore != null)
+            btnStore.thisPrice = this.store.cost;
     }
 
     void GetSoreCapacity()
     {
-        capStoreWillUp = this.store.capacity + 10;
+        capStoreWillUp = this.store.capacity + GameConfig.Instance.lstPropertiesMap[ID].Store_Capacity_2;
     }
     #endregion
 }

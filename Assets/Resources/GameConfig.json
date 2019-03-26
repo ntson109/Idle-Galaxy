@@ -159,7 +159,10 @@
 			1,
 			1
 		],
-		"Store_Capacity" : 50
+		"Store_Cost_1" : 50,
+		"Store_Cost_2" : 0.05,
+		"Store_Capacity_1" : 5,
+		"Store_Capacity_2" : 5
 	},
 	"M_2" :{
 		"Name" : "Machine2",
@@ -252,7 +255,10 @@
 			10,
 			10
 		],
-		"Store_Capacity" : 50
+		"Store_Cost_1" : 5,
+		"Store_Cost_2" : 0.06,
+		"Store_Capacity_1" : 100,
+		"Store_Capacity_2" : 20
 	},
 	"M_3" :{
 		"Name" : "Machine3",
@@ -345,7 +351,10 @@
 			1000,
 			1000
 		],
-		"Store_Capacity" : 50
+		"Store_Cost_1" : 5,
+		"Store_Cost_2" : 0.07,
+		"Store_Capacity_1" : 200,
+		"Store_Capacity_2" : 40
 	},
 	"M_4" :{
 		"Name" : "Machine4",
@@ -437,7 +446,10 @@
 			10000,
 			10000
 		],
-		"Store_Capacity" : 50
+		"Store_Cost_1" : 5,
+		"Store_Cost_2" : 0.07,
+		"Store_Capacity_1" : 500,
+		"Store_Capacity_2" : 80
 	},
 	"M_5" :{
 		"Name" : "Machine5",
@@ -529,7 +541,10 @@
 			100000,
 			100000
 		],
-		"Store_Capacity" : 50
+		"Store_Cost_1" : 5,
+		"Store_Cost_2" : 0.09,
+		"Store_Capacity_1" : 1000,
+		"Store_Capacity_2" : 160
 	},
 	"M_6" :{
 		"Name" : "Machine6",
@@ -621,7 +636,10 @@
 			1000000,
 			1000000
 		],
-		"Store_Capacity" : 50
+		"Store_Cost_1" : 0,
+		"Store_Cost_2" : 0,
+		"Store_Capacity_1" : 0,
+		"Store_Capacity_2" : 0
   },
   "Map_Earth" : {
 	"E_1" : {

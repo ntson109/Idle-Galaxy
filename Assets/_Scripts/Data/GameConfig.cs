@@ -37,7 +37,10 @@ public class GameConfig : MonoBehaviour {
         public List<long> Upgrade_cost;
         public List<double> Unit_Price;
         public List<MineShaft.UpgradeSpecial> Upgrade_Special;
-        public int Store_Capacity;
+        public int Store_Cost_1;
+        public float Store_Cost_2;
+        public int Store_Capacity_1;
+        public int Store_Capacity_2;
     }
 
     #region === GAME CONFIG ===
@@ -60,10 +63,10 @@ public class GameConfig : MonoBehaviour {
     public List<long> lstCostTransporter = new List<long>();
     public string NameTransport;
     public int TimeTransport;
-    public int Cost_1;
-    public float[] Cost_2;
-    public int Capacity_1;
-    public int[] Capacity_2;
+    public int Trans_Cost_1;
+    public float[] Trans_Cost_2;
+    public int Trans_Capacity_1;
+    public int[] Trans_Capacity_2;
     public float UFO_speed;
     public int UFO_time;
     public float[] UFO_rate_gold;
