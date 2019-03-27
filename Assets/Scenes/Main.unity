@@ -3011,6 +3011,7 @@ GameObject:
   - component: {fileID: 139457692}
   - component: {fileID: 139457694}
   - component: {fileID: 139457693}
+  - component: {fileID: 139457696}
   - component: {fileID: 139457695}
   m_Layer: 5
   m_Name: Ong trai
@@ -3075,6 +3076,20 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 139457691}
 --- !u!114 &139457695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 139457691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bd2d06a749d69f4d8350b77d76ce9e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thisButton: {fileID: 139457696}
+  thisPrice: 0
+  type: 0
+--- !u!114 &139457696
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -10121,10 +10136,10 @@ MonoBehaviour:
   lstCostTransporter: 
   NameTransport: 
   TimeTransport: 0
-  Cost_1: 0
-  Cost_2: []
-  Capacity_1: 0
-  Capacity_2: 
+  Trans_Cost_1: 0
+  Trans_Cost_2: []
+  Trans_Capacity_1: 0
+  Trans_Capacity_2: 
   UFO_speed: 0
   UFO_time: 0
   UFO_rate_gold: []
@@ -24542,6 +24557,7 @@ GameObject:
   - component: {fileID: 1001891600}
   - component: {fileID: 1001891602}
   - component: {fileID: 1001891601}
+  - component: {fileID: 1001891604}
   - component: {fileID: 1001891603}
   m_Layer: 5
   m_Name: Ong trai
@@ -24606,6 +24622,20 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1001891599}
 --- !u!114 &1001891603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1001891599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bd2d06a749d69f4d8350b77d76ce9e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thisButton: {fileID: 1001891604}
+  thisPrice: 0
+  type: 0
+--- !u!114 &1001891604
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -34854,6 +34884,7 @@ GameObject:
   - component: {fileID: 1503664353}
   - component: {fileID: 1503664355}
   - component: {fileID: 1503664354}
+  - component: {fileID: 1503664357}
   - component: {fileID: 1503664356}
   m_Layer: 5
   m_Name: Ong trai
@@ -34918,6 +34949,20 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1503664352}
 --- !u!114 &1503664356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1503664352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bd2d06a749d69f4d8350b77d76ce9e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thisButton: {fileID: 1503664357}
+  thisPrice: 0
+  type: 0
+--- !u!114 &1503664357
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -35816,6 +35861,7 @@ GameObject:
   - component: {fileID: 1524725347}
   - component: {fileID: 1524725349}
   - component: {fileID: 1524725348}
+  - component: {fileID: 1524725351}
   - component: {fileID: 1524725350}
   m_Layer: 5
   m_Name: Ong trai
@@ -35880,6 +35926,20 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1524725346}
 --- !u!114 &1524725350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1524725346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bd2d06a749d69f4d8350b77d76ce9e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thisButton: {fileID: 1524725351}
+  thisPrice: 0
+  type: 0
+--- !u!114 &1524725351
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -51616,6 +51676,7 @@ GameObject:
   - component: {fileID: 2132088999}
   - component: {fileID: 2132089001}
   - component: {fileID: 2132089000}
+  - component: {fileID: 2132089003}
   - component: {fileID: 2132089002}
   m_Layer: 5
   m_Name: Ong trai
@@ -51680,6 +51741,20 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2132088998}
 --- !u!114 &2132089002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2132088998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bd2d06a749d69f4d8350b77d76ce9e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thisButton: {fileID: 2132089003}
+  thisPrice: 0
+  type: 0
+--- !u!114 &2132089003
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
