@@ -149,6 +149,7 @@ public class LoadDataJson : MonoBehaviour
 
                     pM.Store_Cost_1 = objJson["Map_Moon"][i]["Store_Cost_1"].AsInt;
                     pM.Store_Cost_2 = objJson["Map_Moon"][i]["Store_Cost_2"].AsFloat;
+                    pM.Store_Cost_3 = objJson["Map_Moon"][i]["Store_Cost_3"].AsInt;
                     pM.Store_Capacity_1 = objJson["Map_Moon"][i]["Store_Capacity_1"].AsInt;
                     pM.Store_Capacity_2 = objJson["Map_Moon"][i]["Store_Capacity_2"].AsInt;
                 }

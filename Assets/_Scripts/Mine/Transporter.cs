@@ -139,28 +139,28 @@ public class Transporter : MonoBehaviour
         }
         else if (this.level <= 20)
         {
-            this.price = (long)(this.price + this.price * GameConfig.Instance.Trans_Cost_2[1]);
+            this.price = (long)(1 + this.price + this.price * GameConfig.Instance.Trans_Cost_2[1]);
 
         }
         else if (this.level <= 50)
         {
-            this.price = (long)(this.price + this.price * GameConfig.Instance.Trans_Cost_2[2]);
+            this.price = (long)(1 + this.price + this.price * GameConfig.Instance.Trans_Cost_2[2]);
         }
         else if (this.level <= 100)
         {
-            this.price = (long)(this.price + this.price * GameConfig.Instance.Trans_Cost_2[3]);
+            this.price = (long)(1 + this.price + this.price * GameConfig.Instance.Trans_Cost_2[3]);
         }
         else if (this.level <= 200)
         {
-            this.price = (long)(this.price + this.price * GameConfig.Instance.Trans_Cost_2[4]);
+            this.price = (long)(1 + this.price + this.price * GameConfig.Instance.Trans_Cost_2[4]);
         }
         else if (this.level <= 500)
         {
-            this.price = (long)(this.price + this.price * GameConfig.Instance.Trans_Cost_2[5]);
+            this.price = (long)(1 +this.price + this.price * GameConfig.Instance.Trans_Cost_2[5]);
         }
         else if (this.level > 500)
         {
-            this.price = (long)(this.price + this.price * GameConfig.Instance.Trans_Cost_2[6]);
+            this.price = (long)(1 + this.price + this.price * GameConfig.Instance.Trans_Cost_2[6]);
         }
     }
 

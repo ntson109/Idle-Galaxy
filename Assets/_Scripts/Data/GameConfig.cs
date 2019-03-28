@@ -39,6 +39,7 @@ public class GameConfig : MonoBehaviour {
         public List<MineShaft.UpgradeSpecial> Upgrade_Special;
         public int Store_Cost_1;
         public float Store_Cost_2;
+        public int Store_Cost_3;
         public int Store_Capacity_1;
         public int Store_Capacity_2;
     }
