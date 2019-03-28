@@ -207,4 +207,160 @@ public class SpinManager : MonoBehaviour
         if (!UIManager.Instance.isSpinning)
             transform.DOKill();
     }
+
+    int l;
+    long CapacityOffline()
+    {
+        long _money = 0;
+        int counter = 0;
+        int time = 0;
+        l = 0;
+        int T_invalid = 5000;
+        int[] c;
+        int[] a;
+        int[] b;
+        int[] n_counter = new int[6] { 10, 100, 100, 200, 400, 800 };
+
+        for (int i = 0; i < GameManager.Instance.lstMap[0].lstMineShaft.Count; i++)
+        {
+            if (GameManager.Instance.lstMap[0].lstMineShaft[i].state != MineShaft.StateMineShaft.LOCK && GameManager.Instance.lstMap[0].lstMineShaft[i].state != MineShaft.StateMineShaft.UNLOCKING)
+            {
+                l++;
+            }
+            else
+                break;
+        }
+
+        c = new int[l];
+        a = new int[l];
+        b = new int[l];
+        for (int i = 0; i < l; i++)
+        {
+            if (GameManager.Instance.lstMap[0].lstMineShaft[i].state != MineShaft.StateMineShaft.LOCK && GameManager.Instance.lstMap[0].lstMineShaft[i].state != MineShaft.StateMineShaft.UNLOCKING)
+            {
+                c[i] = GameManager.Instance.lstMap[0].lstMineShaft[i].properties.miningTime - GameManager.Instance.lstMap[0].lstMineShaft[i].timer;
+                a[i] = GameManager.Instance.lstMap[0].lstMineShaft[i].input;
+                if (i == 0)
+                {
+                    b[i] = a[i];
+                }
+                else
+                {
+                    b[i] = GameManager.Instance.lstMap[0].lstMineShaft[i - 1].store.value;
+                }
+            }
+        }
+
+        while (counter < n_counter[l - 1])
+        {
+            int j = 0;
+            int temp = c[0];
+            int sp = 0;
+
+            for (int i = 1; i < l; i++)
+            {
+                if (c[i] < temp)
+                {
+                    temp = c[i];
+                    j = i;
+                }
+            }
+
+            sp = GameManager.Instance.lstMap[0].lstMineShaft[j].input;
+            time = time + c[j];
+
+            for (int i = 0; i < l; i++)
+            {
+                //neu nha may dang trong qua trinh san xuat thi update lai thoi gian
+                if (c[i] != T_invalid)
+                    c[i] = c[i] - temp;
+            }
+
+            if (b[j] > 0)
+            {
+                //Neu so san pham o nha chua j ma lon hon cong suat nha may j thi day so san pham len bang cong suat
+                if (b[j] >= GameManager.Instance.lstMap[0].lstMineShaft[j].totalCapacity)
+                {
+                    //set so san pham dang xu ly cho nha chua j
+                    a[j] = GameManager.Instance.lstMap[0].lstMineShaft[j].totalCapacity;
+                    //set lai so luong trong nha chua j
+                    if (j != 0)
+                        b[j] = b[j] - a[j];// truong hop j = 0 thi nha chua dau luon co so sp bang cong suat nhu da noi o tren, k can update
+                }
+                else
+                {
+                    //set so san pham dang xu ly cho nha chua j
+                    a[j] = b[j];
+                    if (j != 0)
+                    {
+                        //set lai so luong trong nha chua j
+                        b[j] = 0;
+                    }
+                }
+                //set lai thoi gian cho nha j
+                c[j] = GameManager.Instance.lstMap[0].lstMineShaft[j].properties.miningTime;
+            }
+            else
+            {
+                a[j] = 0;			//khong co gi de xu ly
+                c[j] = T_invalid;	//khong co thoi gian xu ly
+            }
+
+            if (j == l - 1)
+            {
+                // do nothing
+            }
+            else
+            {
+                //cac san pham nay se duoc day len nha chua j+1, con thua thi se duoc ban
+                //kiem tra nha chua j+1, neu con kha nang chua duoc nhieu hon A[j] thi tat ca se duoc don len nha chua j+1
+                //k co gi ban ra
+                if (GameManager.Instance.lstMap[0].lstMineShaft[j].store.capacity - b[j + 1] >= sp)
+                {
+                    b[j + 1] = b[j + 1] + sp;
+                    sp = 0;
+                }
+                else
+                {
+                    sp = sp - (GameManager.Instance.lstMap[0].lstMineShaft[j].store.capacity - b[j + 1]);
+                    b[j + 1] = GameManager.Instance.lstMap[0].lstMineShaft[j].store.capacity;
+                }
+
+                //nếu nhà j+1 dang k san xuat (C[j+1] = T_invalid) thi set de nha j+1 san xuat
+                if (c[j + 1] == T_invalid)
+                {
+                    //set A va B
+                    //Neu so sp trong nha chua j+1 nhieu hon cong suat nha j+1
+                    if (b[j + 1] >= GameManager.Instance.lstMap[0].lstMineShaft[j + 1].totalCapacity)
+                    {
+                        a[j + 1] = GameManager.Instance.lstMap[0].lstMineShaft[j + 1].totalCapacity;
+                        b[j + 1] = b[j + 1] - a[j + 1];
+                    }
+                    else
+                    {
+                        a[j + 1] = b[j + 1];
+                        b[j + 1] = 0;
+                    }
+                    //Set C
+                    c[j + 1] = GameManager.Instance.lstMap[0].lstMineShaft[j + 1].properties.miningTime;
+                }
+            }
+
+            //tinh tien
+            _money = _money + sp * (long)GameManager.Instance.lstMap[0].lstMineShaft[j].properties.unitPrice;
+
+            counter++;
+        }
+
+        Debug.Log(_money);
+        Debug.Log(_money / time);
+        if (_money / time < 5)
+        {
+            return 5;
+        }
+        else
+        {
+            return (_money / time);
+        }
+    }
 }

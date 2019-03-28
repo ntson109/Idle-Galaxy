@@ -476,9 +476,9 @@ public class DataPlayer : MonoBehaviour
 
         Debug.Log(_money);
         Debug.Log(_money / time);
-        if (_money / time < 10)
+        if (_money / time < 5)
         { 
-            return 10; 
+            return 5; 
         }
         else
         {
