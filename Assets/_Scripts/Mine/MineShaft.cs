@@ -127,6 +127,7 @@ public class MineShaft : MonoBehaviour
     public Text txtTimer;
     public Text txtNumberMine;
     public Text txtMoreMinePrice;
+    public Text txtTotalCapacity;
     public Text txtX;
     public Button btnWork;
     public MyButton btnUpgrade;
@@ -192,6 +193,7 @@ public class MineShaft : MonoBehaviour
             txtTimer.text = UIManager.Instance.ToDateTimeString(timer);
             txtNumberMine.text = this.numberMine.ToString();
             txtProduct_PushUp.text = this.store.value + "/" + this.store.capacity;
+            txtTotalCapacity.text = this.totalCapacity.ToString();
             if (this.state == StateMineShaft.WORKING)
             {
                 imgWorkBar.fillAmount += (1.000f / this.properties.miningTime) * Time.deltaTime;
@@ -760,6 +762,7 @@ public class MineShaft : MonoBehaviour
                 break;
             case 2:
                 this.properties.capacity *= 2;
+                this.totalCapacity = this.properties.capacity * numberMine;
                 break;
             default:
                 break;
@@ -825,6 +828,7 @@ public class MineShaft : MonoBehaviour
         this.properties.capacity = GameConfig.Instance.lstPropertiesMap[ID].Productivity[this.properties.level - 1];
         this.properties.miningTime = GameConfig.Instance.lstPropertiesMap[ID].miningTime[this.properties.level - 1];
         this.properties.unitPrice = GameConfig.Instance.lstPropertiesMap[ID].Unit_Price[this.properties.level - 1];
+        this.totalCapacity = this.properties.capacity * numberMine;
         typeUpgradeLevel = UpgradeObj_Level.Type.NONE;
 
         GameManager.Instance.upgradeLevel.SetInfo(this, typeUpgradeLevel);

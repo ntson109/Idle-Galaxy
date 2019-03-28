@@ -130,11 +130,7 @@ public class Transporter : MonoBehaviour
     {
         if (this.level <= 10)
         {
-            double t = this.price + this.price * GameConfig.Instance.Trans_Cost_2[0];
-            //if ((this.price * GameConfig.Instance.Trans_Cost_2[0]) < 2)
-            //{
-            //    t = this.price + 2;
-            //}
+            double t = 1 + this.price + this.price * GameConfig.Instance.Trans_Cost_2[0];
             if (t - (long)t > 0.5f)
             {
                 t += 1;
@@ -144,6 +140,7 @@ public class Transporter : MonoBehaviour
         else if (this.level <= 20)
         {
             this.price = (long)(this.price + this.price * GameConfig.Instance.Trans_Cost_2[1]);
+
         }
         else if (this.level <= 50)
         {

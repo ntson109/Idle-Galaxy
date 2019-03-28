@@ -349,6 +349,7 @@ MonoBehaviour:
   txtTimer: {fileID: 1759345279}
   txtNumberMine: {fileID: 1963757878}
   txtMoreMinePrice: {fileID: 960014039}
+  txtTotalCapacity: {fileID: 1058277129}
   txtX: {fileID: 2102763479}
   btnWork: {fileID: 1417249286}
   btnUpgrade: {fileID: 1919934479}
@@ -4722,6 +4723,7 @@ MonoBehaviour:
   txtTimer: {fileID: 645161027}
   txtNumberMine: {fileID: 1234807560}
   txtMoreMinePrice: {fileID: 89492923}
+  txtTotalCapacity: {fileID: 207634688}
   txtX: {fileID: 788214514}
   btnWork: {fileID: 218689756}
   btnUpgrade: {fileID: 1264420126}
@@ -4877,7 +4879,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &213976672
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4895,7 +4897,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -188, y: 98}
+  m_AnchoredPosition: {x: -188, y: 30}
   m_SizeDelta: {x: 120, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &213976673
@@ -8515,6 +8517,7 @@ MonoBehaviour:
   txtTimer: {fileID: 1695552400}
   txtNumberMine: {fileID: 1536823771}
   txtMoreMinePrice: {fileID: 309219961}
+  txtTotalCapacity: {fileID: 1983480287}
   txtX: {fileID: 45871089}
   btnWork: {fileID: 881903880}
   btnUpgrade: {fileID: 690489874}
@@ -11772,7 +11775,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &490156289
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11790,7 +11793,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -188, y: 98}
+  m_AnchoredPosition: {x: -188, y: 30}
   m_SizeDelta: {x: 120, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &490156290
@@ -17533,6 +17536,7 @@ MonoBehaviour:
   txtTimer: {fileID: 1161452240}
   txtNumberMine: {fileID: 1779591417}
   txtMoreMinePrice: {fileID: 926436309}
+  txtTotalCapacity: {fileID: 798008521}
   txtX: {fileID: 1034688098}
   btnWork: {fileID: 482060046}
   btnUpgrade: {fileID: 641816916}
@@ -18159,7 +18163,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &741686378
 RectTransform:
   m_ObjectHideFlags: 0
@@ -18177,7 +18181,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -188, y: 98}
+  m_AnchoredPosition: {x: -188, y: 30}
   m_SizeDelta: {x: 120, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &741686379
@@ -19709,7 +19713,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 1
+  m_Text: 
 --- !u!222 &798008522
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -25063,7 +25067,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1031021130
 RectTransform:
   m_ObjectHideFlags: 0
@@ -25081,7 +25085,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -188, y: 98}
+  m_AnchoredPosition: {x: -188, y: 30}
   m_SizeDelta: {x: 120, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1031021131
@@ -26434,7 +26438,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1068090674
 RectTransform:
   m_ObjectHideFlags: 0
@@ -26452,7 +26456,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -188, y: 98}
+  m_AnchoredPosition: {x: -188, y: 30}
   m_SizeDelta: {x: 120, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1068090675
@@ -26613,7 +26617,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1083071165}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
@@ -26846,7 +26850,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1091129696
 RectTransform:
   m_ObjectHideFlags: 0
@@ -26864,7 +26868,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -188, y: 98}
+  m_AnchoredPosition: {x: -188, y: 30}
   m_SizeDelta: {x: 120, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1091129697
@@ -41364,6 +41368,7 @@ MonoBehaviour:
   txtTimer: {fileID: 1932564424}
   txtNumberMine: {fileID: 1113907958}
   txtMoreMinePrice: {fileID: 426416894}
+  txtTotalCapacity: {fileID: 1757653089}
   txtX: {fileID: 974736661}
   btnWork: {fileID: 997567969}
   btnUpgrade: {fileID: 278967104}
@@ -43118,6 +43123,7 @@ MonoBehaviour:
   txtTimer: {fileID: 178686463}
   txtNumberMine: {fileID: 783950704}
   txtMoreMinePrice: {fileID: 128129272}
+  txtTotalCapacity: {fileID: 120114111}
   txtX: {fileID: 1764410925}
   btnWork: {fileID: 2122022677}
   btnUpgrade: {fileID: 997505841}
