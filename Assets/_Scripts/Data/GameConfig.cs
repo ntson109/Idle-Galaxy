@@ -22,7 +22,7 @@ public class GameConfig : MonoBehaviour {
     {       
         public int ID;
         public string Name;
-        //public long BuyAI;
+        public long BuyAI;
         public int Unlock_condition;
         public int Unlock_time;
         public List<int> miningTime;

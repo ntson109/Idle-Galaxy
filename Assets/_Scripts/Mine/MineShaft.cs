@@ -30,7 +30,7 @@ public class MineShaft : MonoBehaviour
 
         public int unlockCondition;
 
-        //public long buyAI;
+        public long buyAI;
 
         public long upgradePrice;
 
@@ -111,7 +111,7 @@ public class MineShaft : MonoBehaviour
     public RectTransform posProduct_Complete;
     public RectTransform posProduct_Complete_1;
     public Map mapParent;
-    private bool isCanWork = false;
+    public bool isCanWork = false;
     public float timeUnlocking;
 
     public UpgradeObj_Level.Type typeUpgradeLevel;
@@ -129,7 +129,7 @@ public class MineShaft : MonoBehaviour
     public Text txtMoreMinePrice;
     public Text txtX;
     public Button btnWork;
-    public Button btnUpgrade;
+    public MyButton btnUpgrade;
     public MyButton btnBuyMoreMine;
     public Button btnX;
     public Button btnUnlock_byGold;
@@ -191,20 +191,6 @@ public class MineShaft : MonoBehaviour
 
             txtTimer.text = UIManager.Instance.ToDateTimeString(timer);
             txtNumberMine.text = this.numberMine.ToString();
-            //if (nextMineShaft != null && nextMineShaft.state != StateMineShaft.LOCK && nextMineShaft.state != StateMineShaft.UNLOCKING && nextMineShaft.isActiveAndEnabled)
-            //{
-            //    //txtProduct_PushUp.text = numberProduct_PushUp + "/" + this.nextMineShaft.totalCapacity;
-            //    if (this.store.value < this.nextMineShaft.totalCapacity)
-            //    {
-            //        this.nextMineShaft.GiveInput(this.store.value);
-            //        this.store.value = 0;
-            //    }
-            //    else
-            //    {
-            //        this.nextMineShaft.GiveInput(this.nextMineShaft.totalCapacity);
-            //        this.store.value -= this.nextMineShaft.totalCapacity;
-            //    }
-            //}
             txtProduct_PushUp.text = this.store.value + "/" + this.store.capacity;
             if (this.state == StateMineShaft.WORKING)
             {
@@ -258,7 +244,8 @@ public class MineShaft : MonoBehaviour
     void ON_START_GAME()
     {
         btnWork.onClick.AddListener(() => Btn_Work());
-        btnUpgrade.onClick.AddListener(() => Btn_ShowUpgrade());
+        btnUpgrade.thisButton.onClick.RemoveAllListeners();
+        btnUpgrade.type = MyButton.Type.GOLD;
         btnBuyMoreMine.thisButton.onClick.AddListener(() => Btn_BuyMoreMine());
         btnX.onClick.AddListener(() => Btn_X());
         if (this.ID < 5)
@@ -414,12 +401,22 @@ public class MineShaft : MonoBehaviour
             this.store.cost = GameConfig.Instance.lstPropertiesMap[ID].Store_Cost_1;
         }
 
+        this.properties.buyAI = GameConfig.Instance.lstPropertiesMap[ID].BuyAI;
+        if (this.isAutoWorking)
+        {
+            btnUpgrade.thisPrice = 0;
+            btnUpgrade.thisButton.onClick.AddListener(() => Btn_ShowUpgrade());
+        }
+        else
+        {
+            btnUpgrade.thisPrice = this.properties.buyAI;
+            btnUpgrade.thisButton.onClick.AddListener(() => Buy_AI());
+        }
         this.store.mineShaft = this;
         this.txtLevel.text = "Level " + this.properties.level.ToString();
         this.properties.speedMining = 1;
         xMoreMine = 1;
         txtX.text = "x" + xMoreMine;
-
         this.properties.name = GameConfig.Instance.lstPropertiesMap[ID].Name;
         this.txtName.text = this.properties.name;
 
@@ -649,6 +646,9 @@ public class MineShaft : MonoBehaviour
             {
                 this.input = this.preMineShaft.store.value;
             }
+
+            if (this.preMineShaft.store.value > 0)
+                this.isCanWork = true;
         }
 
         timer = 0;
@@ -753,16 +753,12 @@ public class MineShaft : MonoBehaviour
         switch (_id)
         {
             case 0:
-                this.isAutoWorking = true;
-                imgAI.SetActive(true);
+                this.properties.unitPrice *= 2;
                 break;
             case 1:
                 this.properties.unitPrice *= 2;
                 break;
             case 2:
-                this.properties.unitPrice *= 2;
-                break;
-            case 3:
                 this.properties.capacity *= 2;
                 break;
             default:
@@ -788,6 +784,17 @@ public class MineShaft : MonoBehaviour
                 _coin
                 );
         }
+    }
+
+    void Buy_AI()
+    {
+        btnUpgrade.thisPrice = 0;
+        GameManager.Instance.AddGold(-this.properties.buyAI);       
+        this.isAutoWorking = true;
+        imgAI.SetActive(true);
+        btnUpgrade.thisButton.onClick.RemoveAllListeners();
+        btnUpgrade.thisButton.onClick.AddListener(() => Btn_ShowUpgrade());
+        
     }
 
 
@@ -901,7 +908,7 @@ public class MineShaft : MonoBehaviour
         isAutoWorking = false;
         mapParent.CheckUnlock(this.ID);
         UIManager.Instance.SetDeActivePanel(panelUnlock);
-
+        isCanWork = true;
         //hiện bảng Reward
     }
     #endregion

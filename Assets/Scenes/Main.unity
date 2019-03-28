@@ -307,6 +307,7 @@ MonoBehaviour:
     unlockTime: 0
     speedMining: 0
     unlockCondition: 0
+    buyAI: 0
     upgradePrice: 0
     upgradeTime: 0
   numberMine: 0
@@ -332,6 +333,7 @@ MonoBehaviour:
   posProduct_Complete: {fileID: 1380879260}
   posProduct_Complete_1: {fileID: 82825637}
   mapParent: {fileID: 302750175}
+  isCanWork: 0
   timeUnlocking: 0
   typeUpgradeLevel: 0
   timeUpgradeLevel: 0
@@ -4678,6 +4680,7 @@ MonoBehaviour:
     unlockTime: 0
     speedMining: 0
     unlockCondition: 0
+    buyAI: 0
     upgradePrice: 0
     upgradeTime: 0
   numberMine: 0
@@ -4703,6 +4706,7 @@ MonoBehaviour:
   posProduct_Complete: {fileID: 27561331}
   posProduct_Complete_1: {fileID: 231114143}
   mapParent: {fileID: 302750175}
+  isCanWork: 0
   timeUnlocking: 0
   typeUpgradeLevel: 0
   timeUpgradeLevel: 0
@@ -6731,6 +6735,7 @@ GameObject:
   - component: {fileID: 278967103}
   - component: {fileID: 278967106}
   - component: {fileID: 278967105}
+  - component: {fileID: 278967107}
   - component: {fileID: 278967104}
   m_Layer: 5
   m_Name: BtnUpgrade
@@ -6762,8 +6767,56 @@ RectTransform:
 --- !u!114 &278967104
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114428434471400016, guid: 3002025f70a31f14ab9ccdb95df1195e,
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 278967102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bd2d06a749d69f4d8350b77d76ce9e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thisButton: {fileID: 278967107}
+  thisPrice: 0
+  type: 0
+--- !u!114 &278967105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114243299841166188, guid: 3002025f70a31f14ab9ccdb95df1195e,
     type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 278967102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: c4d841e8ec4666543a08196dd3cd4467, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &278967106
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 222492217891861048, guid: 3002025f70a31f14ab9ccdb95df1195e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 278967102}
+--- !u!114 &278967107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 278967102}
   m_Enabled: 1
@@ -6801,41 +6854,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &278967105
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114243299841166188, guid: 3002025f70a31f14ab9ccdb95df1195e,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 278967102}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: c4d841e8ec4666543a08196dd3cd4467, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
---- !u!222 &278967106
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 222492217891861048, guid: 3002025f70a31f14ab9ccdb95df1195e,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 278967102}
 --- !u!1 &279303719
 GameObject:
   m_ObjectHideFlags: 0
@@ -8455,6 +8473,7 @@ MonoBehaviour:
     unlockTime: 0
     speedMining: 0
     unlockCondition: 0
+    buyAI: 0
     upgradePrice: 0
     upgradeTime: 0
   numberMine: 0
@@ -8480,6 +8499,7 @@ MonoBehaviour:
   posProduct_Complete: {fileID: 1224819368}
   posProduct_Complete_1: {fileID: 596817510}
   mapParent: {fileID: 302750175}
+  isCanWork: 0
   timeUnlocking: 0
   typeUpgradeLevel: 0
   timeUpgradeLevel: 0
@@ -8497,7 +8517,7 @@ MonoBehaviour:
   txtMoreMinePrice: {fileID: 309219961}
   txtX: {fileID: 45871089}
   btnWork: {fileID: 881903880}
-  btnUpgrade: {fileID: 690489871}
+  btnUpgrade: {fileID: 690489874}
   btnBuyMoreMine: {fileID: 1341588292}
   btnX: {fileID: 1733431383}
   btnUnlock_byGold: {fileID: 33681148}
@@ -15272,6 +15292,7 @@ GameObject:
   - component: {fileID: 641816915}
   - component: {fileID: 641816918}
   - component: {fileID: 641816917}
+  - component: {fileID: 641816919}
   - component: {fileID: 641816916}
   m_Layer: 5
   m_Name: BtnUpgrade
@@ -15303,8 +15324,56 @@ RectTransform:
 --- !u!114 &641816916
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114428434471400016, guid: 3002025f70a31f14ab9ccdb95df1195e,
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 641816914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bd2d06a749d69f4d8350b77d76ce9e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thisButton: {fileID: 641816919}
+  thisPrice: 0
+  type: 0
+--- !u!114 &641816917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114243299841166188, guid: 3002025f70a31f14ab9ccdb95df1195e,
     type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 641816914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: c4d841e8ec4666543a08196dd3cd4467, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &641816918
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 222492217891861048, guid: 3002025f70a31f14ab9ccdb95df1195e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 641816914}
+--- !u!114 &641816919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 641816914}
   m_Enabled: 1
@@ -15342,41 +15411,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &641816917
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114243299841166188, guid: 3002025f70a31f14ab9ccdb95df1195e,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 641816914}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: c4d841e8ec4666543a08196dd3cd4467, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
---- !u!222 &641816918
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 222492217891861048, guid: 3002025f70a31f14ab9ccdb95df1195e,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 641816914}
 --- !u!1 &644665885
 GameObject:
   m_ObjectHideFlags: 0
@@ -16426,6 +16460,7 @@ GameObject:
   - component: {fileID: 690489873}
   - component: {fileID: 690489872}
   - component: {fileID: 690489871}
+  - component: {fileID: 690489874}
   m_Layer: 5
   m_Name: BtnUpgrade
   m_TagString: Untagged
@@ -16456,8 +16491,7 @@ RectTransform:
 --- !u!114 &690489871
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114428434471400016, guid: 3002025f70a31f14ab9ccdb95df1195e,
-    type: 2}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 690489869}
   m_Enabled: 1
@@ -16530,6 +16564,20 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 690489869}
+--- !u!114 &690489874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 690489869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bd2d06a749d69f4d8350b77d76ce9e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thisButton: {fileID: 690489871}
+  thisPrice: 0
+  type: 0
 --- !u!1 &696016615
 GameObject:
   m_ObjectHideFlags: 0
@@ -17443,6 +17491,7 @@ MonoBehaviour:
     unlockTime: 0
     speedMining: 0
     unlockCondition: 0
+    buyAI: 0
     upgradePrice: 0
     upgradeTime: 0
   numberMine: 0
@@ -17468,6 +17517,7 @@ MonoBehaviour:
   posProduct_Complete: {fileID: 1050229474}
   posProduct_Complete_1: {fileID: 1845362744}
   mapParent: {fileID: 302750175}
+  isCanWork: 0
   timeUnlocking: 0
   typeUpgradeLevel: 0
   timeUpgradeLevel: 0
@@ -24073,6 +24123,7 @@ GameObject:
   - component: {fileID: 997505840}
   - component: {fileID: 997505843}
   - component: {fileID: 997505842}
+  - component: {fileID: 997505844}
   - component: {fileID: 997505841}
   m_Layer: 5
   m_Name: BtnUpgrade
@@ -24104,8 +24155,56 @@ RectTransform:
 --- !u!114 &997505841
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114428434471400016, guid: 3002025f70a31f14ab9ccdb95df1195e,
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 997505839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bd2d06a749d69f4d8350b77d76ce9e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thisButton: {fileID: 997505844}
+  thisPrice: 0
+  type: 0
+--- !u!114 &997505842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114243299841166188, guid: 3002025f70a31f14ab9ccdb95df1195e,
     type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 997505839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: c4d841e8ec4666543a08196dd3cd4467, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &997505843
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 222492217891861048, guid: 3002025f70a31f14ab9ccdb95df1195e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 997505839}
+--- !u!114 &997505844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 997505839}
   m_Enabled: 1
@@ -24143,41 +24242,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &997505842
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114243299841166188, guid: 3002025f70a31f14ab9ccdb95df1195e,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 997505839}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: c4d841e8ec4666543a08196dd3cd4467, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
---- !u!222 &997505843
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 222492217891861048, guid: 3002025f70a31f14ab9ccdb95df1195e,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 997505839}
 --- !u!1 &997567967
 GameObject:
   m_ObjectHideFlags: 0
@@ -30452,6 +30516,7 @@ GameObject:
   - component: {fileID: 1264420125}
   - component: {fileID: 1264420128}
   - component: {fileID: 1264420127}
+  - component: {fileID: 1264420129}
   - component: {fileID: 1264420126}
   m_Layer: 5
   m_Name: BtnUpgrade
@@ -30483,8 +30548,56 @@ RectTransform:
 --- !u!114 &1264420126
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114428434471400016, guid: 3002025f70a31f14ab9ccdb95df1195e,
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1264420124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bd2d06a749d69f4d8350b77d76ce9e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thisButton: {fileID: 1264420129}
+  thisPrice: 0
+  type: 0
+--- !u!114 &1264420127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114243299841166188, guid: 3002025f70a31f14ab9ccdb95df1195e,
     type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1264420124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: c4d841e8ec4666543a08196dd3cd4467, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &1264420128
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 222492217891861048, guid: 3002025f70a31f14ab9ccdb95df1195e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1264420124}
+--- !u!114 &1264420129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1264420124}
   m_Enabled: 1
@@ -30522,41 +30635,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &1264420127
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114243299841166188, guid: 3002025f70a31f14ab9ccdb95df1195e,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1264420124}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: c4d841e8ec4666543a08196dd3cd4467, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
---- !u!222 &1264420128
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 222492217891861048, guid: 3002025f70a31f14ab9ccdb95df1195e,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1264420124}
 --- !u!1 &1270355097
 GameObject:
   m_ObjectHideFlags: 0
@@ -41244,6 +41322,7 @@ MonoBehaviour:
     unlockTime: 0
     speedMining: 0
     unlockCondition: 0
+    buyAI: 0
     upgradePrice: 0
     upgradeTime: 0
   numberMine: 0
@@ -41269,6 +41348,7 @@ MonoBehaviour:
   posProduct_Complete: {fileID: 2133062194}
   posProduct_Complete_1: {fileID: 359142938}
   mapParent: {fileID: 302750175}
+  isCanWork: 0
   timeUnlocking: 0
   typeUpgradeLevel: 0
   timeUpgradeLevel: 0
@@ -42996,6 +43076,7 @@ MonoBehaviour:
     unlockTime: 0
     speedMining: 0
     unlockCondition: 0
+    buyAI: 0
     upgradePrice: 0
     upgradeTime: 0
   numberMine: 0
@@ -43021,6 +43102,7 @@ MonoBehaviour:
   posProduct_Complete: {fileID: 1097695009}
   posProduct_Complete_1: {fileID: 1788820113}
   mapParent: {fileID: 302750175}
+  isCanWork: 0
   timeUnlocking: 0
   typeUpgradeLevel: 0
   timeUpgradeLevel: 0
@@ -45982,6 +46064,7 @@ GameObject:
   - component: {fileID: 1919934478}
   - component: {fileID: 1919934481}
   - component: {fileID: 1919934480}
+  - component: {fileID: 1919934482}
   - component: {fileID: 1919934479}
   m_Layer: 5
   m_Name: BtnUpgrade
@@ -46013,8 +46096,56 @@ RectTransform:
 --- !u!114 &1919934479
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114428434471400016, guid: 3002025f70a31f14ab9ccdb95df1195e,
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1919934477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bd2d06a749d69f4d8350b77d76ce9e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thisButton: {fileID: 1919934482}
+  thisPrice: 0
+  type: 0
+--- !u!114 &1919934480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114243299841166188, guid: 3002025f70a31f14ab9ccdb95df1195e,
     type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1919934477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: c4d841e8ec4666543a08196dd3cd4467, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &1919934481
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 222492217891861048, guid: 3002025f70a31f14ab9ccdb95df1195e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1919934477}
+--- !u!114 &1919934482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1919934477}
   m_Enabled: 1
@@ -46052,41 +46183,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &1919934480
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114243299841166188, guid: 3002025f70a31f14ab9ccdb95df1195e,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1919934477}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: c4d841e8ec4666543a08196dd3cd4467, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
---- !u!222 &1919934481
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 222492217891861048, guid: 3002025f70a31f14ab9ccdb95df1195e,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1919934477}
 --- !u!1 &1926124369
 GameObject:
   m_ObjectHideFlags: 0

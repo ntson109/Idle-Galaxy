@@ -47,7 +47,8 @@ public class DataPlayer : MonoBehaviour
         data.gold = GameManager.Instance.GOLD;
         data.coin = GameManager.Instance.COIN;
         //data.freeGold1s = GetFreeGoldPerSecond();
-        PlayerPrefs.SetString(KeyPrefs.GOLD_OFFLINE, GetFreeGoldPerSecond().ToString());
+        //PlayerPrefs.SetString(KeyPrefs.GOLD_OFFLINE, GetFreeGoldPerSecond().ToString());
+        PlayerPrefs.SetString(KeyPrefs.GOLD_OFFLINE, CapacityOffline().ToString());
         data.boost = new BoostJSON();
         if (GameManager.Instance.boost.type == TypeBoost.NONE)
         {
@@ -159,7 +160,6 @@ public class DataPlayer : MonoBehaviour
         File.ReadAllText(_path);
         PlayerPrefs.SetInt(KeyPrefs.IS_CONTINUE, 1);
 
-        Test();
         Debug.Log(SimpleJSON_DatDz.JSON.Parse(File.ReadAllText(_path)));
     }
 
@@ -321,7 +321,6 @@ public class DataPlayer : MonoBehaviour
                 UIManager.Instance.timeOffline = UIManager.Instance.GetOfflineTime(PlayerPrefs.GetString(KeyPrefs.TIME_QUIT_GAME));
                 if (UIManager.Instance.timeOffline <= 0)
                     UIManager.Instance.timeOffline = 1;
-                //UIManager.Instance.goldOffline = GetFreeGoldPerSecond() * UIManager.Instance.timeOffline * 60;
                 UIManager.Instance.goldOffline = long.Parse(PlayerPrefs.GetString(KeyPrefs.GOLD_OFFLINE)) * UIManager.Instance.timeOffline * 60;
                 if (UIManager.Instance.goldOffline < 100)
                     UIManager.Instance.goldOffline = 100;
@@ -330,16 +329,19 @@ public class DataPlayer : MonoBehaviour
         }
     }
 
-    int counter = 0;
-    int time = 0;
-    long money = 0;
+
     int l;
-    int T_invalid = 5000;
-    int[] c;
-    int[] a;
-    int[] b;
-    void Test()
+    long CapacityOffline()
     {
+        long _money = 0;
+        int counter = 0;
+        int time = 0;
+        l = 0;
+        int T_invalid = 5000;
+        int[] c;
+        int[] a;
+        int[] b;
+        int[] n_counter = new int[6] { 10, 100, 100, 200, 400, 800 };
 
         for (int i = 0; i < GameManager.Instance.lstMap[0].lstMineShaft.Count; i++)
         {
@@ -371,8 +373,7 @@ public class DataPlayer : MonoBehaviour
             }
         }
 
-
-        while (counter <= 60)
+        while (counter < n_counter[l - 1])
         {
             int j = 0;
             int temp = c[0];
@@ -412,9 +413,11 @@ public class DataPlayer : MonoBehaviour
                 {
                     //set so san pham dang xu ly cho nha chua j
                     a[j] = b[j];
-                    //set lai so luong trong nha chua j
-                    b[j] = 0;
-
+                    if (j != 0)
+                    {
+                        //set lai so luong trong nha chua j
+                        b[j] = 0;
+                    }
                 }
                 //set lai thoi gian cho nha j
                 c[j] = GameManager.Instance.lstMap[0].lstMineShaft[j].properties.miningTime;
@@ -425,7 +428,7 @@ public class DataPlayer : MonoBehaviour
                 c[j] = T_invalid;	//khong co thoi gian xu ly
             }
 
-            if (j == l-1)
+            if (j == l - 1)
             {
                 // do nothing
             }
@@ -466,12 +469,20 @@ public class DataPlayer : MonoBehaviour
             }
 
             //tinh tien
-            money = money + sp * (long)GameManager.Instance.lstMap[0].lstMineShaft[j].properties.unitPrice;
+            _money = _money + sp * (long)GameManager.Instance.lstMap[0].lstMineShaft[j].properties.unitPrice;
 
             counter++;
         }
 
-        Debug.Log(money);
-        Debug.Log(money / time);
+        Debug.Log(_money);
+        Debug.Log(_money / time);
+        if (_money / time < 10)
+        { 
+            return 10; 
+        }
+        else
+        {
+            return (_money / time);
+        }
     }
 }

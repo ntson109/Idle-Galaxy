@@ -79,7 +79,7 @@ public class LoadDataJson : MonoBehaviour
                     pM = new GameConfig.PropertiesMap();
                     pM.ID = i;
                     pM.Name = objJson["Map_Moon"][i]["Name"];
-                    //pM.BuyAI = objJson["Map_Moon"][i]["BuyAI"].AsLong;
+                    pM.BuyAI = objJson["Map_Moon"][i]["BuyAI"].AsLong;
                     pM.Unlock_condition = objJson["Map_Moon"][i]["Unlock_condition"].AsInt;
                     pM.Unlock_time = objJson["Map_Moon"][i]["Unlock_time"].AsInt * 60;
 
