@@ -347,7 +347,7 @@ public class DataPlayer : MonoBehaviour
         int[] c;
         int[] a;
         int[] b;
-        int[] n_counter = new int[6] { 10, 100, 100, 200, 400, 800 };
+        int[] n_counter = new int[6] { 10, 100, 200, 400, 600, 800 };
 
         for (int i = 0; i < GameManager.Instance.lstMap[0].lstMineShaft.Count; i++)
         {
@@ -426,7 +426,7 @@ public class DataPlayer : MonoBehaviour
                     }
                 }
                 //set lai thoi gian cho nha j
-                c[j] = GameManager.Instance.lstMap[0].lstMineShaft[j].properties.miningTime;
+                c[j] = GameManager.Instance.lstMap[0].lstMineShaft[j].properties.miningTime + 2;
             }
             else
             {
@@ -470,7 +470,7 @@ public class DataPlayer : MonoBehaviour
                         b[j + 1] = 0;
                     }
                     //Set C
-                    c[j + 1] = GameManager.Instance.lstMap[0].lstMineShaft[j + 1].properties.miningTime;
+                    c[j + 1] = GameManager.Instance.lstMap[0].lstMineShaft[j + 1].properties.miningTime + 2;
                 }
             }
 
@@ -480,8 +480,9 @@ public class DataPlayer : MonoBehaviour
             counter++;
         }
 
-        Debug.Log(_money);
-        Debug.Log(_money / time);
+        Debug.Log("money " + _money);
+        Debug.Log("cap " + _money / time);
+        Debug.Log("time " + time);
         if (_money / time < 5)
         { 
             return 5; 
