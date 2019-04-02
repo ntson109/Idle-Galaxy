@@ -11,7 +11,7 @@ public class MineShaftJSON
 
     public int level;
 
-    public int timeCurrent;
+    public float timeCurrent;
 
     public int numberMine;
 
@@ -19,7 +19,9 @@ public class MineShaftJSON
 
     public int capacity;
 
-    public int miningTime;
+    public float miningTime;
+
+    public int unitPrice;
 
     public int state;
 

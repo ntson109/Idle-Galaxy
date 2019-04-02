@@ -82,12 +82,7 @@ public class LoadDataJson : MonoBehaviour
                     pM.BuyAI = objJson["Map_Moon"][i]["BuyAI"].AsLong;
                     pM.Unlock_condition = objJson["Map_Moon"][i]["Unlock_condition"].AsInt;
                     pM.Unlock_time = objJson["Map_Moon"][i]["Unlock_time"].AsInt * 60;
-
-                    pM.miningTime = new List<int>();
-                    for (int k = 0; k < objJson["Map_Moon"][i]["miningTime"].Count; k++)
-                    {
-                        pM.miningTime.Add(objJson["Map_Moon"][i]["miningTime"][k].AsInt);
-                    }
+                    pM.miningTime = objJson["Map_Moon"][i]["miningTime"].AsFloat;
 
                     pM.Unlock_cost = new long[2];
                     for (int k = 0; k < objJson["Map_Moon"][i]["Unlock_cost"].Count; k++)
@@ -123,11 +118,7 @@ public class LoadDataJson : MonoBehaviour
                         pM.Upgrade_cost.Add(objJson["Map_Moon"][i]["Upgrade_cost"][k].AsLong);
                     }
 
-                    pM.Productivity = new List<int>();
-                    for (int k = 0; k < objJson["Map_Moon"][i]["Productivity"].Count; k++)
-                    {
-                        pM.Productivity.Add(objJson["Map_Moon"][i]["Productivity"][k].AsInt);
-                    }
+                    pM.Productivity = objJson["Map_Moon"][i]["Productivity"].AsInt;
 
                     pM.Upgrade_Special = new List<MineShaft.UpgradeSpecial>();
                     for (int k = 0; k < objJson["Map_Moon"][i]["Upgrade_Special"].Count; k++)
@@ -141,11 +132,7 @@ public class LoadDataJson : MonoBehaviour
                         pM.Upgrade_Special.Add(temp);
                     }
 
-                    pM.Unit_Price = new List<double>();
-                    for (int k = 0; k < objJson["Map_Moon"][i]["Unit_Price"].Count; k++)
-                    {
-                        pM.Unit_Price.Add(objJson["Map_Moon"][i]["Unit_Price"][k].AsDouble);
-                    }
+                    pM.Unit_Price = objJson["Map_Moon"][i]["Unit_Price"].AsInt;
 
                     pM.Store_Cost_1 = objJson["Map_Moon"][i]["Store_Cost_1"].AsInt;
                     pM.Store_Cost_2 = objJson["Map_Moon"][i]["Store_Cost_2"].AsFloat;

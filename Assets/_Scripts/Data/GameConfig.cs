@@ -25,7 +25,7 @@ public class GameConfig : MonoBehaviour {
         public long BuyAI;
         public int Unlock_condition;
         public int Unlock_time;
-        public List<int> miningTime;
+        public float miningTime;
         public long[] Unlock_cost;
         public List<long> Unlock_reward;
         public int MoreMine_cost_2;
@@ -33,9 +33,9 @@ public class GameConfig : MonoBehaviour {
         public float MoreMine_cost_3;
         public List<int> Upgrade_time;
         public List<int> Upgrade_condition;
-        public List<int> Productivity;
+        public int Productivity;
         public List<long> Upgrade_cost;
-        public List<double> Unit_Price;
+        public int Unit_Price;
         public List<MineShaft.UpgradeSpecial> Upgrade_Special;
         public int Store_Cost_1;
         public float Store_Cost_2;

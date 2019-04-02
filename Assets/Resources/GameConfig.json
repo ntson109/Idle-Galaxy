@@ -80,14 +80,7 @@
 		"Unlock_reward" : {
 			"timex2" : 0
 		},
-		"miningTime" : [
-			4,
-			4,
-			2,
-			2,
-			1,
-			1
-		],
+		"miningTime" : 4,
 		"MoreMine_cost_1" : 5,
 		"MoreMine_cost_2" : 1,
 		"MoreMine_cost_3" : 1.05,
@@ -113,14 +106,7 @@
 			100,
 			100
 		],
-		"Productivity" : [
-			2,
-			2,
-			4,
-			4,
-			8,
-			16
-		],
+		"Productivity" : 2,
 		"Upgrade_Special" : {
 			"1" : {
 				"name" : "Laser drilling Tech",
@@ -131,7 +117,7 @@
 			},
 			"2" : {
 				"name" : "Up 3",
-				"description" : "x2 price",
+				"description" : "/2 time",
 				"price" : 100,
 				"time" : 10,
 				"coinMax" : 10
@@ -145,14 +131,7 @@
 			}
 			
 		},
-		"Unit_Price" : [
-			1,
-			1,
-			1,
-			1,
-			1,
-			1
-		],
+		"Unit_Price" : 1,
 		"Store_Cost_1" : 5,
 		"Store_Cost_2" : 0.05,
 		"Store_Cost_3" : 1,
@@ -174,14 +153,7 @@
 		"MoreMine_cost_1" : 50,
 		"MoreMine_cost_2" : 2,
 		"MoreMine_cost_3" : 1.06,
-		"miningTime" : [
-			8,
-			4,
-			4,
-			5,
-			5,
-			1
-		],
+		"miningTime" : 8,
 		"Upgrade_time" : [
 			2,
 			10,
@@ -205,14 +177,7 @@
 			100,
 			100
 		],
-		"Productivity" : [
-			5,
-			5,
-			10,
-			10,
-			20,
-			20
-		],
+		"Productivity" : 5,
 		"Upgrade_Special" : {
 			"1" : {
 				"name" : "ThermalSoftenning Tech",
@@ -223,7 +188,7 @@
 			},
 			"2" : {
 				"name" : "Up 3",
-				"description" : "x2 price",
+				"description" : "/2 time",
 				"price" : 100,
 				"time" : 15,
 				"coinMax" : 10
@@ -236,14 +201,7 @@
 				"coinMax" : 10
 			}
 		},
-		"Unit_Price" : [
-			10,
-			10,
-			10,
-			10,
-			10,
-			10
-		],
+		"Unit_Price" : 10,
 		"Store_Cost_1" : 50,
 		"Store_Cost_2" : 0.06,
 		"Store_Cost_3" : 2,
@@ -265,14 +223,7 @@
 		"MoreMine_cost_1" : 500,
 		"MoreMine_cost_2" : 5,
 		"MoreMine_cost_3" : 1.07,
-		"miningTime" : [
-			40,
-			20,
-			20,
-			10,
-			10,
-			5
-		],
+		"miningTime" : 40,
 		"Upgrade_time" : [
 			3,
 			12,
@@ -296,14 +247,7 @@
 			100,
 			100
 		],
-		"Productivity" : [
-			40,
-			40,
-			80,
-			80,
-			160,
-			160
-		],
+		"Productivity" : 40,
 		"Upgrade_Special" : {
 			"1" : {
 				"name" : "ThermalSoftenning Tech",
@@ -314,7 +258,7 @@
 			},
 			"2" : {
 				"name" : "Up 3",
-				"description" : "x2 price",
+				"description" : "/2 time",
 				"price" : 100,
 				"time" : 20,
 				"coinMax" : 10
@@ -327,14 +271,7 @@
 				"coinMax" : 10
 			}
 		},
-		"Unit_Price" : [
-			1000,
-			1000,
-			1000,
-			1000,
-			1000,
-			1000
-		],
+		"Unit_Price" : 1000,
 		"Store_Cost_1" : 500,
 		"Store_Cost_2" : 0.07,
 		"Store_Cost_3" : 5,
@@ -356,14 +293,7 @@
 		"MoreMine_cost_1" : 5000,
 		"MoreMine_cost_2" : 10,
 		"MoreMine_cost_3" : 1.08,
-		"miningTime" : [
-			80,
-			40,
-			40,
-			20,
-			20,
-			10
-		],
+		"miningTime" : 80,
 		"Upgrade_time" : [
 			4,
 			14,
@@ -386,14 +316,7 @@
 			100,
 			100
 		],
-		"Productivity" : [
-			100,
-			100,
-			200,
-			200,
-			400,
-			400
-		],
+		"Productivity" : 100,
 		"Upgrade_Special" : {
 			"1" : {
 				"name" : "ThermalSoftenning Tech",
@@ -404,7 +327,7 @@
 			},
 			"2" : {
 				"name" : "Nuclear enriching Tech",
-				"description" : "x2 price",
+				"description" : "/2 time",
 				"price" : 100,
 				"time" : 25,
 				"coinMax" : 10
@@ -417,14 +340,7 @@
 				"coinMax" : 10
 			}
 		},
-		"Unit_Price" : [
-			10000,
-			10000,
-			10000,
-			10000,
-			10000,
-			10000
-		],
+		"Unit_Price" : 10000,
 		"Store_Cost_1" : 5000,
 		"Store_Cost_2" : 0.08,
 		"Store_Cost_3" : 10,
@@ -446,14 +362,7 @@
 		"MoreMine_cost_1" : 50000,
 		"MoreMine_cost_2" : 100,
 		"MoreMine_cost_3" : 1.09,
-		"miningTime" : [
-			240,
-			120,
-			120,
-			60,
-			60,
-			30
-		],
+		"miningTime" : 240,
 		"Upgrade_time" : [
 			5,
 			16,
@@ -476,14 +385,7 @@
 			100,
 			100
 		],
-		"Productivity" : [
-			600,
-			600,
-			1200,
-			1200,
-			2400,
-			2400
-		],
+		"Productivity" : 600,
 		"Upgrade_Special" : {
 			"1" : {
 				"name" : "ThermalSoftenning Tech",
@@ -494,7 +396,7 @@
 			},
 			"2" : {
 				"name" : "Up 3",
-				"description" : "x2 price",
+				"description" : "/2 time",
 				"price" : 100,
 				"time" : 30,
 				"coinMax" : 10
@@ -507,14 +409,7 @@
 				"coinMax" : 10
 			}
 		},
-		"Unit_Price" : [
-			100000,
-			100000,
-			100000,
-			100000,
-			100000,
-			100000
-		],
+		"Unit_Price" : 100000,
 		"Store_Cost_1" : 500000,
 		"Store_Cost_2" : 0.09,
 		"Store_Cost_3" : 100,
@@ -536,14 +431,7 @@
 		"MoreMine_cost_1" : 1000000,
 		"MoreMine_cost_2" : 1000,
 		"MoreMine_cost_3" : 1.1,
-		"miningTime" : [
-			480,
-			240,
-			240,
-			120,
-			120,
-			60
-		],
+		"miningTime" : 480,
 		"Upgrade_time" : [
 			6,
 			18,
@@ -566,14 +454,7 @@
 			100,
 			100
 		],
-		"Productivity" : [
-			2400,
-			2400,
-			4800,
-			4800,
-			9600,
-			9600
-		],
+		"Productivity" : 2400,
 		"Upgrade_Special" : {
 			"1" : {
 				"name" : "ThermalSoftenning Tech",
@@ -584,7 +465,7 @@
 			},
 			"2" : {
 				"name" : "Nuclear enriching Tech",
-				"description" : "x2 price",
+				"description" : "/2 time",
 				"price" : 100,
 				"time" : 35,
 				"coinMax" : 10
@@ -597,14 +478,7 @@
 				"coinMax" : 10
 			}
 		},
-		"Unit_Price" : [
-			1000000,
-			1000000,
-			1000000,
-			1000000,
-			1000000,
-			1000000
-		],
+		"Unit_Price" : 1000000,
 		"Store_Cost_1" : 0,
 		"Store_Cost_2" : 0,
 		"Store_Cost_3" : 0,

@@ -107,6 +107,7 @@ public class DataPlayer : MonoBehaviour
                 m.buyMoreMinePrice = GameManager.Instance.lstMap[i].lstMineShaft[j].properties.buyMoreMinePrice;
                 m.miningTime = GameManager.Instance.lstMap[i].lstMineShaft[j].properties.miningTime;
                 m.capacity = GameManager.Instance.lstMap[i].lstMineShaft[j].properties.capacity;
+                m.unitPrice = GameManager.Instance.lstMap[i].lstMineShaft[j].properties.unitPrice;
                 m.input = GameManager.Instance.lstMap[i].lstMineShaft[j].input;
                 m.workBar = GameManager.Instance.lstMap[i].lstMineShaft[j].imgWorkBar.fillAmount;
                 if (GameManager.Instance.lstMap[i].lstMineShaft[j].state == MineShaft.StateMineShaft.LOCK)
@@ -220,10 +221,11 @@ public class DataPlayer : MonoBehaviour
             {
                 GameManager.Instance.lstMap[0].lstMineShaft[i].ID = objJson["lsMineShaft"][i]["ID"].AsInt;
                 GameManager.Instance.lstMap[0].lstMineShaft[i].properties.level = objJson["lsMineShaft"][i]["level"].AsInt;
-                GameManager.Instance.lstMap[0].lstMineShaft[i].timer = objJson["lsMineShaft"][i]["timeCurrent"].AsInt;
+                GameManager.Instance.lstMap[0].lstMineShaft[i].timer = objJson["lsMineShaft"][i]["timeCurrent"].AsFloat;
                 GameManager.Instance.lstMap[0].lstMineShaft[i].numberMine = objJson["lsMineShaft"][i]["numberMine"].AsInt;
                 GameManager.Instance.lstMap[0].lstMineShaft[i].properties.buyMoreMinePrice = objJson["lsMineShaft"][i]["buyMoreMinePrice"].AsLong;
                 GameManager.Instance.lstMap[0].lstMineShaft[i].properties.capacity = objJson["lsMineShaft"][i]["capacity"].AsInt;
+                GameManager.Instance.lstMap[0].lstMineShaft[i].properties.unitPrice = objJson["lsMineShaft"][i]["unitPrice"].AsInt;
                 GameManager.Instance.lstMap[0].lstMineShaft[i].properties.miningTime = objJson["lsMineShaft"][i]["miningTime"].AsInt;
                 GameManager.Instance.lstMap[0].lstMineShaft[i].input = objJson["lsMineShaft"][i]["input"].AsInt;
                 GameManager.Instance.lstMap[0].lstMineShaft[i].imgWorkBar.fillAmount = objJson["lsMineShaft"][i]["workBar"].AsFloat;
@@ -341,10 +343,10 @@ public class DataPlayer : MonoBehaviour
     {
         long _money = 0;
         int counter = 0;
-        int time = 0;
+        float time = 0;
         l = 0;
         int T_invalid = 5000;
-        int[] c;
+        float[] c;
         int[] a;
         int[] b;
         int[] n_counter = new int[6] { 10, 100, 200, 400, 600, 800 };
@@ -359,7 +361,7 @@ public class DataPlayer : MonoBehaviour
                 break;
         }
 
-        c = new int[l];
+        c = new float[l];
         a = new int[l];
         b = new int[l];
         for (int i = 0; i < l; i++)
@@ -382,7 +384,7 @@ public class DataPlayer : MonoBehaviour
         while (counter < n_counter[l - 1])
         {
             int j = 0;
-            int temp = c[0];
+            float temp = c[0];
             int sp = 0;
 
             for (int i = 1; i < l; i++)
@@ -475,21 +477,21 @@ public class DataPlayer : MonoBehaviour
             }
 
             //tinh tien
-            _money = _money + sp * (long)GameManager.Instance.lstMap[0].lstMineShaft[j].properties.unitPrice;
+            _money = _money + sp * GameManager.Instance.lstMap[0].lstMineShaft[j].properties.unitPrice;
 
             counter++;
         }
 
         Debug.Log("money " + _money);
-        Debug.Log("cap " + _money / time);
+        Debug.Log("cap " + _money / (int)time);
         Debug.Log("time " + time);
-        if (_money / time < 5)
+        if (_money / (int)time < 5)
         { 
             return 5; 
         }
         else
         {
-            return (_money / time);
+            return (_money / (int)time);
         }
     }
 }

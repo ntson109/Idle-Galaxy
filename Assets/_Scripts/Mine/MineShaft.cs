@@ -20,9 +20,9 @@ public class MineShaft : MonoBehaviour
 
         public int capacity;
 
-        public int miningTime;
+        public float miningTime;
 
-        public double unitPrice;
+        public int unitPrice;
 
         public float unlockTime;
 
@@ -105,7 +105,7 @@ public class MineShaft : MonoBehaviour
     public int numberProduct_Completed; //số sản phẩm làm xong
     public int numberProduct_PushUp; //số sản phẩm đẩy lên mỏ trên
     public int numberProduct_Remain; //số sản phẩm thừa
-    public int timer = 0; //thời gian đang chạy tiến trình Work
+    public float timer = 0; //thời gian đang chạy tiến trình Work
     public RectTransform posProduct_Remain;
     public RectTransform posProduct_PushUp;
     public RectTransform posProduct_Complete;
@@ -189,8 +189,14 @@ public class MineShaft : MonoBehaviour
                     btnWork.gameObject.SetActive(false);
                 }
             }
-
-            txtTimer.text = UIManager.Instance.ToDateTimeString(timer);
+            if (timer >= 1)
+            {
+                txtTimer.text = UIManager.Instance.ToDateTimeString((int)timer);
+            }
+            else
+            {
+                txtTimer.text = "";
+            }
             txtNumberMine.text = this.numberMine.ToString();
             txtProduct_PushUp.text = this.store.value + "/" + this.store.capacity;
             txtTotalCapacity.text = this.totalCapacity.ToString();
@@ -384,8 +390,8 @@ public class MineShaft : MonoBehaviour
         {
             this.properties.level = 1;
             this.numberMine = 1;
-            this.properties.capacity = GameConfig.Instance.lstPropertiesMap[ID].Productivity[this.properties.level - 1];
-            this.properties.miningTime = GameConfig.Instance.lstPropertiesMap[ID].miningTime[this.properties.level - 1];
+            this.properties.capacity = GameConfig.Instance.lstPropertiesMap[ID].Productivity;
+            this.properties.miningTime = GameConfig.Instance.lstPropertiesMap[ID].miningTime;
             for (int i = 0; i < GameConfig.Instance.lstPropertiesMap[ID].Upgrade_Special.Count; i++)
             {
                 this.typeUpgradeSpecial.Add(UpgradeObj_Special.Type.NONE);
@@ -401,6 +407,7 @@ public class MineShaft : MonoBehaviour
             this.store.value = 0;
             this.store.capacity = GameConfig.Instance.lstPropertiesMap[ID].Store_Capacity_1;
             this.store.cost = GameConfig.Instance.lstPropertiesMap[ID].Store_Cost_1;
+            this.properties.unitPrice = GameConfig.Instance.lstPropertiesMap[ID].Unit_Price;
         }
 
         this.properties.buyAI = GameConfig.Instance.lstPropertiesMap[ID].BuyAI;
@@ -426,7 +433,6 @@ public class MineShaft : MonoBehaviour
         this.properties.upgradeTime = GameConfig.Instance.lstPropertiesMap[ID].Upgrade_time[this.properties.level - 1];
         GetPriceMoreMine();
         GetPriceUpgradeCost();
-        this.properties.unitPrice = GameConfig.Instance.lstPropertiesMap[ID].Unit_Price[this.properties.level - 1];
         this.properties.unlockTime = GameConfig.Instance.lstPropertiesMap[ID].Unlock_time;
         this.properties.unlockCondition = GameConfig.Instance.lstPropertiesMap[ID].Unlock_condition;
 
@@ -825,9 +831,14 @@ public class MineShaft : MonoBehaviour
         this.properties.level += 1;
         txtLevel.text = "Level " + this.properties.level;
         GetPriceUpgradeCost();
-        this.properties.capacity = GameConfig.Instance.lstPropertiesMap[ID].Productivity[this.properties.level - 1];
-        this.properties.miningTime = GameConfig.Instance.lstPropertiesMap[ID].miningTime[this.properties.level - 1];
-        this.properties.unitPrice = GameConfig.Instance.lstPropertiesMap[ID].Unit_Price[this.properties.level - 1];
+        if (this.properties.level % 2 == 1)
+        {
+            this.properties.miningTime /= 2;
+        }
+        else
+        {
+            this.properties.capacity *= 2;
+        }
         this.totalCapacity = this.properties.capacity * numberMine;
         typeUpgradeLevel = UpgradeObj_Level.Type.NONE;
 
