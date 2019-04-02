@@ -26,6 +26,7 @@ public class UIManager : MonoBehaviour
     public MyButton btnCoin_panelCoinAds;
     public Text txtBoost;
     public Text txtTimeBoost;
+    public Sprite[] sprMoreMine;
 
     [Header("TRANSPORTER")]
     public GameObject panelUpgradeTransporter;
@@ -281,7 +282,7 @@ public class UIManager : MonoBehaviour
             return num2.ToString() + ":" + num3.ToString("00") + "s";
             //eturn num2.ToString("00") + ":" + num3.ToString("00") + "s";
         }
-        return num3.ToString() + "s";
+        return num3.ToString() + " s";
         //return num3.ToString("00") + "s";
     }
 
@@ -486,7 +487,7 @@ public class UIManager : MonoBehaviour
 
     public void TestMoney()
     {
-        GameManager.Instance.AddGold(100000);
+        GameManager.Instance.AddGold(10000);
         GameManager.Instance.AddCoin(100);
     }
     #endregion

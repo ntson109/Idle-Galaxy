@@ -57,7 +57,7 @@ public class Transporter : MonoBehaviour
         yield return new WaitForEndOfFrame();
         mapParent.CompleteTransport();
         yield return new WaitForSeconds(0.25f);
-        this.gameObject.GetComponent<RectTransform>().transform.localScale = new Vector3(1, 1, 1);
+        this.gameObject.GetComponent<RectTransform>().transform.localScale = new Vector3(-1, 1, 1);
         StartCoroutine(TurnBack());
     }
 
@@ -70,7 +70,7 @@ public class Transporter : MonoBehaviour
             yield return null;
         }
         yield return new WaitForEndOfFrame();
-        this.gameObject.GetComponent<RectTransform>().transform.localScale = new Vector3(-1, 1, 1);
+        this.gameObject.GetComponent<RectTransform>().transform.localScale = new Vector3(1, 1, 1);
         yield return new WaitForSeconds(0.35f);
         isTransporting = false;
     }

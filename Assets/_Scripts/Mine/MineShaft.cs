@@ -128,7 +128,7 @@ public class MineShaft : MonoBehaviour
     public Text txtNumberMine;
     public Text txtMoreMinePrice;
     public Text txtTotalCapacity;
-    public Text txtX;
+    public Image imgXMoreMine;
     public Button btnWork;
     public MyButton btnUpgrade;
     public MyButton btnBuyMoreMine;
@@ -142,6 +142,8 @@ public class MineShaft : MonoBehaviour
     public GameObject panelUnlock_Condition;
     public Text txtUnlock_Condition;
     public Text txtTimeUnlock;
+    public GameObject panelUnlock_2;
+    public GameObject objLock;
 
     public GameObject product_Complete;
     public Text txtProduct_Complete;
@@ -149,6 +151,12 @@ public class MineShaft : MonoBehaviour
     public Text txtProduct_PushUp;
     public GameObject product_Remain;
     public Text txtProduct_Remain;
+
+    [Header("UI STORE")]
+    public Text txtPriceStore;
+    public GameObject ongTren;
+    public Image imgStore;
+    public Image imgStore2;
 
     [Header("ANIM")]
     public Animator workAnim;
@@ -238,6 +246,29 @@ public class MineShaft : MonoBehaviour
                 }
                 this.timeUpgradeLevel -= Time.deltaTime;
             }
+
+            if (btnStore != null)
+                txtPriceStore.text = UIManager.Instance.ToLongString(this.store.cost);
+
+            if (!this.ongTren.activeSelf)
+            {
+                if (this.nextMineShaft != null && this.nextMineShaft.state != StateMineShaft.LOCK && this.nextMineShaft.state != StateMineShaft.UNLOCKING)
+                {
+                    this.ongTren.SetActive(true);
+                    imgStore.gameObject.GetComponent<Button>().interactable = false;
+                }
+            }
+
+            if (GameManager.Instance.GOLD < this.store.cost && this.nextMineShaft != null && this.nextMineShaft.state != StateMineShaft.LOCK && this.nextMineShaft.state != StateMineShaft.UNLOCKING)
+            {
+                //imgStore2.color = new Color(imgStore2.color.r, imgStore2.color.g, imgStore2.color.b, 150);
+                imgStore2.gameObject.GetComponent<Button>().interactable = false;
+            }
+            else if (GameManager.Instance.GOLD >= this.store.cost && this.nextMineShaft != null && this.nextMineShaft.state != StateMineShaft.LOCK && this.nextMineShaft.state != StateMineShaft.UNLOCKING)
+            {
+                //imgStore2.color = new Color(imgStore2.color.r, imgStore2.color.g, imgStore2.color.b, 255);
+                imgStore2.gameObject.GetComponent<Button>().interactable = true;
+            }
         }
     }
     #endregion
@@ -256,6 +287,7 @@ public class MineShaft : MonoBehaviour
         btnUpgrade.type = MyButton.Type.GOLD;
         btnBuyMoreMine.thisButton.onClick.AddListener(() => Btn_BuyMoreMine());
         btnX.onClick.AddListener(() => Btn_X());
+        objLock.GetComponent<Button>().onClick.AddListener(() => Btn_ShowUnlock());
         if (this.ID < 5)
         {
             btnStore.type = MyButton.Type.GOLD;
@@ -425,7 +457,7 @@ public class MineShaft : MonoBehaviour
         this.txtLevel.text = "Level " + this.properties.level.ToString();
         this.properties.speedMining = 1;
         xMoreMine = 1;
-        txtX.text = "x" + xMoreMine;
+        imgXMoreMine.sprite = UIManager.Instance.sprMoreMine[0];
         this.properties.name = GameConfig.Instance.lstPropertiesMap[ID].Name;
         this.txtName.text = this.properties.name;
 
@@ -446,6 +478,11 @@ public class MineShaft : MonoBehaviour
         {
             this.timeUpgradeSpecial_Max[i] = (int)GameConfig.Instance.lstPropertiesMap[ID].Upgrade_Special[i].time;
         }
+
+        //if (this.nextMineShaft != null && this.nextMineShaft.state != StateMineShaft.LOCK && this.nextMineShaft.state != StateMineShaft.UNLOCKING)
+        //{
+        //    this.ongTren.SetActive(true);
+        //}
 
         this.unlockCost = new UnlockCost[2];
         this.unlockCost[0].type = TypeUnlock.COIN;
@@ -537,8 +574,8 @@ public class MineShaft : MonoBehaviour
         {
             timer = this.properties.miningTime;
         }
-        if (workAnim != null)
-            workAnim.enabled = true;
+        //if (workAnim != null)
+        //    workAnim.enabled = true;
         if (timer >= 1)
         {
             //diễn anim working
@@ -661,8 +698,8 @@ public class MineShaft : MonoBehaviour
 
         timer = 0;
         yield return new WaitForEndOfFrame();
-        if (workAnim != null)
-            workAnim.enabled = false;
+        //if (workAnim != null)
+        //    workAnim.enabled = false;
         if (pushAnim != null)
         {
             pushAnim.enabled = false;
@@ -798,12 +835,12 @@ public class MineShaft : MonoBehaviour
     void Buy_AI()
     {
         btnUpgrade.thisPrice = 0;
-        GameManager.Instance.AddGold(-this.properties.buyAI);       
+        GameManager.Instance.AddGold(-this.properties.buyAI);
         this.isAutoWorking = true;
         imgAI.SetActive(true);
         btnUpgrade.thisButton.onClick.RemoveAllListeners();
         btnUpgrade.thisButton.onClick.AddListener(() => Btn_ShowUpgrade());
-        
+
     }
 
 
@@ -864,12 +901,13 @@ public class MineShaft : MonoBehaviour
         if (xMoreMine == 1)
         {
             xMoreMine = 10;
+            imgXMoreMine.sprite = UIManager.Instance.sprMoreMine[1];
         }
         else if (xMoreMine == 10)
         {
             xMoreMine = 1;
+            imgXMoreMine.sprite = UIManager.Instance.sprMoreMine[0];
         }
-        txtX.text = "x" + xMoreMine;
         GetPriceMoreMine();
     }
     public void Btn_BuyMoreMine()
@@ -893,6 +931,12 @@ public class MineShaft : MonoBehaviour
     #endregion
 
     #region === UNLOCK ===
+
+    public void Btn_ShowUnlock()
+    {
+        if (panelUnlock_2 != null)
+            panelUnlock_2.SetActive(true);
+    }
     public void Btn_Unlock(TypeUnlock _type)
     {
         //diễn anim unlock
@@ -914,7 +958,7 @@ public class MineShaft : MonoBehaviour
             this.timeUnlocking = this.properties.unlockTime;
             this.state = StateMineShaft.UNLOCKING;
         }
-
+        objLock.SetActive(false);
     }
 
     public void UnlockComplete()
@@ -952,11 +996,14 @@ public class MineShaft : MonoBehaviour
 
     void Upgrade_Store()
     {
-        GameManager.Instance.AddGold(-this.store.cost);
-        this.store.level += 1;
-        this.store.capacity = capStoreWillUp;
-        GetStoreCost();
-        GetSoreCapacity();
+        if (this.nextMineShaft != null && this.nextMineShaft.state != StateMineShaft.LOCK && this.nextMineShaft.state != StateMineShaft.UNLOCKING)
+        {
+            GameManager.Instance.AddGold(-this.store.cost);
+            this.store.level += 1;
+            this.store.capacity = capStoreWillUp;
+            GetStoreCost();
+            GetSoreCapacity();
+        }
     }
 
 
