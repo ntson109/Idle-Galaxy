@@ -22,7 +22,7 @@ public class Transporter : MonoBehaviour
     {
         thisButton.onClick.AddListener(() => ShowUpgrade());
         isTransporting = false;
-        this.speed = 5;
+        this.speed = 3f;
     }
 
     void Update()

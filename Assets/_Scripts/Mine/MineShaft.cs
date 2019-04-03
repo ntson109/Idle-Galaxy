@@ -164,6 +164,7 @@ public class MineShaft : MonoBehaviour
     public Image imgWorkBar;
     public Sprite sprLight0;
     public GameObject imgAI;
+    public Image imgMineBar;
 
     #region === START VS UPDATE ===
     void Start()
@@ -255,6 +256,13 @@ public class MineShaft : MonoBehaviour
                 if (this.nextMineShaft != null && this.nextMineShaft.state != StateMineShaft.LOCK && this.nextMineShaft.state != StateMineShaft.UNLOCKING)
                 {
                     this.ongTren.SetActive(true);
+                    pushAnim.gameObject.SetActive(true);
+                    pushAnim.enabled = false;
+                    pushAnim.gameObject.GetComponent<Image>().sprite = sprLight0;
+
+                }
+                else
+                {
                     imgStore.gameObject.GetComponent<Button>().interactable = false;
                 }
             }
@@ -268,6 +276,11 @@ public class MineShaft : MonoBehaviour
             {
                 //imgStore2.color = new Color(imgStore2.color.r, imgStore2.color.g, imgStore2.color.b, 255);
                 imgStore2.gameObject.GetComponent<Button>().interactable = true;
+            }
+
+            if (this.state != StateMineShaft.LOCK && this.state != StateMineShaft.UNLOCKING)
+            {
+                imgMineBar.fillAmount = ((float)this.numberMine / (float)GameConfig.Instance.lstPropertiesMap[ID].Upgrade_condition[this.properties.level - 1]);// *Time.deltaTime;
             }
         }
     }
