@@ -10,9 +10,8 @@ public class UFO : MonoBehaviour
     public float speed;
     public Transform[] posMove;
     public Button btnOk;
-    int countSpin;
     int timeSkip;
-    int goldReward;
+    long goldReward;
     int x;
     public bool isOpening;
 
@@ -47,7 +46,8 @@ public class UFO : MonoBehaviour
         UIManager.Instance.SetActivePanel(UIManager.Instance.panelUFO);
         Move_fromMidtoEnd(speed / 3);
         btnOk.onClick.RemoveAllListeners();
-        countSpin = timeSkip = goldReward = 0;
+        timeSkip = 0;
+        goldReward = 0;
         x = 1;
         UIManager.Instance.SetDeActivePanel(UIManager.Instance.panelUFO_CoinVideo);
         UIManager.Instance.SetDeActivePanel(UIManager.Instance.panelUFO_Gold);
@@ -56,7 +56,13 @@ public class UFO : MonoBehaviour
         {
             UIManager.Instance.SetActivePanel(UIManager.Instance.panelUFO_Gold);
             UIManager.Instance.SetDeActivePanel(UIManager.Instance.panelUFO_CoinVideo);
-            long a = (long)(Random.Range(GameConfig.Instance.UFO_rate_gold[0], GameConfig.Instance.UFO_rate_gold[1])* GameManager.Instance.GOLD);
+            long priceLastMine = 0;
+            for (int i = 0; i < GameManager.Instance.lstMap[0].lstMineShaft.Count; i++)
+            {
+                if (GameManager.Instance.lstMap[0].lstMineShaft[i].state != MineShaft.StateMineShaft.LOCK && GameManager.Instance.lstMap[0].lstMineShaft[i].state != MineShaft.StateMineShaft.UNLOCKING)
+                    priceLastMine = GameManager.Instance.lstMap[0].lstMineShaft[i].properties.buyMoreMinePrice;
+            }
+            long a = (long)(Random.Range(GameConfig.Instance.UFO_rate_gold[0], GameConfig.Instance.UFO_rate_gold[1]) * priceLastMine);
             if (a < 10)
                 a = 10;
             UIManager.Instance.txtGold_UFO.text = UIManager.Instance.ToLongString(a);
@@ -66,9 +72,26 @@ public class UFO : MonoBehaviour
         {
             UIManager.Instance.SetActivePanel(UIManager.Instance.panelUFO_CoinVideo);
             UIManager.Instance.SetDeActivePanel(UIManager.Instance.panelUFO_Gold);
-            int a = (int)(Random.Range(GameConfig.Instance.UFO_rate_coin[0], GameConfig.Instance.UFO_rate_coin[1]) * GameManager.Instance.COIN);
-            if (a < 5)
-                a = 5;
+            int r1 = Random.Range(1, 11);
+            int countMine = 0;
+            int a;
+            for (int i = 0; i < GameManager.Instance.lstMap[0].lstMineShaft.Count; i++)
+            {
+                if (GameManager.Instance.lstMap[0].lstMineShaft[i].state != MineShaft.StateMineShaft.LOCK && GameManager.Instance.lstMap[0].lstMineShaft[i].state != MineShaft.StateMineShaft.UNLOCKING)
+                    countMine++;
+            }
+            if (r1 <= 4)
+            {
+                a = Random.Range(1, 3) * countMine;
+            }
+            else if (r1 <= 8)
+            {
+                a = Random.Range(3, 5) * countMine;
+            }
+            else
+            {
+                a = 5 * countMine;
+            }
             UIManager.Instance.txtCoin_UFO.text = a.ToString();
             UIManager.Instance.imgRewardUFO.sprite = UIManager.Instance.lstSprReward[0];
             UIManager.Instance.txtReward_UFO.text = "Ad";
@@ -86,7 +109,7 @@ public class UFO : MonoBehaviour
         {
             GameManager.Instance.AddCoin(_value * x);
             GameManager.Instance.countSpin++;
-            GameManager.Instance.AddGold(goldReward * x);
+            GameManager.Instance.AddGold(goldReward);
             this.PostEvent(EventID.SKIP_TIME, timeSkip);
         }
         UIManager.Instance.SetDeActivePanel(UIManager.Instance.panelUFO);
@@ -101,7 +124,6 @@ public class UFO : MonoBehaviour
         {
             UIManager.Instance.imgRewardUFO.sprite = UIManager.Instance.lstSprReward[2];
             UIManager.Instance.txtReward_UFO.text = "1";
-            countSpin = 1;
         }
         else if (r == 1) //skip thoi gian
         {
@@ -111,7 +133,16 @@ public class UFO : MonoBehaviour
         }
         else //nhan gold
         {
-            goldReward = Random.Range(1000, 5000);
+            long priceLastMine = 0;
+            for (int i = 0; i < GameManager.Instance.lstMap[0].lstMineShaft.Count; i++)
+            {
+                if (GameManager.Instance.lstMap[0].lstMineShaft[i].state != MineShaft.StateMineShaft.LOCK && GameManager.Instance.lstMap[0].lstMineShaft[i].state != MineShaft.StateMineShaft.UNLOCKING)
+                {
+                    if(priceLastMine <= GameManager.Instance.lstMap[0].lstMineShaft[i].properties.buyMoreMinePrice)
+                        priceLastMine = GameManager.Instance.lstMap[0].lstMineShaft[i].properties.buyMoreMinePrice;
+                }
+            }
+            goldReward = (long)(Random.Range(GameConfig.Instance.UFO_rate_gold[0], GameConfig.Instance.UFO_rate_gold[1]) * priceLastMine);
             UIManager.Instance.imgRewardUFO.sprite = UIManager.Instance.lstSprReward[1];
             UIManager.Instance.txtReward_UFO.text = UIManager.Instance.ToLongString(goldReward);
         }

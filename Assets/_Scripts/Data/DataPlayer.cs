@@ -485,9 +485,9 @@ public class DataPlayer : MonoBehaviour
         Debug.Log("money " + _money);
         Debug.Log("cap " + _money / (int)time);
         Debug.Log("time " + time);
-        if (_money / (int)time < 5)
+        if (_money / (int)time < 2)
         { 
-            return 5; 
+            return 2; 
         }
         else
         {

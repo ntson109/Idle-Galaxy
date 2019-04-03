@@ -22,6 +22,7 @@ public class PlayUnityAd : MonoBehaviour
 
     [Tooltip("'watchAdButton' is optional. If an advertisement is available, the button will be set to interactable. To show ad with button, call 'showRewardedAd()'.")]
     public Button watchAdButton;
+    public Animator anim;
 
     [Tooltip("Is the ad rewarded? If yes, the callbacks on success/fail will be called and the user can't skip the Ad. Else the default will be played.")]
     public bool rewardedAd = true;
@@ -54,6 +55,11 @@ public class PlayUnityAd : MonoBehaviour
 
 				if (watchAdButton != null) {
 					watchAdButton.interactable = true;
+                    if (anim != null)
+                    {
+                        anim.enabled = true;
+                        anim.Play("Ad");
+                    }
 				}
 
 				if (advertisementAvailable == false) {
@@ -64,6 +70,11 @@ public class PlayUnityAd : MonoBehaviour
 			} else {
 				if (watchAdButton != null) {
 					watchAdButton.interactable = false;
+                    if (anim != null)
+                    {
+                        anim.enabled = false;
+                        //anim.Play("Ad");
+                    }
 				}
 				advertisementAvailable = false;
 			}

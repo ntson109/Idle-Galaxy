@@ -10,6 +10,8 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance = new UIManager();
     public bool isNewPlayer = true;
+    public float timeVideo;
+    public bool isCanClickVideo;
 
     [HideInInspector]
     public List<string> arrAlphabetNeed = new List<string>();
@@ -27,6 +29,7 @@ public class UIManager : MonoBehaviour
     public Text txtBoost;
     public Text txtTimeBoost;
     public Sprite[] sprMoreMine;
+    public Image imgXMine;
 
     [Header("TRANSPORTER")]
     public GameObject panelUpgradeTransporter;
@@ -40,7 +43,7 @@ public class UIManager : MonoBehaviour
     public Text txtTimeTrans_Up;
     public Text txtPriceTrans;
 
-    [Header("TRANSPORTER")]
+    [Header("STORE")]
     public GameObject panelUpgradeStore;
     public MyButton btnUpStore;
     public Text txtNameStore;
@@ -78,6 +81,21 @@ public class UIManager : MonoBehaviour
     public GameObject receiveSpin_random;
     public Text txtRewardSpin_randomGold;
     public Text txtRewardSpin_randomCoin;
+
+    [Header("VIDEO")]
+    public Text txtTimeVideo;
+    public GameObject panelVideo;
+    public Text txtReward_Video;
+    public Image imgRewardVideo;
+
+    [Header("UNLOCK")]
+    public GameObject panelUnlockReward;
+    public Text txtTittleUnlock;
+    public GameObject unlock_1;
+    public GameObject unlock_2;
+    public GameObject unlock_3;
+    public Button btnOkUnlock;
+
     //[Header("MOUSE CLICK")]
     //public GameObject mouseClick;
     //public Canvas parentCanvas;
@@ -94,6 +112,7 @@ public class UIManager : MonoBehaviour
     #region === START VS UPDATE ===
     void Start()
     {
+        //PlayerPrefs.DeleteAll();
         for (int i = 0; i < 4; i++)
         {
             for (int j = 0; j < arrAlphabet.Length; j++)
@@ -109,6 +128,20 @@ public class UIManager : MonoBehaviour
         else
         {
             btnContinue.interactable = false;
+        }
+
+        if (timeVideo > 0)
+        {
+            timeVideo -= Time.deltaTime;
+            txtTimeVideo.text = transformToTime(timeVideo);
+            if (isCanClickVideo)
+                isCanClickVideo = false;
+        }
+        else
+        {
+            txtTimeVideo.text = "";
+            if (!isCanClickVideo)
+                isCanClickVideo = true;
         }
     }
 
@@ -478,6 +511,163 @@ public class UIManager : MonoBehaviour
         }
     }
     #endregion
+
+    #region === VIDEO ===
+    long reward_Video;
+    int typeReward_Video;
+    public void On_Success_Ad_Video()
+    {
+        SetActivePanel(panelVideo);
+        reward_Video = 0;
+        typeReward_Video = 0;
+        int r = UnityEngine.Random.Range(0, 10);
+        if (r < 8) //gold
+        {
+            long priceLastMine = 0;
+            for (int i = 0; i < GameManager.Instance.lstMap[0].lstMineShaft.Count; i++)
+            {
+                if (GameManager.Instance.lstMap[0].lstMineShaft[i].state != MineShaft.StateMineShaft.LOCK && GameManager.Instance.lstMap[0].lstMineShaft[i].state != MineShaft.StateMineShaft.UNLOCKING)
+                {
+                    if (priceLastMine <= GameManager.Instance.lstMap[0].lstMineShaft[i].properties.buyMoreMinePrice)
+                        priceLastMine = GameManager.Instance.lstMap[0].lstMineShaft[i].properties.buyMoreMinePrice;
+                }
+            }
+            reward_Video = (long)(UnityEngine.Random.Range(GameConfig.Instance.UFO_rate_gold[0], GameConfig.Instance.UFO_rate_gold[1]) * priceLastMine);
+            imgRewardVideo.sprite = UIManager.Instance.lstSprReward[1];
+            typeReward_Video = 1;
+        }
+        else //coin
+        {
+            int r1 = UnityEngine.Random.Range(1, 11);
+            int countMine = 0;
+            for (int i = 0; i < GameManager.Instance.lstMap[0].lstMineShaft.Count; i++)
+            {
+                if (GameManager.Instance.lstMap[0].lstMineShaft[i].state != MineShaft.StateMineShaft.LOCK && GameManager.Instance.lstMap[0].lstMineShaft[i].state != MineShaft.StateMineShaft.UNLOCKING)
+                    countMine++;
+            }
+            if (r1 <= 4)
+            {
+                reward_Video = UnityEngine.Random.Range(1, 3) * countMine;
+            }
+            else if (r1 <= 8)
+            {
+                reward_Video = UnityEngine.Random.Range(3, 5) * countMine;
+            }
+            else
+            {
+                reward_Video = 5 * countMine;
+            }
+            imgRewardVideo.sprite = UIManager.Instance.lstSprReward[1];
+            typeReward_Video = 2;
+        }
+        UIManager.Instance.txtReward_Video.text = ToLongString(reward_Video);
+    }
+
+    public void Btn_OK_Video()
+    {
+        if (typeReward_Video == 1)
+        {
+            GameManager.Instance.AddGold(reward_Video);
+        }
+        else if (typeReward_Video == 2)
+        {
+            GameManager.Instance.AddCoin(reward_Video);
+        }
+        SetDeActivePanel(panelVideo);
+        timeVideo = 380;
+        isCanClickVideo = false;
+    }
+
+    int countSpin_Unlock;
+    int timeSkip_Unlock;
+    long gold_Unlock;
+    int coin_Unlock;
+    public void UnlockReward(long _gold, int _spin, int _time, int _coin)
+    {
+        btnOkUnlock.onClick.RemoveAllListeners();
+
+        gold_Unlock = _gold;
+        unlock_2.SetActive(true);
+        unlock_2.GetComponentInChildren<Text>().text = ToLongString(gold_Unlock);
+        
+        countSpin_Unlock = _spin;
+        unlock_1.SetActive(true);
+        unlock_1.GetComponentInChildren<Text>().text = countSpin_Unlock.ToString();
+
+        timeSkip_Unlock = _time;
+        coin_Unlock = _coin;
+
+        btnOkUnlock.onClick.AddListener(() => Btn_OK_Unlock());
+    }
+
+    public void On_Success_Ad_Unlock()
+    {
+        unlock_3.SetActive(true);
+        int r = UnityEngine.Random.Range(0, 10);
+        if (r > 5)
+        {
+            timeSkip_Unlock = UnityEngine.Random.Range(5, 16);
+            unlock_3.GetComponentInChildren<Text>().text = "-" + timeSkip_Unlock + "mins";
+        }
+        else
+        {
+            int r1 = UnityEngine.Random.Range(1, 11);
+            int countMine = 0;
+            for (int i = 0; i < GameManager.Instance.lstMap[0].lstMineShaft.Count; i++)
+            {
+                if (GameManager.Instance.lstMap[0].lstMineShaft[i].state != MineShaft.StateMineShaft.LOCK && GameManager.Instance.lstMap[0].lstMineShaft[i].state != MineShaft.StateMineShaft.UNLOCKING)
+                    countMine++;
+            }
+            if (r1 <= 4)
+            {
+                coin_Unlock = UnityEngine.Random.Range(1, 3) * countMine;
+            }
+            else if (r1 <= 8)
+            {
+                coin_Unlock = UnityEngine.Random.Range(3, 5) * countMine;
+            }
+            else
+            {
+                coin_Unlock = 5 * countMine;
+            }
+            unlock_3.GetComponentInChildren<Text>().text = coin_Unlock.ToString();
+        }
+    }
+
+    public void Btn_OK_Unlock()
+    {
+        GameManager.Instance.AddGold(gold_Unlock);
+        GameManager.Instance.countSpin += countSpin_Unlock;
+        if (timeSkip_Unlock > 0)
+        {
+            this.PostEvent(EventID.SKIP_TIME, timeSkip_Unlock);
+        }
+        if (timeSkip_Unlock > 0)
+        {
+            GameManager.Instance.AddCoin(coin_Unlock);
+        }
+
+        countSpin_Unlock = timeSkip_Unlock = coin_Unlock = 0;
+        gold_Unlock = 0;
+    }
+    #endregion
+
+    public void Btn_X_MoreMine()
+    {
+        for (int i = 0; i < GameManager.Instance.lstMap[0].lstMineShaft.Count; i++)
+        {
+            //if (GameManager.Instance.lstMap[0].lstMineShaft[i].state != MineShaft.StateMineShaft.LOCK && GameManager.Instance.lstMap[0].lstMineShaft[i].state != MineShaft.StateMineShaft.UNLOCKING)
+            GameManager.Instance.lstMap[0].lstMineShaft[i].Btn_X();
+        }
+        if (GameManager.Instance.lstMap[0].lstMineShaft[0].xMoreMine == 1)
+        {
+            imgXMine.sprite = sprMoreMine[0];
+        }
+        else
+        {
+            imgXMine.sprite = sprMoreMine[1];
+        }
+    }
     public void Test_Boost()
     {
         GameManager.Instance.boost.SetBoost(TypeBoost.GOLD, 2, 30);

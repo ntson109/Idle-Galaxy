@@ -35,8 +35,8 @@
   },
   "UFO_speed" : 4,
   "UFO_rate_Gold" : [
-	0.01,
-	0.1
+	0.1,
+	0.2
   ],
   "UFO_rate_Coin" : [
 	0.01,

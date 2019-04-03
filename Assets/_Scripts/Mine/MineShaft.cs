@@ -155,8 +155,6 @@ public class MineShaft : MonoBehaviour
     [Header("UI STORE")]
     public Text txtPriceStore;
     public GameObject ongTren;
-    public Image imgStore;
-    public Image imgStore2;
 
     [Header("ANIM")]
     public Animator workAnim;
@@ -216,6 +214,16 @@ public class MineShaft : MonoBehaviour
 
             if (this.state == StateMineShaft.UNLOCKING)
             {
+                if (!this.panelUnlock.activeSelf)
+                    this.panelUnlock.SetActive(true);
+
+                if (!this.panelUnlock_2.activeSelf)
+                {
+                    this.panelUnlock_2.SetActive(true);
+                    btnUnlock_byGold.interactable = false;
+                    objLock.SetActive(false);
+                }
+
                 if (timeUnlocking <= 0)
                 {
                     UnlockComplete();
@@ -256,6 +264,7 @@ public class MineShaft : MonoBehaviour
                 if (this.nextMineShaft != null && this.nextMineShaft.state != StateMineShaft.LOCK && this.nextMineShaft.state != StateMineShaft.UNLOCKING)
                 {
                     this.ongTren.SetActive(true);
+                    btnStore.gameObject.SetActive(true);
                     pushAnim.gameObject.SetActive(true);
                     pushAnim.enabled = false;
                     pushAnim.gameObject.GetComponent<Image>().sprite = sprLight0;
@@ -263,19 +272,8 @@ public class MineShaft : MonoBehaviour
                 }
                 else
                 {
-                    imgStore.gameObject.GetComponent<Button>().interactable = false;
+                    btnStore.gameObject.SetActive(false);
                 }
-            }
-
-            if (GameManager.Instance.GOLD < this.store.cost && this.nextMineShaft != null && this.nextMineShaft.state != StateMineShaft.LOCK && this.nextMineShaft.state != StateMineShaft.UNLOCKING)
-            {
-                //imgStore2.color = new Color(imgStore2.color.r, imgStore2.color.g, imgStore2.color.b, 150);
-                imgStore2.gameObject.GetComponent<Button>().interactable = false;
-            }
-            else if (GameManager.Instance.GOLD >= this.store.cost && this.nextMineShaft != null && this.nextMineShaft.state != StateMineShaft.LOCK && this.nextMineShaft.state != StateMineShaft.UNLOCKING)
-            {
-                //imgStore2.color = new Color(imgStore2.color.r, imgStore2.color.g, imgStore2.color.b, 255);
-                imgStore2.gameObject.GetComponent<Button>().interactable = true;
             }
 
             if (this.state != StateMineShaft.LOCK && this.state != StateMineShaft.UNLOCKING)
@@ -299,7 +297,7 @@ public class MineShaft : MonoBehaviour
         btnUpgrade.thisButton.onClick.RemoveAllListeners();
         btnUpgrade.type = MyButton.Type.GOLD;
         btnBuyMoreMine.thisButton.onClick.AddListener(() => Btn_BuyMoreMine());
-        btnX.onClick.AddListener(() => Btn_X());
+        //btnX.onClick.AddListener(() => Btn_X());
         objLock.GetComponent<Button>().onClick.AddListener(() => Btn_ShowUnlock());
         if (this.ID < 5)
         {
@@ -491,11 +489,6 @@ public class MineShaft : MonoBehaviour
         {
             this.timeUpgradeSpecial_Max[i] = (int)GameConfig.Instance.lstPropertiesMap[ID].Upgrade_Special[i].time;
         }
-
-        //if (this.nextMineShaft != null && this.nextMineShaft.state != StateMineShaft.LOCK && this.nextMineShaft.state != StateMineShaft.UNLOCKING)
-        //{
-        //    this.ongTren.SetActive(true);
-        //}
 
         this.unlockCost = new UnlockCost[2];
         this.unlockCost[0].type = TypeUnlock.COIN;
@@ -974,6 +967,10 @@ public class MineShaft : MonoBehaviour
         objLock.SetActive(false);
     }
 
+    int countSpin_Unlock;
+    int timeSkip_Unlock;
+    long gold_Unlock;
+    int coin_Unlock;
     public void UnlockComplete()
     {
         state = StateMineShaft.IDLE;
@@ -981,7 +978,49 @@ public class MineShaft : MonoBehaviour
         mapParent.CheckUnlock(this.ID);
         UIManager.Instance.SetDeActivePanel(panelUnlock);
         isCanWork = true;
-        //hiện bảng Reward
+        UIManager.Instance.SetActivePanel(UIManager.Instance.panelUnlockReward);
+        UIManager.Instance.txtTittleUnlock.text = "Unlock success " + this.properties.name;
+        long priceLastMine = 0;
+        for (int i = 0; i < GameManager.Instance.lstMap[0].lstMineShaft.Count; i++)
+        {
+            if (GameManager.Instance.lstMap[0].lstMineShaft[i].state != MineShaft.StateMineShaft.LOCK && GameManager.Instance.lstMap[0].lstMineShaft[i].state != MineShaft.StateMineShaft.UNLOCKING)
+            {
+                if (priceLastMine <= GameManager.Instance.lstMap[0].lstMineShaft[i].properties.buyMoreMinePrice)
+                    priceLastMine = GameManager.Instance.lstMap[0].lstMineShaft[i].properties.buyMoreMinePrice;
+            }
+        }
+        gold_Unlock = (long)(UnityEngine.Random.Range(GameConfig.Instance.UFO_rate_gold[0], GameConfig.Instance.UFO_rate_gold[1]) * priceLastMine);
+        if (this.ID == 1)
+        {
+            countSpin_Unlock = 1;
+            timeSkip_Unlock = 0;
+            coin_Unlock = 0;
+        }
+        else if (this.ID == 2)
+        {
+            countSpin_Unlock = 1;
+            timeSkip_Unlock = 0;
+            coin_Unlock = 0;
+        }
+        else if (this.ID == 3)
+        {
+            countSpin_Unlock = 2;
+            timeSkip_Unlock = 0;
+            coin_Unlock = 0;
+        }
+        else if (this.ID == 4)
+        {
+            countSpin_Unlock = 3;
+            timeSkip_Unlock = 0;
+            coin_Unlock = 0;
+        }
+        else if (this.ID == 5)
+        {
+            countSpin_Unlock = 5;
+            timeSkip_Unlock = 0;
+            coin_Unlock = 0;
+        }
+
     }
     #endregion
 
