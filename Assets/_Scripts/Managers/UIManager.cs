@@ -636,6 +636,10 @@ public class UIManager : MonoBehaviour
 
     public void Btn_OK_Unlock()
     {
+        SetDeActivePanel(panelUnlockReward);
+        unlock_1.SetActive(false);
+        unlock_2.SetActive(false);
+        unlock_3.SetActive(false);
         GameManager.Instance.AddGold(gold_Unlock);
         GameManager.Instance.countSpin += countSpin_Unlock;
         if (timeSkip_Unlock > 0)
@@ -680,6 +684,43 @@ public class UIManager : MonoBehaviour
         GameManager.Instance.AddGold(10000);
         GameManager.Instance.AddCoin(100);
     }
+    #endregion
+
+    #region === TUTORIAL ===
+    //public void TutorialOnclick()
+    //{
+    //    AudioManager.Instance.Play("Click");
+    //    AudioManager.Instance.Stop("Menu");
+    //    AudioManager.Instance.Play("GamePlay");
+    //    PlayerPrefs.SetFloat("X4TimeGame", 4f);
+    //    GameManager.Instance.isTutorial = true;
+    //    ResetGame();
+    //    btnX4.image.sprite = spX1;
+    //    menuGame.SetActive(false);
+    //    Loading(false);
+    //    isPlay = true;
+    //    GameManager.Instance.LoadDate();
+    //    GameManager.Instance.main.bitCoin = GameConfig.Instance.bitcoinStartGame;
+    //    GameManager.Instance.main.dollars = GameConfig.Instance.dollarStartGame;
+    //    OnclickWORD(false);
+    //    if (PlayerPrefs.GetInt("isDoneTutorial") == 0 || GameManager.Instance.isTutorial)
+    //    {
+    //        Turorial(WorldManager.Instance.lsCountry[1].gameObject, WorldManager.Instance.lsCountry[1].transform.position, Vector3.zero);
+    //    }
+    //}
+
+    //public void Turorial(GameObject main, Vector3 posHand, Vector3 angleHnad)
+    //{
+    //    Destroy(mainTutorial);
+    //    panelTutorial.SetActive(true);
+    //    Vector3 pos = main.transform.position;
+    //    mainTutorial = Instantiate(main, panelTutorial.transform);
+    //    mainTutorial.SetActive(true);
+    //    mainTutorial.transform.SetAsFirstSibling();
+    //    mainTutorial.transform.position = pos;
+    //    handTutorial.transform.position = posHand;
+    //    handTutorial.transform.localEulerAngles = angleHnad;
+    //}
     #endregion
 }
 
