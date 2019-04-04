@@ -54,17 +54,18 @@ public class UpgradeObj_Level : MonoBehaviour
         {
             if (thisMineShaft.numberMine >= GameConfig.Instance.lstPropertiesMap[thisMineShaft.ID].Upgrade_condition[thisMineShaft.properties.level - 1])
             {
-                btnUpgrade.thisPrice = thisMineShaft.properties.upgradePrice;
-                txtPrice.text = "Upgrade\n" + btnUpgrade.thisPrice;
+                //btnUpgrade.thisPrice = thisMineShaft.properties.upgradePrice;
+                //txtPrice.text = "Upgrade";// +btnUpgrade.thisPrice;
+                btnUpgrade.thisPrice = 0;
                 imgCondition.enabled = true;
             }
             else
             {
                 btnUpgrade.thisPrice = long.MaxValue;
                 btnUpgrade.thisButton.interactable = false;
-                txtPrice.text = "Upgrade";
                 imgCondition.enabled = false;
             }
+            txtPrice.text = "Upgrade";
             GameManager.Instance.AddGold(0);
             txtName.text = thisMineShaft.properties.name;
             txtDescription.text = "Level " + thisMineShaft.properties.level + " -> " + (thisMineShaft.properties.level + 1);
@@ -90,6 +91,7 @@ public class UpgradeObj_Level : MonoBehaviour
         }
         else
         {
+            btnUpgrade.thisPrice = long.MaxValue;
             btnUpgrade.thisButton.interactable = false;
             txtPrice.text = "Max";
             txtDescription.text = "Max level";

@@ -3982,10 +3982,10 @@ RectTransform:
   m_Father: {fileID: 1624361506}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -72, y: 0}
-  m_SizeDelta: {x: 60, y: -0.000030517578}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: -72, y: 290.08}
+  m_SizeDelta: {x: 60, y: 180.09}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &194341634
 MonoBehaviour:
@@ -5683,7 +5683,7 @@ Prefab:
     - target: {fileID: 114453927447260306, guid: 90fd4355538c0c84e95fe8fdb11d003e,
         type: 2}
       propertyPath: m_Text
-      value: 03:20
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1162116452252100, guid: 90fd4355538c0c84e95fe8fdb11d003e, type: 2}
       propertyPath: m_Name
@@ -8996,7 +8996,6 @@ MonoBehaviour:
     speedMining: 0
     unlockCondition: 0
     buyAI: 0
-    upgradePrice: 0
     upgradeTime: 0
   numberMine: 0
   xMoreMine: 1
@@ -9934,6 +9933,41 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 363795536}
+--- !u!1 &367456059
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 367456060}
+  m_Layer: 5
+  m_Name: Home 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &367456060
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 367456059}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1664691103}
+  - {fileID: 1523022419}
+  m_Father: {fileID: 1953369686}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &367608217
 GameObject:
   m_ObjectHideFlags: 0
@@ -11698,7 +11732,6 @@ MonoBehaviour:
     speedMining: 0
     unlockCondition: 0
     buyAI: 0
-    upgradePrice: 0
     upgradeTime: 0
   numberMine: 0
   xMoreMine: 1
@@ -13343,7 +13376,6 @@ MonoBehaviour:
     speedMining: 0
     unlockCondition: 0
     buyAI: 0
-    upgradePrice: 0
     upgradeTime: 0
   numberMine: 0
   xMoreMine: 1
@@ -15226,7 +15258,6 @@ MonoBehaviour:
     speedMining: 0
     unlockCondition: 0
     buyAI: 0
-    upgradePrice: 0
     upgradeTime: 0
   numberMine: 0
   xMoreMine: 1
@@ -26293,7 +26324,6 @@ MonoBehaviour:
     speedMining: 0
     unlockCondition: 0
     buyAI: 0
-    upgradePrice: 0
     upgradeTime: 0
   numberMine: 0
   xMoreMine: 1
@@ -39530,8 +39560,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.000085, y: 1.000085, z: 1.000085}
   m_Children: []
-  m_Father: {fileID: 1953369686}
-  m_RootOrder: 2
+  m_Father: {fileID: 367456060}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -42526,7 +42556,6 @@ MonoBehaviour:
     speedMining: 0
     unlockCondition: 0
     buyAI: 0
-    upgradePrice: 0
     upgradeTime: 0
   numberMine: 0
   xMoreMine: 1
@@ -44119,8 +44148,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1953369686}
-  m_RootOrder: 1
+  m_Father: {fileID: 367456060}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -50980,8 +51009,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 601123737}
-  - {fileID: 1664691103}
-  - {fileID: 1523022419}
+  - {fileID: 367456060}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -447,6 +447,7 @@ public class UIManager : MonoBehaviour
 
     public void Btn_No_NewPlay()
     {
+        AudioManager.Instance.Play("Click");
         SetDeActivePanel(panelYesNoNewPlay);
     }
 
@@ -464,7 +465,7 @@ public class UIManager : MonoBehaviour
 
     public void Btn_Share()
     {
-        DataPlayer.Instance.SaveDataPlayer();
+        //DataPlayer.Instance.SaveDataPlayer();
     }
 
     public void Btn_Rate()
@@ -746,6 +747,8 @@ public class UIManager : MonoBehaviour
     {
 
     }
+
+
     #endregion
 }
 
