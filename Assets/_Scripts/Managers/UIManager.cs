@@ -20,6 +20,9 @@ public class UIManager : MonoBehaviour
     public Text txtGold;
     public Text txtCoin;
 
+    [Header("UI HOME")]
+    public GameObject panelYesNoNewPlay;
+
     [Header("UI MAIN")]
     public Button btnContinue;
     public GameObject panelShowUpgrade;
@@ -95,6 +98,12 @@ public class UIManager : MonoBehaviour
     public GameObject unlock_2;
     public GameObject unlock_3;
     public Button btnOkUnlock;
+
+    [Header("TUTORIAL")]
+    public GameObject mainTutorial;
+    public GameObject panelTutorial;
+    public GameObject handTutorial;
+    public GameObject[] lsButtonTutorial;
 
     //[Header("MOUSE CLICK")]
     //public GameObject mouseClick;
@@ -410,6 +419,7 @@ public class UIManager : MonoBehaviour
     public void Btn_Play()
     {
         AudioManager.Instance.Play("Click");
+        SetActivePanel(panelYesNoNewPlay);
         isNewPlayer = true;
         ScenesManager.Instance.GoToScene(ScenesManager.TypeScene.Main, () =>
             {
@@ -423,12 +433,21 @@ public class UIManager : MonoBehaviour
 
     public void Btn_Yes_NewPlay()
     {
-
+        AudioManager.Instance.Play("Click");
+        isNewPlayer = true;
+        ScenesManager.Instance.GoToScene(ScenesManager.TypeScene.Main, () =>
+        {
+            this.PostEvent(EventID.START_GAME);
+            GameManager.Instance.stateGame = StateGame.PLAYING;
+            GameManager.Instance.AddGold(GameConfig.Instance.GoldStart);
+            GameManager.Instance.AddCoin(GameConfig.Instance.CoinStart);
+            AudioManager.Instance.Play("GamePlay", true);
+        });
     }
 
     public void Btn_No_NewPlay()
     {
-
+        SetDeActivePanel(panelYesNoNewPlay);
     }
 
     public void Btn_Continue()
@@ -589,7 +608,7 @@ public class UIManager : MonoBehaviour
         gold_Unlock = _gold;
         unlock_2.SetActive(true);
         unlock_2.GetComponentInChildren<Text>().text = ToLongString(gold_Unlock);
-        
+
         countSpin_Unlock = _spin;
         unlock_1.SetActive(true);
         unlock_1.GetComponentInChildren<Text>().text = countSpin_Unlock.ToString();
@@ -709,18 +728,24 @@ public class UIManager : MonoBehaviour
     //    }
     //}
 
-    //public void Turorial(GameObject main, Vector3 posHand, Vector3 angleHnad)
-    //{
-    //    Destroy(mainTutorial);
-    //    panelTutorial.SetActive(true);
-    //    Vector3 pos = main.transform.position;
-    //    mainTutorial = Instantiate(main, panelTutorial.transform);
-    //    mainTutorial.SetActive(true);
-    //    mainTutorial.transform.SetAsFirstSibling();
-    //    mainTutorial.transform.position = pos;
-    //    handTutorial.transform.position = posHand;
-    //    handTutorial.transform.localEulerAngles = angleHnad;
-    //}
+    public void Turorial(GameObject main, Vector3 posHand, Vector3 angleHand)
+    {
+        if (mainTutorial != null)
+            Destroy(mainTutorial);
+        panelTutorial.SetActive(true);
+        Vector3 pos = main.transform.position;
+        mainTutorial = Instantiate(main, panelTutorial.transform);
+        mainTutorial.SetActive(true);
+        mainTutorial.transform.SetAsFirstSibling();
+        mainTutorial.transform.position = pos;
+        handTutorial.transform.position = posHand;
+        handTutorial.transform.localEulerAngles = angleHand;
+    }
+
+    public void Step_1_Tutorial()
+    {
+
+    }
     #endregion
 }
 

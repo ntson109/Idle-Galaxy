@@ -50,6 +50,8 @@ public class StoreJSON
     public int value;
 
     public long capacity;
+
+    public long cost;
 }
 
 [System.Serializable]

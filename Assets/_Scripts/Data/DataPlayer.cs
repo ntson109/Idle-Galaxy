@@ -152,6 +152,7 @@ public class DataPlayer : MonoBehaviour
                 m.store.level = GameManager.Instance.lstMap[i].lstMineShaft[j].store.level;
                 m.store.value = GameManager.Instance.lstMap[i].lstMineShaft[j].store.value;
                 m.store.capacity = GameManager.Instance.lstMap[i].lstMineShaft[j].store.capacity;
+                m.store.cost = GameManager.Instance.lstMap[i].lstMineShaft[j].store.cost;
                 data.lsMineShaft.Add(m);
             }
         }
@@ -226,7 +227,7 @@ public class DataPlayer : MonoBehaviour
                 GameManager.Instance.lstMap[0].lstMineShaft[i].properties.buyMoreMinePrice = objJson["lsMineShaft"][i]["buyMoreMinePrice"].AsLong;
                 GameManager.Instance.lstMap[0].lstMineShaft[i].properties.capacity = objJson["lsMineShaft"][i]["capacity"].AsInt;
                 GameManager.Instance.lstMap[0].lstMineShaft[i].properties.unitPrice = objJson["lsMineShaft"][i]["unitPrice"].AsInt;
-                GameManager.Instance.lstMap[0].lstMineShaft[i].properties.miningTime = objJson["lsMineShaft"][i]["miningTime"].AsInt;
+                GameManager.Instance.lstMap[0].lstMineShaft[i].properties.miningTime = objJson["lsMineShaft"][i]["miningTime"].AsFloat;
                 GameManager.Instance.lstMap[0].lstMineShaft[i].input = objJson["lsMineShaft"][i]["input"].AsInt;
                 GameManager.Instance.lstMap[0].lstMineShaft[i].imgWorkBar.fillAmount = objJson["lsMineShaft"][i]["workBar"].AsFloat;
                 if (objJson["lsMineShaft"][i]["state"].AsInt == 1)
@@ -265,6 +266,7 @@ public class DataPlayer : MonoBehaviour
                 GameManager.Instance.lstMap[0].lstMineShaft[i].store.level = objJson["lsMineShaft"][i]["store"]["level"].AsInt;
                 GameManager.Instance.lstMap[0].lstMineShaft[i].store.value = objJson["lsMineShaft"][i]["store"]["value"].AsInt;
                 GameManager.Instance.lstMap[0].lstMineShaft[i].store.capacity = objJson["lsMineShaft"][i]["store"]["capacity"].AsInt;
+                GameManager.Instance.lstMap[0].lstMineShaft[i].store.cost = objJson["lsMineShaft"][i]["store"]["cost"].AsLong;
             }
         }
 

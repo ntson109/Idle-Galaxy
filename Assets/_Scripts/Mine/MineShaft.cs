@@ -493,7 +493,7 @@ public class MineShaft : MonoBehaviour
         txtUnlock_byCoin.text = UIManager.Instance.ToLongString(this.unlockCost[0].cost);
         txtUnlock_byGold.text = UIManager.Instance.ToLongString(this.unlockCost[1].cost) + "$";
 
-        GetStoreCost();
+        //GetStoreCost();
         GetSoreCapacity();
     }
 
