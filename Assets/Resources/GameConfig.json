@@ -109,27 +109,47 @@
 		"Productivity" : 2,
 		"Upgrade_Special" : {
 			"1" : {
-				"name" : "Laser drilling Tech",
+				"name" : "Deep Explore Tech lv 1",
 				"description" : "x2 price",
-				"price" : 100,
+				"price" : 10000,
 				"time" : 5,
 				"coinMax" : 10
 			},
 			"2" : {
-				"name" : "Up 3",
-				"description" : "/2 time",
-				"price" : 100,
+				"name" : "Deep Explore Tech lv 2",
+				"description" : "x2 price",
+				"price" : 50000,
 				"time" : 10,
 				"coinMax" : 10
 			},
 			"3" : {
-				"name" : "Explore System",
-				"description" : "x2 productivity",
-				"price" : 100,
+				"name" : "Deep Explore Tech lv 3",
+				"description" : "x2 price",
+				"price" : 250000,
 				"time" : 15,
 				"coinMax" : 10
+			},
+			"4" : {
+				"name" : "Laser drilling Tech lv 1",
+				"description" : "x2 productivity",
+				"price" : 20000000,
+				"time" : 20,
+				"coinMax" : 10
+			},
+			"5" : {
+				"name" : "Laser drilling Tech lv 2",
+				"description" : "x2 productivity",
+				"price" : 100000000,
+				"time" : 40,
+				"coinMax" : 10
+			},
+			"6" : {
+				"name" : "Laser drilling Tech lv 3",
+				"description" : "x2 productivity",
+				"price" : 500000000,
+				"time" : 60,
+				"coinMax" : 10
 			}
-			
 		},
 		"Unit_Price" : 1,
 		"Store_Cost_1" : 5,
@@ -180,20 +200,27 @@
 		"Productivity" : 5,
 		"Upgrade_Special" : {
 			"1" : {
-				"name" : "ThermalSoftenning Tech",
+				"name" : "Nuclear enriching Tech lv 1",
 				"description" : "x2 price",
-				"price" : 100,
+				"price" : 1000000,
 				"time" : 10,
 				"coinMax" : 10
 			},
 			"2" : {
-				"name" : "Up 3",
-				"description" : "/2 time",
-				"price" : 100,
-				"time" : 15,
+				"name" : "Nuclear enriching Tech lv 2",
+				"description" : "x2 price",
+				"price" : 1000000,
+				"time" : 10,
 				"coinMax" : 10
 			},
 			"3" : {
+				"name" : "Nuclear enriching Tech lv 3",
+				"description" : "x2 price",
+				"price" : 1000000,
+				"time" : 10,
+				"coinMax" : 10
+			},
+			"4" : {
 				"name" : "Nuclear enriching Tech",
 				"description" : "x2 productivity",
 				"price" : 100,
@@ -215,7 +242,7 @@
 		"Unlock_time" : 10,
 		"Unlock_cost" : [
 			20,
-			5000000
+			500000
 		],
 		"Unlock_reward" : {
 			"timex2" : 60
@@ -285,7 +312,7 @@
 		"Unlock_time" : 20,
 		"Unlock_cost" : [
 			40,
-			10000000
+			50000000
 		],
 		"Unlock_reward" : {
 			"timex2" : 60

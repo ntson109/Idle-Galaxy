@@ -133,7 +133,7 @@ public class MineShaft : MonoBehaviour
     public Button btnUpgrade;
     public MyButton btnBuyMoreMine;
     public MyButton btnBuyAI;
-    public Button btnX;
+    //public Button btnX;
     public Button btnUnlock_byGold;
     public Text txtUnlock_byGold;
     public Button btnUnlock_byCoin;
@@ -156,6 +156,7 @@ public class MineShaft : MonoBehaviour
     [Header("UI STORE")]
     public Text txtPriceStore;
     public GameObject ongTren;
+    public GameObject ongTrai;
 
     [Header("ANIM")]
     public Animator workAnim;
@@ -165,6 +166,11 @@ public class MineShaft : MonoBehaviour
     public GameObject imgUpgrade;
     public GameObject imgAI;
     public Image imgMineBar;
+    public GameObject tubeT;
+    public GameObject tubeL;
+    public Sprite tubeT0;
+    public Sprite tubeL0;
+    public Sprite work0;
 
     #region === START VS UPDATE ===
     void Start()
@@ -261,22 +267,22 @@ public class MineShaft : MonoBehaviour
             if (btnStore != null)
                 txtPriceStore.text = UIManager.Instance.ToLongString(this.store.cost);
 
-            if (!this.ongTren.activeSelf)
-            {
-                if (this.nextMineShaft != null && this.nextMineShaft.state != StateMineShaft.LOCK && this.nextMineShaft.state != StateMineShaft.UNLOCKING)
-                {
-                    this.ongTren.SetActive(true);
-                    btnStore.gameObject.SetActive(true);
-                    pushAnim.gameObject.SetActive(true);
-                    pushAnim.enabled = false;
-                    pushAnim.gameObject.GetComponent<Image>().sprite = sprLight0;
+            //if (!this.ongTren.activeSelf)
+            //{
+            //    if (this.nextMineShaft != null && this.nextMineShaft.state != StateMineShaft.LOCK && this.nextMineShaft.state != StateMineShaft.UNLOCKING)
+            //    {
+            //        this.ongTren.SetActive(true);
+            //        btnStore.gameObject.SetActive(true);
+            //        pushAnim.gameObject.SetActive(true);
+            //        pushAnim.enabled = false;
+            //        pushAnim.gameObject.GetComponent<Image>().sprite = sprLight0;
 
-                }
-                else
-                {
-                    btnStore.gameObject.SetActive(false);
-                }
-            }
+            //    }
+            //    else
+            //    {
+            //        btnStore.gameObject.SetActive(false);
+            //    }
+            //}
 
             if (this.state != StateMineShaft.LOCK && this.state != StateMineShaft.UNLOCKING)
             {
@@ -290,6 +296,28 @@ public class MineShaft : MonoBehaviour
                 }
             }
 
+            if (tubeT != null)
+            {
+                if (!tubeT.activeSelf)
+                {
+                    if (this.nextMineShaft != null && this.nextMineShaft.state != StateMineShaft.LOCK && this.nextMineShaft.state != StateMineShaft.UNLOCKING)
+                    {
+                        tubeT.SetActive(true);
+                        tubeL.SetActive(false);
+
+                        this.ongTren.SetActive(true);
+                        this.ongTrai.SetActive(true);
+                        btnStore.gameObject.SetActive(true);
+                        pushAnim.gameObject.SetActive(true);
+                        pushAnim.enabled = false;
+                        pushAnim.gameObject.GetComponent<Image>().sprite = sprLight0;
+                    }
+                    //else
+                    //{
+                    //    btnStore.gameObject.SetActive(false);
+                    //}
+                }
+            }
             //if(){
             //if (!CheckUpgrade())
             //{
@@ -595,6 +623,13 @@ public class MineShaft : MonoBehaviour
         }
         if (workAnim != null)
             workAnim.enabled = true;
+
+        if (tubeT.activeSelf)
+            tubeT.GetComponent<Animator>().enabled = true;
+
+        if(tubeL.activeSelf)
+            tubeL.GetComponent<Animator>().enabled = true;
+
         if (timer >= 1)
         {
             //diễn anim working
@@ -717,8 +752,25 @@ public class MineShaft : MonoBehaviour
 
         timer = 0;
         yield return new WaitForEndOfFrame();
+
         if (workAnim != null)
+        {
             workAnim.enabled = false;
+            workAnim.gameObject.GetComponent<Image>().sprite = work0;
+        }
+
+        if (tubeT.activeSelf)
+        {
+            tubeT.GetComponent<Animator>().enabled = false;
+            tubeT.GetComponent<Image>().sprite = tubeT0;
+        }
+
+        if (tubeL.activeSelf)
+        {
+            tubeL.GetComponent<Animator>().enabled = false;
+            tubeL.GetComponent<Image>().sprite = tubeL0;
+        }
+
         if (pushAnim != null)
         {
             pushAnim.enabled = false;
@@ -730,7 +782,6 @@ public class MineShaft : MonoBehaviour
         if (!isAutoWorking)
             btnWork.gameObject.SetActive(true);
         Debug.Log("Done");
-
     }
 
     //IEnumerator Product_Move_PushUp()
