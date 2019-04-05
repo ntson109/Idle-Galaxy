@@ -627,7 +627,7 @@ public class MineShaft : MonoBehaviour
         if (tubeT.activeSelf)
             tubeT.GetComponent<Animator>().enabled = true;
 
-        if(tubeL.activeSelf)
+        if (tubeL.activeSelf)
             tubeL.GetComponent<Animator>().enabled = true;
 
         if (timer >= 1)
@@ -756,7 +756,8 @@ public class MineShaft : MonoBehaviour
         if (workAnim != null)
         {
             workAnim.enabled = false;
-            workAnim.gameObject.GetComponent<Image>().sprite = work0;
+            if (!isAutoWorking)
+                workAnim.gameObject.GetComponent<Image>().sprite = work0;
         }
 
         if (tubeT.activeSelf)
@@ -959,7 +960,7 @@ public class MineShaft : MonoBehaviour
         this.timeUpgradeSpecial[_id] = 0;
         GameManager.Instance.AddCoin(-_coin);
     }
-    
+
     public bool CheckUpgrade()
     {
         if (this.numberMine >= GameConfig.Instance.lstPropertiesMap[this.ID].Upgrade_condition[this.properties.level - 1])

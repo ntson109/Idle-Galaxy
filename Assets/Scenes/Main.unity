@@ -1449,6 +1449,7 @@ GameObject:
   - component: {fileID: 64597097}
   - component: {fileID: 64597099}
   - component: {fileID: 64597098}
+  - component: {fileID: 64597100}
   m_Layer: 5
   m_Name: Unlock
   m_TagString: Untagged
@@ -1513,6 +1514,23 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 64597096}
+--- !u!95 &64597100
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 64597096}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: deaaa19d30bd90c4abf5f0ea79f9cd97, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &69191969
 GameObject:
   m_ObjectHideFlags: 0
@@ -5530,13 +5548,14 @@ GameObject:
   - component: {fileID: 235490263}
   - component: {fileID: 235490265}
   - component: {fileID: 235490264}
+  - component: {fileID: 235490266}
   m_Layer: 5
   m_Name: Unlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &235490263
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5594,6 +5613,23 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 235490262}
+--- !u!95 &235490266
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 235490262}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: deaaa19d30bd90c4abf5f0ea79f9cd97, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &240053268
 GameObject:
   m_ObjectHideFlags: 0
@@ -17181,6 +17217,7 @@ GameObject:
   - component: {fileID: 623546453}
   - component: {fileID: 623546455}
   - component: {fileID: 623546454}
+  - component: {fileID: 623546456}
   m_Layer: 5
   m_Name: Unlock
   m_TagString: Untagged
@@ -17245,6 +17282,23 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 623546452}
+--- !u!95 &623546456
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 623546452}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: deaaa19d30bd90c4abf5f0ea79f9cd97, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &626201770
 GameObject:
   m_ObjectHideFlags: 0
@@ -26712,6 +26766,7 @@ GameObject:
   - component: {fileID: 991327948}
   - component: {fileID: 991327950}
   - component: {fileID: 991327949}
+  - component: {fileID: 991327951}
   m_Layer: 5
   m_Name: Unlock
   m_TagString: Untagged
@@ -26776,6 +26831,23 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 991327947}
+--- !u!95 &991327951
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 991327947}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: deaaa19d30bd90c4abf5f0ea79f9cd97, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &999572641
 GameObject:
   m_ObjectHideFlags: 0
@@ -36972,6 +37044,7 @@ GameObject:
   - component: {fileID: 1397893343}
   - component: {fileID: 1397893345}
   - component: {fileID: 1397893344}
+  - component: {fileID: 1397893346}
   m_Layer: 5
   m_Name: Unlock
   m_TagString: Untagged
@@ -37036,6 +37109,23 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1397893342}
+--- !u!95 &1397893346
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1397893342}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: deaaa19d30bd90c4abf5f0ea79f9cd97, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!224 &1399939121 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224147013678111444, guid: 90fd4355538c0c84e95fe8fdb11d003e,
@@ -54855,6 +54945,7 @@ GameObject:
   - component: {fileID: 2069299193}
   - component: {fileID: 2069299195}
   - component: {fileID: 2069299194}
+  - component: {fileID: 2069299196}
   m_Layer: 5
   m_Name: Unlock
   m_TagString: Untagged
@@ -54919,6 +55010,23 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2069299192}
+--- !u!95 &2069299196
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2069299192}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: deaaa19d30bd90c4abf5f0ea79f9cd97, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &2069732314
 GameObject:
   m_ObjectHideFlags: 0
