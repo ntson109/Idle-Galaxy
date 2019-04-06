@@ -171,6 +171,7 @@ public class MineShaft : MonoBehaviour
     public Sprite tubeT0;
     public Sprite tubeL0;
     public Sprite work0;
+    public Animator unlockAnim;
 
     #region === START VS UPDATE ===
     void Start()
@@ -234,7 +235,7 @@ public class MineShaft : MonoBehaviour
 
                 if (timeUnlocking <= 0)
                 {
-                    UnlockComplete();
+                    PlayAnimUnlock();
                     timeUnlocking = 0;
                 }
                 timeUnlocking -= Time.deltaTime;
@@ -435,6 +436,8 @@ public class MineShaft : MonoBehaviour
     void ON_SKIP_TIME(object param)
     {
         int a = (int)param;
+        if (a <= 60)
+            a = 60;
 
         if (state == StateMineShaft.UNLOCKING)
         {
@@ -1035,7 +1038,8 @@ public class MineShaft : MonoBehaviour
         else if (_type == TypeUnlock.COIN)
         {
             GameManager.Instance.AddCoin(-this.unlockCost[0].cost);
-            UnlockComplete();
+            PlayAnimUnlock();
+            //UnlockComplete();
         }
         else
         {
@@ -1050,6 +1054,17 @@ public class MineShaft : MonoBehaviour
     int timeSkip_Unlock;
     long gold_Unlock;
     int coin_Unlock;
+
+    void PlayAnimUnlock()
+    {
+        txtTimeUnlock.text = "";
+
+        if (panelUnlock_2 != null)
+            panelUnlock_2.SetActive(false);
+
+        if (unlockAnim != null)
+            unlockAnim.enabled = true;
+    }
     public void UnlockComplete()
     {
         state = StateMineShaft.IDLE;
