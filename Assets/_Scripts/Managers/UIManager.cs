@@ -410,7 +410,14 @@ public class UIManager : MonoBehaviour
         {
             return 0;
         }
-        return (int)Mathf.Round((float)DateTime.Now.Subtract(Convert.ToDateTime(dateTime)).TotalMinutes);
+        if ((int)Mathf.Round((float)DateTime.Now.Subtract(Convert.ToDateTime(dateTime)).TotalMinutes) <= int.MaxValue)
+        {
+            return (int)Mathf.Round((float)DateTime.Now.Subtract(Convert.ToDateTime(dateTime)).TotalMinutes);
+        }
+        else
+        {
+            return int.MaxValue;
+        }
     }
 
     #endregion
