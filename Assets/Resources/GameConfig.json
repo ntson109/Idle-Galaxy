@@ -16,6 +16,16 @@
   "warning2" : "abc",
   "warning3" : "abc"
   },
+  "Tutorial" : [
+	"Touch to run",
+	"Buy a mining rig",
+	"Buy Robot to manage rigs automatically",
+	"Touch Robot to upgrade",
+	"Touch to upgrade level of mining rig",
+	"Touch to apply advance technology to boost the rig",
+	"Upgrade transportation system to speedup money releasing",
+	"The Show is now on you !"
+  ],
   "Spin" : {
 	"Gold" : [
 		0.05,

@@ -39,22 +39,34 @@ public class MyButton : MonoBehaviour
         {
             if (GameManager.Instance.GOLD >= thisPrice)
             {
-                thisButton.interactable = true;
+                if (thisButton != null)
+                {
+                    thisButton.interactable = true;
+                }
             }
             else
             {
-                thisButton.interactable = false;
+                if (thisButton != null)
+                {
+                    thisButton.interactable = false;
+                }
             }
         }
         else if (type == Type.COIN)
         {
             if (GameManager.Instance.COIN >= thisPrice)
             {
-                thisButton.interactable = true;
+                if (thisButton != null)
+                {
+                    thisButton.interactable = true;
+                }
             }
             else
             {
-                thisButton.interactable = false;
+                if (thisButton != null)
+                {
+                    thisButton.interactable = false;
+                }
             }
         }
     }

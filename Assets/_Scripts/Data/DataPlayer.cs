@@ -160,7 +160,7 @@ public class DataPlayer : MonoBehaviour
         string _path = Path.Combine(Application.persistentDataPath, "DataPlayer.json");
         File.WriteAllText(_path, JsonUtility.ToJson(data, true));
         File.ReadAllText(_path);
-        PlayerPrefs.SetInt(KeyPrefs.IS_CONTINUE, 1);
+        PlayerPrefs.SetInt(KeyPrefs.TUTORIAL_DONE, 1);
 
         Debug.Log(SimpleJSON_DatDz.JSON.Parse(File.ReadAllText(_path)));
     }

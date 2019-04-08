@@ -75,6 +75,7 @@ public class GameConfig : MonoBehaviour {
     public List<float> lstRewardSpin_Gold = new List<float>();
     public List<int> lstRewardSpin_Time = new List<int>();
     public List<int> lstRewardSpin_Coin = new List<int>();
+    public List<string> lstTutorial = new List<string>();
     
     #endregion
 

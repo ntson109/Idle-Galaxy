@@ -29,7 +29,7 @@ public class LoadDataJson : MonoBehaviour
         LoadGameConfig();
         Ads.Instance.RequestAd();
         Ads.Instance.RequestBanner();
-        if (PlayerPrefs.GetInt(KeyPrefs.IS_CONTINUE) == 1)
+        if (PlayerPrefs.GetInt(KeyPrefs.TUTORIAL_DONE) == 1)
         {
             Ads.Instance.ShowBanner();
         }
@@ -72,6 +72,11 @@ public class LoadDataJson : MonoBehaviour
             {
                 GameConfig.Instance.lstIntroduction.Add(objJson["introduction"][i]);
             }
+            for (int i = 0; i < objJson["Tutorial"].Count; i++)
+            {
+                GameConfig.Instance.lstTutorial.Add(objJson["Tutorial"][i]);
+            }
+
             for (int i = 0; i < objJson["Map_Moon"].Count; i++)
             {
                 for (int j = 0; j < objJson["Map_Moon"][i].Count; j++)
@@ -104,6 +109,10 @@ public class LoadDataJson : MonoBehaviour
                     for (int k = 0; k < objJson["Map_Moon"][i]["Upgrade_time"].Count; k++)
                     {
                         pM.Upgrade_time.Add(objJson["Map_Moon"][i]["Upgrade_time"][k].AsInt * 60);
+                    }
+                    if (pM.ID == 0)
+                    {
+                        pM.Upgrade_time[0] = 3;
                     }
 
                     pM.Upgrade_condition = new List<int>();

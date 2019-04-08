@@ -177,6 +177,7 @@ public class MineShaft : MonoBehaviour
     void Start()
     {
         //typeMap = TypeMap.MOON;
+        
         this.RegisterListener(EventID.START_GAME, (param) => ON_START_GAME());
     }
 
@@ -838,6 +839,11 @@ public class MineShaft : MonoBehaviour
             return;
 
         LetWork();
+
+        if (PlayerPrefs.GetInt(KeyPrefs.TUTORIAL_DONE) == 0)
+        {
+            UIManager.Instance.Step_2_Tutorial();
+        }
     }
 
     #endregion
@@ -886,7 +892,7 @@ public class MineShaft : MonoBehaviour
         }
     }
 
-    void Btn_ShowUpgrade()
+    public void Btn_ShowUpgrade()
     {
         UIManager.Instance.SetActivePanel(UIManager.Instance.panelShowUpgrade);
         AudioManager.Instance.Play("Click");
@@ -904,14 +910,24 @@ public class MineShaft : MonoBehaviour
                 _coin
                 );
         }
+
+        if (PlayerPrefs.GetInt(KeyPrefs.TUTORIAL_DONE) == 0)
+        {
+            UIManager.Instance.Step_5_Tutorial();
+        }
     }
 
-    void Buy_AI()
+    public void Buy_AI()
     {
         GameManager.Instance.AddGold(-this.properties.buyAI);
         this.isAutoWorking = true;
         imgUpgrade.SetActive(true);
         imgAI.SetActive(false);
+
+        if (PlayerPrefs.GetInt(KeyPrefs.TUTORIAL_DONE) == 0)
+        {
+            UIManager.Instance.Step_4_Tutorial();
+        }
     }
 
 
@@ -1015,6 +1031,11 @@ public class MineShaft : MonoBehaviour
         this.totalCapacity = this.properties.capacity * numberMine;
         if (this.ID == 0)
             this.input = this.totalCapacity;
+
+        if (PlayerPrefs.GetInt(KeyPrefs.TUTORIAL_DONE) == 0)
+        {
+            UIManager.Instance.Step_3_Tutorial();
+        }
     }
     #endregion
 

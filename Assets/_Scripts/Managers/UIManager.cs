@@ -32,6 +32,7 @@ public class UIManager : MonoBehaviour
     public Text txtBoost;
     public Text txtTimeBoost;
     public Sprite[] sprMoreMine;
+    public Sprite[] sprMoreMine_btn;
     public Image imgXMine;
 
     [Header("TRANSPORTER")]
@@ -72,6 +73,8 @@ public class UIManager : MonoBehaviour
     public Text txtGoldOffline;
 
     [Header("SPIN")]
+    public Animator animSpin;
+    public Sprite sprSpin0;
     public GameObject panelSpin;
     public Text txtCountSpin;
     public Text txtCountSpinMain;
@@ -103,7 +106,9 @@ public class UIManager : MonoBehaviour
     public GameObject mainTutorial;
     public GameObject panelTutorial;
     public GameObject handTutorial;
-    public GameObject[] lsButtonTutorial;
+    public Text txtTutorial;
+    public GameObject btnUp_Tutorial;
+    public GameObject btnSkipTutorial;
 
     //[Header("MOUSE CLICK")]
     //public GameObject mouseClick;
@@ -130,13 +135,14 @@ public class UIManager : MonoBehaviour
             }
         }
 
-        if (PlayerPrefs.GetInt(KeyPrefs.IS_CONTINUE) == 1)
+        if (PlayerPrefs.GetInt(KeyPrefs.TUTORIAL_DONE) == 1)
         {
             btnContinue.interactable = true;
         }
         else
         {
             btnContinue.interactable = false;
+            btnContinue.gameObject.GetComponent<Animator>().enabled = false;
         }
 
         if (timeVideo > 0)
@@ -159,6 +165,22 @@ public class UIManager : MonoBehaviour
         if (GameManager.Instance.stateGame == StateGame.PLAYING)
         {
             HideIfClickedOutside(panelCoinAds);
+
+            if (!animSpin.isActiveAndEnabled)
+            {
+                if (GameManager.Instance.countSpin > 0)
+                {
+                    animSpin.enabled = true;
+                }
+            }
+            else
+            {
+                if (GameManager.Instance.countSpin <= 0)
+                {
+                    animSpin.enabled = false;
+                    animSpin.gameObject.GetComponent<Image>().sprite = sprSpin0;
+                }
+            }
             UIManager.Instance.txtCountSpinMain.text = "x" + GameManager.Instance.countSpin;
         }
     }
@@ -420,6 +442,12 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void Add_0()
+    {
+        GameManager.Instance.AddGold(0);
+        GameManager.Instance.AddCoin(0);
+    }
+
     #endregion
 
     #region === UI HOME ===
@@ -428,6 +456,7 @@ public class UIManager : MonoBehaviour
         AudioManager.Instance.Play("Click");
         SetActivePanel(panelYesNoNewPlay);
         isNewPlayer = true;
+        PlayerPrefs.SetInt(KeyPrefs.TUTORIAL_DONE, 0);
         ScenesManager.Instance.GoToScene(ScenesManager.TypeScene.Main, () =>
             {
                 this.PostEvent(EventID.START_GAME);
@@ -435,6 +464,10 @@ public class UIManager : MonoBehaviour
                 GameManager.Instance.AddGold(GameConfig.Instance.GoldStart);
                 GameManager.Instance.AddCoin(GameConfig.Instance.CoinStart);
                 AudioManager.Instance.Play("GamePlay", true);
+                if (PlayerPrefs.GetInt(KeyPrefs.TUTORIAL_DONE) == 0)
+                {
+                    Step_1_Tutorial();
+                }
             });
     }
 
@@ -692,11 +725,11 @@ public class UIManager : MonoBehaviour
         }
         if (GameManager.Instance.lstMap[0].lstMineShaft[0].xMoreMine == 1)
         {
-            imgXMine.sprite = sprMoreMine[0];
+            imgXMine.sprite = sprMoreMine_btn[0];
         }
         else
         {
-            imgXMine.sprite = sprMoreMine[1];
+            imgXMine.sprite = sprMoreMine_btn[1];
         }
     }
     public void Test_Boost()
@@ -714,29 +747,8 @@ public class UIManager : MonoBehaviour
     #endregion
 
     #region === TUTORIAL ===
-    //public void TutorialOnclick()
-    //{
-    //    AudioManager.Instance.Play("Click");
-    //    AudioManager.Instance.Stop("Menu");
-    //    AudioManager.Instance.Play("GamePlay");
-    //    PlayerPrefs.SetFloat("X4TimeGame", 4f);
-    //    GameManager.Instance.isTutorial = true;
-    //    ResetGame();
-    //    btnX4.image.sprite = spX1;
-    //    menuGame.SetActive(false);
-    //    Loading(false);
-    //    isPlay = true;
-    //    GameManager.Instance.LoadDate();
-    //    GameManager.Instance.main.bitCoin = GameConfig.Instance.bitcoinStartGame;
-    //    GameManager.Instance.main.dollars = GameConfig.Instance.dollarStartGame;
-    //    OnclickWORD(false);
-    //    if (PlayerPrefs.GetInt("isDoneTutorial") == 0 || GameManager.Instance.isTutorial)
-    //    {
-    //        Turorial(WorldManager.Instance.lsCountry[1].gameObject, WorldManager.Instance.lsCountry[1].transform.position, Vector3.zero);
-    //    }
-    //}
 
-    public void Turorial(GameObject main, Vector3 posHand, Vector3 angleHand)
+    public void Tutorial(GameObject main, Vector3 posHand, Vector3 angleHand,string strTutorial, UnityEngine.Events.UnityAction action = null)
     {
         if (mainTutorial != null)
             Destroy(mainTutorial);
@@ -746,15 +758,120 @@ public class UIManager : MonoBehaviour
         mainTutorial.SetActive(true);
         mainTutorial.transform.SetAsFirstSibling();
         mainTutorial.transform.position = pos;
+
+        if (action != null)
+            mainTutorial.GetComponent<Button>().onClick.AddListener(action);
+
+        if (posHand == Vector3.zero)
+        {
+            posHand = pos;
+        }
         handTutorial.transform.position = posHand;
         handTutorial.transform.localEulerAngles = angleHand;
+        txtTutorial.text = strTutorial;
     }
 
-    public void Step_1_Tutorial()
+    public void Step_1_Tutorial()//nhấn work
     {
-
+        Tutorial(GameManager.Instance.lstMap[0].lstMineShaft[0].transform.Find("BtnWork").gameObject, Vector3.zero, Vector3.zero, GameConfig.Instance.lstTutorial[0], () => GameManager.Instance.lstMap[0].lstMineShaft[0].Btn_Work());
     }
 
+    public void Step_2_Tutorial()//mua thêm nhà
+    {
+        Tutorial(GameManager.Instance.lstMap[0].lstMineShaft[0].transform.Find("BtnBuyMore").gameObject, Vector3.zero, Vector3.zero, GameConfig.Instance.lstTutorial[1], () => GameManager.Instance.lstMap[0].lstMineShaft[0].Btn_BuyMoreMine());
+    }
+    public void Step_3_Tutorial()//mua AI
+    {
+        Tutorial(GameManager.Instance.lstMap[0].lstMineShaft[0].transform.Find("Robot").Find("AI").gameObject, Vector3.zero, Vector3.zero, GameConfig.Instance.lstTutorial[2], () => GameManager.Instance.lstMap[0].lstMineShaft[0].Buy_AI());
+    }
+
+    public void Step_4_Tutorial()//hiện upgrade
+    {
+        Tutorial(GameManager.Instance.lstMap[0].lstMineShaft[0].transform.Find("Robot").Find("BtnUpgrade").gameObject, Vector3.zero, Vector3.zero, GameConfig.Instance.lstTutorial[3], () => GameManager.Instance.lstMap[0].lstMineShaft[0].Btn_ShowUpgrade());
+    }
+
+    public void Step_5_Tutorial()//upgrade lv2
+    {
+        //Tutorial(GameObject.FindWithTag("TabLevel"), Vector3.zero, Vector3.zero, GameConfig.Instance.lstTutorial[4]);
+        panelShowUpgrade.transform.parent = panelTutorial.transform;
+        //handTutorial.transform.position = btnUp_Tutorial.transform.position;
+        handTutorial.transform.position = GameObject.FindWithTag("TabLevel").transform.position;
+        handTutorial.transform.SetAsLastSibling();
+        txtTutorial.text = GameConfig.Instance.lstTutorial[4];
+    }
+
+    public void Btn_Step_5_Tutorial()
+    {
+        if (PlayerPrefs.GetInt(KeyPrefs.TUTORIAL_DONE) == 0)
+        {
+            UIManager.Instance.Step_6_Tutorial();
+        }
+    }
+
+    public void Step_6_Tutorial()//mua special upgrade
+    {
+        handTutorial.transform.position = GameObject.FindWithTag("TabSpecial").transform.position;
+        txtTutorial.text = GameConfig.Instance.lstTutorial[5];
+    }
+
+    public void Btn_Step_6_Tutorial()
+    {
+        if (PlayerPrefs.GetInt(KeyPrefs.TUTORIAL_DONE) == 0)
+        {
+            UIManager.Instance.Step_7_Tutorial();
+        }
+    }
+
+    public void Step_7_Tutorial()//close upgrade mine
+    {
+        handTutorial.transform.position = GameObject.Find("Panel_Upgrade").transform.Find("Close").transform.position;
+        txtTutorial.text = "Close";
+    }
+
+    public void Btn_Step_7_Tutorial()
+    {
+        if (PlayerPrefs.GetInt(KeyPrefs.TUTORIAL_DONE) == 0)
+        {
+            UIManager.Instance.Step_8_Tutorial();
+        }
+    }
+
+    public void Step_8_Tutorial()//upgrade xe
+    {
+        Tutorial(GameManager.Instance.lstMap[0].transform.Find("Rock").Find("Space Ship").gameObject, Vector3.zero, Vector3.zero, GameConfig.Instance.lstTutorial[6], () => GameManager.Instance.lstMap[0].transporter.ShowUpgrade());
+    }
+
+    public void Step_9_Tutorial()//last text
+    {
+        panelUpgradeTransporter.transform.parent = panelTutorial.transform;
+        handTutorial.transform.position = GameObject.FindWithTag("UpgradeTranspoter").transform.position;
+        handTutorial.transform.SetAsLastSibling();
+        txtTutorial.text = GameConfig.Instance.lstTutorial[6];
+    }
+
+    public void Step_10_Tutorial()//last text
+    {
+        handTutorial.transform.position = GameObject.Find("Panel_UpgradeTransporter").transform.Find("BG").Find("Close").transform.position;
+        txtTutorial.text = "Close";
+        if (mainTutorial != null)
+            Destroy(mainTutorial);
+    }
+
+    public void Btn_Step_10_Tutorial()
+    {
+        if (PlayerPrefs.GetInt(KeyPrefs.TUTORIAL_DONE) == 0)
+        {
+            handTutorial.SetActive(false);
+            txtTutorial.text = GameConfig.Instance.lstTutorial[7];
+            btnSkipTutorial.SetActive(true);
+        }
+    }
+
+    public void Btn_Step_11_Tutorial()
+    {
+        panelTutorial.SetActive(false);
+        PlayerPrefs.SetInt(KeyPrefs.TUTORIAL_DONE, 1);
+    }
 
     #endregion
 }

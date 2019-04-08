@@ -92,6 +92,11 @@ public class Transporter : MonoBehaviour
         UIManager.Instance.txtPriceTrans.text = "Upgrade\n" + UIManager.Instance.ToLongString(this.price);
         UIManager.Instance.btnUpTrans.type = MyButton.Type.GOLD;
         UIManager.Instance.btnUpTrans.thisButton.onClick.AddListener(() => Upgrade());
+
+        if (PlayerPrefs.GetInt(KeyPrefs.TUTORIAL_DONE) == 0)
+        {
+            UIManager.Instance.Step_9_Tutorial();
+        }
     }
 
     void GetCapacityUp()
@@ -164,11 +169,16 @@ public class Transporter : MonoBehaviour
         }
     }
 
-    void Upgrade()
+    public void Upgrade()
     {
         GameManager.Instance.AddGold(-this.price);
         this.level += 1;
         this.capacity = capacityWillUp;
         ShowUpgrade();
+
+        if (PlayerPrefs.GetInt(KeyPrefs.TUTORIAL_DONE) == 0)
+        {
+            UIManager.Instance.Step_10_Tutorial();
+        }
     }
 }
