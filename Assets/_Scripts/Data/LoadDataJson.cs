@@ -110,10 +110,6 @@ public class LoadDataJson : MonoBehaviour
                     {
                         pM.Upgrade_time.Add(objJson["Map_Moon"][i]["Upgrade_time"][k].AsInt * 60);
                     }
-                    if (pM.ID == 0)
-                    {
-                        pM.Upgrade_time[0] = 3;
-                    }
 
                     pM.Upgrade_condition = new List<int>();
                     for (int k = 0; k < objJson["Map_Moon"][i]["Upgrade_condition"].Count; k++)

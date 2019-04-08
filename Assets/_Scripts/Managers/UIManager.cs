@@ -107,8 +107,9 @@ public class UIManager : MonoBehaviour
     public GameObject panelTutorial;
     public GameObject handTutorial;
     public Text txtTutorial;
-    public GameObject btnUp_Tutorial;
     public GameObject btnSkipTutorial;
+    public GameObject upgradeParent;
+    public GameObject upgradeTransParent;
 
     //[Header("MOUSE CLICK")]
     //public GameObject mouseClick;
@@ -779,6 +780,7 @@ public class UIManager : MonoBehaviour
     public void Step_2_Tutorial()//mua thêm nhà
     {
         Tutorial(GameManager.Instance.lstMap[0].lstMineShaft[0].transform.Find("BtnBuyMore").gameObject, Vector3.zero, Vector3.zero, GameConfig.Instance.lstTutorial[1], () => GameManager.Instance.lstMap[0].lstMineShaft[0].Btn_BuyMoreMine());
+        GameManager.Instance.lstMap[0].lstMineShaft[0].imgAI.GetComponent<Animator>().enabled = false;
     }
     public void Step_3_Tutorial()//mua AI
     {
@@ -792,9 +794,7 @@ public class UIManager : MonoBehaviour
 
     public void Step_5_Tutorial()//upgrade lv2
     {
-        //Tutorial(GameObject.FindWithTag("TabLevel"), Vector3.zero, Vector3.zero, GameConfig.Instance.lstTutorial[4]);
         panelShowUpgrade.transform.parent = panelTutorial.transform;
-        //handTutorial.transform.position = btnUp_Tutorial.transform.position;
         handTutorial.transform.position = GameObject.FindWithTag("TabLevel").transform.position;
         handTutorial.transform.SetAsLastSibling();
         txtTutorial.text = GameConfig.Instance.lstTutorial[4];
@@ -824,7 +824,7 @@ public class UIManager : MonoBehaviour
 
     public void Step_7_Tutorial()//close upgrade mine
     {
-        handTutorial.transform.position = GameObject.Find("Panel_Upgrade").transform.Find("Close").transform.position;
+        handTutorial.transform.position = GameObject.FindWithTag("CloseUp").transform.position; ;
         txtTutorial.text = "Close";
     }
 
@@ -851,7 +851,7 @@ public class UIManager : MonoBehaviour
 
     public void Step_10_Tutorial()//last text
     {
-        handTutorial.transform.position = GameObject.Find("Panel_UpgradeTransporter").transform.Find("BG").Find("Close").transform.position;
+        handTutorial.transform.position = GameObject.FindWithTag("CloseTrans").transform.position;
         txtTutorial.text = "Close";
         if (mainTutorial != null)
             Destroy(mainTutorial);
@@ -871,6 +871,9 @@ public class UIManager : MonoBehaviour
     {
         panelTutorial.SetActive(false);
         PlayerPrefs.SetInt(KeyPrefs.TUTORIAL_DONE, 1);
+        GameManager.Instance.lstMap[0].lstMineShaft[0].imgAI.GetComponent<Animator>().enabled = true;
+        panelUpgradeTransporter.transform.parent = upgradeTransParent.transform;
+        panelShowUpgrade.transform.parent = upgradeParent.transform;
     }
 
     #endregion

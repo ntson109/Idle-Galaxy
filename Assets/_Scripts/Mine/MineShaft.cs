@@ -179,6 +179,7 @@ public class MineShaft : MonoBehaviour
         //typeMap = TypeMap.MOON;
         
         this.RegisterListener(EventID.START_GAME, (param) => ON_START_GAME());
+
     }
 
     void LateUpdate()
