@@ -1192,7 +1192,7 @@ public class MineShaft : MonoBehaviour
 
     void GetStoreCost()
     {
-        double t = GameConfig.Instance.lstPropertiesMap[ID].Store_Cost_3 + this.store.cost + this.store.cost * this.store.deltaCap;
+        double t = GameConfig.Instance.lstPropertiesMap[ID].Store_Cost_3 + this.store.cost + this.store.cost * GameConfig.Instance.lstPropertiesMap[ID].Store_Cost_2;
         //if ((this.store.cost * GameConfig.Instance.Trans_Cost_2[0]) < 2)
         //{
         //    t = this.store.cost + 2;
