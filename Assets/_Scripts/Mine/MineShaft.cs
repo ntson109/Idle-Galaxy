@@ -79,6 +79,7 @@ public class MineShaft : MonoBehaviour
         public int level;
         public int value;
         public int capacity;
+        public int deltaCap;
         public long cost;
     }
 
@@ -172,12 +173,13 @@ public class MineShaft : MonoBehaviour
     public Sprite tubeL0;
     public Sprite work0;
     public Animator unlockAnim;
+    bool isUp;
 
     #region === START VS UPDATE ===
     void Start()
     {
         //typeMap = TypeMap.MOON;
-        
+
         this.RegisterListener(EventID.START_GAME, (param) => ON_START_GAME());
 
     }
@@ -321,16 +323,22 @@ public class MineShaft : MonoBehaviour
                     //}
                 }
             }
-            //if(){
-            //if (!CheckUpgrade())
-            //{
-
-            //}
-            //else
-            //{
-
-            //}
-            //}
+            if (!isUp)
+            {
+                if (CheckUpgrade())
+                {
+                    isUp = true;
+                    imgUpgrade.GetComponent<Animator>().SetBool("isUp", isUp);
+                }
+            }
+            else //if (imgUpgrade.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Robot Up"))
+            {
+                if (!CheckUpgrade())
+                {
+                    isUp = false;
+                    imgUpgrade.GetComponent<Animator>().SetBool("isUp", isUp);
+                }
+            }
         }
     }
     #endregion
@@ -395,8 +403,10 @@ public class MineShaft : MonoBehaviour
 
         if (isAutoWorking)
         {
-            imgUpgrade.SetActive(true);
-            imgAI.SetActive(false);
+            if (!imgUpgrade.activeSelf)
+                imgUpgrade.SetActive(true);
+            if (imgAI.activeSelf)
+                imgAI.SetActive(false);
         }
     }
 
@@ -503,6 +513,7 @@ public class MineShaft : MonoBehaviour
             this.store.level = 1;
             this.store.value = 0;
             this.store.capacity = GameConfig.Instance.lstPropertiesMap[ID].Store_Capacity_1;
+            this.store.deltaCap = GameConfig.Instance.lstPropertiesMap[ID].Store_Capacity_2;
             this.store.cost = GameConfig.Instance.lstPropertiesMap[ID].Store_Cost_1;
             this.properties.unitPrice = GameConfig.Instance.lstPropertiesMap[ID].Unit_Price;
         }
@@ -886,6 +897,7 @@ public class MineShaft : MonoBehaviour
                 break;
             case 2:
                 this.properties.capacity *= 2;
+                this.preMineShaft.store.deltaCap *= 2;
                 this.totalCapacity = this.properties.capacity * numberMine;
                 break;
             default:
@@ -922,8 +934,10 @@ public class MineShaft : MonoBehaviour
     {
         GameManager.Instance.AddGold(-this.properties.buyAI);
         this.isAutoWorking = true;
-        imgUpgrade.SetActive(true);
-        imgAI.SetActive(false);
+        if (!imgUpgrade.activeSelf)
+            imgUpgrade.SetActive(true);
+        if (imgAI.activeSelf)
+            imgAI.SetActive(false);
 
         if (PlayerPrefs.GetInt(KeyPrefs.TUTORIAL_DONE) == 0)
         {
@@ -963,6 +977,7 @@ public class MineShaft : MonoBehaviour
         else
         {
             this.properties.capacity *= 2;
+            this.preMineShaft.store.deltaCap *= 2;
         }
         this.totalCapacity = this.properties.capacity * numberMine;
         typeUpgradeLevel = UpgradeObj_Level.Type.NONE;
@@ -1177,7 +1192,7 @@ public class MineShaft : MonoBehaviour
 
     void GetStoreCost()
     {
-        double t = GameConfig.Instance.lstPropertiesMap[ID].Store_Cost_3 + this.store.cost + this.store.cost * GameConfig.Instance.lstPropertiesMap[ID].Store_Cost_2;
+        double t = GameConfig.Instance.lstPropertiesMap[ID].Store_Cost_3 + this.store.cost + this.store.cost * this.store.deltaCap;
         //if ((this.store.cost * GameConfig.Instance.Trans_Cost_2[0]) < 2)
         //{
         //    t = this.store.cost + 2;
@@ -1193,7 +1208,7 @@ public class MineShaft : MonoBehaviour
 
     void GetSoreCapacity()
     {
-        capStoreWillUp = this.store.capacity + GameConfig.Instance.lstPropertiesMap[ID].Store_Capacity_2;
+        capStoreWillUp = this.store.capacity + this.store.deltaCap;
     }
     #endregion
 }

@@ -152,6 +152,7 @@ public class DataPlayer : MonoBehaviour
                 m.store.level = GameManager.Instance.lstMap[i].lstMineShaft[j].store.level;
                 m.store.value = GameManager.Instance.lstMap[i].lstMineShaft[j].store.value;
                 m.store.capacity = GameManager.Instance.lstMap[i].lstMineShaft[j].store.capacity;
+                m.store.deltaCap = GameManager.Instance.lstMap[i].lstMineShaft[j].store.deltaCap;
                 m.store.cost = GameManager.Instance.lstMap[i].lstMineShaft[j].store.cost;
                 data.lsMineShaft.Add(m);
             }
@@ -266,6 +267,7 @@ public class DataPlayer : MonoBehaviour
                 GameManager.Instance.lstMap[0].lstMineShaft[i].store.level = objJson["lsMineShaft"][i]["store"]["level"].AsInt;
                 GameManager.Instance.lstMap[0].lstMineShaft[i].store.value = objJson["lsMineShaft"][i]["store"]["value"].AsInt;
                 GameManager.Instance.lstMap[0].lstMineShaft[i].store.capacity = objJson["lsMineShaft"][i]["store"]["capacity"].AsInt;
+                GameManager.Instance.lstMap[0].lstMineShaft[i].store.deltaCap = objJson["lsMineShaft"][i]["store"]["deltaCap"].AsInt;
                 GameManager.Instance.lstMap[0].lstMineShaft[i].store.cost = objJson["lsMineShaft"][i]["store"]["cost"].AsLong;
             }
         }

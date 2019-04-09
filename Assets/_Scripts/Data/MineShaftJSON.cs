@@ -49,7 +49,9 @@ public class StoreJSON
 
     public int value;
 
-    public long capacity;
+    public int capacity;
+
+    public int deltaCap;
 
     public long cost;
 }

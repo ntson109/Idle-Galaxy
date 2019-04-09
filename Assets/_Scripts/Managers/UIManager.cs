@@ -795,9 +795,11 @@ public class UIManager : MonoBehaviour
     public void Step_5_Tutorial()//upgrade lv2
     {
         panelShowUpgrade.transform.parent = panelTutorial.transform;
+        GameObject.FindWithTag("CloseUp").GetComponent<Button>().interactable = false;
         handTutorial.transform.position = GameObject.FindWithTag("TabLevel").transform.position;
         handTutorial.transform.SetAsLastSibling();
         txtTutorial.text = GameConfig.Instance.lstTutorial[4];
+        txtTutorial.transform.SetAsLastSibling();
     }
 
     public void Btn_Step_5_Tutorial()
@@ -824,7 +826,8 @@ public class UIManager : MonoBehaviour
 
     public void Step_7_Tutorial()//close upgrade mine
     {
-        handTutorial.transform.position = GameObject.FindWithTag("CloseUp").transform.position; ;
+        GameObject.FindWithTag("CloseUp").GetComponent<Button>().interactable = true;
+        handTutorial.transform.position = GameObject.FindWithTag("CloseUp").transform.position;
         txtTutorial.text = "Close";
     }
 
@@ -841,16 +844,19 @@ public class UIManager : MonoBehaviour
         Tutorial(GameManager.Instance.lstMap[0].transform.Find("Rock").Find("Space Ship").gameObject, Vector3.zero, Vector3.zero, GameConfig.Instance.lstTutorial[6], () => GameManager.Instance.lstMap[0].transporter.ShowUpgrade());
     }
 
-    public void Step_9_Tutorial()//last text
+    public void Step_9_Tutorial()
     {
         panelUpgradeTransporter.transform.parent = panelTutorial.transform;
+        GameObject.FindWithTag("CloseTrans").GetComponent<Button>().interactable = false;
         handTutorial.transform.position = GameObject.FindWithTag("UpgradeTranspoter").transform.position;
         handTutorial.transform.SetAsLastSibling();
         txtTutorial.text = GameConfig.Instance.lstTutorial[6];
+        txtTutorial.transform.SetAsLastSibling();
     }
 
     public void Step_10_Tutorial()//last text
     {
+        GameObject.FindWithTag("CloseTrans").GetComponent<Button>().interactable = true;
         handTutorial.transform.position = GameObject.FindWithTag("CloseTrans").transform.position;
         txtTutorial.text = "Close";
         if (mainTutorial != null)
