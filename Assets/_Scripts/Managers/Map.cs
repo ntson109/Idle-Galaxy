@@ -15,6 +15,7 @@ public class Map : MonoBehaviour
     public long moneyPerTurn;
     public GameObject rdPrefabs;
     float timeTransport;
+    public int turnTransport;
 
     [Header("UI")]
     public Text txtAmountProduct;
@@ -48,7 +49,7 @@ public class Map : MonoBehaviour
     {
         if (UIManager.Instance.isNewPlayer)
         {
-            this.transporter.SetInfo(1, GameConfig.Instance.Trans_Capacity_1, GameConfig.Instance.Trans_Cost_1);           
+            this.transporter.SetInfo(1, GameConfig.Instance.Trans_Capacity_1, GameConfig.Instance.Trans_Cost_1);
         }
         else
         {
@@ -59,7 +60,7 @@ public class Map : MonoBehaviour
                     if (i != 0)
                     {
                         lstMineShaft[i].LetWork();
-                    }                    
+                    }
                     //lstMineShaft[i].imgWorkBar.fillAmount = (float)lstMineShaft[i].timer / (float)lstMineShaft[i].properties.miningTime;
                 }
 
@@ -117,6 +118,21 @@ public class Map : MonoBehaviour
     {
         GameManager.Instance.AddGold(moneyPerTurn);
         moneyPerTurn = 0;
+
+        if (turnTransport >= 2)
+        {
+            SpaceShipFly();
+            turnTransport = 0;
+        }
+        else
+        {
+            turnTransport++;
+        }
+    }
+
+    void SpaceShipFly()
+    {
+        spaceShip.GetComponent<Animator>().Play("SpaceShip");
     }
 
     public void CheckUnlock(int _id)

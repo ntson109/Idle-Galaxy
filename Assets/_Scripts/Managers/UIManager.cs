@@ -103,13 +103,14 @@ public class UIManager : MonoBehaviour
     public Button btnOkUnlock;
 
     [Header("TUTORIAL")]
-    public GameObject mainTutorial;
+    private GameObject mainTutorial;
     public GameObject panelTutorial;
     public GameObject handTutorial;
     public Text txtTutorial;
     public GameObject btnSkipTutorial;
     public GameObject upgradeParent;
     public GameObject upgradeTransParent;
+    public GameObject tut_SpaceShip;
 
     //[Header("MOUSE CLICK")]
     //public GameObject mouseClick;
@@ -749,7 +750,7 @@ public class UIManager : MonoBehaviour
 
     #region === TUTORIAL ===
 
-    public void Tutorial(GameObject main, Vector3 posHand, Vector3 angleHand,string strTutorial, UnityEngine.Events.UnityAction action = null)
+    public void Tutorial(GameObject main, Vector3 posHand, Vector3 angleHand, string strTutorial, UnityEngine.Events.UnityAction action = null)
     {
         if (mainTutorial != null)
             Destroy(mainTutorial);
@@ -775,11 +776,13 @@ public class UIManager : MonoBehaviour
     public void Step_1_Tutorial()//nhấn work
     {
         Tutorial(GameManager.Instance.lstMap[0].lstMineShaft[0].transform.Find("BtnWork").gameObject, Vector3.zero, Vector3.zero, GameConfig.Instance.lstTutorial[0], () => GameManager.Instance.lstMap[0].lstMineShaft[0].Btn_Work());
+        panelTutorial.GetComponent<Image>().enabled = false;
     }
 
     public void Step_2_Tutorial()//mua thêm nhà
     {
-        Tutorial(GameManager.Instance.lstMap[0].lstMineShaft[0].transform.Find("BtnBuyMore").gameObject, Vector3.zero, Vector3.zero, GameConfig.Instance.lstTutorial[1], () => GameManager.Instance.lstMap[0].lstMineShaft[0].Btn_BuyMoreMine());
+        panelTutorial.GetComponent<Image>().enabled = true;
+        Tutorial(GameManager.Instance.lstMap[0].lstMineShaft[0].transform.Find("BtnBuyMore").gameObject, Vector3.zero, new Vector3(0, 0, 180), GameConfig.Instance.lstTutorial[1], () => GameManager.Instance.lstMap[0].lstMineShaft[0].Btn_BuyMoreMine());
         GameManager.Instance.lstMap[0].lstMineShaft[0].imgAI.GetComponent<Animator>().enabled = false;
     }
     public void Step_3_Tutorial()//mua AI
@@ -841,7 +844,9 @@ public class UIManager : MonoBehaviour
 
     public void Step_8_Tutorial()//upgrade xe
     {
-        Tutorial(GameManager.Instance.lstMap[0].transform.Find("Rock").Find("Space Ship").gameObject, Vector3.zero, Vector3.zero, GameConfig.Instance.lstTutorial[6], () => GameManager.Instance.lstMap[0].transporter.ShowUpgrade());
+        GameManager.Instance.lstMap[0].scrollbarVertical.value = 1;
+        //tut_SpaceShip.GetComponent<Animator>().enabled = false;
+        Tutorial(tut_SpaceShip, Vector3.zero, Vector3.zero, GameConfig.Instance.lstTutorial[6], () => GameManager.Instance.lstMap[0].transporter.ShowUpgrade());
     }
 
     public void Step_9_Tutorial()
@@ -869,14 +874,16 @@ public class UIManager : MonoBehaviour
         {
             handTutorial.SetActive(false);
             txtTutorial.text = GameConfig.Instance.lstTutorial[7];
+            GameManager.Instance.lstMap[0].scrollbarVertical.value = 0;
             btnSkipTutorial.SetActive(true);
+            //tut_SpaceShip.GetComponent<Animator>().enabled = true;
         }
     }
 
     public void Btn_Step_11_Tutorial()
     {
         panelTutorial.SetActive(false);
-        PlayerPrefs.SetInt(KeyPrefs.TUTORIAL_DONE, 1);
+        PlayerPrefs.SetInt(KeyPrefs.TUTORIAL_DONE, 1);       
         GameManager.Instance.lstMap[0].lstMineShaft[0].imgAI.GetComponent<Animator>().enabled = true;
         panelUpgradeTransporter.transform.parent = upgradeTransParent.transform;
         panelShowUpgrade.transform.parent = upgradeParent.transform;
