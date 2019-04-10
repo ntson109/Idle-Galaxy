@@ -70,12 +70,28 @@ public class UpgradeObj_Level : MonoBehaviour
             txtName.text = thisMineShaft.properties.name;
             txtDescription.text = "Level " + thisMineShaft.properties.level + " -> " + (thisMineShaft.properties.level + 1);
             txtCondition.text = "Need : " + GameConfig.Instance.lstPropertiesMap[thisMineShaft.ID].Upgrade_condition[thisMineShaft.properties.level - 1] + " mine";
-            txtLv_cur.text = thisMineShaft.properties.level.ToString();
-            txtLv_next.text = (thisMineShaft.properties.level + 1).ToString();
-            //txtCap_cur.text = GameConfig.Instance.lstPropertiesMap[thisMineShaft.ID].Productivity[thisMineShaft.properties.level - 1].ToString();
-            //txtCap_next.text = GameConfig.Instance.lstPropertiesMap[thisMineShaft.ID].Productivity[thisMineShaft.properties.level].ToString();
-            //txtTime_cur.text = UIManager.Instance.ToDateTimeString(GameConfig.Instance.lstPropertiesMap[thisMineShaft.ID].miningTime[thisMineShaft.properties.level - 1]);
-            //txtTime_next.text = UIManager.Instance.ToDateTimeString(GameConfig.Instance.lstPropertiesMap[thisMineShaft.ID].miningTime[thisMineShaft.properties.level]);
+            //txtLv_cur.text = thisMineShaft.properties.level.ToString();
+            //txtLv_next.text = (thisMineShaft.properties.level + 1).ToString();
+            if (thisMineShaft.properties.level % 2 == 1)
+            {
+                txtCap_cur.text = thisMineShaft.properties.capacity.ToString();
+                txtCap_next.text = thisMineShaft.properties.capacity.ToString();
+                txtCap_next.color = Color.white;
+                txtTime_cur.text = UIManager.Instance.ToDateTimeString((int)thisMineShaft.properties.miningTime);
+                txtTime_next.text = UIManager.Instance.ToDateTimeString((int)(thisMineShaft.properties.miningTime/2));
+                txtTime_next.color = Color.yellow;
+                
+            }
+            else
+            {
+                txtCap_cur.text = thisMineShaft.properties.capacity.ToString();
+                txtCap_next.text = (thisMineShaft.properties.capacity*2).ToString();
+                txtCap_next.color = Color.yellow;
+                txtTime_cur.text = UIManager.Instance.ToDateTimeString((int)thisMineShaft.properties.miningTime);
+                txtTime_next.text = UIManager.Instance.ToDateTimeString((int)thisMineShaft.properties.miningTime);
+                txtTime_next.color = Color.white;
+            }
+            
             //txtUnitPrice_cur.text = GameConfig.Instance.lstPropertiesMap[thisMineShaft.ID].Unit_Price[thisMineShaft.properties.level - 1].ToString();
             //txtUnitPrice_next.text = GameConfig.Instance.lstPropertiesMap[thisMineShaft.ID].Unit_Price[thisMineShaft.properties.level].ToString();
             btnUpgrade.type = MyButton.Type.GOLD;

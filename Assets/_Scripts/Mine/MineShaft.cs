@@ -114,6 +114,7 @@ public class MineShaft : MonoBehaviour
     public Map mapParent;
     public bool isCanWork = false;
     public float timeUnlocking;
+    public bool isCanUp;
 
     public UpgradeObj_Level.Type typeUpgradeLevel;
     public float timeUpgradeLevel;
@@ -173,7 +174,8 @@ public class MineShaft : MonoBehaviour
     public Sprite tubeL0;
     public Sprite work0;
     public Animator unlockAnim;
-    bool isUp;
+    public Image imgPushBar;
+
 
     #region === START VS UPDATE ===
     void Start()
@@ -218,7 +220,7 @@ public class MineShaft : MonoBehaviour
                 txtTimer.text = "";
             }
             txtNumberMine.text = this.numberMine.ToString();
-            txtProduct_PushUp.text = this.store.value + "/" + this.store.capacity;
+            //txtProduct_PushUp.text = this.store.value + "/" + this.store.capacity;
             txtTotalCapacity.text = this.totalCapacity.ToString();
             if (this.state == StateMineShaft.WORKING)
             {
@@ -299,6 +301,11 @@ public class MineShaft : MonoBehaviour
                 {
                     imgMineBar.fillAmount = 1f;
                 }
+
+                if (imgPushBar != null)
+                    imgPushBar.fillAmount = ((float)this.store.value / (float)this.store.capacity);
+
+                txtProduct_PushUp.text = this.store.capacity.ToString();
             }
 
             if (tubeT != null)
@@ -323,20 +330,20 @@ public class MineShaft : MonoBehaviour
                     //}
                 }
             }
-            if (!isUp)
+            if (!isCanUp)
             {
                 if (CheckUpgrade())
                 {
-                    isUp = true;
-                    imgUpgrade.GetComponent<Animator>().SetBool("isUp", isUp);
+                    this.isCanUp = true;
+                    this.imgUpgrade.GetComponent<Animator>().SetBool("isUp", isCanUp);
                 }
             }
             else //if (imgUpgrade.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Robot Up"))
             {
                 if (!CheckUpgrade())
                 {
-                    isUp = false;
-                    imgUpgrade.GetComponent<Animator>().SetBool("isUp", isUp);
+                    this.isCanUp = false;
+                    this.imgUpgrade.GetComponent<Animator>().SetBool("isUp", isCanUp);
                 }
             }
         }
@@ -404,7 +411,11 @@ public class MineShaft : MonoBehaviour
         if (isAutoWorking)
         {
             if (!imgUpgrade.activeSelf)
+            {
                 imgUpgrade.SetActive(true);
+                isCanUp = false;
+            }
+
             if (imgAI.activeSelf)
                 imgAI.SetActive(false);
         }
@@ -897,7 +908,8 @@ public class MineShaft : MonoBehaviour
                 break;
             case 2:
                 this.properties.capacity *= 2;
-                this.preMineShaft.store.deltaCap *= 2;
+                if (this.preMineShaft != null)
+                    this.preMineShaft.store.deltaCap *= 2;
                 this.totalCapacity = this.properties.capacity * numberMine;
                 break;
             default:
@@ -977,7 +989,8 @@ public class MineShaft : MonoBehaviour
         else
         {
             this.properties.capacity *= 2;
-            this.preMineShaft.store.deltaCap *= 2;
+            if (this.preMineShaft != null)
+                this.preMineShaft.store.deltaCap *= 2;
         }
         this.totalCapacity = this.properties.capacity * numberMine;
         typeUpgradeLevel = UpgradeObj_Level.Type.NONE;
@@ -1005,7 +1018,7 @@ public class MineShaft : MonoBehaviour
 
         for (int i = 0; i < GameConfig.Instance.lstPropertiesMap[ID].Upgrade_Special.Count; i++)
         {
-            if (GameManager.Instance.GOLD >= GameConfig.Instance.lstPropertiesMap[ID].Upgrade_Special[i].price)
+            if (GameManager.Instance.GOLD >= GameConfig.Instance.lstPropertiesMap[ID].Upgrade_Special[i].price && this.typeUpgradeSpecial[i] == UpgradeObj_Special.Type.NONE)
             {
                 return true;
             }

@@ -40,6 +40,7 @@ public class MineShaftJSON
     public float workBar;
 
     public StoreJSON store;
+
 }
 
 [System.Serializable]

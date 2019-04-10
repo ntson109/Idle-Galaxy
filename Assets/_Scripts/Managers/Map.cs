@@ -132,7 +132,10 @@ public class Map : MonoBehaviour
 
     void SpaceShipFly()
     {
-        spaceShip.GetComponent<Animator>().Play("SpaceShip");
+        if (spaceShip.GetComponent<Animator>().isActiveAndEnabled)
+            spaceShip.GetComponent<Animator>().Play("SpaceShip");
+        else
+            spaceShip.GetComponent<Animator>().enabled = true;
     }
 
     public void CheckUnlock(int _id)

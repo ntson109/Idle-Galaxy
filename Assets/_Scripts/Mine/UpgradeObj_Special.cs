@@ -65,8 +65,7 @@ public class UpgradeObj_Special : MonoBehaviour
         btnBuyNow.thisPrice = coin;
         btnBuyNow.type = MyButton.Type.COIN;
         txtCoin.text = UIManager.Instance.ToLongString(coin);
-        
-        GameManager.Instance.AddGold(0);
+                
         switch (type)
         {
             case Type.NONE:
@@ -82,6 +81,8 @@ public class UpgradeObj_Special : MonoBehaviour
             default:
                 break;
         }
+
+        GameManager.Instance.AddGold(0);
     }
 
     public void SetBought()
@@ -105,5 +106,10 @@ public class UpgradeObj_Special : MonoBehaviour
     public void BtnBuyAds()
     {
         thisMineShaft.UpgradeAds(this.ID);
+    }
+
+    void OnEnable()
+    {
+        GameManager.Instance.AddGold(0);
     }
 }
