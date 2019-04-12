@@ -430,18 +430,30 @@ public class UIManager : MonoBehaviour
     //================================================
     public int GetOfflineTime(string dateTime)
     {
+        int a;
         if (dateTime == string.Empty)
         {
             return 0;
         }
-        if ((int)Mathf.Round((float)DateTime.Now.Subtract(Convert.ToDateTime(dateTime)).TotalMinutes) <= int.MaxValue)
+        if (Mathf.Round((float)DateTime.Now.Subtract(Convert.ToDateTime(dateTime)).TotalMinutes) > float.MaxValue)
         {
-            return (int)Mathf.Round((float)DateTime.Now.Subtract(Convert.ToDateTime(dateTime)).TotalMinutes);
+            a = int.MaxValue;
         }
         else
         {
-            return int.MaxValue;
+            a = (int)Mathf.Round((float)DateTime.Now.Subtract(Convert.ToDateTime(dateTime)).TotalMinutes);
         }
+
+
+        if (a > 0)
+        {
+            return a;
+        }
+        else
+        {
+            return 1;
+        }
+
     }
 
     public void Add_0()
@@ -883,7 +895,7 @@ public class UIManager : MonoBehaviour
     public void Btn_Step_11_Tutorial()
     {
         panelTutorial.SetActive(false);
-        PlayerPrefs.SetInt(KeyPrefs.TUTORIAL_DONE, 1);       
+        PlayerPrefs.SetInt(KeyPrefs.TUTORIAL_DONE, 1);
         GameManager.Instance.lstMap[0].lstMineShaft[0].imgAI.GetComponent<Animator>().enabled = true;
         panelUpgradeTransporter.transform.parent = upgradeTransParent.transform;
         panelShowUpgrade.transform.parent = upgradeParent.transform;

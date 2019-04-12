@@ -305,7 +305,10 @@ public class MineShaft : MonoBehaviour
                 if (imgPushBar != null)
                     imgPushBar.fillAmount = ((float)this.store.value / (float)this.store.capacity);
 
-                txtProduct_PushUp.text = this.store.capacity.ToString();
+                if (txtProduct_PushUp != null)
+                    txtProduct_PushUp.text = this.store.capacity.ToString();
+
+                txtMoreMinePrice.text = UIManager.Instance.ToLongString(btnBuyMoreMine.thisPrice);
             }
 
             if (tubeT != null)
@@ -590,7 +593,6 @@ public class MineShaft : MonoBehaviour
 
         btnBuyMoreMine.thisPrice = (long)_temp;
         btnBuyMoreMine.type = MyButton.Type.GOLD;
-        txtMoreMinePrice.text = UIManager.Instance.ToLongString(btnBuyMoreMine.thisPrice);
         GameManager.Instance.AddGold(0);
     }
 
@@ -626,7 +628,17 @@ public class MineShaft : MonoBehaviour
 
     public void LetWork()
     {
-        StartCoroutine(Work());
+        if (this.ID == 0)
+        {
+            StartCoroutine(Work());
+        }
+        else
+        {
+            if(this.preMineShaft.store.value > 0)
+            {
+                StartCoroutine(Work());
+            }
+        }
     }
     public IEnumerator Work()
     {

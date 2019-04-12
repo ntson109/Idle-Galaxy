@@ -80,7 +80,6 @@ public class UpgradeObj_Level : MonoBehaviour
                 txtTime_cur.text = UIManager.Instance.ToDateTimeString((int)thisMineShaft.properties.miningTime);
                 txtTime_next.text = UIManager.Instance.ToDateTimeString((int)(thisMineShaft.properties.miningTime/2));
                 txtTime_next.color = Color.yellow;
-                
             }
             else
             {
@@ -91,9 +90,9 @@ public class UpgradeObj_Level : MonoBehaviour
                 txtTime_next.text = UIManager.Instance.ToDateTimeString((int)thisMineShaft.properties.miningTime);
                 txtTime_next.color = Color.white;
             }
-            
-            //txtUnitPrice_cur.text = GameConfig.Instance.lstPropertiesMap[thisMineShaft.ID].Unit_Price[thisMineShaft.properties.level - 1].ToString();
-            //txtUnitPrice_next.text = GameConfig.Instance.lstPropertiesMap[thisMineShaft.ID].Unit_Price[thisMineShaft.properties.level].ToString();
+
+            txtUnitPrice_cur.text = UIManager.Instance.ToLongString(thisMineShaft.properties.unitPrice);
+            txtUnitPrice_next.text = UIManager.Instance.ToLongString(thisMineShaft.properties.unitPrice);
             btnUpgrade.type = MyButton.Type.GOLD;
 
             if (type == Type.UPGRADING)
