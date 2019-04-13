@@ -530,6 +530,7 @@ public class MineShaft : MonoBehaviour
             this.store.deltaCap = GameConfig.Instance.lstPropertiesMap[ID].Store_Capacity_2;
             this.store.cost = GameConfig.Instance.lstPropertiesMap[ID].Store_Cost_1;
             this.properties.unitPrice = GameConfig.Instance.lstPropertiesMap[ID].Unit_Price;
+            GetPriceMoreMine();
         }
 
         this.properties.buyAI = GameConfig.Instance.lstPropertiesMap[ID].BuyAI;
@@ -545,7 +546,7 @@ public class MineShaft : MonoBehaviour
 
         this.totalCapacity = this.properties.capacity * this.numberMine;
         this.properties.upgradeTime = GameConfig.Instance.lstPropertiesMap[ID].Upgrade_time[this.properties.level - 1];
-        GetPriceMoreMine();
+        
         //GetPriceUpgradeCost();
         this.properties.unlockTime = GameConfig.Instance.lstPropertiesMap[ID].Unlock_time;
         this.properties.unlockCondition = GameConfig.Instance.lstPropertiesMap[ID].Unlock_condition;
@@ -568,7 +569,7 @@ public class MineShaft : MonoBehaviour
         this.unlockCost[1].cost = GameConfig.Instance.lstPropertiesMap[ID].Unlock_cost[1];
         txtUnlock_byCoin.text = UIManager.Instance.ToLongString(this.unlockCost[0].cost);
         txtUnlock_byGold.text = UIManager.Instance.ToLongString(this.unlockCost[1].cost) + "$";
-
+        GetPriceMoreMine();
         //GetStoreCost();
         GetSoreCapacity();
     }

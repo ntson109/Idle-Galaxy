@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class ScenesManager : MonoBehaviour
 {
-
+    public Animator anim;
     public enum TypeScene
     {
         Home, Main
@@ -40,6 +40,7 @@ public class ScenesManager : MonoBehaviour
         yield return new WaitUntil(() => Fade.Instance.state == Fade.FadeState.FadeInDone);
 
         secenes[0].objects.SetActive(false);
+        anim.enabled = true;
         if (actionLoadScenesDone != null)
             actionLoadScenesDone();
         yield return new WaitForSeconds(1.5f);
@@ -48,6 +49,7 @@ public class ScenesManager : MonoBehaviour
         if (actionLoadScenesLast != null)
             actionLoadScenesLast();
         Fade.Instance.EndFade();
+        anim.enabled = false;
     }
 
 }

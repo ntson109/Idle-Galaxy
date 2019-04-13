@@ -38,13 +38,8 @@ public class UIManager : MonoBehaviour
     [Header("TRANSPORTER")]
     public GameObject panelUpgradeTransporter;
     public MyButton btnUpTrans;
-    public Text txtNameTrans;
     public Text txtLevelTrans;
-    public Text txtLevelTrans_Up;
     public Text txtCapTrans;
-    public Text txtCapTrans_Up;
-    public Text txtTimeTrans;
-    public Text txtTimeTrans_Up;
     public Text txtPriceTrans;
 
     [Header("STORE")]
@@ -276,9 +271,9 @@ public class UIManager : MonoBehaviour
     //================================================
     private string[] timeFormat = new string[]
 	{
-		"d",
-		"h",
-		"mins",
+		" d ",
+		" h ",
+		" mins",
 		"s"
 	};
 
@@ -548,7 +543,7 @@ public class UIManager : MonoBehaviour
     public void ShowPanelOffline()
     {
         SetActivePanel(panelOffline);
-        txtTittleOffline.text = "You are offline: \n" + ConvertTime(timeOffline * 60);
+        txtTittleOffline.text = ConvertTime(timeOffline * 60);
         txtGoldOffline.text = ToLongString(goldOffline);
     }
     public void Btn_ReceiveOffline()

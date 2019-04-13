@@ -11,7 +11,6 @@ public class Transporter : MonoBehaviour
     public long price;
     //public float time;
     long capacityWillUp;
-    float speedWillUp;
     public RectTransform posBeginTransport;
     public RectTransform posEndTransport;
     public Button thisButton;
@@ -81,13 +80,8 @@ public class Transporter : MonoBehaviour
         GetPriceUp();
         UIManager.Instance.SetActivePanel(UIManager.Instance.panelUpgradeTransporter);
         UIManager.Instance.btnUpTrans.thisButton.onClick.RemoveAllListeners();
-        UIManager.Instance.txtNameTrans.text = GameConfig.Instance.NameTransport;
-        UIManager.Instance.txtLevelTrans.text = this.level.ToString();
-        UIManager.Instance.txtLevelTrans_Up.text = (this.level + 1).ToString();
-        UIManager.Instance.txtCapTrans.text = UIManager.Instance.ToLongString(this.capacity);
-        UIManager.Instance.txtCapTrans_Up.text = UIManager.Instance.ToLongString(this.capacityWillUp);
-        //UIManager.Instance.txtTimeTrans.text = this.time.ToString();
-        //UIManager.Instance.txtTimeTrans_Up.text = this.time.ToString();
+        UIManager.Instance.txtLevelTrans.text = "Level " + this.level + " -> " + (this.level + 1);
+        UIManager.Instance.txtCapTrans.text = UIManager.Instance.ToLongString(this.capacity) + " -> " + UIManager.Instance.ToLongString(this.capacityWillUp);
         UIManager.Instance.btnUpTrans.thisPrice = this.price;
         UIManager.Instance.txtPriceTrans.text = "Upgrade\n" + UIManager.Instance.ToLongString(this.price);
         UIManager.Instance.btnUpTrans.type = MyButton.Type.GOLD;
@@ -161,7 +155,7 @@ public class Transporter : MonoBehaviour
         }
         else if (this.level <= 500)
         {
-            this.price = (long)(1 +this.price + this.price * GameConfig.Instance.Trans_Cost_2[5]);
+            this.price = (long)(1 + this.price + this.price * GameConfig.Instance.Trans_Cost_2[5]);
         }
         else if (this.level > 500)
         {

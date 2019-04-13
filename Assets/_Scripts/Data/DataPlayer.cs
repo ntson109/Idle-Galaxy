@@ -219,7 +219,7 @@ public class DataPlayer : MonoBehaviour
 
         for (int i = 0; i < objJson["lsMineShaft"].Count; i++)
         {
-            if (i <= GameManager.Instance.lstMap[0].lstMineShaft.Count)
+            if (i < GameManager.Instance.lstMap[0].lstMineShaft.Count)
             {
                 GameManager.Instance.lstMap[0].lstMineShaft[i].ID = objJson["lsMineShaft"][i]["ID"].AsInt;
                 GameManager.Instance.lstMap[0].lstMineShaft[i].properties.level = objJson["lsMineShaft"][i]["level"].AsInt;
