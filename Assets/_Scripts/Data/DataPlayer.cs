@@ -221,6 +221,7 @@ public class DataPlayer : MonoBehaviour
         {
             if (i < GameManager.Instance.lstMap[0].lstMineShaft.Count)
             {
+                Debug.Log(i);
                 GameManager.Instance.lstMap[0].lstMineShaft[i].ID = objJson["lsMineShaft"][i]["ID"].AsInt;
                 GameManager.Instance.lstMap[0].lstMineShaft[i].properties.level = objJson["lsMineShaft"][i]["level"].AsInt;
                 GameManager.Instance.lstMap[0].lstMineShaft[i].timer = objJson["lsMineShaft"][i]["timeCurrent"].AsFloat;
@@ -260,7 +261,6 @@ public class DataPlayer : MonoBehaviour
                         GameManager.Instance.lstMap[0].lstMineShaft[i].typeUpgradeSpecial.Add(UpgradeObj_Special.Type.UPGRADED);
                     }
                 }
-
                 GameManager.Instance.lstMap[0].lstMineShaft[i].isAutoWorking = objJson["lsMineShaft"][i]["isAutoWorking"].AsBool;
                 GameManager.Instance.lstMap[0].lstMineShaft[i].timeUnlocking = objJson["lsMineShaft"][i]["timeUnlocking"].AsFloat;
                 GameManager.Instance.lstMap[0].lstMineShaft[i].timeUpgradeLevel = objJson["lsMineShaft"][i]["timeUpgradeLevel"].AsFloat;
