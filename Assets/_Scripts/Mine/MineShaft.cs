@@ -268,7 +268,10 @@ public class MineShaft : MonoBehaviour
                     this.timeUpgradeLevel = 0;
                     UpgradeLevel_Complete();
                 }
-                this.timeUpgradeLevel -= Time.deltaTime;
+				else
+				{
+					this.timeUpgradeLevel -= Time.deltaTime;
+				}
             }
 
             if (btnStore != null)
@@ -549,8 +552,9 @@ public class MineShaft : MonoBehaviour
         this.txtName.text = this.properties.name;
 
         this.totalCapacity = this.properties.capacity * this.numberMine;
-        this.properties.upgradeTime = GameConfig.Instance.lstPropertiesMap[ID].Upgrade_time[this.properties.level - 1];
-        
+		if (this.properties.level <= 5) {
+			this.properties.upgradeTime = GameConfig.Instance.lstPropertiesMap [ID].Upgrade_time [this.properties.level - 1];
+		}
         //GetPriceUpgradeCost();
         this.properties.unlockTime = GameConfig.Instance.lstPropertiesMap[ID].Unlock_time;
         this.properties.unlockCondition = GameConfig.Instance.lstPropertiesMap[ID].Unlock_condition;
@@ -996,23 +1000,27 @@ public class MineShaft : MonoBehaviour
     private void UpgradeLevel_Complete()
     {
         UIManager.Instance.SetDeActivePanel(UIManager.Instance.panelCoinAds);
-        this.properties.level += 1;
-        txtLevel.text = "Level " + this.properties.level;
-        //GetPriceUpgradeCost();
-        if (this.properties.level % 2 == 1)
-        {
-            this.properties.miningTime /= 2;
-        }
-        else
-        {
-            this.properties.capacity *= 2;
-            if (this.preMineShaft != null)
-                this.preMineShaft.store.deltaCap *= 2;
-        }
-        this.totalCapacity = this.properties.capacity * numberMine;
-        typeUpgradeLevel = UpgradeObj_Level.Type.NONE;
+		if(this.properties.level<6)
+		{
+	        this.properties.level += 1;
+	        txtLevel.text = "Level " + this.properties.level;
+	        //GetPriceUpgradeCost();
+	        if (this.properties.level % 2 == 1)
+	        {
+	            this.properties.miningTime /= 2;
+	        }
+	        else
+	        {
+	            this.properties.capacity *= 2;
+	            if (this.preMineShaft != null)
+	                this.preMineShaft.store.deltaCap *= 2;
+	        }
+	        this.totalCapacity = this.properties.capacity * numberMine;
+	        typeUpgradeLevel = UpgradeObj_Level.Type.NONE;
 
-        GameManager.Instance.upgradeLevel.SetInfo(this, typeUpgradeLevel);
+	        GameManager.Instance.upgradeLevel.SetInfo(this, typeUpgradeLevel);
+		}
+
     }
 
     public void UpgradeAds(int _id)
