@@ -64,10 +64,12 @@ public class Map : MonoBehaviour
                     //lstMineShaft[i].imgWorkBar.fillAmount = (float)lstMineShaft[i].timer / (float)lstMineShaft[i].properties.miningTime;
                 }
 
-                if (lstMineShaft[i].state != MineShaft.StateMineShaft.LOCK && lstMineShaft[i].state != MineShaft.StateMineShaft.UNLOCKING)
-                {
-                    CheckUnlock(i);
-                }
+				if (i>=1){
+					if (lstMineShaft[i-1].state != MineShaft.StateMineShaft.LOCK && lstMineShaft[i-1].state != MineShaft.StateMineShaft.UNLOCKING)
+	                {
+	                    CheckUnlock(i);
+	                }
+				}
             }
         }
 
@@ -140,21 +142,21 @@ public class Map : MonoBehaviour
 
     public void CheckUnlock(int _id)
     {
-        if (_id + 1 >= lstMineShaft.Count)
-            return;
-        if (lstMineShaft[_id + 1].state == MineShaft.StateMineShaft.LOCK)
-        {
-            if (lstMineShaft[_id].numberMine >= lstMineShaft[_id + 1].properties.unlockCondition)
-            {
-                UIManager.Instance.SetActivePanel(lstMineShaft[_id + 1].panelUnlock);
-                UIManager.Instance.SetDeActivePanel(lstMineShaft[_id + 1].panelUnlock_Condition);
-            }
-            else
-            {
-                UIManager.Instance.SetActivePanel(lstMineShaft[_id + 1].panelUnlock_Condition);
-            }
-        }
-    }
+		if (_id == 0 || _id >= lstMineShaft.Count) return;
+		if (lstMineShaft[_id].state == MineShaft.StateMineShaft.LOCK) 
+		{
+			if (lstMineShaft[_id - 1].numberMine >= lstMineShaft[_id].properties.unlockCondition) 
+			{
+				UIManager.Instance.SetActivePanel (lstMineShaft[_id].panelUnlock);
+				UIManager.Instance.SetDeActivePanel (lstMineShaft[_id].panelUnlock_Condition);
+			} 
+			else 
+			{
+				UIManager.Instance.SetActivePanel (lstMineShaft[_id].panelUnlock_Condition);
+			}
+		}
+	}
+    
 }
 
 [System.Serializable]

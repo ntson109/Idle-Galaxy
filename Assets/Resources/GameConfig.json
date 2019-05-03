@@ -1,5 +1,5 @@
 {
-  "GoldStart" : 120,
+  "GoldStart" : 500,
   "CoinStart" : 10,
   "ID_UnityAds_ios" : "",
   "ID_Inter_android" : "",
@@ -90,7 +90,7 @@
 		"Unlock_reward" : {
 			"timex2" : 0
 		},
-		"miningTime" : 4,
+		"miningTime" : 8,
 		"MoreMine_cost_1" : 5,
 		"MoreMine_cost_2" : 1,
 		"MoreMine_cost_3" : 1.05,
@@ -116,7 +116,7 @@
 			100,
 			100
 		],
-		"Productivity" : 2,
+		"Productivity" : 5,
 		"Upgrade_Special" : {
 			"1" : {
 				"name" : "Deep Explore Tech lv 1",
@@ -183,7 +183,7 @@
 		"MoreMine_cost_1" : 50,
 		"MoreMine_cost_2" : 2,
 		"MoreMine_cost_3" : 1.06,
-		"miningTime" : 8,
+		"miningTime" : 16,
 		"Upgrade_time" : [
 			2,
 			10,
@@ -207,7 +207,7 @@
 			100,
 			100
 		],
-		"Productivity" : 5,
+		"Productivity" : 8,
 		"Upgrade_Special" : {
 			"1" : {
 				"name" : "Nuclear enriching Tech lv 1",
@@ -242,7 +242,7 @@
 		"Store_Cost_1" : 50,
 		"Store_Cost_2" : 0.06,
 		"Store_Cost_3" : 2,
-		"Store_Capacity_1" : 100,
+		"Store_Capacity_1" : 50,
 		"Store_Capacity_2" : 20
 	},
 	"M_3" :{
@@ -284,7 +284,7 @@
 			100,
 			100
 		],
-		"Productivity" : 40,
+		"Productivity" : 20,
 		"Upgrade_Special" : {
 			"1" : {
 				"name" : "ThermalSoftenning Tech",
@@ -312,7 +312,7 @@
 		"Store_Cost_1" : 500,
 		"Store_Cost_2" : 0.07,
 		"Store_Cost_3" : 5,
-		"Store_Capacity_1" : 200,
+		"Store_Capacity_1" : 100,
 		"Store_Capacity_2" : 40
 	},
 	"M_4" :{
@@ -353,7 +353,7 @@
 			100,
 			100
 		],
-		"Productivity" : 100,
+		"Productivity" : 40,
 		"Upgrade_Special" : {
 			"1" : {
 				"name" : "ThermalSoftenning Tech",
@@ -381,7 +381,7 @@
 		"Store_Cost_1" : 5000,
 		"Store_Cost_2" : 0.08,
 		"Store_Cost_3" : 10,
-		"Store_Capacity_1" : 500,
+		"Store_Capacity_1" : 200,
 		"Store_Capacity_2" : 80
 	},
 	"M_5" :{
@@ -422,7 +422,7 @@
 			100,
 			100
 		],
-		"Productivity" : 600,
+		"Productivity" : 100,
 		"Upgrade_Special" : {
 			"1" : {
 				"name" : "ThermalSoftenning Tech",
@@ -450,7 +450,7 @@
 		"Store_Cost_1" : 500000,
 		"Store_Cost_2" : 0.09,
 		"Store_Cost_3" : 100,
-		"Store_Capacity_1" : 1000,
+		"Store_Capacity_1" : 500,
 		"Store_Capacity_2" : 160
 	},
 	"M_6" :{
@@ -491,7 +491,7 @@
 			100,
 			100
 		],
-		"Productivity" : 2400,
+		"Productivity" : 250,
 		"Upgrade_Special" : {
 			"1" : {
 				"name" : "ThermalSoftenning Tech",

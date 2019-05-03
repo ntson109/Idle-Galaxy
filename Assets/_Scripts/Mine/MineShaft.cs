@@ -393,10 +393,14 @@ public class MineShaft : MonoBehaviour
             UIManager.Instance.SetActivePanel(panelUnlock_Condition);
             txtUnlock_Condition.text = "Need: unlock pre house !";
 
-            if (ID >= 1 && mapParent.lstMineShaft[ID - 1].state != StateMineShaft.LOCK && mapParent.lstMineShaft[ID - 1].state != StateMineShaft.UNLOCKING)
-            {
-                UIManager.Instance.SetDeActivePanel(panelUnlock_Condition);
-            }
+			if (ID > 1) 
+			{
+				if (mapParent.lstMineShaft[ID - 1].state != StateMineShaft.LOCK && mapParent.lstMineShaft[ID - 1].state != StateMineShaft.UNLOCKING) 
+				{
+					UIManager.Instance.SetDeActivePanel(panelUnlock_Condition);
+					UIManager.Instance.SetActivePanel(panelUnlock);
+				}
+			}
 
             if (ID == 1)
             {
