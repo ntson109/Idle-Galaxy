@@ -941,9 +941,11 @@ public class MineShaft : MonoBehaviour
     public void Btn_ShowUpgrade()
     {
         UIManager.Instance.SetActivePanel(UIManager.Instance.panelShowUpgrade);
-        AudioManager.Instance.Play("Click");
+		if (UIManager.Instance.isSoundOn == true) {
+			AudioManager.Instance.Play ("Click");
+		}
         GameManager.Instance.upgradeLevel.SetInfo(this, typeUpgradeLevel);
-        for (int i = 0; i < this.lstUpgradeSpecial.Count; i++)
+		for (int i = 0; i<this.lstUpgradeSpecial.Count; i++)
         {
             int _coin = (int)((timeUpgradeSpecial[i] * GameConfig.Instance.lstPropertiesMap[ID].Upgrade_Special[i].coinMax) / timeUpgradeSpecial_Max[i]);
             GameManager.Instance.lstUpgradeSpecial[i].SetInfo(
@@ -1070,7 +1072,10 @@ public class MineShaft : MonoBehaviour
     }
     public void Btn_BuyMoreMine()
     {
-        AudioManager.Instance.Play("Click");
+		if (UIManager.Instance.isSoundOn == true) {
+			AudioManager.Instance.Play ("Click");
+		}
+        
         GameManager.Instance.AddGold(-this.btnBuyMoreMine.thisPrice);
         BuyMoreMineComplete();
     }

@@ -35,6 +35,10 @@ public class UIManager : MonoBehaviour
     public Sprite[] sprMoreMine_btn;
     public Image imgXMine;
 
+	[Header("MUSICSOUND")]
+	public bool isMusicOn = true;
+	public bool isSoundOn = true;
+
     [Header("TRANSPORTER")]
     public GameObject panelUpgradeTransporter;
     public MyButton btnUpTrans;
@@ -462,17 +466,20 @@ public class UIManager : MonoBehaviour
     #region === UI HOME ===
     public void Btn_Play()
     {
-        AudioManager.Instance.Play("Click");
+		if (isSoundOn == true) {
+			AudioManager.Instance.Play ("Click");
+		}
         SetActivePanel(panelYesNoNewPlay);
         isNewPlayer = true;
         PlayerPrefs.SetInt(KeyPrefs.TUTORIAL_DONE, 0);
-        ScenesManager.Instance.GoToScene(ScenesManager.TypeScene.Main, () =>
+		ScenesManager.Instance.GoToScene(ScenesManager.TypeScene.Main, () =>
             {
                 this.PostEvent(EventID.START_GAME);
                 GameManager.Instance.stateGame = StateGame.PLAYING;
                 GameManager.Instance.AddGold(GameConfig.Instance.GoldStart);
                 GameManager.Instance.AddCoin(GameConfig.Instance.CoinStart);
                 AudioManager.Instance.Play("GamePlay", true);
+				isMusicOn = true;
                 if (PlayerPrefs.GetInt(KeyPrefs.TUTORIAL_DONE) == 0)
                 {
                     Step_1_Tutorial();
@@ -482,7 +489,9 @@ public class UIManager : MonoBehaviour
 
     public void Btn_Yes_NewPlay()
     {
-        AudioManager.Instance.Play("Click");
+		if (isSoundOn == true) {
+			AudioManager.Instance.Play ("Click");
+		}
         isNewPlayer = true;
         ScenesManager.Instance.GoToScene(ScenesManager.TypeScene.Main, () =>
         {
@@ -491,24 +500,30 @@ public class UIManager : MonoBehaviour
             GameManager.Instance.AddGold(GameConfig.Instance.GoldStart);
             GameManager.Instance.AddCoin(GameConfig.Instance.CoinStart);
             AudioManager.Instance.Play("GamePlay", true);
+			isMusicOn = true;
         });
     }
 
     public void Btn_No_NewPlay()
     {
-        AudioManager.Instance.Play("Click");
+		if (isSoundOn == true) {
+			AudioManager.Instance.Play ("Click");
+		}
         SetDeActivePanel(panelYesNoNewPlay);
     }
 
     public void Btn_Continue()
     {
-        AudioManager.Instance.Play("Click");
+		if (isSoundOn == true) {
+			AudioManager.Instance.Play ("Click");
+		}
         isNewPlayer = false;
         ScenesManager.Instance.GoToScene(ScenesManager.TypeScene.Main, () =>
         {
             GameManager.Instance.stateGame = StateGame.PLAYING;
             DataPlayer.Instance.LoadDataPlayer();
             AudioManager.Instance.Play("GamePlay", true);
+			isMusicOn = true;
         });
     }
 
@@ -805,7 +820,7 @@ public class UIManager : MonoBehaviour
     public void Step_5_Tutorial()//upgrade lv2
     {
         panelShowUpgrade.transform.parent = panelTutorial.transform;
-        GameObject.FindWithTag("CloseUp").GetComponent<Button>().interactable = false;
+        //GameObject.FindWithTag("CloseUp").GetComponent<Button>().interactable = false;
         handTutorial.transform.position = GameObject.FindWithTag("TabLevel").transform.position;
         handTutorial.transform.SetAsLastSibling();
         txtTutorial.text = GameConfig.Instance.lstTutorial[4];
@@ -836,7 +851,7 @@ public class UIManager : MonoBehaviour
 
     public void Step_7_Tutorial()//close upgrade mine
     {
-        GameObject.FindWithTag("CloseUp").GetComponent<Button>().interactable = true;
+        //GameObject.FindWithTag("CloseUp").GetComponent<Button>().interactable = true;
         handTutorial.transform.position = GameObject.FindWithTag("CloseUp").transform.position;
         txtTutorial.text = "Close";
     }
@@ -859,7 +874,7 @@ public class UIManager : MonoBehaviour
     public void Step_9_Tutorial()
     {
         panelUpgradeTransporter.transform.parent = panelTutorial.transform;
-        GameObject.FindWithTag("CloseTrans").GetComponent<Button>().interactable = false;
+        //GameObject.FindWithTag("CloseTrans").GetComponent<Button>().interactable = false;
         handTutorial.transform.position = GameObject.FindWithTag("UpgradeTranspoter").transform.position;
         handTutorial.transform.SetAsLastSibling();
         txtTutorial.text = GameConfig.Instance.lstTutorial[6];
@@ -897,5 +912,28 @@ public class UIManager : MonoBehaviour
     }
 
     #endregion
+
+	#region === MUSIC & SOUND CONTROL  ===
+	public void Music_ON_OFF(){
+		if (isMusicOn == true) {
+			AudioManager.Instance.Stop ("GamePlay", true);
+			isMusicOn = false;
+
+		} else {
+			AudioManager.Instance.Play ("GamePlay", true);
+			isMusicOn = true;
+		}
+	}
+
+	public void Sound_ON_OFF(){
+		if (isSoundOn == true)
+			isSoundOn = false;
+		else
+			isSoundOn = true;
+		
+	}
+	#endregion
+
+
 }
 

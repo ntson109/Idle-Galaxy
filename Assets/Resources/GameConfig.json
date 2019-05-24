@@ -192,7 +192,6 @@
 			70
 		],
 		"Upgrade_condition" : [
-			10,
 			20,
 			50,
 			100,
@@ -210,31 +209,45 @@
 		"Productivity" : 8,
 		"Upgrade_Special" : {
 			"1" : {
-				"name" : "Nuclear enriching Tech lv 1",
+				"name" : "Deep Explore Tech lv 1",
 				"description" : "x2 price",
-				"price" : 1000000,
-				"time" : 10,
+				"price" : 10000,
+				"time" : 5,
 				"coinMax" : 10
 			},
 			"2" : {
-				"name" : "Nuclear enriching Tech lv 2",
+				"name" : "Deep Explore Tech lv 2",
 				"description" : "x2 price",
-				"price" : 1000000,
+				"price" : 50000,
 				"time" : 10,
 				"coinMax" : 10
 			},
 			"3" : {
-				"name" : "Nuclear enriching Tech lv 3",
+				"name" : "Deep Explore Tech lv 3",
 				"description" : "x2 price",
-				"price" : 1000000,
-				"time" : 10,
+				"price" : 250000,
+				"time" : 15,
 				"coinMax" : 10
 			},
 			"4" : {
-				"name" : "Nuclear enriching Tech",
+				"name" : "Laser drilling Tech lv 1",
 				"description" : "x2 productivity",
-				"price" : 100,
+				"price" : 20000000,
 				"time" : 20,
+				"coinMax" : 10
+			},
+			"5" : {
+				"name" : "Laser drilling Tech lv 2",
+				"description" : "x2 productivity",
+				"price" : 100000000,
+				"time" : 40,
+				"coinMax" : 10
+			},
+			"6" : {
+				"name" : "Laser drilling Tech lv 3",
+				"description" : "x2 productivity",
+				"price" : 500000000,
+				"time" : 60,
 				"coinMax" : 10
 			}
 		},
@@ -269,7 +282,6 @@
 			75
 		],
 		"Upgrade_condition" : [
-			10,
 			20,
 			50,
 			100,
@@ -287,24 +299,45 @@
 		"Productivity" : 20,
 		"Upgrade_Special" : {
 			"1" : {
-				"name" : "ThermalSoftenning Tech",
+				"name" : "Deep Explore Tech lv 1",
 				"description" : "x2 price",
-				"price" :100,
-				"time" : 15,
+				"price" : 10000,
+				"time" : 5,
 				"coinMax" : 10
 			},
 			"2" : {
-				"name" : "Up 3",
-				"description" : "/2 time",
-				"price" : 100,
-				"time" : 20,
+				"name" : "Deep Explore Tech lv 2",
+				"description" : "x2 price",
+				"price" : 50000,
+				"time" : 10,
 				"coinMax" : 10
 			},
 			"3" : {
-				"name" : "Nuclear enriching Tech",
+				"name" : "Deep Explore Tech lv 3",
+				"description" : "x2 price",
+				"price" : 250000,
+				"time" : 15,
+				"coinMax" : 10
+			},
+			"4" : {
+				"name" : "Laser drilling Tech lv 1",
 				"description" : "x2 productivity",
-				"price" : 100,
-				"time" : 25,
+				"price" : 20000000,
+				"time" : 20,
+				"coinMax" : 10
+			},
+			"5" : {
+				"name" : "Laser drilling Tech lv 2",
+				"description" : "x2 productivity",
+				"price" : 100000000,
+				"time" : 40,
+				"coinMax" : 10
+			},
+			"6" : {
+				"name" : "Laser drilling Tech lv 3",
+				"description" : "x2 productivity",
+				"price" : 500000000,
+				"time" : 60,
 				"coinMax" : 10
 			}
 		},
@@ -356,24 +389,45 @@
 		"Productivity" : 40,
 		"Upgrade_Special" : {
 			"1" : {
-				"name" : "ThermalSoftenning Tech",
+				"name" : "Deep Explore Tech lv 1",
 				"description" : "x2 price",
-				"price" : 100,
-				"time" : 20,
+				"price" : 10000,
+				"time" : 5,
 				"coinMax" : 10
 			},
 			"2" : {
-				"name" : "Nuclear enriching Tech",
-				"description" : "/2 time",
-				"price" : 100,
-				"time" : 25,
+				"name" : "Deep Explore Tech lv 2",
+				"description" : "x2 price",
+				"price" : 50000,
+				"time" : 10,
 				"coinMax" : 10
 			},
 			"3" : {
-				"name" : "Nuclear enriching Tech",
+				"name" : "Deep Explore Tech lv 3",
+				"description" : "x2 price",
+				"price" : 250000,
+				"time" : 15,
+				"coinMax" : 10
+			},
+			"4" : {
+				"name" : "Laser drilling Tech lv 1",
 				"description" : "x2 productivity",
-				"price" : 100,
-				"time" : 30,
+				"price" : 20000000,
+				"time" : 20,
+				"coinMax" : 10
+			},
+			"5" : {
+				"name" : "Laser drilling Tech lv 2",
+				"description" : "x2 productivity",
+				"price" : 100000000,
+				"time" : 40,
+				"coinMax" : 10
+			},
+			"6" : {
+				"name" : "Laser drilling Tech lv 3",
+				"description" : "x2 productivity",
+				"price" : 500000000,
+				"time" : 60,
 				"coinMax" : 10
 			}
 		},
@@ -425,24 +479,45 @@
 		"Productivity" : 100,
 		"Upgrade_Special" : {
 			"1" : {
-				"name" : "ThermalSoftenning Tech",
+				"name" : "Deep Explore Tech lv 1",
 				"description" : "x2 price",
-				"price" : 100,
-				"time" : 25,
+				"price" : 10000,
+				"time" : 5,
 				"coinMax" : 10
 			},
 			"2" : {
-				"name" : "Up 3",
-				"description" : "/2 time",
-				"price" : 100,
-				"time" : 30,
+				"name" : "Deep Explore Tech lv 2",
+				"description" : "x2 price",
+				"price" : 50000,
+				"time" : 10,
 				"coinMax" : 10
 			},
-			"2" : {
-				"name" : "Nuclear enriching Tech",
+			"3" : {
+				"name" : "Deep Explore Tech lv 3",
+				"description" : "x2 price",
+				"price" : 250000,
+				"time" : 15,
+				"coinMax" : 10
+			},
+			"4" : {
+				"name" : "Laser drilling Tech lv 1",
 				"description" : "x2 productivity",
-				"price" : 100,
-				"time" : 35,
+				"price" : 20000000,
+				"time" : 20,
+				"coinMax" : 10
+			},
+			"5" : {
+				"name" : "Laser drilling Tech lv 2",
+				"description" : "x2 productivity",
+				"price" : 100000000,
+				"time" : 40,
+				"coinMax" : 10
+			},
+			"6" : {
+				"name" : "Laser drilling Tech lv 3",
+				"description" : "x2 productivity",
+				"price" : 500000000,
+				"time" : 60,
 				"coinMax" : 10
 			}
 		},
@@ -477,11 +552,11 @@
 			90
 		],
 		"Upgrade_condition" : [
-			5,
 			10,
 			20,
 			30,
-			50
+			50,
+			100
 		],
 		"Upgrade_cost" : [
 			100,
@@ -494,24 +569,45 @@
 		"Productivity" : 250,
 		"Upgrade_Special" : {
 			"1" : {
-				"name" : "ThermalSoftenning Tech",
+				"name" : "Deep Explore Tech lv 1",
 				"description" : "x2 price",
-				"price" : 100,
-				"time" : 30,
+				"price" : 10000,
+				"time" : 5,
 				"coinMax" : 10
 			},
 			"2" : {
-				"name" : "Nuclear enriching Tech",
-				"description" : "/2 time",
-				"price" : 100,
-				"time" : 35,
+				"name" : "Deep Explore Tech lv 2",
+				"description" : "x2 price",
+				"price" : 50000,
+				"time" : 10,
 				"coinMax" : 10
 			},
 			"3" : {
-				"name" : "Nuclear enriching Tech",
+				"name" : "Deep Explore Tech lv 3",
+				"description" : "x2 price",
+				"price" : 250000,
+				"time" : 15,
+				"coinMax" : 10
+			},
+			"4" : {
+				"name" : "Laser drilling Tech lv 1",
 				"description" : "x2 productivity",
-				"price" : 100,
+				"price" : 20000000,
+				"time" : 20,
+				"coinMax" : 10
+			},
+			"5" : {
+				"name" : "Laser drilling Tech lv 2",
+				"description" : "x2 productivity",
+				"price" : 100000000,
 				"time" : 40,
+				"coinMax" : 10
+			},
+			"6" : {
+				"name" : "Laser drilling Tech lv 3",
+				"description" : "x2 productivity",
+				"price" : 500000000,
+				"time" : 60,
 				"coinMax" : 10
 			}
 		},

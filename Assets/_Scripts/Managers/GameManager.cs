@@ -32,49 +32,9 @@ public class GameManager : MonoBehaviour
     [Header("Spin")]
     public int countSpin = 0;
 
-    long test = 5;
-    long test_2;
     void Start()
     {
-        //boost.SetDefault();
-        //for (int i = 1; i <= 500; i++)
-        //{
-        //    if (i <= 100)
-        //    {
-        //        test_2 = (long)(test * 0.05f);
-        //    }
-        //    else
-        //    {
-        //        test_2 = (long)(test * 0.015f);
-        //    }
-        //    if (test_2 <= 2)
-        //        test_2 = 2;
-        //    test += test_2;
-        //    if (i == 10)
-        //    {
-        //        Debug.Log(test);
-        //    }
 
-        //    if (i == 50)
-        //    {
-        //        Debug.Log(test);
-        //    }
-
-        //    if (i == 100)
-        //    {
-        //        Debug.Log(test);
-        //    }
-
-        //    if (i == 200)
-        //    {
-        //        Debug.Log(test);
-        //    }
-
-        //    if (i == 500)
-        //    {
-        //        Debug.Log(test);
-        //    }
-        //}
         
     }
 
@@ -141,6 +101,11 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.txtCoin.text = UIManager.Instance.ToLongString(COIN);
         this.PostEvent(EventID.CHANGE_GOLD_COIN);
     }
+
+	public void SaveExit(){
+		Debug.Log ("quit");
+		Application.Quit ();
+	}
 }
 
 [System.Serializable]
