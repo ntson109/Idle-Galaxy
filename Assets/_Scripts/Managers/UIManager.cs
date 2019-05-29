@@ -35,9 +35,11 @@ public class UIManager : MonoBehaviour
     public Sprite[] sprMoreMine_btn;
     public Image imgXMine;
 
-	[Header("MUSICSOUND")]
-	public bool isMusicOn = true;
-	public bool isSoundOn = true;
+    [Header("MUSICSOUND")]
+    public bool isMusicOn = true;
+    public bool isSoundOn = true;
+    public GameObject MusicOnBar, MusicOffBar;
+    public GameObject SoundOnBar, SoundOffBar;
 
     [Header("TRANSPORTER")]
     public GameObject panelUpgradeTransporter;
@@ -111,6 +113,7 @@ public class UIManager : MonoBehaviour
     public GameObject upgradeTransParent;
     public GameObject tut_SpaceShip;
 
+    public GameObject panelSetting;
     //[Header("MOUSE CLICK")]
     //public GameObject mouseClick;
     //public Canvas parentCanvas;
@@ -139,6 +142,7 @@ public class UIManager : MonoBehaviour
         if (PlayerPrefs.GetInt(KeyPrefs.TUTORIAL_DONE) == 1)
         {
             btnContinue.interactable = true;
+            this.Btn_Continue();
         }
         else
         {
@@ -159,6 +163,8 @@ public class UIManager : MonoBehaviour
             if (!isCanClickVideo)
                 isCanClickVideo = true;
         }
+
+        this.InitMusicAndSound();
     }
 
     void Update()
@@ -274,20 +280,20 @@ public class UIManager : MonoBehaviour
 
     //================================================
     private string[] timeFormat = new string[]
-	{
-		" d ",
-		" h ",
-		" mins",
-		"s"
-	};
+    {
+        " d ",
+        " h ",
+        " mins",
+        "s"
+    };
 
     private string[] cashFormat = new string[]
-	{
-		"K",
-		"M",
-		"B",
-		"T"
-	};
+    {
+        "K",
+        "M",
+        "B",
+        "T"
+    };
     public string ConvertCash(double cash)
     {
         if (cash < 1000.0)
@@ -466,32 +472,34 @@ public class UIManager : MonoBehaviour
     #region === UI HOME ===
     public void Btn_Play()
     {
-		if (isSoundOn == true) {
-			AudioManager.Instance.Play ("Click");
-		}
+        if (isSoundOn == true)
+        {
+            AudioManager.Instance.Play("Click");
+        }
         SetActivePanel(panelYesNoNewPlay);
         isNewPlayer = true;
         PlayerPrefs.SetInt(KeyPrefs.TUTORIAL_DONE, 0);
-		ScenesManager.Instance.GoToScene(ScenesManager.TypeScene.Main, () =>
+        ScenesManager.Instance.GoToScene(ScenesManager.TypeScene.Main, () =>
+        {
+            this.PostEvent(EventID.START_GAME);
+            GameManager.Instance.stateGame = StateGame.PLAYING;
+            GameManager.Instance.AddGold(GameConfig.Instance.GoldStart);
+            GameManager.Instance.AddCoin(GameConfig.Instance.CoinStart);
+            AudioManager.Instance.Play("GamePlay", true);
+            //isMusicOn = true;
+            if (PlayerPrefs.GetInt(KeyPrefs.TUTORIAL_DONE) == 0)
             {
-                this.PostEvent(EventID.START_GAME);
-                GameManager.Instance.stateGame = StateGame.PLAYING;
-                GameManager.Instance.AddGold(GameConfig.Instance.GoldStart);
-                GameManager.Instance.AddCoin(GameConfig.Instance.CoinStart);
-                AudioManager.Instance.Play("GamePlay", true);
-				isMusicOn = true;
-                if (PlayerPrefs.GetInt(KeyPrefs.TUTORIAL_DONE) == 0)
-                {
-                    Step_1_Tutorial();
-                }
-            });
+                Step_1_Tutorial();
+            }
+        });
     }
 
     public void Btn_Yes_NewPlay()
     {
-		if (isSoundOn == true) {
-			AudioManager.Instance.Play ("Click");
-		}
+        if (isSoundOn == true)
+        {
+            AudioManager.Instance.Play("Click");
+        }
         isNewPlayer = true;
         ScenesManager.Instance.GoToScene(ScenesManager.TypeScene.Main, () =>
         {
@@ -500,30 +508,32 @@ public class UIManager : MonoBehaviour
             GameManager.Instance.AddGold(GameConfig.Instance.GoldStart);
             GameManager.Instance.AddCoin(GameConfig.Instance.CoinStart);
             AudioManager.Instance.Play("GamePlay", true);
-			isMusicOn = true;
+            //isMusicOn = true;
         });
     }
 
     public void Btn_No_NewPlay()
     {
-		if (isSoundOn == true) {
-			AudioManager.Instance.Play ("Click");
-		}
+        if (isSoundOn == true)
+        {
+            AudioManager.Instance.Play("Click");
+        }
         SetDeActivePanel(panelYesNoNewPlay);
     }
 
     public void Btn_Continue()
     {
-		if (isSoundOn == true) {
-			AudioManager.Instance.Play ("Click");
-		}
+        if (isSoundOn == true)
+        {
+            AudioManager.Instance.Play("Click");
+        }
         isNewPlayer = false;
         ScenesManager.Instance.GoToScene(ScenesManager.TypeScene.Main, () =>
         {
             GameManager.Instance.stateGame = StateGame.PLAYING;
             DataPlayer.Instance.LoadDataPlayer();
             AudioManager.Instance.Play("GamePlay", true);
-			isMusicOn = true;
+            //isMusicOn = true;
         });
     }
 
@@ -536,6 +546,13 @@ public class UIManager : MonoBehaviour
     {
 
     }
+
+    public void Btn_Replay()
+    {
+        this.panelSetting.SetActive(false);
+        this.Btn_Play();
+    }
+
     #endregion
 
     #region === UI MAIN ===
@@ -913,26 +930,45 @@ public class UIManager : MonoBehaviour
 
     #endregion
 
-	#region === MUSIC & SOUND CONTROL  ===
-	public void Music_ON_OFF(){
-		if (isMusicOn == true) {
-			AudioManager.Instance.Stop ("GamePlay", true);
-			isMusicOn = false;
+    #region === MUSIC & SOUND CONTROL  ===
+    private void InitMusicAndSound()
+    {
+        this.isMusicOn = PlayerPrefs.GetInt("MusicOff") == 0;
+        this.MusicOnBar.SetActive(this.isMusicOn);
+        this.MusicOffBar.SetActive(!this.isMusicOn);
 
-		} else {
-			AudioManager.Instance.Play ("GamePlay", true);
-			isMusicOn = true;
-		}
-	}
+        this.isSoundOn = PlayerPrefs.GetInt("SoundOff") == 0;
+        this.SoundOnBar.SetActive(this.isSoundOn);
+        this.SoundOffBar.SetActive(!this.isSoundOn);
+    }
 
-	public void Sound_ON_OFF(){
-		if (isSoundOn == true)
-			isSoundOn = false;
-		else
-			isSoundOn = true;
-		
-	}
-	#endregion
+    public void Music_ON_OFF()
+    {
+        if (isMusicOn == true)
+        {
+            AudioManager.Instance.Stop("GamePlay", true);
+            isMusicOn = false;
+
+        }
+        else
+        {
+            AudioManager.Instance.Play("GamePlay", true);
+            isMusicOn = true;
+        }
+
+        PlayerPrefs.SetInt("MusicOff", this.isMusicOn ? 0 : 1);
+    }
+
+    public void Sound_ON_OFF()
+    {
+        if (isSoundOn == true)
+            isSoundOn = false;
+        else
+            isSoundOn = true;
+
+        PlayerPrefs.SetInt("SoundOff", this.isSoundOn ? 0 : 1);
+    }
+    #endregion
 
 
 }

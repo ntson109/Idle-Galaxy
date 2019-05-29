@@ -268,10 +268,10 @@ public class MineShaft : MonoBehaviour
                     this.timeUpgradeLevel = 0;
                     UpgradeLevel_Complete();
                 }
-				else
-				{
-					this.timeUpgradeLevel -= Time.deltaTime;
-				}
+                else
+                {
+                    this.timeUpgradeLevel -= Time.deltaTime;
+                }
             }
 
             if (btnStore != null)
@@ -396,14 +396,14 @@ public class MineShaft : MonoBehaviour
             UIManager.Instance.SetActivePanel(panelUnlock_Condition);
             txtUnlock_Condition.text = "Need: unlock pre house !";
 
-			if (ID > 1) 
-			{
-				if (mapParent.lstMineShaft[ID - 1].state != StateMineShaft.LOCK && mapParent.lstMineShaft[ID - 1].state != StateMineShaft.UNLOCKING) 
-				{
-					UIManager.Instance.SetDeActivePanel(panelUnlock_Condition);
-					UIManager.Instance.SetActivePanel(panelUnlock);
-				}
-			}
+            if (ID > 1)
+            {
+                if (mapParent.lstMineShaft[ID - 1].state != StateMineShaft.LOCK && mapParent.lstMineShaft[ID - 1].state != StateMineShaft.UNLOCKING)
+                {
+                    UIManager.Instance.SetDeActivePanel(panelUnlock_Condition);
+                    UIManager.Instance.SetActivePanel(panelUnlock);
+                }
+            }
 
             if (ID == 1)
             {
@@ -552,13 +552,15 @@ public class MineShaft : MonoBehaviour
         this.txtName.text = this.properties.name;
 
         this.totalCapacity = this.properties.capacity * this.numberMine;
-		if (this.properties.level <= 5) {
-			this.properties.upgradeTime = GameConfig.Instance.lstPropertiesMap [ID].Upgrade_time [this.properties.level - 1];
-		}
+        if (this.properties.level <= 5)
+        {
+            this.properties.upgradeTime = GameConfig.Instance.lstPropertiesMap[ID].Upgrade_time[this.properties.level - 1];
+        }
         //GetPriceUpgradeCost();
         this.properties.unlockTime = GameConfig.Instance.lstPropertiesMap[ID].Unlock_time;
         this.properties.unlockCondition = GameConfig.Instance.lstPropertiesMap[ID].Unlock_condition;
 
+        this.lstUpgradeSpecial = new List<UpgradeObj_Special>();
         for (int i = 0; i < GameConfig.Instance.lstPropertiesMap[ID].Upgrade_Special.Count; i++)
         {
             this.lstUpgradeSpecial.Add(GameManager.Instance.lstUpgradeSpecial[i]);
@@ -643,7 +645,7 @@ public class MineShaft : MonoBehaviour
         }
         else
         {
-            if(this.preMineShaft.store.value > 0)
+            if (this.preMineShaft.store.value > 0)
             {
                 StartCoroutine(Work());
             }
@@ -941,11 +943,12 @@ public class MineShaft : MonoBehaviour
     public void Btn_ShowUpgrade()
     {
         UIManager.Instance.SetActivePanel(UIManager.Instance.panelShowUpgrade);
-		if (UIManager.Instance.isSoundOn == true) {
-			AudioManager.Instance.Play ("Click");
-		}
+        if (UIManager.Instance.isSoundOn == true)
+        {
+            AudioManager.Instance.Play("Click");
+        }
         GameManager.Instance.upgradeLevel.SetInfo(this, typeUpgradeLevel);
-		for (int i = 0; i<this.lstUpgradeSpecial.Count; i++)
+        for (int i = 0; i < this.lstUpgradeSpecial.Count; i++)
         {
             int _coin = (int)((timeUpgradeSpecial[i] * GameConfig.Instance.lstPropertiesMap[ID].Upgrade_Special[i].coinMax) / timeUpgradeSpecial_Max[i]);
             GameManager.Instance.lstUpgradeSpecial[i].SetInfo(
@@ -1002,26 +1005,26 @@ public class MineShaft : MonoBehaviour
     private void UpgradeLevel_Complete()
     {
         UIManager.Instance.SetDeActivePanel(UIManager.Instance.panelCoinAds);
-		if(this.properties.level<6)
-		{
-	        this.properties.level += 1;
-	        txtLevel.text = "Level " + this.properties.level;
-	        //GetPriceUpgradeCost();
-	        if (this.properties.level % 2 == 1)
-	        {
-	            this.properties.miningTime /= 2;
-	        }
-	        else
-	        {
-	            this.properties.capacity *= 2;
-	            if (this.preMineShaft != null)
-	                this.preMineShaft.store.deltaCap *= 2;
-	        }
-	        this.totalCapacity = this.properties.capacity * numberMine;
-	        typeUpgradeLevel = UpgradeObj_Level.Type.NONE;
+        if (this.properties.level < 6)
+        {
+            this.properties.level += 1;
+            txtLevel.text = "Level " + this.properties.level;
+            //GetPriceUpgradeCost();
+            if (this.properties.level % 2 == 1)
+            {
+                this.properties.miningTime /= 2;
+            }
+            else
+            {
+                this.properties.capacity *= 2;
+                if (this.preMineShaft != null)
+                    this.preMineShaft.store.deltaCap *= 2;
+            }
+            this.totalCapacity = this.properties.capacity * numberMine;
+            typeUpgradeLevel = UpgradeObj_Level.Type.NONE;
 
-	        GameManager.Instance.upgradeLevel.SetInfo(this, typeUpgradeLevel);
-		}
+            GameManager.Instance.upgradeLevel.SetInfo(this, typeUpgradeLevel);
+        }
 
     }
 
@@ -1072,10 +1075,11 @@ public class MineShaft : MonoBehaviour
     }
     public void Btn_BuyMoreMine()
     {
-		if (UIManager.Instance.isSoundOn == true) {
-			AudioManager.Instance.Play ("Click");
-		}
-        
+        if (UIManager.Instance.isSoundOn == true)
+        {
+            AudioManager.Instance.Play("Click");
+        }
+
         GameManager.Instance.AddGold(-this.btnBuyMoreMine.thisPrice);
         BuyMoreMineComplete();
     }
