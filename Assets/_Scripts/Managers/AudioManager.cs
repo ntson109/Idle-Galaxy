@@ -59,7 +59,7 @@ public class AudioManager : MonoBehaviour
             s.source.loop = s.loop;
         }
 
-        if (!PlayerPrefs.HasKey("Volume Sound"))
+        /*if (!PlayerPrefs.HasKey("Volume Sound"))
         {
             PlayerPrefs.SetInt("Volume Sound", 1);
         }
@@ -83,9 +83,7 @@ public class AudioManager : MonoBehaviour
                 //sliderMusic.value = 0;
                 MuteAll(true, true);
             }
-        }
-
-
+        }*/
     }
 
     public void Start()
@@ -176,21 +174,19 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void MuteAll(bool mute,bool isMusic = false)
+    public void MuteMusic(bool mute)
     {
-        if (!isMusic)
+        foreach (Sound s in musics)
         {
-            foreach (Sound s in sounds)
-            {
-                s.source.mute = mute;
-            }
+            s.source.mute = mute;
         }
-        else
+    }
+
+    public void MuteSound(bool mute)
+    {
+        foreach (Sound s in sounds)
         {
-            foreach (Sound s in musics)
-            {
-                s.source.mute = mute;
-            }
+            s.source.mute = mute;
         }
     }
 
@@ -212,7 +208,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void ControllSound(Slider _slider)
+    /*public void ControllSound(Slider _slider)
     {
         if(_slider.value == 0)
         {
@@ -236,5 +232,5 @@ public class AudioManager : MonoBehaviour
             MuteAll(false,true);
         }
         PlayerPrefs.SetInt("Volume Music", (int)_slider.value);
-    }
+    }*/
 }

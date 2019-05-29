@@ -936,10 +936,12 @@ public class UIManager : MonoBehaviour
         this.isMusicOn = PlayerPrefs.GetInt("MusicOff") == 0;
         this.MusicOnBar.SetActive(this.isMusicOn);
         this.MusicOffBar.SetActive(!this.isMusicOn);
+        AudioManager.Instance.MuteMusic(!this.isMusicOn);
 
         this.isSoundOn = PlayerPrefs.GetInt("SoundOff") == 0;
         this.SoundOnBar.SetActive(this.isSoundOn);
         this.SoundOffBar.SetActive(!this.isSoundOn);
+        AudioManager.Instance.MuteSound(!this.isSoundOn);
     }
 
     public void Music_ON_OFF()
@@ -957,6 +959,7 @@ public class UIManager : MonoBehaviour
         }
 
         PlayerPrefs.SetInt("MusicOff", this.isMusicOn ? 0 : 1);
+        AudioManager.Instance.MuteMusic(!this.isMusicOn);
     }
 
     public void Sound_ON_OFF()
@@ -967,6 +970,7 @@ public class UIManager : MonoBehaviour
             isSoundOn = true;
 
         PlayerPrefs.SetInt("SoundOff", this.isSoundOn ? 0 : 1);
+        AudioManager.Instance.MuteSound(!this.isSoundOn);
     }
     #endregion
 
