@@ -9837,7 +9837,7 @@ MonoBehaviour:
   ongTren: {fileID: 0}
   ongTrai: {fileID: 1216947351}
   workAnim: {fileID: 1059021076}
-  workFirstSprite: {fileID: 21300000, guid: b01b912bdf4af9946ae20da1a56546ce, type: 3}
+  workFirstSprite: {fileID: 21300000, guid: f54befc1945c9b14c9f22d675b7c55ac, type: 3}
   pushAnim: {fileID: 0}
   imgWorkBar: {fileID: 1044818394}
   sprLight0: {fileID: 21300000, guid: 12c339b55334f6d42aef404dd10a04bc, type: 3}
@@ -12921,7 +12921,7 @@ MonoBehaviour:
   ongTren: {fileID: 240053268}
   ongTrai: {fileID: 1991048646}
   workAnim: {fileID: 836413641}
-  workFirstSprite: {fileID: 21300000, guid: b01b912bdf4af9946ae20da1a56546ce, type: 3}
+  workFirstSprite: {fileID: 21300000, guid: d084fcf7057ca73499f9678361cb87b0, type: 3}
   pushAnim: {fileID: 1602197474}
   imgWorkBar: {fileID: 1518274372}
   sprLight0: {fileID: 21300000, guid: 12c339b55334f6d42aef404dd10a04bc, type: 3}
@@ -14903,7 +14903,7 @@ MonoBehaviour:
   ongTren: {fileID: 222788495}
   ongTrai: {fileID: 1599170814}
   workAnim: {fileID: 1374091999}
-  workFirstSprite: {fileID: 21300000, guid: b01b912bdf4af9946ae20da1a56546ce, type: 3}
+  workFirstSprite: {fileID: 21300000, guid: 387befc5e558ecd4398740ed36072c0c, type: 3}
   pushAnim: {fileID: 490778791}
   imgWorkBar: {fileID: 500786502}
   sprLight0: {fileID: 21300000, guid: 12c339b55334f6d42aef404dd10a04bc, type: 3}
@@ -17218,7 +17218,7 @@ MonoBehaviour:
   ongTren: {fileID: 814482804}
   ongTrai: {fileID: 1017140823}
   workAnim: {fileID: 1185013423}
-  workFirstSprite: {fileID: 21300000, guid: b01b912bdf4af9946ae20da1a56546ce, type: 3}
+  workFirstSprite: {fileID: 21300000, guid: 1f7420ebfd3d3ac46aa99f9969b8cf5c, type: 3}
   pushAnim: {fileID: 1325067061}
   imgWorkBar: {fileID: 1337189841}
   sprLight0: {fileID: 21300000, guid: 12c339b55334f6d42aef404dd10a04bc, type: 3}
@@ -29767,7 +29767,7 @@ MonoBehaviour:
   ongTren: {fileID: 1843533841}
   ongTrai: {fileID: 51432065}
   workAnim: {fileID: 572971773}
-  workFirstSprite: {fileID: 21300000, guid: b01b912bdf4af9946ae20da1a56546ce, type: 3}
+  workFirstSprite: {fileID: 21300000, guid: 047717e02dc420345b2afed1a3450ed4, type: 3}
   pushAnim: {fileID: 1990734803}
   imgWorkBar: {fileID: 1478036799}
   sprLight0: {fileID: 21300000, guid: 12c339b55334f6d42aef404dd10a04bc, type: 3}
@@ -59095,7 +59095,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1953369683
 MonoBehaviour:
   m_ObjectHideFlags: 0
