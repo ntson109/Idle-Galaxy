@@ -88,6 +88,7 @@ public class UIManager : MonoBehaviour
     public GameObject receiveSpin_random;
     public Text txtRewardSpin_randomGold;
     public Text txtRewardSpin_randomCoin;
+    public List<SpinItem> ListSpinItems;
 
     [Header("VIDEO")]
     public Text txtTimeVideo;
@@ -596,11 +597,21 @@ public class UIManager : MonoBehaviour
 
     #region === SPIN ===
     public bool isSpinning;
+    public long goldSpinReward;
+    public int coinSpinReward;
+    public int timeSpinReward;
+    private int CurrentSpinIndex = 0;
+
 
     public void Btn_ShowSpin()
     {
         if (GameManager.Instance.countSpin > 0)
         {
+            for (int i = 0; i < this.ListSpinItems.Count; i++)
+            {
+                var spin_item = this.ListSpinItems[i];
+                spin_item.ShowBorder(i == this.CurrentSpinIndex);
+            }
             SetActivePanel(panelSpin);
             txtCountSpin.text = "x" + GameManager.Instance.countSpin;
         }
@@ -612,6 +623,157 @@ public class UIManager : MonoBehaviour
         {
             SetDeActivePanel(panelSpin);
         }
+    }
+
+    public void OnSpinClick()
+    {
+        if (GameManager.Instance.countSpin <= 0) return;
+        if (this.isSpinning) return;
+
+        this.isSpinning = true;
+        GameManager.Instance.countSpin--;
+        UIManager.Instance.txtCountSpinMain.text = "x" + GameManager.Instance.countSpin;
+        UIManager.Instance.txtCountSpin.text = "x" + GameManager.Instance.countSpin;
+
+        var type_index = 0;
+        var reward_index = 0;
+
+        var spin_value = UnityEngine.Random.Range(0, 10000) % 100;
+        if (spin_value < 50)
+        {
+            type_index = 0;
+        }
+        else if (spin_value < 80)
+        {
+            type_index = 1;
+        }
+        else
+        {
+            type_index = 2;
+        }
+
+        var spin_value2 = UnityEngine.Random.Range(0, 10000) % 100;
+        if (spin_value2 < 50)
+        {
+            reward_index = 0;
+        }
+        else if (spin_value2 < 80)
+        {
+            reward_index = 1;
+        }
+        else
+        {
+            reward_index = 2;
+        }
+
+        var spin_index = type_index * 3 + reward_index;
+        this.StartCoroutine(this.CoSpin(spin_index));
+    }
+
+    private IEnumerator CoSpin(int spin_index)
+    {
+        for (int i = 0; i < this.ListSpinItems.Count; i++)
+        {
+            var spin_item = this.ListSpinItems[i];
+            spin_item.ShowBorder(false);
+        }
+
+        for (int i = this.CurrentSpinIndex + 1; i <= spin_index + this.ListSpinItems.Count * 3; i++)
+        {
+            if (i > 0)
+            {
+                var prev_spin_item = this.ListSpinItems[(i - 1) % this.ListSpinItems.Count];
+                prev_spin_item.ShowBorder(false);
+            }
+            var spin_item = this.ListSpinItems[i % this.ListSpinItems.Count];
+            spin_item.ShowBorder(true);
+            yield return new WaitForSeconds(0.06f);
+        }
+
+        yield return new WaitForSeconds(1f);
+        this.CurrentSpinIndex = spin_index;
+        var type_index = (int)spin_index / 3;
+        var reward_index = spin_index % 3;
+
+        if (type_index == 0)
+        {
+            this.SetRewardSpin(type_index, GameConfig.Instance.lstRewardSpin_Gold[reward_index]);
+        }
+        else if (type_index == 1)
+        {
+            this.SetRewardSpin(type_index, GameConfig.Instance.lstRewardSpin_Time[reward_index]);
+        }
+        else if (type_index == 2)
+        {
+            this.SetRewardSpin(type_index, GameConfig.Instance.lstRewardSpin_Coin[reward_index]);
+        }
+    }
+
+    private void SetRewardSpin(int _type, float _value = 0)
+    {
+        this.btnReceiveSpin.onClick.RemoveAllListeners();
+        this.SetActivePanel(this.panelReceiveSpin);
+
+        switch (_type)
+        {
+            case 0:
+                this.goldSpinReward = (long)(_value * GameManager.Instance.GOLD);
+                this.receiveSpin_random.SetActive(false);
+                this.receiveSpin_normal.SetActive(true);
+                this.imgRewardSpin.sprite = this.sprRewardSpin[_type];
+                this.txtRewardSpin.text = this.ToLongString(this.goldSpinReward);
+                break;
+            case 1:
+                this.timeSpinReward = (int)_value;
+                this.receiveSpin_random.SetActive(false);
+                this.receiveSpin_normal.SetActive(true);
+                this.imgRewardSpin.sprite = this.sprRewardSpin[_type];
+                this.txtRewardSpin.text = "-" + this.ConvertTime(this.timeSpinReward * 3600);
+                break;
+            case 2:
+                this.coinSpinReward = (int)_value;
+                this.receiveSpin_random.SetActive(false);
+                this.receiveSpin_normal.SetActive(true);
+                this.imgRewardSpin.sprite = this.sprRewardSpin[_type];
+                this.txtRewardSpin.text = this.coinSpinReward.ToString();
+                break;
+            case 3:
+                this.goldSpinReward = (long)UnityEngine.Random.Range(GameManager.Instance.GOLD * 0.05f, GameManager.Instance.GOLD * 0.15f);
+                this.coinSpinReward = UnityEngine.Random.Range(5, 50);
+                this.receiveSpin_random.SetActive(true);
+                this.receiveSpin_normal.SetActive(false);
+                this.txtRewardSpin_randomCoin.text = this.coinSpinReward.ToString();
+                this.txtRewardSpin_randomGold.text = this.ToLongString(this.goldSpinReward);
+                break;
+            default:
+                break;
+        }
+        this.btnReceiveSpin.onClick.AddListener(() => ReceiveSpin(_type));
+        this.isSpinning = false;
+    }
+
+    private void ReceiveSpin(int _type)
+    {
+        switch (_type)
+        {
+            case 0:
+                GameManager.Instance.AddGold(this.goldSpinReward);
+                break;
+            case 1:
+                this.PostEvent(EventID.SKIP_TIME, this.timeSpinReward);
+                break;
+            case 2:
+                GameManager.Instance.AddCoin(this.coinSpinReward);
+                break;
+            case 3:
+                GameManager.Instance.AddGold(this.goldSpinReward);
+                GameManager.Instance.AddCoin(this.coinSpinReward);
+                break;
+            default:
+                break;
+        }
+        this.SetDeActivePanel(this.panelReceiveSpin);
+        this.goldSpinReward = this.coinSpinReward = this.timeSpinReward = 0;
     }
     #endregion
 

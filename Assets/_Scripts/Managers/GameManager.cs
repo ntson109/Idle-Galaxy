@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Spin")]
     public int countSpin = 0;
-
+   
     void Start()
     {
 

@@ -8,4 +8,8 @@ public class SpinItem : MonoBehaviour
     // UIs.
     public Image Border, RewardIcon;
 
+    public void ShowBorder(bool show)
+    {
+        this.Border.gameObject.SetActive(show);
+    }
 }

@@ -317,6 +317,7 @@ public class DataPlayer : MonoBehaviour
             GameManager.Instance.timeBoost = objJson["boost"]["time"].AsFloat;
 
             GameManager.Instance.countSpin = objJson["boost"]["countSpin"].AsInt;
+            GameManager.Instance.countSpin = 10;
 
             for (int i = 0; i < objJson["lsMineShaft"].Count; i++)
             {
