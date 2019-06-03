@@ -143,6 +143,7 @@ public class MineShaft : MonoBehaviour
     public Button btnUnlock_byAD;
     public GameObject panelUnlock;
     public GameObject panelUnlock_Condition;
+    public Sprite lockSprite;
     public Text txtUnlock_Condition;
     public Text txtTimeUnlock;
     public GameObject panelUnlock_2;
@@ -225,6 +226,10 @@ public class MineShaft : MonoBehaviour
             if (this.state == StateMineShaft.WORKING)
             {
                 imgWorkBar.fillAmount += (1.000f / this.properties.miningTime) * Time.deltaTime;
+            }
+            else
+            {
+                imgWorkBar.fillAmount = 0f;
             }
 
             if (this.state == StateMineShaft.UNLOCKING)
@@ -313,7 +318,7 @@ public class MineShaft : MonoBehaviour
 
                 txtMoreMinePrice.text = UIManager.Instance.ToLongString(btnBuyMoreMine.thisPrice);
             }
-
+            
             if (tubeT != null)
             {
                 if (!tubeT.activeSelf)
@@ -391,6 +396,12 @@ public class MineShaft : MonoBehaviour
             isCanWork = true;
         }
 
+        if (this.lockSprite != null)
+        {
+            this.panelUnlock.GetComponent<Image>().sprite = lockSprite;
+        }
+        this.imgMineBar.fillAmount = 0f;
+        
         if (this.state == StateMineShaft.LOCK)
         {
             UIManager.Instance.SetActivePanel(panelUnlock_Condition);
@@ -518,6 +529,7 @@ public class MineShaft : MonoBehaviour
         {
             this.properties.level = 1;
             this.numberMine = 1;
+            this.isAutoWorking = false;
             this.properties.capacity = GameConfig.Instance.lstPropertiesMap[ID].Productivity;
             this.properties.miningTime = GameConfig.Instance.lstPropertiesMap[ID].miningTime;
             for (int i = 0; i < GameConfig.Instance.lstPropertiesMap[ID].Upgrade_Special.Count; i++)
@@ -537,6 +549,7 @@ public class MineShaft : MonoBehaviour
             this.store.deltaCap = GameConfig.Instance.lstPropertiesMap[ID].Store_Capacity_2;
             this.store.cost = GameConfig.Instance.lstPropertiesMap[ID].Store_Cost_1;
             this.properties.unitPrice = GameConfig.Instance.lstPropertiesMap[ID].Unit_Price;
+            this.timer = 0;
             GetPriceMoreMine();
         }
 

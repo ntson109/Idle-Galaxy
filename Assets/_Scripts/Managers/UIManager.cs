@@ -483,6 +483,8 @@ public class UIManager : MonoBehaviour
         {
             this.PostEvent(EventID.START_GAME);
             GameManager.Instance.stateGame = StateGame.PLAYING;
+            GameManager.Instance.GOLD = 0;
+            GameManager.Instance.COIN = 0;
             GameManager.Instance.AddGold(GameConfig.Instance.GoldStart);
             GameManager.Instance.AddCoin(GameConfig.Instance.CoinStart);
             AudioManager.Instance.Play("GamePlay", true);
@@ -807,6 +809,8 @@ public class UIManager : MonoBehaviour
         {
             posHand = pos;
         }
+
+        handTutorial.SetActive(true);
         handTutorial.transform.position = posHand;
         handTutorial.transform.localEulerAngles = angleHand;
         txtTutorial.text = strTutorial;
@@ -922,6 +926,7 @@ public class UIManager : MonoBehaviour
     public void Btn_Step_11_Tutorial()
     {
         panelTutorial.SetActive(false);
+        btnSkipTutorial.SetActive(false);
         PlayerPrefs.SetInt(KeyPrefs.TUTORIAL_DONE, 1);
         GameManager.Instance.lstMap[0].lstMineShaft[0].imgAI.GetComponent<Animator>().enabled = true;
         panelUpgradeTransporter.transform.parent = upgradeTransParent.transform;

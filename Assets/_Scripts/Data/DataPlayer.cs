@@ -161,12 +161,12 @@ public class DataPlayer : MonoBehaviour
         string _path = Path.Combine(Application.persistentDataPath, "DataPlayer.json");
         File.WriteAllText(_path, JsonUtility.ToJson(data, true));
         File.ReadAllText(_path);
-        PlayerPrefs.SetInt(KeyPrefs.TUTORIAL_DONE, 1);
+        //PlayerPrefs.SetInt(KeyPrefs.TUTORIAL_DONE, 1);
 
         Debug.Log(SimpleJSON_DatDz.JSON.Parse(File.ReadAllText(_path)));
     }
 
-    public void LoadDataPlayer()
+    public void LoadDataPlayer(bool clear_data = false)
     {
         string _path = Path.Combine(Application.persistentDataPath, "DataPlayer.json");
         string dataAsJson = File.ReadAllText(_path);
@@ -174,117 +174,216 @@ public class DataPlayer : MonoBehaviour
         Debug.Log(objJson);
         if (objJson != null)
         {
-            StartCoroutine(IE_LoadDataPlayer(objJson));
+            StartCoroutine(IE_LoadDataPlayer(objJson, clear_data));
         }
     }
 
-    IEnumerator IE_LoadDataPlayer(SimpleJSON_DatDz.JSONNode objJson)
+    IEnumerator IE_LoadDataPlayer(SimpleJSON_DatDz.JSONNode objJson, bool clear_data)
     {
-
-        GameManager.Instance.AddGold(objJson["gold"].AsLong);
-        GameManager.Instance.AddCoin(objJson["coin"].AsLong);
-
-        for (int i = 0; i < objJson["lstMap"].Count; i++)
+        if (clear_data)
         {
-            if (objJson["lstMap"][i]["typeMap"] == 1)
+            GameManager.Instance.GOLD = 0;
+            GameManager.Instance.AddGold(GameConfig.Instance.GoldStart);
+            GameManager.Instance.COIN = 0;
+            GameManager.Instance.AddCoin(GameConfig.Instance.CoinStart);
+
+            for (int i = 0; i < objJson["lstMap"].Count; i++)
             {
-                GameManager.Instance.lstMap[i].type = TypeMap.MOON;
-            }
-            else if (objJson["lstMap"][i]["typeMap"] == 2)
-            {
-                GameManager.Instance.lstMap[i].type = TypeMap.MOON;
-            }
-            //GameManager.Instance.lstMap[i].totalAmount = objJson["lstMap"][i]["totalAmount"].AsLong;
-            GameManager.Instance.lstMap[i].totalMoney = objJson["lstMap"][i]["totalMoney"].AsLong;
-            //GameManager.Instance.lstMap[i].transporter.level = objJson["lstMap"][i]["transporter"]["level"].AsInt;
-            //GameManager.Instance.lstMap[i].transporter.capacity = objJson["lstMap"][i]["transporter"]["capacity"].AsLong;
-            GameManager.Instance.lstMap[i].transporter.SetInfo(objJson["lstMap"][i]["transporter"]["level"].AsInt, objJson["lstMap"][i]["transporter"]["capacity"].AsLong, objJson["lstMap"][i]["transporter"]["price"].AsLong);
-        }
-
-        if (objJson["boost"]["type"] == 1)
-        {
-            GameManager.Instance.boost.type = TypeBoost.NONE;
-        }
-        else if (objJson["boost"]["type"] == 2)
-        {
-            GameManager.Instance.boost.type = TypeBoost.GOLD;
-        }
-        else if (objJson["boost"]["type"] == 3)
-        {
-            GameManager.Instance.boost.type = TypeBoost.SPEED;
-        }
-        GameManager.Instance.timeBoost = objJson["boost"]["time"].AsFloat;
-
-        GameManager.Instance.countSpin = objJson["boost"]["countSpin"].AsInt;
-
-        for (int i = 0; i < objJson["lsMineShaft"].Count; i++)
-        {
-            if (i < GameManager.Instance.lstMap[0].lstMineShaft.Count)
-            {
-                Debug.Log(i);
-                GameManager.Instance.lstMap[0].lstMineShaft[i].ID = objJson["lsMineShaft"][i]["ID"].AsInt;
-                GameManager.Instance.lstMap[0].lstMineShaft[i].properties.level = objJson["lsMineShaft"][i]["level"].AsInt;
-                GameManager.Instance.lstMap[0].lstMineShaft[i].timer = objJson["lsMineShaft"][i]["timeCurrent"].AsFloat;
-                GameManager.Instance.lstMap[0].lstMineShaft[i].numberMine = objJson["lsMineShaft"][i]["numberMine"].AsInt;
-                GameManager.Instance.lstMap[0].lstMineShaft[i].properties.buyMoreMinePrice = objJson["lsMineShaft"][i]["buyMoreMinePrice"].AsLong;
-                GameManager.Instance.lstMap[0].lstMineShaft[i].properties.capacity = objJson["lsMineShaft"][i]["capacity"].AsInt;
-                GameManager.Instance.lstMap[0].lstMineShaft[i].properties.unitPrice = objJson["lsMineShaft"][i]["unitPrice"].AsInt;
-                GameManager.Instance.lstMap[0].lstMineShaft[i].properties.miningTime = objJson["lsMineShaft"][i]["miningTime"].AsFloat;
-                GameManager.Instance.lstMap[0].lstMineShaft[i].input = objJson["lsMineShaft"][i]["input"].AsInt;
-                GameManager.Instance.lstMap[0].lstMineShaft[i].imgWorkBar.fillAmount = objJson["lsMineShaft"][i]["workBar"].AsFloat;
-                if (objJson["lsMineShaft"][i]["state"].AsInt == 1)
-                    GameManager.Instance.lstMap[0].lstMineShaft[i].state = MineShaft.StateMineShaft.LOCK;
-                else if (objJson["lsMineShaft"][i]["state"].AsInt == 2)
-                    GameManager.Instance.lstMap[0].lstMineShaft[i].state = MineShaft.StateMineShaft.UNLOCKING;
-                else if (objJson["lsMineShaft"][i]["state"].AsInt == 3)
-                    GameManager.Instance.lstMap[0].lstMineShaft[i].state = MineShaft.StateMineShaft.IDLE;
-                else if (objJson["lsMineShaft"][i]["state"].AsInt == 4)
-                    GameManager.Instance.lstMap[0].lstMineShaft[i].state = MineShaft.StateMineShaft.WORKING;
-
-                for (int j = 0; j < objJson["lsMineShaft"][i]["timeUpgradeSpecial"].Count; j++)
+                if (objJson["lstMap"][i]["typeMap"] == 1)
                 {
-                    GameManager.Instance.lstMap[0].lstMineShaft[i].timeUpgradeSpecial.Add(objJson["lsMineShaft"][i]["timeUpgradeSpecial"][j].AsFloat);
+                    GameManager.Instance.lstMap[i].type = TypeMap.MOON;
                 }
-
-                for (int j = 0; j < objJson["lsMineShaft"][i]["stateUpgradeSpecial"].Count; j++)
+                else if (objJson["lstMap"][i]["typeMap"] == 2)
                 {
-                    if (objJson["lsMineShaft"][i]["stateUpgradeSpecial"][j].AsInt == 1)
-                    {
-                        GameManager.Instance.lstMap[0].lstMineShaft[i].typeUpgradeSpecial.Add(UpgradeObj_Special.Type.NONE);
-                    }
-                    else if (objJson["lsMineShaft"][i]["stateUpgradeSpecial"][j].AsInt == 2)
-                    {
-                        GameManager.Instance.lstMap[0].lstMineShaft[i].typeUpgradeSpecial.Add(UpgradeObj_Special.Type.UPGRADING);
-                    }
-                    else if (objJson["lsMineShaft"][i]["stateUpgradeSpecial"][j].AsInt == 3)
-                    {
-                        GameManager.Instance.lstMap[0].lstMineShaft[i].typeUpgradeSpecial.Add(UpgradeObj_Special.Type.UPGRADED);
-                    }
+                    GameManager.Instance.lstMap[i].type = TypeMap.MOON;
                 }
-                GameManager.Instance.lstMap[0].lstMineShaft[i].isAutoWorking = objJson["lsMineShaft"][i]["isAutoWorking"].AsBool;
-                GameManager.Instance.lstMap[0].lstMineShaft[i].timeUnlocking = objJson["lsMineShaft"][i]["timeUnlocking"].AsFloat;
-                GameManager.Instance.lstMap[0].lstMineShaft[i].timeUpgradeLevel = objJson["lsMineShaft"][i]["timeUpgradeLevel"].AsFloat;
-                GameManager.Instance.lstMap[0].lstMineShaft[i].store.level = objJson["lsMineShaft"][i]["store"]["level"].AsInt;
-                GameManager.Instance.lstMap[0].lstMineShaft[i].store.value = objJson["lsMineShaft"][i]["store"]["value"].AsInt;
-                GameManager.Instance.lstMap[0].lstMineShaft[i].store.capacity = objJson["lsMineShaft"][i]["store"]["capacity"].AsInt;
-                GameManager.Instance.lstMap[0].lstMineShaft[i].store.deltaCap = objJson["lsMineShaft"][i]["store"]["deltaCap"].AsInt;
-                GameManager.Instance.lstMap[0].lstMineShaft[i].store.cost = objJson["lsMineShaft"][i]["store"]["cost"].AsLong;
+                GameManager.Instance.lstMap[i].totalMoney = 0;
+                GameManager.Instance.lstMap[i].transporter.SetInfo(0, 0, 0);
+            }
+
+            if (objJson["boost"]["type"] == 1)
+            {
+                GameManager.Instance.boost.type = TypeBoost.NONE;
+            }
+            else if (objJson["boost"]["type"] == 2)
+            {
+                GameManager.Instance.boost.type = TypeBoost.GOLD;
+            }
+            else if (objJson["boost"]["type"] == 3)
+            {
+                GameManager.Instance.boost.type = TypeBoost.SPEED;
+            }
+            GameManager.Instance.timeBoost = 0;
+            GameManager.Instance.countSpin = 0;
+
+            for (int i = 0; i < objJson["lsMineShaft"].Count; i++)
+            {
+                if (i < GameManager.Instance.lstMap[0].lstMineShaft.Count)
+                {
+                    GameManager.Instance.lstMap[0].lstMineShaft[i].ID = objJson["lsMineShaft"][i]["ID"].AsInt;
+                    GameManager.Instance.lstMap[0].lstMineShaft[i].properties.level = objJson["lsMineShaft"][i]["level"].AsInt;
+                    GameManager.Instance.lstMap[0].lstMineShaft[i].timer = objJson["lsMineShaft"][i]["timeCurrent"].AsFloat;
+                    GameManager.Instance.lstMap[0].lstMineShaft[i].numberMine = objJson["lsMineShaft"][i]["numberMine"].AsInt;
+                    GameManager.Instance.lstMap[0].lstMineShaft[i].properties.buyMoreMinePrice = objJson["lsMineShaft"][i]["buyMoreMinePrice"].AsLong;
+                    GameManager.Instance.lstMap[0].lstMineShaft[i].properties.capacity = objJson["lsMineShaft"][i]["capacity"].AsInt;
+                    GameManager.Instance.lstMap[0].lstMineShaft[i].properties.unitPrice = objJson["lsMineShaft"][i]["unitPrice"].AsInt;
+                    GameManager.Instance.lstMap[0].lstMineShaft[i].properties.miningTime = objJson["lsMineShaft"][i]["miningTime"].AsFloat;
+                    GameManager.Instance.lstMap[0].lstMineShaft[i].input = objJson["lsMineShaft"][i]["input"].AsInt;
+                    GameManager.Instance.lstMap[0].lstMineShaft[i].imgWorkBar.fillAmount = objJson["lsMineShaft"][i]["workBar"].AsFloat;
+                    if (objJson["lsMineShaft"][i]["state"].AsInt == 1)
+                        GameManager.Instance.lstMap[0].lstMineShaft[i].state = MineShaft.StateMineShaft.LOCK;
+                    else if (objJson["lsMineShaft"][i]["state"].AsInt == 2)
+                        GameManager.Instance.lstMap[0].lstMineShaft[i].state = MineShaft.StateMineShaft.UNLOCKING;
+                    else if (objJson["lsMineShaft"][i]["state"].AsInt == 3)
+                        GameManager.Instance.lstMap[0].lstMineShaft[i].state = MineShaft.StateMineShaft.IDLE;
+                    else if (objJson["lsMineShaft"][i]["state"].AsInt == 4)
+                        GameManager.Instance.lstMap[0].lstMineShaft[i].state = MineShaft.StateMineShaft.WORKING;
+
+                    for (int j = 0; j < objJson["lsMineShaft"][i]["timeUpgradeSpecial"].Count; j++)
+                    {
+                        GameManager.Instance.lstMap[0].lstMineShaft[i].timeUpgradeSpecial.Add(objJson["lsMineShaft"][i]["timeUpgradeSpecial"][j].AsFloat);
+                    }
+
+                    for (int j = 0; j < objJson["lsMineShaft"][i]["stateUpgradeSpecial"].Count; j++)
+                    {
+                        if (objJson["lsMineShaft"][i]["stateUpgradeSpecial"][j].AsInt == 1)
+                        {
+                            GameManager.Instance.lstMap[0].lstMineShaft[i].typeUpgradeSpecial.Add(UpgradeObj_Special.Type.NONE);
+                        }
+                        else if (objJson["lsMineShaft"][i]["stateUpgradeSpecial"][j].AsInt == 2)
+                        {
+                            GameManager.Instance.lstMap[0].lstMineShaft[i].typeUpgradeSpecial.Add(UpgradeObj_Special.Type.UPGRADING);
+                        }
+                        else if (objJson["lsMineShaft"][i]["stateUpgradeSpecial"][j].AsInt == 3)
+                        {
+                            GameManager.Instance.lstMap[0].lstMineShaft[i].typeUpgradeSpecial.Add(UpgradeObj_Special.Type.UPGRADED);
+                        }
+                    }
+                    GameManager.Instance.lstMap[0].lstMineShaft[i].isAutoWorking = objJson["lsMineShaft"][i]["isAutoWorking"].AsBool;
+                    GameManager.Instance.lstMap[0].lstMineShaft[i].timeUnlocking = objJson["lsMineShaft"][i]["timeUnlocking"].AsFloat;
+                    GameManager.Instance.lstMap[0].lstMineShaft[i].timeUpgradeLevel = objJson["lsMineShaft"][i]["timeUpgradeLevel"].AsFloat;
+                    GameManager.Instance.lstMap[0].lstMineShaft[i].store.level = objJson["lsMineShaft"][i]["store"]["level"].AsInt;
+                    GameManager.Instance.lstMap[0].lstMineShaft[i].store.value = objJson["lsMineShaft"][i]["store"]["value"].AsInt;
+                    GameManager.Instance.lstMap[0].lstMineShaft[i].store.capacity = objJson["lsMineShaft"][i]["store"]["capacity"].AsInt;
+                    GameManager.Instance.lstMap[0].lstMineShaft[i].store.deltaCap = objJson["lsMineShaft"][i]["store"]["deltaCap"].AsInt;
+                    GameManager.Instance.lstMap[0].lstMineShaft[i].store.cost = objJson["lsMineShaft"][i]["store"]["cost"].AsLong;
+                }
+            }
+
+            yield return new WaitForEndOfFrame();
+            ScenesManager.Instance.isNextScene = true;
+            this.PostEvent(EventID.START_GAME);
+            UIManager.Instance.timeOffline = UIManager.Instance.GetOfflineTime(PlayerPrefs.GetString(KeyPrefs.TIME_QUIT_GAME));
+
+            if (UIManager.Instance.timeOffline >= 2)
+            {
+                UIManager.Instance.goldOffline = long.Parse(PlayerPrefs.GetString(KeyPrefs.GOLD_OFFLINE)) * UIManager.Instance.timeOffline * 60;
+                if (UIManager.Instance.goldOffline < 100)
+                    UIManager.Instance.goldOffline = 100;
+                UIManager.Instance.ShowPanelOffline();
             }
         }
-
-        yield return new WaitForEndOfFrame();
-        ScenesManager.Instance.isNextScene = true;
-        this.PostEvent(EventID.START_GAME);
-        UIManager.Instance.timeOffline = UIManager.Instance.GetOfflineTime(PlayerPrefs.GetString(KeyPrefs.TIME_QUIT_GAME));
-        //if (UIManager.Instance.timeOffline <= 0)
-        //    UIManager.Instance.timeOffline = 1;
-        //UIManager.Instance.goldOffline = objJson["freeGold1s"].AsLong * UIManager.Instance.timeOffline * 60;
-        if (UIManager.Instance.timeOffline >= 2)
+        else
         {
-            UIManager.Instance.goldOffline = long.Parse(PlayerPrefs.GetString(KeyPrefs.GOLD_OFFLINE)) * UIManager.Instance.timeOffline * 60;
-            if (UIManager.Instance.goldOffline < 100)
-                UIManager.Instance.goldOffline = 100;
-            UIManager.Instance.ShowPanelOffline();
+            GameManager.Instance.AddGold(objJson["gold"].AsLong);
+            GameManager.Instance.AddCoin(objJson["coin"].AsLong);
+
+            for (int i = 0; i < objJson["lstMap"].Count; i++)
+            {
+                if (objJson["lstMap"][i]["typeMap"] == 1)
+                {
+                    GameManager.Instance.lstMap[i].type = TypeMap.MOON;
+                }
+                else if (objJson["lstMap"][i]["typeMap"] == 2)
+                {
+                    GameManager.Instance.lstMap[i].type = TypeMap.MOON;
+                }
+                GameManager.Instance.lstMap[i].totalMoney = objJson["lstMap"][i]["totalMoney"].AsLong;
+                GameManager.Instance.lstMap[i].transporter.SetInfo(objJson["lstMap"][i]["transporter"]["level"].AsInt, objJson["lstMap"][i]["transporter"]["capacity"].AsLong, objJson["lstMap"][i]["transporter"]["price"].AsLong);
+            }
+
+            if (objJson["boost"]["type"] == 1)
+            {
+                GameManager.Instance.boost.type = TypeBoost.NONE;
+            }
+            else if (objJson["boost"]["type"] == 2)
+            {
+                GameManager.Instance.boost.type = TypeBoost.GOLD;
+            }
+            else if (objJson["boost"]["type"] == 3)
+            {
+                GameManager.Instance.boost.type = TypeBoost.SPEED;
+            }
+            GameManager.Instance.timeBoost = objJson["boost"]["time"].AsFloat;
+
+            GameManager.Instance.countSpin = objJson["boost"]["countSpin"].AsInt;
+
+            for (int i = 0; i < objJson["lsMineShaft"].Count; i++)
+            {
+                if (i < GameManager.Instance.lstMap[0].lstMineShaft.Count)
+                {
+                    GameManager.Instance.lstMap[0].lstMineShaft[i].ID = objJson["lsMineShaft"][i]["ID"].AsInt;
+                    GameManager.Instance.lstMap[0].lstMineShaft[i].properties.level = objJson["lsMineShaft"][i]["level"].AsInt;
+                    GameManager.Instance.lstMap[0].lstMineShaft[i].timer = objJson["lsMineShaft"][i]["timeCurrent"].AsFloat;
+                    GameManager.Instance.lstMap[0].lstMineShaft[i].numberMine = objJson["lsMineShaft"][i]["numberMine"].AsInt;
+                    GameManager.Instance.lstMap[0].lstMineShaft[i].properties.buyMoreMinePrice = objJson["lsMineShaft"][i]["buyMoreMinePrice"].AsLong;
+                    GameManager.Instance.lstMap[0].lstMineShaft[i].properties.capacity = objJson["lsMineShaft"][i]["capacity"].AsInt;
+                    GameManager.Instance.lstMap[0].lstMineShaft[i].properties.unitPrice = objJson["lsMineShaft"][i]["unitPrice"].AsInt;
+                    GameManager.Instance.lstMap[0].lstMineShaft[i].properties.miningTime = objJson["lsMineShaft"][i]["miningTime"].AsFloat;
+                    GameManager.Instance.lstMap[0].lstMineShaft[i].input = objJson["lsMineShaft"][i]["input"].AsInt;
+                    GameManager.Instance.lstMap[0].lstMineShaft[i].imgWorkBar.fillAmount = objJson["lsMineShaft"][i]["workBar"].AsFloat;
+                    if (objJson["lsMineShaft"][i]["state"].AsInt == 1)
+                        GameManager.Instance.lstMap[0].lstMineShaft[i].state = MineShaft.StateMineShaft.LOCK;
+                    else if (objJson["lsMineShaft"][i]["state"].AsInt == 2)
+                        GameManager.Instance.lstMap[0].lstMineShaft[i].state = MineShaft.StateMineShaft.UNLOCKING;
+                    else if (objJson["lsMineShaft"][i]["state"].AsInt == 3)
+                        GameManager.Instance.lstMap[0].lstMineShaft[i].state = MineShaft.StateMineShaft.IDLE;
+                    else if (objJson["lsMineShaft"][i]["state"].AsInt == 4)
+                        GameManager.Instance.lstMap[0].lstMineShaft[i].state = MineShaft.StateMineShaft.WORKING;
+
+                    for (int j = 0; j < objJson["lsMineShaft"][i]["timeUpgradeSpecial"].Count; j++)
+                    {
+                        GameManager.Instance.lstMap[0].lstMineShaft[i].timeUpgradeSpecial.Add(objJson["lsMineShaft"][i]["timeUpgradeSpecial"][j].AsFloat);
+                    }
+
+                    for (int j = 0; j < objJson["lsMineShaft"][i]["stateUpgradeSpecial"].Count; j++)
+                    {
+                        if (objJson["lsMineShaft"][i]["stateUpgradeSpecial"][j].AsInt == 1)
+                        {
+                            GameManager.Instance.lstMap[0].lstMineShaft[i].typeUpgradeSpecial.Add(UpgradeObj_Special.Type.NONE);
+                        }
+                        else if (objJson["lsMineShaft"][i]["stateUpgradeSpecial"][j].AsInt == 2)
+                        {
+                            GameManager.Instance.lstMap[0].lstMineShaft[i].typeUpgradeSpecial.Add(UpgradeObj_Special.Type.UPGRADING);
+                        }
+                        else if (objJson["lsMineShaft"][i]["stateUpgradeSpecial"][j].AsInt == 3)
+                        {
+                            GameManager.Instance.lstMap[0].lstMineShaft[i].typeUpgradeSpecial.Add(UpgradeObj_Special.Type.UPGRADED);
+                        }
+                    }
+                    GameManager.Instance.lstMap[0].lstMineShaft[i].isAutoWorking = objJson["lsMineShaft"][i]["isAutoWorking"].AsBool;
+                    GameManager.Instance.lstMap[0].lstMineShaft[i].timeUnlocking = objJson["lsMineShaft"][i]["timeUnlocking"].AsFloat;
+                    GameManager.Instance.lstMap[0].lstMineShaft[i].timeUpgradeLevel = objJson["lsMineShaft"][i]["timeUpgradeLevel"].AsFloat;
+                    GameManager.Instance.lstMap[0].lstMineShaft[i].store.level = objJson["lsMineShaft"][i]["store"]["level"].AsInt;
+                    GameManager.Instance.lstMap[0].lstMineShaft[i].store.value = objJson["lsMineShaft"][i]["store"]["value"].AsInt;
+                    GameManager.Instance.lstMap[0].lstMineShaft[i].store.capacity = objJson["lsMineShaft"][i]["store"]["capacity"].AsInt;
+                    GameManager.Instance.lstMap[0].lstMineShaft[i].store.deltaCap = objJson["lsMineShaft"][i]["store"]["deltaCap"].AsInt;
+                    GameManager.Instance.lstMap[0].lstMineShaft[i].store.cost = objJson["lsMineShaft"][i]["store"]["cost"].AsLong;
+                }
+            }
+
+            yield return new WaitForEndOfFrame();
+            ScenesManager.Instance.isNextScene = true;
+            this.PostEvent(EventID.START_GAME);
+            UIManager.Instance.timeOffline = UIManager.Instance.GetOfflineTime(PlayerPrefs.GetString(KeyPrefs.TIME_QUIT_GAME));
+
+            if (UIManager.Instance.timeOffline >= 2)
+            {
+                UIManager.Instance.goldOffline = long.Parse(PlayerPrefs.GetString(KeyPrefs.GOLD_OFFLINE)) * UIManager.Instance.timeOffline * 60;
+                if (UIManager.Instance.goldOffline < 100)
+                    UIManager.Instance.goldOffline = 100;
+                UIManager.Instance.ShowPanelOffline();
+            }
         }
     }
 

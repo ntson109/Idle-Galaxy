@@ -83,21 +83,6 @@ public class Map : MonoBehaviour
 
     void CheckFullWareHouse()
     {
-        //if (totalAmount >= transporter.capacity)
-        //{           
-        //    moneyPerTurn = (totalMoney * transporter.capacity) / totalAmount;
-        //    totalMoney -= moneyPerTurn;
-        //    totalAmount -= transporter.capacity;
-        //    transporter.Transport();
-        //}
-
-        //if (totalMoney >= transporter.capacity)
-        //{
-        //    moneyPerTurn = transporter.capacity;
-        //    totalMoney -= moneyPerTurn;
-        //    transporter.Transport();
-        //}
-
         if (totalMoney > 0)
         {
             if (transporter.capacity > totalMoney)
