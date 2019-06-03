@@ -163,6 +163,7 @@ public class MineShaft : MonoBehaviour
 
     [Header("ANIM")]
     public Animator workAnim;
+    public Sprite workFirstSprite;
     public Animator pushAnim;
     public Image imgWorkBar;
     public Sprite sprLight0;
@@ -181,10 +182,7 @@ public class MineShaft : MonoBehaviour
     #region === START VS UPDATE ===
     void Start()
     {
-        //typeMap = TypeMap.MOON;
-
         this.RegisterListener(EventID.START_GAME, (param) => ON_START_GAME());
-
     }
 
     void LateUpdate()
@@ -335,10 +333,6 @@ public class MineShaft : MonoBehaviour
                         pushAnim.enabled = false;
                         pushAnim.gameObject.GetComponent<Image>().sprite = sprLight0;
                     }
-                    //else
-                    //{
-                    //    btnStore.gameObject.SetActive(false);
-                    //}
                 }
             }
             if (!isCanUp)
@@ -371,6 +365,14 @@ public class MineShaft : MonoBehaviour
     void ON_START_GAME()
     {
         this.StopAllCoroutines();
+        this.ongTrai.SetActive(false);
+        if (this.ongTren) this.ongTren.SetActive(false);
+        if (this.tubeT) this.tubeT.SetActive(false);
+        this.btnUpgrade.gameObject.SetActive(false);
+        this.btnBuyAI.gameObject.SetActive(true);
+        this.workAnim.enabled = false;
+        this.workAnim.GetComponent<Image>().sprite = this.workFirstSprite;
+
         btnWork.onClick.AddListener(() => Btn_Work());
         btnUpgrade.onClick.AddListener(() => Btn_ShowUpgrade());
         btnBuyMoreMine.thisButton.onClick.AddListener(() => Btn_BuyMoreMine());

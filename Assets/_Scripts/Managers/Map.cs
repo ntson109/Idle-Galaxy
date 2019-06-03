@@ -49,6 +49,7 @@ public class Map : MonoBehaviour
     {
         if (UIManager.Instance.isNewPlayer)
         {
+            this.totalMoney = 0;
             this.transporter.SetInfo(1, GameConfig.Instance.Trans_Capacity_1, GameConfig.Instance.Trans_Cost_1);
         }
         else
