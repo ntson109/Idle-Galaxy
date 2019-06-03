@@ -34,6 +34,9 @@ public class Transporter : MonoBehaviour
         this.level = _level;
         this.capacity = _cap;
         this.price = _price;
+        this.isTransporting = false;
+        this.speed = 3f;
+        this.StopAllCoroutines();
     }
 
     public void Transport()

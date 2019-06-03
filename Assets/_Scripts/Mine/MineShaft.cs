@@ -370,6 +370,7 @@ public class MineShaft : MonoBehaviour
 
     void ON_START_GAME()
     {
+        this.StopAllCoroutines();
         btnWork.onClick.AddListener(() => Btn_Work());
         btnUpgrade.onClick.AddListener(() => Btn_ShowUpgrade());
         btnBuyMoreMine.thisButton.onClick.AddListener(() => Btn_BuyMoreMine());
@@ -421,6 +422,8 @@ public class MineShaft : MonoBehaviour
                 UIManager.Instance.SetDeActivePanel(panelUnlock_Condition);
                 UIManager.Instance.SetActivePanel(panelUnlock);
             }
+
+            this.objLock.SetActive(true);
         }
 
         if (this.state != StateMineShaft.LOCK)
