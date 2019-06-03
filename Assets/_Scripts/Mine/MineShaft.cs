@@ -368,6 +368,7 @@ public class MineShaft : MonoBehaviour
         this.ongTrai.SetActive(false);
         if (this.ongTren) this.ongTren.SetActive(false);
         if (this.tubeT) this.tubeT.SetActive(false);
+        if (this.tubeL) this.tubeL.SetActive(true);
         this.btnUpgrade.gameObject.SetActive(false);
         this.btnBuyAI.gameObject.SetActive(true);
         this.workAnim.enabled = false;
