@@ -52,9 +52,10 @@ public class GameConfig : MonoBehaviour
     public long CoinStart;
     public float TimeAd;
     public string ID_UnityAds_ios;
-    public string ID_Inter_android;
-    public string ID_Inter_ios;
-    public string ID_Banner_ios;
+    public string AdmobID_Interstitial_android;
+    public string AdmobID_Interstitial_ios;
+    public string AdmobID_Banner_ios;
+    public string AdmobID_VideoReward_ios;
     public string link_ios;
     public string link_android;
     public string string_Share;
@@ -77,7 +78,7 @@ public class GameConfig : MonoBehaviour
     public List<int> lstRewardSpin_Time = new List<int>();
     public List<int> lstRewardSpin_Coin = new List<int>();
     public List<string> lstTutorial = new List<string>();
-
+    public List<CoinPack> listCoinPacks;
     #endregion
 
     #region === APP42 ===
@@ -111,8 +112,6 @@ public class GameConfig : MonoBehaviour
         //UIManager.Instance.PushGiveGold("Waiting ...");
     }
     #endregion
-
-    public List<CoinPack> listCoinPacks;
 }
 
 public class SaveGold

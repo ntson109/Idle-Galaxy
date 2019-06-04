@@ -68,10 +68,10 @@ public class Ads : MonoBehaviour
             Debug.Log("Load Ads - " + interstitalAd.IsLoaded().ToString());
         }
 #else
-        GameConfig.Instance.ID_Inter_android = "ca-app-pub-6285794272989840/5632501293"; //test
-        if (!isLoadAds && GameConfig.Instance.ID_Inter_android != null)
+        GameConfig.Instance.AdmobID_Interstitial_android = "ca-app-pub-6285794272989840/5632501293"; //test
+        if (!isLoadAds && GameConfig.Instance.AdmobID_Interstitial_android != null)
         {
-            interstitalAd = new InterstitialAd(GameConfig.Instance.ID_Inter_android);
+            interstitalAd = new InterstitialAd(GameConfig.Instance.AdmobID_Interstitial_android);
             AdRequest requestInterAd = new AdRequest.Builder().Build();
             interstitalAd.LoadAd(requestInterAd);
             isLoadAds = true;
@@ -111,9 +111,9 @@ public class Ads : MonoBehaviour
 
     public void RequestBanner()
     {
-        if (GameConfig.Instance.ID_Banner_ios != null)
+        if (GameConfig.Instance.AdmobID_Banner_ios != null)
         {
-            bannerView = new BannerView(GameConfig.Instance.ID_Banner_ios, AdSize.Banner, AdPosition.Bottom);
+            bannerView = new BannerView(GameConfig.Instance.AdmobID_Banner_ios, AdSize.Banner, AdPosition.Bottom);
             AdRequest requestBanner = new AdRequest.Builder().Build();
             bannerView.LoadAd(requestBanner);
         }

@@ -50,9 +50,10 @@ public class LoadDataJson : MonoBehaviour
             GameConfig.Instance.GoldStart = objJson["GoldStart"].AsLong;
             GameConfig.Instance.CoinStart = objJson["CoinStart"].AsLong;
             GameConfig.Instance.ID_UnityAds_ios = objJson["ID_UnityAds_ios"];
-            GameConfig.Instance.ID_Inter_android = objJson["ID_Inter_android"];
-            GameConfig.Instance.ID_Inter_ios = objJson["ID_Inter_ios"];
-            GameConfig.Instance.ID_Banner_ios = objJson["ID_Banner_ios"];
+            GameConfig.Instance.AdmobID_Interstitial_android = objJson["AdmobID_Interstitial_android"];
+            GameConfig.Instance.AdmobID_Interstitial_ios = objJson["AdmobID_Interstitial_ios"];
+            GameConfig.Instance.AdmobID_Banner_ios = objJson["AdmobID_Banner_ios"];
+            GameConfig.Instance.AdmobID_VideoReward_ios = objJson["AdmobID_VideoReward_ios"];
             GameConfig.Instance.kProductID50 = objJson["kProductID50"];
             GameConfig.Instance.kProductID300 = objJson["kProductID300"];
             GameConfig.Instance.kProductID5000 = objJson["kProductID5000"];

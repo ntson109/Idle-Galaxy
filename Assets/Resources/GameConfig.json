@@ -2,9 +2,10 @@
   "GoldStart": 500,
   "CoinStart": 10,
   "ID_UnityAds_ios": "",
-  "ID_Inter_android": "",
-  "ID_Inter_ios": "",
-  "ID_Banner_ios": "",
+  "AdmobID_Interstitial_android": "",
+  "AdmobID_Interstitial_ios": "",
+  "AdmobID_Banner_ios": "",
+  "AdmobID_VideoReward_ios": null,
   "kProductID50": "consumable",
   "kProductID300": "consumable",
   "kProductID5000": "consumable",
@@ -628,21 +629,21 @@
         ]
       }
     },
-    "coinPacks": [
-      {
-        "productID": "com.company.idlegalaxy.coin1",
+    "coinPacks": {
+      "1": {
+        "productID": "com.companyname.galaxyidle.coinpack1",
         "price": "0.99$",
         "value": 200
       },
-      {
-        "productID": "com.company.idlegalaxy.coin2",
+      "2": {
+        "productID": "com.companyname.galaxyidle.coinpack2",
         "price": "1.99$",
         "value": 500
       },
-      {
-        "productID": "com.company.idlegalaxy.coin3",
+      "3": {
+        "productID": "com.companyname.galaxyidle.coinpack3",
         "price": "2.99$",
         "value": 1000
       }
-    ]
+    }
   }
