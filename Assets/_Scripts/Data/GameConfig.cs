@@ -5,7 +5,8 @@ using com.shephertz.app42.paas.sdk.csharp;
 using com.shephertz.app42.paas.sdk.csharp.storage;
 
 [RequireComponent(typeof(LoadDataJson))]
-public class GameConfig : MonoBehaviour {
+public class GameConfig : MonoBehaviour
+{
     public static GameConfig Instance;
     public static string id = "";
     void Awake()
@@ -19,7 +20,7 @@ public class GameConfig : MonoBehaviour {
 
     [System.Serializable]
     public struct PropertiesMap
-    {       
+    {
         public int ID;
         public string Name;
         public long BuyAI;
@@ -46,7 +47,7 @@ public class GameConfig : MonoBehaviour {
 
     #region === GAME CONFIG ===
     [Header("GAME CONFIG")]
-    public List<PropertiesMap> lstPropertiesMap = new List<PropertiesMap>();   
+    public List<PropertiesMap> lstPropertiesMap = new List<PropertiesMap>();
     public long GoldStart;
     public long CoinStart;
     public float TimeAd;
@@ -76,7 +77,7 @@ public class GameConfig : MonoBehaviour {
     public List<int> lstRewardSpin_Time = new List<int>();
     public List<int> lstRewardSpin_Coin = new List<int>();
     public List<string> lstTutorial = new List<string>();
-    
+
     #endregion
 
     #region === APP42 ===
@@ -110,6 +111,8 @@ public class GameConfig : MonoBehaviour {
         //UIManager.Instance.PushGiveGold("Waiting ...");
     }
     #endregion
+
+    public List<CoinPack> listCoinPacks;
 }
 
 public class SaveGold
@@ -121,5 +124,12 @@ public class SaveGold
         this.id = id;
         this.gold = gold;
     }
+}
+
+public class CoinPack
+{
+    public string productID;
+    public string price;
+    public int value;
 }
 

@@ -1,631 +1,648 @@
 {
-  "GoldStart" : 500,
-  "CoinStart" : 10,
-  "ID_UnityAds_ios" : "",
-  "ID_Inter_android" : "",
-  "ID_Inter_ios" : "",
-  "ID_Banner_ios" : "",
-  "kProductID50" : "consumable",
-  "kProductID300" : "consumable",
+  "GoldStart": 500,
+  "CoinStart": 10,
+  "ID_UnityAds_ios": "",
+  "ID_Inter_android": "",
+  "ID_Inter_ios": "",
+  "ID_Banner_ios": "",
+  "kProductID50": "consumable",
+  "kProductID300": "consumable",
   "kProductID5000": "consumable",
-  "link_ios" : "",
-  "link_android" : "",
-  "string_Share" : "",
+  "link_ios": "",
+  "link_android": "",
+  "string_Share": "",
   "introduction": {
-  "warning1" : "abc",
-  "warning2" : "abc",
-  "warning3" : "abc"
+    "warning1": "abc",
+    "warning2": "abc",
+    "warning3": "abc"
   },
-  "Tutorial" : [
-	"Touch to run",
-	"Buy a mining rig",
-	"Buy Robot to manage rigs automatically",
-	"Touch Robot to upgrade",
-	"Touch to upgrade level of mining rig",
-	"Touch to apply advance technology to boost the rig",
-	"Upgrade transportation system to speedup money releasing",
-	"The Show is now on you !"
+  "Tutorial": [
+    "Touch to run",
+    "Buy a mining rig",
+    "Buy Robot to manage rigs automatically",
+    "Touch Robot to upgrade",
+    "Touch to upgrade level of mining rig",
+    "Touch to apply advance technology to boost the rig",
+    "Upgrade transportation system to speedup money releasing",
+    "The Show is now on you !"
   ],
-  "Spin" : {
-	"Gold" : [
-		0.05,
-		0.1,
-		0.15
-	],
-	"TimeSkip" : [
-		1,
-		2,
-		4
-	],
-	"Coin" : [
-		10,
-		30,
-		100
-	]
+  "Spin": {
+    "Gold": [
+      0.05,
+      0.1,
+      0.15
+    ],
+    "TimeSkip": [
+      1,
+      2,
+      4
+    ],
+    "Coin": [
+      10,
+      30,
+      100
+    ]
   },
-  "UFO_speed" : 4,
-  "UFO_rate_Gold" : [
-	0.1,
-	0.2
+  "UFO_speed": 4,
+  "UFO_rate_Gold": [
+    0.1,
+    0.2
   ],
-  "UFO_rate_Coin" : [
-	0.01,
-	0.1
+  "UFO_rate_Coin": [
+    0.01,
+    0.1
   ],
-  "UFO_time" : 60,
-  "Transporter" : {
-	"NameTransport" : "The Flash",
-	"TimeTransport" : 3,
-	"Cost_1" : 5,
-	"Cost_2" :[
-		0.05,
-		0.06,
-		0.07,
-		0.08,
-		0.09,
-		0.1,
-		0.1
-	],
-	"Capacity_1" : 5,
-	"Capacity_2" : [
-		5,
-		50,
-		500,
-		5000,
-		50000,
-		500000,
-		5000000
-	]
+  "UFO_time": 60,
+  "Transporter": {
+    "NameTransport": "The Flash",
+    "TimeTransport": 3,
+    "Cost_1": 5,
+    "Cost_2": [
+      0.05,
+      0.06,
+      0.07,
+      0.08,
+      0.09,
+      0.1,
+      0.1
+    ],
+    "Capacity_1": 5,
+    "Capacity_2": [
+      5,
+      50,
+      500,
+      5000,
+      50000,
+      500000,
+      5000000
+    ]
   },
-  "Map_Moon" : {
-	"M_1" : {
-		"Name" : "Machine1",
-		"BuyAI" : 100,
-		"Unlock_condition" : 0,
-		"Unlock_time" : 0,
-		"Unlock_cost" : [
-			10,
-			500
-		],
-		"Unlock_reward" : {
-			"timex2" : 0
-		},
-		"miningTime" : 8,
-		"MoreMine_cost_1" : 5,
-		"MoreMine_cost_2" : 1,
-		"MoreMine_cost_3" : 1.05,
-		"Upgrade_time" : [
-			1,
-			8,
-			21,
-			40,
-			65
-		],
-		"Upgrade_condition" : [
-			20,
-			50,
-			100,
-			300,
-			500
-		],
-		"Upgrade_cost" : [
-			100,
-			100,
-			100,
-			100,
-			100,
-			100
-		],
-		"Productivity" : 5,
-		"Upgrade_Special" : {
-			"1" : {
-				"name" : "Deep Explore Tech lv 1",
-				"description" : "x2 price",
-				"price" : 10000,
-				"time" : 5,
-				"coinMax" : 10
-			},
-			"2" : {
-				"name" : "Deep Explore Tech lv 2",
-				"description" : "x2 price",
-				"price" : 50000,
-				"time" : 10,
-				"coinMax" : 10
-			},
-			"3" : {
-				"name" : "Deep Explore Tech lv 3",
-				"description" : "x2 price",
-				"price" : 250000,
-				"time" : 15,
-				"coinMax" : 10
-			},
-			"4" : {
-				"name" : "Laser drilling Tech lv 1",
-				"description" : "x2 productivity",
-				"price" : 20000000,
-				"time" : 20,
-				"coinMax" : 10
-			},
-			"5" : {
-				"name" : "Laser drilling Tech lv 2",
-				"description" : "x2 productivity",
-				"price" : 100000000,
-				"time" : 40,
-				"coinMax" : 10
-			},
-			"6" : {
-				"name" : "Laser drilling Tech lv 3",
-				"description" : "x2 productivity",
-				"price" : 500000000,
-				"time" : 60,
-				"coinMax" : 10
-			}
-		},
-		"Unit_Price" : 1,
-		"Store_Cost_1" : 5,
-		"Store_Cost_2" : 0.05,
-		"Store_Cost_3" : 1,
-		"Store_Capacity_1" : 20,
-		"Store_Capacity_2" : 10
-	},
-	"M_2" :{
-		"Name" : "Machine2",
-		"BuyAI" : 100,
-		"Unlock_condition" : 0,
-		"Unlock_time" : 5,
-		"Unlock_cost" : [
-			10,
-			500
-		],
-		"Unlock_reward" : {
-			"timex2" : 60
-		},
-		"MoreMine_cost_1" : 50,
-		"MoreMine_cost_2" : 2,
-		"MoreMine_cost_3" : 1.06,
-		"miningTime" : 16,
-		"Upgrade_time" : [
-			2,
-			10,
-			24,
-			44,
-			70
-		],
-		"Upgrade_condition" : [
-			20,
-			50,
-			100,
-			200,
-			400
-		],
-		"Upgrade_cost" : [
-			100,
-			100,
-			100,
-			100,
-			100,
-			100
-		],
-		"Productivity" : 8,
-		"Upgrade_Special" : {
-			"1" : {
-				"name" : "Deep Explore Tech lv 1",
-				"description" : "x2 price",
-				"price" : 10000,
-				"time" : 5,
-				"coinMax" : 10
-			},
-			"2" : {
-				"name" : "Deep Explore Tech lv 2",
-				"description" : "x2 price",
-				"price" : 50000,
-				"time" : 10,
-				"coinMax" : 10
-			},
-			"3" : {
-				"name" : "Deep Explore Tech lv 3",
-				"description" : "x2 price",
-				"price" : 250000,
-				"time" : 15,
-				"coinMax" : 10
-			},
-			"4" : {
-				"name" : "Laser drilling Tech lv 1",
-				"description" : "x2 productivity",
-				"price" : 20000000,
-				"time" : 20,
-				"coinMax" : 10
-			},
-			"5" : {
-				"name" : "Laser drilling Tech lv 2",
-				"description" : "x2 productivity",
-				"price" : 100000000,
-				"time" : 40,
-				"coinMax" : 10
-			},
-			"6" : {
-				"name" : "Laser drilling Tech lv 3",
-				"description" : "x2 productivity",
-				"price" : 500000000,
-				"time" : 60,
-				"coinMax" : 10
-			}
-		},
-		"Unit_Price" : 10,
-		"Store_Cost_1" : 50,
-		"Store_Cost_2" : 0.06,
-		"Store_Cost_3" : 2,
-		"Store_Capacity_1" : 50,
-		"Store_Capacity_2" : 20
-	},
-	"M_3" :{
-		"Name" : "Machine3",
-		"BuyAI" : 100,
-		"Unlock_condition" : 0,
-		"Unlock_time" : 10,
-		"Unlock_cost" : [
-			20,
-			500000
-		],
-		"Unlock_reward" : {
-			"timex2" : 60
-		},
-		"MoreMine_cost_1" : 500,
-		"MoreMine_cost_2" : 5,
-		"MoreMine_cost_3" : 1.07,
-		"miningTime" : 40,
-		"Upgrade_time" : [
-			3,
-			12,
-			27,
-			48,
-			75
-		],
-		"Upgrade_condition" : [
-			20,
-			50,
-			100,
-			200,
-			300
-		],
-		"Upgrade_cost" : [
-			100,
-			100,
-			100,
-			100,
-			100,
-			100
-		],
-		"Productivity" : 20,
-		"Upgrade_Special" : {
-			"1" : {
-				"name" : "Deep Explore Tech lv 1",
-				"description" : "x2 price",
-				"price" : 10000,
-				"time" : 5,
-				"coinMax" : 10
-			},
-			"2" : {
-				"name" : "Deep Explore Tech lv 2",
-				"description" : "x2 price",
-				"price" : 50000,
-				"time" : 10,
-				"coinMax" : 10
-			},
-			"3" : {
-				"name" : "Deep Explore Tech lv 3",
-				"description" : "x2 price",
-				"price" : 250000,
-				"time" : 15,
-				"coinMax" : 10
-			},
-			"4" : {
-				"name" : "Laser drilling Tech lv 1",
-				"description" : "x2 productivity",
-				"price" : 20000000,
-				"time" : 20,
-				"coinMax" : 10
-			},
-			"5" : {
-				"name" : "Laser drilling Tech lv 2",
-				"description" : "x2 productivity",
-				"price" : 100000000,
-				"time" : 40,
-				"coinMax" : 10
-			},
-			"6" : {
-				"name" : "Laser drilling Tech lv 3",
-				"description" : "x2 productivity",
-				"price" : 500000000,
-				"time" : 60,
-				"coinMax" : 10
-			}
-		},
-		"Unit_Price" : 1000,
-		"Store_Cost_1" : 500,
-		"Store_Cost_2" : 0.07,
-		"Store_Cost_3" : 5,
-		"Store_Capacity_1" : 100,
-		"Store_Capacity_2" : 40
-	},
-	"M_4" :{
-		"Name" : "Machine4",
-		"BuyAI" : 100,
-		"Unlock_condition" : 0,
-		"Unlock_time" : 20,
-		"Unlock_cost" : [
-			40,
-			50000000
-		],
-		"Unlock_reward" : {
-			"timex2" : 60
-		},
-		"MoreMine_cost_1" : 5000,
-		"MoreMine_cost_2" : 10,
-		"MoreMine_cost_3" : 1.08,
-		"miningTime" : 80,
-		"Upgrade_time" : [
-			4,
-			14,
-			30,
-			52,
-			80
-		],
-		"Upgrade_condition" : [
-			20,
-			50,
-			100,
-			150,
-			200
-		],
-		"Upgrade_cost" : [
-			100,
-			100,
-			100,
-			100,
-			100,
-			100
-		],
-		"Productivity" : 40,
-		"Upgrade_Special" : {
-			"1" : {
-				"name" : "Deep Explore Tech lv 1",
-				"description" : "x2 price",
-				"price" : 10000,
-				"time" : 5,
-				"coinMax" : 10
-			},
-			"2" : {
-				"name" : "Deep Explore Tech lv 2",
-				"description" : "x2 price",
-				"price" : 50000,
-				"time" : 10,
-				"coinMax" : 10
-			},
-			"3" : {
-				"name" : "Deep Explore Tech lv 3",
-				"description" : "x2 price",
-				"price" : 250000,
-				"time" : 15,
-				"coinMax" : 10
-			},
-			"4" : {
-				"name" : "Laser drilling Tech lv 1",
-				"description" : "x2 productivity",
-				"price" : 20000000,
-				"time" : 20,
-				"coinMax" : 10
-			},
-			"5" : {
-				"name" : "Laser drilling Tech lv 2",
-				"description" : "x2 productivity",
-				"price" : 100000000,
-				"time" : 40,
-				"coinMax" : 10
-			},
-			"6" : {
-				"name" : "Laser drilling Tech lv 3",
-				"description" : "x2 productivity",
-				"price" : 500000000,
-				"time" : 60,
-				"coinMax" : 10
-			}
-		},
-		"Unit_Price" : 10000,
-		"Store_Cost_1" : 5000,
-		"Store_Cost_2" : 0.08,
-		"Store_Cost_3" : 10,
-		"Store_Capacity_1" : 200,
-		"Store_Capacity_2" : 80
-	},
-	"M_5" :{
-		"Name" : "Machine5",
-		"BuyAI" : 100,
-		"Unlock_condition" : 0,
-		"Unlock_time" : 30,
-		"Unlock_cost" : [
-			70,
-			500000000
-		],
-		"Unlock_reward" : {
-			"timex2" : 60
-		},
-		"MoreMine_cost_1" : 50000,
-		"MoreMine_cost_2" : 100,
-		"MoreMine_cost_3" : 1.09,
-		"miningTime" : 240,
-		"Upgrade_time" : [
-			5,
-			16,
-			33,
-			56,
-			85
-		],
-		"Upgrade_condition" : [
-			10,
-			20,
-			30,
-			50,
-			100
-		],
-		"Upgrade_cost" : [
-			100,
-			100,
-			100,
-			100,
-			100,
-			100
-		],
-		"Productivity" : 100,
-		"Upgrade_Special" : {
-			"1" : {
-				"name" : "Deep Explore Tech lv 1",
-				"description" : "x2 price",
-				"price" : 10000,
-				"time" : 5,
-				"coinMax" : 10
-			},
-			"2" : {
-				"name" : "Deep Explore Tech lv 2",
-				"description" : "x2 price",
-				"price" : 50000,
-				"time" : 10,
-				"coinMax" : 10
-			},
-			"3" : {
-				"name" : "Deep Explore Tech lv 3",
-				"description" : "x2 price",
-				"price" : 250000,
-				"time" : 15,
-				"coinMax" : 10
-			},
-			"4" : {
-				"name" : "Laser drilling Tech lv 1",
-				"description" : "x2 productivity",
-				"price" : 20000000,
-				"time" : 20,
-				"coinMax" : 10
-			},
-			"5" : {
-				"name" : "Laser drilling Tech lv 2",
-				"description" : "x2 productivity",
-				"price" : 100000000,
-				"time" : 40,
-				"coinMax" : 10
-			},
-			"6" : {
-				"name" : "Laser drilling Tech lv 3",
-				"description" : "x2 productivity",
-				"price" : 500000000,
-				"time" : 60,
-				"coinMax" : 10
-			}
-		},
-		"Unit_Price" : 100000,
-		"Store_Cost_1" : 500000,
-		"Store_Cost_2" : 0.09,
-		"Store_Cost_3" : 100,
-		"Store_Capacity_1" : 500,
-		"Store_Capacity_2" : 160
-	},
-	"M_6" :{
-		"Name" : "Machine6",
-		"BuyAI" : 100,
-		"Unlock_condition" : 0,
-		"Unlock_time" : 60,
-		"Unlock_cost" : [
-			100,
-			25000000000
-		],
-		"Unlock_reward" : {
-			"timex2" : 60
-		},
-		"MoreMine_cost_1" : 1000000,
-		"MoreMine_cost_2" : 1000,
-		"MoreMine_cost_3" : 1.1,
-		"miningTime" : 480,
-		"Upgrade_time" : [
-			6,
-			18,
-			36,
-			60,
-			90
-		],
-		"Upgrade_condition" : [
-			10,
-			20,
-			30,
-			50,
-			100
-		],
-		"Upgrade_cost" : [
-			100,
-			100,
-			100,
-			100,
-			100,
-			100
-		],
-		"Productivity" : 250,
-		"Upgrade_Special" : {
-			"1" : {
-				"name" : "Deep Explore Tech lv 1",
-				"description" : "x2 price",
-				"price" : 10000,
-				"time" : 5,
-				"coinMax" : 10
-			},
-			"2" : {
-				"name" : "Deep Explore Tech lv 2",
-				"description" : "x2 price",
-				"price" : 50000,
-				"time" : 10,
-				"coinMax" : 10
-			},
-			"3" : {
-				"name" : "Deep Explore Tech lv 3",
-				"description" : "x2 price",
-				"price" : 250000,
-				"time" : 15,
-				"coinMax" : 10
-			},
-			"4" : {
-				"name" : "Laser drilling Tech lv 1",
-				"description" : "x2 productivity",
-				"price" : 20000000,
-				"time" : 20,
-				"coinMax" : 10
-			},
-			"5" : {
-				"name" : "Laser drilling Tech lv 2",
-				"description" : "x2 productivity",
-				"price" : 100000000,
-				"time" : 40,
-				"coinMax" : 10
-			},
-			"6" : {
-				"name" : "Laser drilling Tech lv 3",
-				"description" : "x2 productivity",
-				"price" : 500000000,
-				"time" : 60,
-				"coinMax" : 10
-			}
-		},
-		"Unit_Price" : 1000000,
-		"Store_Cost_1" : 0,
-		"Store_Cost_2" : 0,
-		"Store_Cost_3" : 0,
-		"Store_Capacity_1" : 0,
-		"Store_Capacity_2" : 0
-  },
-  "Map_Earth" : {
-	"E_1" : {
-		"Name" : "Ship 1",
-		"Unlock_time" : 10,
-		"Unlock_cost" : [
-			20,
-			5000000
-		],
-	}
+  "Map_Moon": {
+    "M_1": {
+      "Name": "Machine1",
+      "BuyAI": 100,
+      "Unlock_condition": 0,
+      "Unlock_time": 0,
+      "Unlock_cost": [
+        10,
+        500
+      ],
+      "Unlock_reward": {
+        "timex2": 0
+      },
+      "miningTime": 8,
+      "MoreMine_cost_1": 5,
+      "MoreMine_cost_2": 1,
+      "MoreMine_cost_3": 1.05,
+      "Upgrade_time": [
+        1,
+        8,
+        21,
+        40,
+        65
+      ],
+      "Upgrade_condition": [
+        20,
+        50,
+        100,
+        300,
+        500
+      ],
+      "Upgrade_cost": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "Productivity": 5,
+      "Upgrade_Special": {
+        "1": {
+          "name": "Deep Explore Tech lv 1",
+          "description": "x2 price",
+          "price": 10000,
+          "time": 5,
+          "coinMax": 10
+        },
+        "2": {
+          "name": "Deep Explore Tech lv 2",
+          "description": "x2 price",
+          "price": 50000,
+          "time": 10,
+          "coinMax": 10
+        },
+        "3": {
+          "name": "Deep Explore Tech lv 3",
+          "description": "x2 price",
+          "price": 250000,
+          "time": 15,
+          "coinMax": 10
+        },
+        "4": {
+          "name": "Laser drilling Tech lv 1",
+          "description": "x2 productivity",
+          "price": 20000000,
+          "time": 20,
+          "coinMax": 10
+        },
+        "5": {
+          "name": "Laser drilling Tech lv 2",
+          "description": "x2 productivity",
+          "price": 100000000,
+          "time": 40,
+          "coinMax": 10
+        },
+        "6": {
+          "name": "Laser drilling Tech lv 3",
+          "description": "x2 productivity",
+          "price": 500000000,
+          "time": 60,
+          "coinMax": 10
+        }
+      },
+      "Unit_Price": 1,
+      "Store_Cost_1": 5,
+      "Store_Cost_2": 0.05,
+      "Store_Cost_3": 1,
+      "Store_Capacity_1": 20,
+      "Store_Capacity_2": 10
+    },
+    "M_2": {
+      "Name": "Machine2",
+      "BuyAI": 100,
+      "Unlock_condition": 0,
+      "Unlock_time": 5,
+      "Unlock_cost": [
+        10,
+        500
+      ],
+      "Unlock_reward": {
+        "timex2": 60
+      },
+      "MoreMine_cost_1": 50,
+      "MoreMine_cost_2": 2,
+      "MoreMine_cost_3": 1.06,
+      "miningTime": 16,
+      "Upgrade_time": [
+        2,
+        10,
+        24,
+        44,
+        70
+      ],
+      "Upgrade_condition": [
+        20,
+        50,
+        100,
+        200,
+        400
+      ],
+      "Upgrade_cost": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "Productivity": 8,
+      "Upgrade_Special": {
+        "1": {
+          "name": "Deep Explore Tech lv 1",
+          "description": "x2 price",
+          "price": 10000,
+          "time": 5,
+          "coinMax": 10
+        },
+        "2": {
+          "name": "Deep Explore Tech lv 2",
+          "description": "x2 price",
+          "price": 50000,
+          "time": 10,
+          "coinMax": 10
+        },
+        "3": {
+          "name": "Deep Explore Tech lv 3",
+          "description": "x2 price",
+          "price": 250000,
+          "time": 15,
+          "coinMax": 10
+        },
+        "4": {
+          "name": "Laser drilling Tech lv 1",
+          "description": "x2 productivity",
+          "price": 20000000,
+          "time": 20,
+          "coinMax": 10
+        },
+        "5": {
+          "name": "Laser drilling Tech lv 2",
+          "description": "x2 productivity",
+          "price": 100000000,
+          "time": 40,
+          "coinMax": 10
+        },
+        "6": {
+          "name": "Laser drilling Tech lv 3",
+          "description": "x2 productivity",
+          "price": 500000000,
+          "time": 60,
+          "coinMax": 10
+        }
+      },
+      "Unit_Price": 10,
+      "Store_Cost_1": 50,
+      "Store_Cost_2": 0.06,
+      "Store_Cost_3": 2,
+      "Store_Capacity_1": 50,
+      "Store_Capacity_2": 20
+    },
+    "M_3": {
+      "Name": "Machine3",
+      "BuyAI": 100,
+      "Unlock_condition": 0,
+      "Unlock_time": 10,
+      "Unlock_cost": [
+        20,
+        500000
+      ],
+      "Unlock_reward": {
+        "timex2": 60
+      },
+      "MoreMine_cost_1": 500,
+      "MoreMine_cost_2": 5,
+      "MoreMine_cost_3": 1.07,
+      "miningTime": 40,
+      "Upgrade_time": [
+        3,
+        12,
+        27,
+        48,
+        75
+      ],
+      "Upgrade_condition": [
+        20,
+        50,
+        100,
+        200,
+        300
+      ],
+      "Upgrade_cost": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "Productivity": 20,
+      "Upgrade_Special": {
+        "1": {
+          "name": "Deep Explore Tech lv 1",
+          "description": "x2 price",
+          "price": 10000,
+          "time": 5,
+          "coinMax": 10
+        },
+        "2": {
+          "name": "Deep Explore Tech lv 2",
+          "description": "x2 price",
+          "price": 50000,
+          "time": 10,
+          "coinMax": 10
+        },
+        "3": {
+          "name": "Deep Explore Tech lv 3",
+          "description": "x2 price",
+          "price": 250000,
+          "time": 15,
+          "coinMax": 10
+        },
+        "4": {
+          "name": "Laser drilling Tech lv 1",
+          "description": "x2 productivity",
+          "price": 20000000,
+          "time": 20,
+          "coinMax": 10
+        },
+        "5": {
+          "name": "Laser drilling Tech lv 2",
+          "description": "x2 productivity",
+          "price": 100000000,
+          "time": 40,
+          "coinMax": 10
+        },
+        "6": {
+          "name": "Laser drilling Tech lv 3",
+          "description": "x2 productivity",
+          "price": 500000000,
+          "time": 60,
+          "coinMax": 10
+        }
+      },
+      "Unit_Price": 1000,
+      "Store_Cost_1": 500,
+      "Store_Cost_2": 0.07,
+      "Store_Cost_3": 5,
+      "Store_Capacity_1": 100,
+      "Store_Capacity_2": 40
+    },
+    "M_4": {
+      "Name": "Machine4",
+      "BuyAI": 100,
+      "Unlock_condition": 0,
+      "Unlock_time": 20,
+      "Unlock_cost": [
+        40,
+        50000000
+      ],
+      "Unlock_reward": {
+        "timex2": 60
+      },
+      "MoreMine_cost_1": 5000,
+      "MoreMine_cost_2": 10,
+      "MoreMine_cost_3": 1.08,
+      "miningTime": 80,
+      "Upgrade_time": [
+        4,
+        14,
+        30,
+        52,
+        80
+      ],
+      "Upgrade_condition": [
+        20,
+        50,
+        100,
+        150,
+        200
+      ],
+      "Upgrade_cost": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "Productivity": 40,
+      "Upgrade_Special": {
+        "1": {
+          "name": "Deep Explore Tech lv 1",
+          "description": "x2 price",
+          "price": 10000,
+          "time": 5,
+          "coinMax": 10
+        },
+        "2": {
+          "name": "Deep Explore Tech lv 2",
+          "description": "x2 price",
+          "price": 50000,
+          "time": 10,
+          "coinMax": 10
+        },
+        "3": {
+          "name": "Deep Explore Tech lv 3",
+          "description": "x2 price",
+          "price": 250000,
+          "time": 15,
+          "coinMax": 10
+        },
+        "4": {
+          "name": "Laser drilling Tech lv 1",
+          "description": "x2 productivity",
+          "price": 20000000,
+          "time": 20,
+          "coinMax": 10
+        },
+        "5": {
+          "name": "Laser drilling Tech lv 2",
+          "description": "x2 productivity",
+          "price": 100000000,
+          "time": 40,
+          "coinMax": 10
+        },
+        "6": {
+          "name": "Laser drilling Tech lv 3",
+          "description": "x2 productivity",
+          "price": 500000000,
+          "time": 60,
+          "coinMax": 10
+        }
+      },
+      "Unit_Price": 10000,
+      "Store_Cost_1": 5000,
+      "Store_Cost_2": 0.08,
+      "Store_Cost_3": 10,
+      "Store_Capacity_1": 200,
+      "Store_Capacity_2": 80
+    },
+    "M_5": {
+      "Name": "Machine5",
+      "BuyAI": 100,
+      "Unlock_condition": 0,
+      "Unlock_time": 30,
+      "Unlock_cost": [
+        70,
+        500000000
+      ],
+      "Unlock_reward": {
+        "timex2": 60
+      },
+      "MoreMine_cost_1": 50000,
+      "MoreMine_cost_2": 100,
+      "MoreMine_cost_3": 1.09,
+      "miningTime": 240,
+      "Upgrade_time": [
+        5,
+        16,
+        33,
+        56,
+        85
+      ],
+      "Upgrade_condition": [
+        10,
+        20,
+        30,
+        50,
+        100
+      ],
+      "Upgrade_cost": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "Productivity": 100,
+      "Upgrade_Special": {
+        "1": {
+          "name": "Deep Explore Tech lv 1",
+          "description": "x2 price",
+          "price": 10000,
+          "time": 5,
+          "coinMax": 10
+        },
+        "2": {
+          "name": "Deep Explore Tech lv 2",
+          "description": "x2 price",
+          "price": 50000,
+          "time": 10,
+          "coinMax": 10
+        },
+        "3": {
+          "name": "Deep Explore Tech lv 3",
+          "description": "x2 price",
+          "price": 250000,
+          "time": 15,
+          "coinMax": 10
+        },
+        "4": {
+          "name": "Laser drilling Tech lv 1",
+          "description": "x2 productivity",
+          "price": 20000000,
+          "time": 20,
+          "coinMax": 10
+        },
+        "5": {
+          "name": "Laser drilling Tech lv 2",
+          "description": "x2 productivity",
+          "price": 100000000,
+          "time": 40,
+          "coinMax": 10
+        },
+        "6": {
+          "name": "Laser drilling Tech lv 3",
+          "description": "x2 productivity",
+          "price": 500000000,
+          "time": 60,
+          "coinMax": 10
+        }
+      },
+      "Unit_Price": 100000,
+      "Store_Cost_1": 500000,
+      "Store_Cost_2": 0.09,
+      "Store_Cost_3": 100,
+      "Store_Capacity_1": 500,
+      "Store_Capacity_2": 160
+    },
+    "M_6": {
+      "Name": "Machine6",
+      "BuyAI": 100,
+      "Unlock_condition": 0,
+      "Unlock_time": 60,
+      "Unlock_cost": [
+        100,
+        25000000000
+      ],
+      "Unlock_reward": {
+        "timex2": 60
+      },
+      "MoreMine_cost_1": 1000000,
+      "MoreMine_cost_2": 1000,
+      "MoreMine_cost_3": 1.1,
+      "miningTime": 480,
+      "Upgrade_time": [
+        6,
+        18,
+        36,
+        60,
+        90
+      ],
+      "Upgrade_condition": [
+        10,
+        20,
+        30,
+        50,
+        100
+      ],
+      "Upgrade_cost": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "Productivity": 250,
+      "Upgrade_Special": {
+        "1": {
+          "name": "Deep Explore Tech lv 1",
+          "description": "x2 price",
+          "price": 10000,
+          "time": 5,
+          "coinMax": 10
+        },
+        "2": {
+          "name": "Deep Explore Tech lv 2",
+          "description": "x2 price",
+          "price": 50000,
+          "time": 10,
+          "coinMax": 10
+        },
+        "3": {
+          "name": "Deep Explore Tech lv 3",
+          "description": "x2 price",
+          "price": 250000,
+          "time": 15,
+          "coinMax": 10
+        },
+        "4": {
+          "name": "Laser drilling Tech lv 1",
+          "description": "x2 productivity",
+          "price": 20000000,
+          "time": 20,
+          "coinMax": 10
+        },
+        "5": {
+          "name": "Laser drilling Tech lv 2",
+          "description": "x2 productivity",
+          "price": 100000000,
+          "time": 40,
+          "coinMax": 10
+        },
+        "6": {
+          "name": "Laser drilling Tech lv 3",
+          "description": "x2 productivity",
+          "price": 500000000,
+          "time": 60,
+          "coinMax": 10
+        }
+      },
+      "Unit_Price": 1000000,
+      "Store_Cost_1": 0,
+      "Store_Cost_2": 0,
+      "Store_Cost_3": 0,
+      "Store_Capacity_1": 0,
+      "Store_Capacity_2": 0
+    },
+    "Map_Earth": {
+      "E_1": {
+        "Name": "Ship 1",
+        "Unlock_time": 10,
+        "Unlock_cost": [
+          20,
+          5000000
+        ]
+      }
+    },
+    "coinPacks": [
+      {
+        "productID": "com.company.idlegalaxy.coin1",
+        "price": "0.99$",
+        "value": 200
+      },
+      {
+        "productID": "com.company.idlegalaxy.coin2",
+        "price": "1.99$",
+        "value": 500
+      },
+      {
+        "productID": "com.company.idlegalaxy.coin3",
+        "price": "2.99$",
+        "value": 1000
+      }
+    ]
   }
-}

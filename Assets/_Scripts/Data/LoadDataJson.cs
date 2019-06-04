@@ -183,6 +183,16 @@ public class LoadDataJson : MonoBehaviour
             {
                 GameConfig.Instance.lstRewardSpin_Coin.Add(objJson["Spin"]["Coin"][j].AsInt);
             }
+
+            GameConfig.Instance.listCoinPacks = new List<CoinPack>();
+            for (int j = 0; j < objJson["coinPacks"].Count; j++)
+            {
+                var coin_pack = new CoinPack();
+                coin_pack.productID = objJson["coinPack"][j]["productID"];
+                coin_pack.price = objJson["coinPack"][j]["price"];
+                coin_pack.value = objJson["coinPack"][j]["value"].AsInt;
+                GameConfig.Instance.listCoinPacks.Add(coin_pack);
+            }
         }
     }
 
