@@ -27,6 +27,9 @@ public class DataPlayer : MonoBehaviour
     public long coin;
 
     [HideInInspector]
+    public long medal;
+
+    [HideInInspector]
     public long freeGold1s;
 
     [HideInInspector]
@@ -46,6 +49,7 @@ public class DataPlayer : MonoBehaviour
         DataPlayer data = new DataPlayer();
         data.gold = GameManager.Instance.GOLD;
         data.coin = GameManager.Instance.COIN;
+        data.medal = GameManager.Instance.MEDAL;
         //data.freeGold1s = GetFreeGoldPerSecond();
         //PlayerPrefs.SetString(KeyPrefs.GOLD_OFFLINE, GetFreeGoldPerSecond().ToString());
         PlayerPrefs.SetString(KeyPrefs.GOLD_OFFLINE, CapacityOffline().ToString());
@@ -186,6 +190,8 @@ public class DataPlayer : MonoBehaviour
             GameManager.Instance.AddGold(GameConfig.Instance.GoldStart);
             GameManager.Instance.COIN = 0;
             GameManager.Instance.AddCoin(GameConfig.Instance.CoinStart);
+            GameManager.Instance.MEDAL = 0;
+            GameManager.Instance.AddMedal(0);
 
             for (int i = 0; i < objJson["lstMap"].Count; i++)
             {
@@ -285,8 +291,11 @@ public class DataPlayer : MonoBehaviour
         }
         else
         {
+            var medal = 0;
+            
             GameManager.Instance.AddGold(objJson["gold"].AsLong);
             GameManager.Instance.AddCoin(objJson["coin"].AsLong);
+            GameManager.Instance.AddMedal(objJson["medal"].AsInt);
 
             for (int i = 0; i < objJson["lstMap"].Count; i++)
             {

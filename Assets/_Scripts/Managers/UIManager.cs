@@ -18,6 +18,7 @@ public class UIManager : MonoBehaviour
 
     public Text txtGold;
     public Text txtCoin;
+    public Text txtMedal;
 
     [Header("UI HOME")]
     public GameObject panelYesNoNewPlay;
@@ -488,8 +489,10 @@ public class UIManager : MonoBehaviour
             GameManager.Instance.stateGame = StateGame.PLAYING;
             GameManager.Instance.GOLD = 0;
             GameManager.Instance.COIN = 0;
+            GameManager.Instance.MEDAL = 0;
             GameManager.Instance.AddGold(GameConfig.Instance.GoldStart);
             GameManager.Instance.AddCoin(GameConfig.Instance.CoinStart);
+            GameManager.Instance.AddMedal(0);
             AudioManager.Instance.Play("GamePlay", true);
             //isMusicOn = true;
             if (PlayerPrefs.GetInt(KeyPrefs.TUTORIAL_DONE) == 0)

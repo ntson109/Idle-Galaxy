@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
 
     public long GOLD;
     public long COIN;
+    public int MEDAL;
     public StateGame stateGame = StateGame.NONE;
     public List<Map> lstMap = new List<Map>();
     public Boost boost;
@@ -102,7 +103,16 @@ public class GameManager : MonoBehaviour
         this.PostEvent(EventID.CHANGE_GOLD_COIN);
     }
 
-	public void SaveExit(){
+    public void AddMedal(int _value)
+    {
+        MEDAL += _value;
+        if (MEDAL <= 0)
+            MEDAL = 0;
+
+        UIManager.Instance.txtMedal.text = UIManager.Instance.ToLongString(MEDAL);
+    }
+
+    public void SaveExit(){
 		Debug.Log ("quit");
 		Application.Quit ();
 	}
