@@ -14,6 +14,12 @@ public class UFO : MonoBehaviour
     long goldReward;
     int x;
     public bool isOpening;
+    public static UFO Instance;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     public void Move()
     {

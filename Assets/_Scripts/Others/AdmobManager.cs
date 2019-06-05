@@ -43,6 +43,7 @@ public class AdmobManager : MonoBehaviour
     private RewardBasedVideoAd rewardBasedVideo;
 
     private VideoRewardType VideoRewardType { get; set; }
+    private System.Action VideoRewardSuccessAction { get; set; }
     private bool IsRewardedVideo { get; set; }
 
     void Awake()
@@ -115,10 +116,10 @@ public class AdmobManager : MonoBehaviour
                  .Build();
     }
 
-    public void RequestRewardBasedVideo(VideoRewardType type)
+    public void RequestRewardBasedVideo(VideoRewardType type, System.Action action)
     {
         //LoadingPopup.Show();
-        
+        this.VideoRewardSuccessAction = action;
 #if UNITY_EDITOR
         string adUnitId = "unused";
 #elif UNITY_ANDROID
@@ -283,14 +284,7 @@ public class AdmobManager : MonoBehaviour
 
         if (this.IsRewardedVideo)
         {
-            if (this.VideoRewardType == VideoRewardType.HOME)
-            {
-                
-            }
-            else if (this.VideoRewardType == VideoRewardType.UPGRADE)
-            {
-                
-            }
+            if (this.VideoRewardSuccessAction != null) this.VideoRewardSuccessAction();
         }
     }
 
@@ -316,5 +310,5 @@ public class AdmobManager : MonoBehaviour
 public enum VideoRewardType
 {
     HOME,
-    UPGRADE
+    UNLOCK
 }

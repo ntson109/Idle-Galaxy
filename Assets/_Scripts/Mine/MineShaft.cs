@@ -1146,9 +1146,12 @@ public class MineShaft : MonoBehaviour
         }
         else
         {
-            btnUnlock_byAD.GetComponent<PlayUnityAd>().showAd();
-            this.timeUnlocking = this.properties.unlockTime;
-            this.state = StateMineShaft.UNLOCKING;
+            /*btnUnlock_byAD.GetComponent<PlayUnityAd>().showAd();*/
+            AdmobManager.Instance.RequestRewardBasedVideo(VideoRewardType.UNLOCK, () =>
+            {
+                this.timeUnlocking = this.properties.unlockTime;
+                this.state = StateMineShaft.UNLOCKING;
+            });
         }
         objLock.SetActive(false);
     }

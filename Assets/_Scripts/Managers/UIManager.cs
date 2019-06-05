@@ -11,7 +11,6 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance = new UIManager();
     public bool isNewPlayer = true;
     public float timeVideo;
-    public bool isCanClickVideo;
 
     [HideInInspector]
     public List<string> arrAlphabetNeed = new List<string>();
@@ -95,6 +94,8 @@ public class UIManager : MonoBehaviour
     public GameObject panelVideo;
     public Text txtReward_Video;
     public Image imgRewardVideo;
+    public Button btnHomeAds;
+    public Animator btnHomeAdsAnim;
 
     [Header("UNLOCK")]
     public GameObject panelUnlockReward;
@@ -155,14 +156,15 @@ public class UIManager : MonoBehaviour
         {
             timeVideo -= Time.deltaTime;
             txtTimeVideo.text = transformToTime(timeVideo);
-            if (isCanClickVideo)
-                isCanClickVideo = false;
+            this.btnHomeAds.interactable = false;
+            this.btnHomeAdsAnim.enabled = false;
         }
         else
         {
             txtTimeVideo.text = "";
-            if (!isCanClickVideo)
-                isCanClickVideo = true;
+            this.btnHomeAds.interactable = true;
+            this.btnHomeAdsAnim.enabled = true;
+            this.btnHomeAdsAnim.Play("Ad");
         }
 
         this.InitMusicAndSound();
@@ -840,7 +842,11 @@ public class UIManager : MonoBehaviour
         }
         SetDeActivePanel(panelVideo);
         timeVideo = 380;
-        isCanClickVideo = false;
+    }
+
+    public void OnHomeAdsClick()
+    {
+        AdmobManager.Instance.RequestRewardBasedVideo(VideoRewardType.HOME, () => this.On_Success_Ad_Video());
     }
 
     int countSpin_Unlock;
