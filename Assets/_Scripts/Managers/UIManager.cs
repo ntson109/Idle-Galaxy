@@ -121,6 +121,11 @@ public class UIManager : MonoBehaviour
     //public GameObject mouseClick;
     //public Canvas parentCanvas;
 
+    [Header("SHOP")]
+    public GameObject panelShop;
+    public List<GoldPackItem> ListGoldPackItems;
+    public List<CoinPackItem> ListCoinPackItems;
+
     void Awake()
     {
         if (Instance != null)
@@ -169,6 +174,7 @@ public class UIManager : MonoBehaviour
         }
 
         this.InitMusicAndSound();
+        this.InitShop();
     }
 
     void Update()
@@ -1150,6 +1156,24 @@ public class UIManager : MonoBehaviour
     }
     #endregion
 
+    #region SHOP
+    private void InitShop()
+    {
+        for (int i = 0; i < this.ListGoldPackItems.Count; i++)
+        {
+            this.ListGoldPackItems[i].Init(i);
+        }
 
+        for (int i = 0; i < this.ListCoinPackItems.Count; i++)
+        {
+            this.ListCoinPackItems[i].Init(i);
+        }
+    }
+
+    public void OnOpenShopClick()
+    {
+        this.SetActivePanel(this.panelShop);
+    }
+    #endregion
 }
 

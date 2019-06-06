@@ -628,22 +628,37 @@
           5000000
         ]
       }
+    }
+  },
+  "coinPacks": {
+    "1": {
+      "productID": "com.companyname.galaxyidle.coinpack1",
+      "price": "0.99$",
+      "value": 200
     },
-    "coinPacks": {
-      "1": {
-        "productID": "com.companyname.galaxyidle.coinpack1",
-        "price": "0.99$",
-        "value": 200
-      },
-      "2": {
-        "productID": "com.companyname.galaxyidle.coinpack2",
-        "price": "1.99$",
-        "value": 500
-      },
-      "3": {
-        "productID": "com.companyname.galaxyidle.coinpack3",
-        "price": "2.99$",
-        "value": 1000
-      }
+    "2": {
+      "productID": "com.companyname.galaxyidle.coinpack2",
+      "price": "1.99$",
+      "value": 500
+    },
+    "3": {
+      "productID": "com.companyname.galaxyidle.coinpack3",
+      "price": "2.99$",
+      "value": 1000
+    }
+  },
+  "goldPacks": {
+    "1": {
+      "price": 10,
+      "value": 1000
+    },
+    "2": {
+      "price": 100,
+      "value": 15000
+    },
+    "3": {
+      "price": 1000,
+      "value": 300000
     }
   }
+}

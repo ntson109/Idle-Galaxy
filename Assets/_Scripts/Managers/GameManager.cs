@@ -5,16 +5,18 @@ using EventDispatcher;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance = new GameManager();
-
-    void Awake()
+    public static GameManager Instance
     {
-        if (Instance != null)
+        get
         {
-            return;
+            if (_instace == null)
+            {
+                _instace = GameObject.Find("GameManager").GetComponent<GameManager>();
+            }
+            return _instace;
         }
-        Instance = this;
     }
+    private static GameManager _instace;
 
     public long GOLD;
     public long COIN;

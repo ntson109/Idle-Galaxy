@@ -7,16 +7,19 @@ using com.shephertz.app42.paas.sdk.csharp.storage;
 [RequireComponent(typeof(LoadDataJson))]
 public class GameConfig : MonoBehaviour
 {
-    public static GameConfig Instance;
-    public static string id = "";
-    void Awake()
+    public static GameConfig Instance
     {
-        if (Instance != null)
+        get
         {
-            return;
+            if (_instance == null)
+            {
+                _instance = GameObject.Find("GameConfig").GetComponent<GameConfig>();
+            }
+            return _instance;
         }
-        Instance = this;
     }
+    private static GameConfig _instance;
+    public static string id = "";
 
     [System.Serializable]
     public struct PropertiesMap
@@ -79,6 +82,7 @@ public class GameConfig : MonoBehaviour
     public List<int> lstRewardSpin_Coin = new List<int>();
     public List<string> lstTutorial = new List<string>();
     public List<CoinPack> listCoinPacks;
+    public List<GoldPack> listGoldPacks;
     #endregion
 
     #region === APP42 ===
@@ -130,5 +134,11 @@ public class CoinPack
     public string productID;
     public string price;
     public int value;
+}
+
+public class GoldPack
+{
+    public int price;
+    public long value;
 }
 

@@ -21,13 +21,14 @@ public class LoadDataJson : MonoBehaviour
         {
             PlayerPrefs.DeleteAll();
         }
+        LoadGameConfig();
     }
     private string gameConfig = "GameConfig";
 
     void Start()
     {
-        LoadGameConfig();
-        Ads.Instance.RequestAd();
+        
+        /*Ads.Instance.RequestAd();
         Ads.Instance.RequestBanner();
         if (PlayerPrefs.GetInt(KeyPrefs.TUTORIAL_DONE) == 1)
         {
@@ -35,7 +36,7 @@ public class LoadDataJson : MonoBehaviour
         }
 #if UNITY_ADS
         Advertisement.Initialize(GameConfig.Instance.ID_UnityAds_ios, true);
-#endif
+#endif*/
         //Purchaser.Instance.Init();
     }
 
@@ -189,10 +190,19 @@ public class LoadDataJson : MonoBehaviour
             for (int j = 0; j < objJson["coinPacks"].Count; j++)
             {
                 var coin_pack = new CoinPack();
-                coin_pack.productID = objJson["coinPack"][j]["productID"];
-                coin_pack.price = objJson["coinPack"][j]["price"];
-                coin_pack.value = objJson["coinPack"][j]["value"].AsInt;
+                coin_pack.productID = objJson["coinPacks"][j]["productID"];
+                coin_pack.price = objJson["coinPacks"][j]["price"];
+                coin_pack.value = objJson["coinPacks"][j]["value"].AsInt;
                 GameConfig.Instance.listCoinPacks.Add(coin_pack);
+            }
+
+            GameConfig.Instance.listGoldPacks = new List<GoldPack>();
+            for (int j = 0; j < objJson["goldPacks"].Count; j++)
+            {
+                var gold_pack = new GoldPack();
+                gold_pack.price = objJson["goldPacks"][j]["price"].AsInt;
+                gold_pack.value = objJson["goldPacks"][j]["value"].AsLong;
+                GameConfig.Instance.listGoldPacks.Add(gold_pack);
             }
         }
     }
