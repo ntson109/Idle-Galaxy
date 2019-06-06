@@ -342,7 +342,7 @@
           "coinMax": 10
         }
       },
-      "Unit_Price": 1000,
+      "Unit_Price": 100,
       "Store_Cost_1": 500,
       "Store_Cost_2": 0.07,
       "Store_Cost_3": 5,
@@ -432,7 +432,7 @@
           "coinMax": 10
         }
       },
-      "Unit_Price": 10000,
+      "Unit_Price": 1000,
       "Store_Cost_1": 5000,
       "Store_Cost_2": 0.08,
       "Store_Cost_3": 10,
@@ -522,7 +522,7 @@
           "coinMax": 10
         }
       },
-      "Unit_Price": 100000,
+      "Unit_Price": 10000,
       "Store_Cost_1": 500000,
       "Store_Cost_2": 0.09,
       "Store_Cost_3": 100,
@@ -612,7 +612,7 @@
           "coinMax": 10
         }
       },
-      "Unit_Price": 1000000,
+      "Unit_Price": 100000,
       "Store_Cost_1": 0,
       "Store_Cost_2": 0,
       "Store_Cost_3": 0,
