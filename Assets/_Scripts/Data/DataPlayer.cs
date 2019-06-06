@@ -419,10 +419,9 @@ public class DataPlayer : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (GameManager.Instance.stateGame == StateGame.PLAYING)
+        if (GameManager.Instance != null && GameManager.Instance.stateGame == StateGame.PLAYING)
         {
             SaveDataPlayer();
-
             PlayerPrefs.SetString(KeyPrefs.TIME_QUIT_GAME, DateTime.Now.ToString());
         }
     }

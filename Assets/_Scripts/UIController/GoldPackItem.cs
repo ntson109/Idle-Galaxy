@@ -16,8 +16,20 @@ public class GoldPackItem : MonoBehaviour
         this.txtPrice.text = this.PackData.price.ToString();
     }
 
+    public void UpdateState()
+    {
+        this.GetComponentInChildren<Button>().interactable = GameManager.Instance.COIN >= this.PackData.price;
+    }
+
     public void OnBuyClick()
     {
-
+        if (this.PackData.price > GameManager.Instance.COIN)
+        {
+            return;
+        }
+            
+        GameManager.Instance.AddCoin(-this.PackData.price);
+        GameManager.Instance.AddGold(this.PackData.value);
+        this.UpdateState();
     }
 }

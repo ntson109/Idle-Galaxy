@@ -1173,6 +1173,10 @@ public class UIManager : MonoBehaviour
     public void OnOpenShopClick()
     {
         this.SetActivePanel(this.panelShop);
+        for (int i = 0; i < this.ListGoldPackItems.Count; i++)
+        {
+            this.ListGoldPackItems[i].UpdateState();
+        }
     }
     #endregion
 }

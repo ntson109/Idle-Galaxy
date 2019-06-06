@@ -935,7 +935,7 @@ public class MineShaft : MonoBehaviour
             this.typeUpgradeSpecial[_id] = UpgradeObj_Special.Type.UPGRADED;
             this.lstUpgradeSpecial[_id].SetBought();
         }
-
+        GameManager.Instance.AddMedal(1);
     }
 
     void SpecialUpgrade_Complete_2(int _id)
@@ -1044,7 +1044,7 @@ public class MineShaft : MonoBehaviour
 
             GameManager.Instance.upgradeLevel.SetInfo(this, typeUpgradeLevel);
         }
-
+        GameManager.Instance.AddMedal(1);
     }
 
     public void UpgradeAds(int _id)
@@ -1221,6 +1221,7 @@ public class MineShaft : MonoBehaviour
             coin_Unlock = 0;
         }
         UIManager.Instance.UnlockReward(gold_Unlock, countSpin_Unlock, timeSkip_Unlock, coin_Unlock);
+        GameManager.Instance.AddMedal(1);
     }
     #endregion
 
