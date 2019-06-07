@@ -504,6 +504,7 @@ PlayerSettings:
   webGLThreadsSupport: 0
   scriptingDefineSymbols:
     1: INAPP;RECEIPT_VALIDATION
+    4: INAPP;RECEIPT_VALIDATION
     7: INAPP;RECEIPT_VALIDATION
   platformArchitecture: {}
   scriptingBackend: {}
