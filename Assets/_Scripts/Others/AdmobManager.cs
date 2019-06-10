@@ -42,7 +42,6 @@ public class AdmobManager : MonoBehaviour
     private InterstitialAd interstitial;
     private RewardBasedVideoAd rewardBasedVideo;
 
-    private VideoRewardType VideoRewardType { get; set; }
     private System.Action VideoRewardSuccessAction { get; set; }
     private bool IsRewardedVideo { get; set; }
 
@@ -116,12 +115,17 @@ public class AdmobManager : MonoBehaviour
                  .Build();
     }
 
-    public void RequestRewardBasedVideo(VideoRewardType type, System.Action action)
+    public void RequestRewardBasedVideo(System.Action action)
     {
         //LoadingPopup.Show();
         this.VideoRewardSuccessAction = action;
 #if UNITY_EDITOR
         string adUnitId = "unused";
+        if (action != null)
+        {
+            action();
+            return;
+        }
 #elif UNITY_ANDROID
             string adUnitId = "ca-app-pub-7945781459560557/8311323627";
 #elif (UNITY_5 && UNITY_IOS) || UNITY_IPHONE
@@ -138,8 +142,6 @@ public class AdmobManager : MonoBehaviour
         rewardBasedVideo.OnAdClosed += HandleRewardBasedVideoClosed;
         rewardBasedVideo.OnAdLeavingApplication += HandleRewardBasedVideoLeftApplication;
         rewardBasedVideo.LoadAd(createAdRequest(), adUnitId);
-
-        this.VideoRewardType = type;
         this.IsRewardedVideo = false;
     }
 
@@ -305,10 +307,4 @@ public class AdmobManager : MonoBehaviour
 
     #endregion
 
-}
-
-public enum VideoRewardType
-{
-    HOME,
-    UNLOCK
 }

@@ -433,7 +433,6 @@ public class DataPlayer : MonoBehaviour
             if (GameManager.Instance.stateGame == StateGame.PLAYING)
             {
                 SaveDataPlayer();
-
                 PlayerPrefs.SetString(KeyPrefs.TIME_QUIT_GAME, DateTime.Now.ToString());
             }           
         }

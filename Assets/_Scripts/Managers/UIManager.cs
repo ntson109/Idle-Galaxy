@@ -853,11 +853,6 @@ public class UIManager : MonoBehaviour
         timeVideo = 380;
     }
 
-    public void OnHomeAdsClick()
-    {
-        AdmobManager.Instance.RequestRewardBasedVideo(VideoRewardType.HOME, () => this.On_Success_Ad_Video());
-    }
-
     int countSpin_Unlock;
     int timeSkip_Unlock;
     long gold_Unlock;

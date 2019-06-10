@@ -11,7 +11,8 @@ public class GameManager : MonoBehaviour
         {
             if (_instace == null)
             {
-                _instace = GameObject.Find("GameManager").GetComponent<GameManager>();
+                var go = GameObject.Find("GameManager");
+                if (go != null) _instace = go.GetComponent<GameManager>();
             }
             return _instace;
         }
@@ -37,8 +38,7 @@ public class GameManager : MonoBehaviour
    
     void Start()
     {
-
-        
+        DontDestroyOnLoad(this.gameObject);
     }
 
     void Update()

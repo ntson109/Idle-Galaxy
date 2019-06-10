@@ -1147,7 +1147,7 @@ public class MineShaft : MonoBehaviour
         else
         {
             /*btnUnlock_byAD.GetComponent<PlayUnityAd>().showAd();*/
-            AdmobManager.Instance.RequestRewardBasedVideo(VideoRewardType.UNLOCK, () =>
+            AdmobManager.Instance.RequestRewardBasedVideo(() =>
             {
                 this.timeUnlocking = this.properties.unlockTime;
                 this.state = StateMineShaft.UNLOCKING;
