@@ -8705,7 +8705,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &288782170
 RectTransform:
   m_ObjectHideFlags: 0
@@ -21740,34 +21740,25 @@ RectTransform:
 --- !u!114 &637224820
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 114750305709189216, guid: 06fb6266456d58f4cb881edf82426579,
-    type: 3}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 637224818}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 116eab2baa61dd54a91d96a595b30f7d, type: 3}
+  m_Script: {fileID: 11500000, guid: edf20d40f2a1c294f9f490d4e52a213f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onAdAvailable:
+  onSuccess:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: PlayUnityAd+mEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+    m_TypeName: AdsButton+mEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
-  onAdSuccess:
+  onFail:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: PlayUnityAd+mEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+    m_TypeName: AdsButton+mEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
-  onAdFail:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: PlayUnityAd+mEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  watchAdButton: {fileID: 637224821}
-  anim: {fileID: 0}
-  rewardedAd: 1
 --- !u!114 &637224821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21808,18 +21799,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 637224822}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 637224820}
-        m_MethodName: showAd
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &637224822
@@ -37929,6 +37909,12 @@ MonoBehaviour:
   txtUnitPrice_next: {fileID: 106396562}
   txtPrice: {fileID: 1218500768}
   btnUpgrade: {fileID: 1822019741}
+  CapLine: {fileID: 999572643}
+  TimeLine: {fileID: 667462093}
+  CapDefaultSprite: {fileID: 0}
+  TimeDefaultSprite: {fileID: 0}
+  CapLineDefaultSprite: {fileID: 0}
+  TimeLineDefaultSprite: {fileID: 0}
 --- !u!1 &1152156989
 GameObject:
   m_ObjectHideFlags: 0
@@ -44510,7 +44496,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: aac5751924abb694884f71d292ad3635, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cbb70a323dc3a684883ac79997b5b1b7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

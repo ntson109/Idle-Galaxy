@@ -32,13 +32,18 @@ public class UpgradeObj_Level : MonoBehaviour
     public Text txtUnitPrice_next;
     public Text txtPrice;
     public MyButton btnUpgrade;
-
     private MineShaft thisMineShaft;
+    public Image CapLine, TimeLine;
+    public Sprite CapDefaultSprite, TimeDefaultSprite;
+    public Sprite CapLineDefaultSprite, TimeLineDefaultSprite;
 
     // Use this for initialization
-    void Start()
+    void Awake()
     {
-
+        this.CapDefaultSprite = this.animCap.GetComponent<Image>().sprite;
+        this.TimeDefaultSprite = this.animTime.GetComponent<Image>().sprite;
+        this.CapLineDefaultSprite = this.CapLine.sprite;
+        this.TimeLineDefaultSprite = this.TimeLine.sprite;
     }
 
     // Update is called once per frame
@@ -81,6 +86,8 @@ public class UpgradeObj_Level : MonoBehaviour
             if (thisMineShaft.properties.level % 2 == 1)
             {
                 animCap.enabled = false;
+                if (this.CapDefaultSprite != null) this.animCap.GetComponent<Image>().sprite = this.CapDefaultSprite;
+                if (this.CapLineDefaultSprite != null) this.CapLine.sprite = this.CapLineDefaultSprite;
                 txtCap_cur.text = thisMineShaft.properties.capacity.ToString();
                 txtCap_next.text = thisMineShaft.properties.capacity.ToString();
                 txtCap_next.color = Color.white;
@@ -98,6 +105,8 @@ public class UpgradeObj_Level : MonoBehaviour
                 txtCap_next.color = Color.yellow;
 
                 animTime.enabled = false;
+                if (this.TimeDefaultSprite != null) this.animTime.GetComponent<Image>().sprite = this.TimeDefaultSprite;
+                if (this.TimeLineDefaultSprite != null) this.TimeLine.sprite = this.TimeLineDefaultSprite;
                 txtTime_cur.text = UIManager.Instance.ToDateTimeString((int)thisMineShaft.properties.miningTime);
                 txtTime_next.text = UIManager.Instance.ToDateTimeString((int)thisMineShaft.properties.miningTime);
                 txtTime_next.color = Color.white;
