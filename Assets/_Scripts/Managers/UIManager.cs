@@ -95,7 +95,7 @@ public class UIManager : MonoBehaviour
     public GameObject panelVideo;
     public Text txtReward_Video;
     public Image imgRewardVideo;
-    public Button btnHomeAds;
+    public Button btnHomeAds, btnHomeAdsX2;
     public Animator btnHomeAdsAnim;
 
     [Header("UNLOCK")]
@@ -158,21 +158,6 @@ public class UIManager : MonoBehaviour
             btnContinue.gameObject.GetComponent<Animator>().enabled = false;
         }
 
-        if (timeVideo > 0)
-        {
-            timeVideo -= Time.deltaTime;
-            txtTimeVideo.text = transformToTime(timeVideo);
-            this.btnHomeAds.interactable = false;
-            this.btnHomeAdsAnim.enabled = false;
-        }
-        else
-        {
-            txtTimeVideo.text = "";
-            this.btnHomeAds.interactable = true;
-            this.btnHomeAdsAnim.enabled = true;
-            this.btnHomeAdsAnim.Play("Ad");
-        }
-
         this.InitMusicAndSound();
         this.InitShop();
     }
@@ -199,6 +184,21 @@ public class UIManager : MonoBehaviour
                 }
             }
             UIManager.Instance.txtCountSpinMain.text = "x" + GameManager.Instance.countSpin;
+
+            if (timeVideo > 0)
+            {
+                timeVideo -= Time.deltaTime;
+                txtTimeVideo.text = transformToTime(timeVideo);
+                this.btnHomeAds.interactable = false;
+                this.btnHomeAdsAnim.enabled = false;
+            }
+            else
+            {
+                txtTimeVideo.text = "";
+                this.btnHomeAds.interactable = true;
+                this.btnHomeAdsAnim.enabled = true;
+                this.btnHomeAdsAnim.Play("Ad");
+            }
         }
     }
     #endregion
@@ -789,12 +789,12 @@ public class UIManager : MonoBehaviour
     #endregion
 
     #region === VIDEO ===
-    long reward_Video;
+    long HomeAdsRewards;
     int typeReward_Video;
-    public void On_Success_Ad_Video()
+    public void ShowHomeAdsPanel()
     {
         SetActivePanel(panelVideo);
-        reward_Video = 0;
+        HomeAdsRewards = 0;
         typeReward_Video = 0;
         int r = UnityEngine.Random.Range(0, 10);
         if (r < 8) //gold
@@ -808,7 +808,7 @@ public class UIManager : MonoBehaviour
                         priceLastMine = GameManager.Instance.lstMap[0].lstMineShaft[i].properties.buyMoreMinePrice;
                 }
             }
-            reward_Video = (long)(UnityEngine.Random.Range(GameConfig.Instance.UFO_rate_gold[0], GameConfig.Instance.UFO_rate_gold[1]) * priceLastMine);
+            HomeAdsRewards = (long)(UnityEngine.Random.Range(GameConfig.Instance.UFO_rate_gold[0], GameConfig.Instance.UFO_rate_gold[1]) * priceLastMine);
             imgRewardVideo.sprite = UIManager.Instance.lstSprReward[1];
             typeReward_Video = 1;
         }
@@ -823,31 +823,39 @@ public class UIManager : MonoBehaviour
             }
             if (r1 <= 4)
             {
-                reward_Video = UnityEngine.Random.Range(1, 3) * countMine;
+                HomeAdsRewards = UnityEngine.Random.Range(1, 3) * countMine;
             }
             else if (r1 <= 8)
             {
-                reward_Video = UnityEngine.Random.Range(3, 5) * countMine;
+                HomeAdsRewards = UnityEngine.Random.Range(3, 5) * countMine;
             }
             else
             {
-                reward_Video = 5 * countMine;
+                HomeAdsRewards = 5 * countMine;
             }
             imgRewardVideo.sprite = UIManager.Instance.lstSprReward[1];
             typeReward_Video = 2;
         }
-        UIManager.Instance.txtReward_Video.text = ToLongString(reward_Video);
+        this.txtReward_Video.text = ToLongString(HomeAdsRewards);
+        this.btnHomeAdsX2.interactable = true;
+    }
+
+    public void OnHomeAdsX2Success()
+    {
+        this.HomeAdsRewards *= 2;
+        this.txtReward_Video.text = ToLongString(this.HomeAdsRewards);
+        this.btnHomeAdsX2.interactable = false;
     }
 
     public void Btn_OK_Video()
     {
         if (typeReward_Video == 1)
         {
-            GameManager.Instance.AddGold(reward_Video);
+            GameManager.Instance.AddGold(HomeAdsRewards);
         }
         else if (typeReward_Video == 2)
         {
-            GameManager.Instance.AddCoin(reward_Video);
+            GameManager.Instance.AddCoin(HomeAdsRewards);
         }
         SetDeActivePanel(panelVideo);
         timeVideo = 380;

@@ -19,7 +19,7 @@ public class AdsButton : MonoBehaviour
         switch (this.Type)
         {
             case AdsType.HOME:
-                success_action = () => UIManager.Instance.On_Success_Ad_Video();
+                success_action = () => UIManager.Instance.OnHomeAdsX2Success();
                 break;
 
             default:
