@@ -3451,7 +3451,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edf20d40f2a1c294f9f490d4e52a213f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Type: 0
+  onSuccess:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2083362800}
+        m_MethodName: OnHomeAdsX2Success
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: AdsButton+mEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onFail:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: AdsButton+mEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!1 &131860670
 GameObject:
   m_ObjectHideFlags: 0
@@ -14730,22 +14750,16 @@ GameObject:
 --- !u!114 &457575855
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 114095790684563096, guid: 90fd4355538c0c84e95fe8fdb11d003e,
-    type: 3}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 457575854}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 116eab2baa61dd54a91d96a595b30f7d, type: 3}
+  m_Script: {fileID: 11500000, guid: edf20d40f2a1c294f9f490d4e52a213f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onAdAvailable:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: PlayUnityAd+mEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  onAdSuccess:
+  onSuccess:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2083362800}
@@ -14759,16 +14773,13 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: PlayUnityAd+mEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+    m_TypeName: AdsButton+mEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
-  onAdFail:
+  onFail:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: PlayUnityAd+mEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+    m_TypeName: AdsButton+mEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
-  watchAdButton: {fileID: 457575856}
-  anim: {fileID: 0}
-  rewardedAd: 1
 --- !u!114 &457575856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14809,18 +14820,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 457575857}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 457575855}
-        m_MethodName: showAd
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &457575857
@@ -49675,11 +49675,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2083362800}
-        m_MethodName: SetActivePanel
-        m_Mode: 2
+        m_MethodName: OnShowMedalClick
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 1162379502}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -68263,7 +68263,7 @@ MonoBehaviour:
   txtReward_Video: {fileID: 429591374}
   imgRewardVideo: {fileID: 227358596}
   btnHomeAds: {fileID: 1014555782}
-  btnHomeAdsX2: {fileID: 1433292399}
+  btnHomeAdsX2: {fileID: 129556440}
   btnHomeAdsAnim: {fileID: 1014555780}
   panelUnlockReward: {fileID: 1311258457}
   txtTittleUnlock: {fileID: 670353201}
@@ -68288,6 +68288,9 @@ MonoBehaviour:
   - {fileID: 1499302596}
   - {fileID: 607580000}
   - {fileID: 1400915539}
+  panelMedal: {fileID: 1162379502}
+  txtMedalHave: {fileID: 1507715812}
+  txtMedalNeed: {fileID: 490364970}
   timeOffline: 0
   goldOffline: 0
   isSpinning: 0

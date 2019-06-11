@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class AdsButton : MonoBehaviour
 {
-    public AdsType Type;
+    [System.Serializable] public class mEvent : UnityEvent { }
+    public mEvent onSuccess;
+    public mEvent onFail;
 
     void Awake()
     {
@@ -14,24 +17,9 @@ public class AdsButton : MonoBehaviour
 
     private void OnAdsButtonClick()
     {
-        System.Action success_action = null;
-
-        switch (this.Type)
+        AdmobManager.Instance.RequestRewardBasedVideo(() =>
         {
-            case AdsType.HOME:
-                success_action = () => UIManager.Instance.OnHomeAdsX2Success();
-                break;
-
-            default:
-                break;
-        }
-
-        AdmobManager.Instance.RequestRewardBasedVideo(success_action);
+            this.onSuccess.Invoke();
+        });
     }
-}
-
-public enum AdsType
-{
-    HOME,
-    UNLOCK
 }

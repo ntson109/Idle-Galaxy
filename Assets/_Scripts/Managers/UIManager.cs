@@ -126,6 +126,10 @@ public class UIManager : MonoBehaviour
     public List<GoldPackItem> ListGoldPackItems;
     public List<CoinPackItem> ListCoinPackItems;
 
+    [Header("MEDAL")]
+    public GameObject panelMedal;
+    public Text txtMedalHave, txtMedalNeed;
+
     void Awake()
     {
         if (Instance != null)
@@ -1180,6 +1184,15 @@ public class UIManager : MonoBehaviour
         {
             this.ListGoldPackItems[i].UpdateState();
         }
+    }
+    #endregion
+
+    #region Medal
+    public void OnShowMedalClick()
+    {
+        this.SetActivePanel(this.panelMedal);
+        this.txtMedalHave.text = string.Format("You have collected {0} medals.", GameManager.Instance.MEDAL);
+        this.txtMedalNeed.text = string.Format("Collect {0} more to unlock the next chapter.", 50 - GameManager.Instance.MEDAL);
     }
     #endregion
 }
