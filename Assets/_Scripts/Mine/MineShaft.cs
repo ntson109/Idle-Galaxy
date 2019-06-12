@@ -938,11 +938,12 @@ public class MineShaft : MonoBehaviour
             this.typeUpgradeSpecial[_id] = UpgradeObj_Special.Type.UPGRADED;
             this.lstUpgradeSpecial[_id].SetBought();
         }
-        GameManager.Instance.AddMedal(1);
     }
 
     void SpecialUpgrade_Complete_2(int _id)
     {
+        GameManager.Instance.AddMedal(1);
+
         switch (_id)
         {
             case 0:
@@ -952,6 +953,21 @@ public class MineShaft : MonoBehaviour
                 this.properties.unitPrice *= 2;
                 break;
             case 2:
+                this.properties.unitPrice *= 2;
+                break;
+            case 3:
+                this.properties.capacity *= 2;
+                if (this.preMineShaft != null)
+                    this.preMineShaft.store.deltaCap *= 2;
+                this.totalCapacity = this.properties.capacity * numberMine;
+                break;
+            case 4:
+                this.properties.capacity *= 2;
+                if (this.preMineShaft != null)
+                    this.preMineShaft.store.deltaCap *= 2;
+                this.totalCapacity = this.properties.capacity * numberMine;
+                break;
+            case 5:
                 this.properties.capacity *= 2;
                 if (this.preMineShaft != null)
                     this.preMineShaft.store.deltaCap *= 2;

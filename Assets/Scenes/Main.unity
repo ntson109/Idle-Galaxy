@@ -6369,6 +6369,45 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 222788495}
   m_CullTransparentMesh: 0
+--- !u!1 &224013367 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1221066147510138, guid: 06fb6266456d58f4cb881edf82426579,
+    type: 3}
+  m_PrefabInstance: {fileID: 1878955721}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &224013368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 224013367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edf20d40f2a1c294f9f490d4e52a213f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onSuccess:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1115913776}
+        m_MethodName: BtnBuyAds
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: AdsButton+mEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onFail:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: AdsButton+mEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!1 &226262003
 GameObject:
   m_ObjectHideFlags: 0
@@ -8197,6 +8236,45 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 271199406}
   m_CullTransparentMesh: 0
+--- !u!1 &271331815 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1221066147510138, guid: 06fb6266456d58f4cb881edf82426579,
+    type: 3}
+  m_PrefabInstance: {fileID: 479514590}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &271331816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 271331815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edf20d40f2a1c294f9f490d4e52a213f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onSuccess:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1676949715}
+        m_MethodName: BtnBuyAds
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: AdsButton+mEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onFail:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: AdsButton+mEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!1 &272011998
 GameObject:
   m_ObjectHideFlags: 0
@@ -15204,6 +15282,45 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 469717603}
   m_CullTransparentMesh: 0
+--- !u!1 &476447177 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1221066147510138, guid: 06fb6266456d58f4cb881edf82426579,
+    type: 3}
+  m_PrefabInstance: {fileID: 584494375}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &476447178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 476447177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edf20d40f2a1c294f9f490d4e52a213f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onSuccess:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1576254380}
+        m_MethodName: BtnBuyAds
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: AdsButton+mEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onFail:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: AdsButton+mEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!1 &478661216
 GameObject:
   m_ObjectHideFlags: 0
@@ -15488,6 +15605,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -38.00003
+      objectReference: {fileID: 0}
+    - target: {fileID: 114739787383850366, guid: 06fb6266456d58f4cb881edf82426579,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114739787383850366, guid: 06fb6266456d58f4cb881edf82426579,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1676949715}
+    - target: {fileID: 114739787383850366, guid: 06fb6266456d58f4cb881edf82426579,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: BtnBuyAds
       objectReference: {fileID: 0}
     - target: {fileID: 114008773996437938, guid: 06fb6266456d58f4cb881edf82426579,
         type: 3}
@@ -19351,6 +19483,21 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: -37.99913
       objectReference: {fileID: 0}
+    - target: {fileID: 114739787383850366, guid: 06fb6266456d58f4cb881edf82426579,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114739787383850366, guid: 06fb6266456d58f4cb881edf82426579,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1576254380}
+    - target: {fileID: 114739787383850366, guid: 06fb6266456d58f4cb881edf82426579,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: BtnBuyAds
+      objectReference: {fileID: 0}
     - target: {fileID: 114008773996437938, guid: 06fb6266456d58f4cb881edf82426579,
         type: 3}
       propertyPath: PriceButton
@@ -22511,6 +22658,45 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &659319186 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1221066147510138, guid: 06fb6266456d58f4cb881edf82426579,
+    type: 3}
+  m_PrefabInstance: {fileID: 1819385653}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &659319187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 659319186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edf20d40f2a1c294f9f490d4e52a213f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onSuccess:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 783011359}
+        m_MethodName: BtnBuyAds
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: AdsButton+mEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onFail:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: AdsButton+mEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!1 &665382131
 GameObject:
   m_ObjectHideFlags: 0
@@ -27519,6 +27705,21 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: -37.99913
       objectReference: {fileID: 0}
+    - target: {fileID: 114739787383850366, guid: 06fb6266456d58f4cb881edf82426579,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114739787383850366, guid: 06fb6266456d58f4cb881edf82426579,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 167819636}
+    - target: {fileID: 114739787383850366, guid: 06fb6266456d58f4cb881edf82426579,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: BtnBuyAds
+      objectReference: {fileID: 0}
     - target: {fileID: 114008773996437938, guid: 06fb6266456d58f4cb881edf82426579,
         type: 3}
       propertyPath: PriceButton
@@ -31820,6 +32021,45 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 941376742}
   m_CullTransparentMesh: 0
+--- !u!1 &943700086 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1221066147510138, guid: 06fb6266456d58f4cb881edf82426579,
+    type: 3}
+  m_PrefabInstance: {fileID: 1171355399}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &943700087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 943700086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edf20d40f2a1c294f9f490d4e52a213f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onSuccess:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1643433698}
+        m_MethodName: BtnBuyAds
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: AdsButton+mEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onFail:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: AdsButton+mEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!1 &945813583
 GameObject:
   m_ObjectHideFlags: 0
@@ -36952,6 +37192,45 @@ RectTransform:
   m_AnchoredPosition: {x: -18, y: -37}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1123303231 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1221066147510138, guid: 06fb6266456d58f4cb881edf82426579,
+    type: 3}
+  m_PrefabInstance: {fileID: 1729772897}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1123303232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1123303231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edf20d40f2a1c294f9f490d4e52a213f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onSuccess:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1729772899}
+        m_MethodName: BtnBuyAds
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: AdsButton+mEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onFail:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: AdsButton+mEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!1 &1125707749
 GameObject:
   m_ObjectHideFlags: 0
@@ -37785,6 +38064,45 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1141444920}
   m_CullTransparentMesh: 0
+--- !u!1 &1145233134 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1221066147510138, guid: 06fb6266456d58f4cb881edf82426579,
+    type: 3}
+  m_PrefabInstance: {fileID: 798830307}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1145233135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1145233134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edf20d40f2a1c294f9f490d4e52a213f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onSuccess:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 167819636}
+        m_MethodName: BtnBuyAds
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: AdsButton+mEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onFail:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: AdsButton+mEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!1 &1146471740
 GameObject:
   m_ObjectHideFlags: 0
@@ -39413,6 +39731,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -37.99913
+      objectReference: {fileID: 0}
+    - target: {fileID: 114739787383850366, guid: 06fb6266456d58f4cb881edf82426579,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114739787383850366, guid: 06fb6266456d58f4cb881edf82426579,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1643433698}
+    - target: {fileID: 114739787383850366, guid: 06fb6266456d58f4cb881edf82426579,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: BtnBuyAds
       objectReference: {fileID: 0}
     - target: {fileID: 114008773996437938, guid: 06fb6266456d58f4cb881edf82426579,
         type: 3}
@@ -42677,6 +43010,45 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1311258457}
   m_CullTransparentMesh: 0
+--- !u!1 &1312031401 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1221066147510138, guid: 06fb6266456d58f4cb881edf82426579,
+    type: 3}
+  m_PrefabInstance: {fileID: 2004995607}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1312031402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1312031401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edf20d40f2a1c294f9f490d4e52a213f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onSuccess:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 604555591}
+        m_MethodName: BtnBuyAds
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: AdsButton+mEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onFail:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: AdsButton+mEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!1 &1313397806
 GameObject:
   m_ObjectHideFlags: 0
@@ -52455,6 +52827,21 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: -38.00003
       objectReference: {fileID: 0}
+    - target: {fileID: 114739787383850366, guid: 06fb6266456d58f4cb881edf82426579,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114739787383850366, guid: 06fb6266456d58f4cb881edf82426579,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1397018937}
+    - target: {fileID: 114739787383850366, guid: 06fb6266456d58f4cb881edf82426579,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: BtnBuyAds
+      objectReference: {fileID: 0}
     - target: {fileID: 114008773996437938, guid: 06fb6266456d58f4cb881edf82426579,
         type: 3}
       propertyPath: PriceButton
@@ -58158,6 +58545,21 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: -38.00003
       objectReference: {fileID: 0}
+    - target: {fileID: 114739787383850366, guid: 06fb6266456d58f4cb881edf82426579,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114739787383850366, guid: 06fb6266456d58f4cb881edf82426579,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1729772899}
+    - target: {fileID: 114739787383850366, guid: 06fb6266456d58f4cb881edf82426579,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: BtnBuyAds
+      objectReference: {fileID: 0}
     - target: {fileID: 114008773996437938, guid: 06fb6266456d58f4cb881edf82426579,
         type: 3}
       propertyPath: PriceButton
@@ -60051,6 +60453,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -37.99913
+      objectReference: {fileID: 0}
+    - target: {fileID: 114739787383850366, guid: 06fb6266456d58f4cb881edf82426579,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114739787383850366, guid: 06fb6266456d58f4cb881edf82426579,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 783011359}
+    - target: {fileID: 114739787383850366, guid: 06fb6266456d58f4cb881edf82426579,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: BtnBuyAds
       objectReference: {fileID: 0}
     - target: {fileID: 114347426781667544, guid: 06fb6266456d58f4cb881edf82426579,
         type: 3}
@@ -62402,6 +62819,21 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: -38.00003
       objectReference: {fileID: 0}
+    - target: {fileID: 114739787383850366, guid: 06fb6266456d58f4cb881edf82426579,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114739787383850366, guid: 06fb6266456d58f4cb881edf82426579,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1115913776}
+    - target: {fileID: 114739787383850366, guid: 06fb6266456d58f4cb881edf82426579,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: BtnBuyAds
+      objectReference: {fileID: 0}
     - target: {fileID: 114008773996437938, guid: 06fb6266456d58f4cb881edf82426579,
         type: 3}
       propertyPath: PriceButton
@@ -63144,6 +63576,45 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1915448812}
   m_CullTransparentMesh: 0
+--- !u!1 &1916228655 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1221066147510138, guid: 06fb6266456d58f4cb881edf82426579,
+    type: 3}
+  m_PrefabInstance: {fileID: 1587025778}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1916228656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1916228655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edf20d40f2a1c294f9f490d4e52a213f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onSuccess:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1397018937}
+        m_MethodName: BtnBuyAds
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: AdsButton+mEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onFail:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: AdsButton+mEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!1 &1917349927
 GameObject:
   m_ObjectHideFlags: 0
@@ -63814,6 +64285,45 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1936785949}
   m_CullTransparentMesh: 0
+--- !u!1 &1938470545 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1221066147510138, guid: 06fb6266456d58f4cb881edf82426579,
+    type: 3}
+  m_PrefabInstance: {fileID: 1982891952}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1938470546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1938470545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edf20d40f2a1c294f9f490d4e52a213f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onSuccess:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1982891954}
+        m_MethodName: BtnBuyAds
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: AdsButton+mEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onFail:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: AdsButton+mEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!114 &1942657999 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114112943604799332, guid: 06fb6266456d58f4cb881edf82426579,
@@ -65142,6 +65652,21 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: -38
       objectReference: {fileID: 0}
+    - target: {fileID: 114739787383850366, guid: 06fb6266456d58f4cb881edf82426579,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114739787383850366, guid: 06fb6266456d58f4cb881edf82426579,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1982891954}
+    - target: {fileID: 114739787383850366, guid: 06fb6266456d58f4cb881edf82426579,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: BtnBuyAds
+      objectReference: {fileID: 0}
     - target: {fileID: 114008773996437938, guid: 06fb6266456d58f4cb881edf82426579,
         type: 3}
       propertyPath: PriceButton
@@ -66232,6 +66757,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -37.99913
+      objectReference: {fileID: 0}
+    - target: {fileID: 114739787383850366, guid: 06fb6266456d58f4cb881edf82426579,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114739787383850366, guid: 06fb6266456d58f4cb881edf82426579,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 604555591}
+    - target: {fileID: 114739787383850366, guid: 06fb6266456d58f4cb881edf82426579,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: BtnBuyAds
       objectReference: {fileID: 0}
     - target: {fileID: 114008773996437938, guid: 06fb6266456d58f4cb881edf82426579,
         type: 3}
