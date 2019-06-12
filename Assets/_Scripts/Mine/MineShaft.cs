@@ -314,7 +314,7 @@ public class MineShaft : MonoBehaviour
                 if (txtProduct_PushUp != null)
                     txtProduct_PushUp.text = this.store.capacity.ToString();
 
-                txtMoreMinePrice.text = UIManager.Instance.ToLongString(btnBuyMoreMine.thisPrice);
+                //txtMoreMinePrice.text = UIManager.Instance.ToLongString(btnBuyMoreMine.thisPrice);
             }
             
             if (tubeT != null)
@@ -376,14 +376,15 @@ public class MineShaft : MonoBehaviour
 
         btnWork.onClick.AddListener(() => Btn_Work());
         btnUpgrade.onClick.AddListener(() => Btn_ShowUpgrade());
-        btnBuyMoreMine.thisButton.onClick.AddListener(() => Btn_BuyMoreMine());
-        btnBuyAI.thisButton.onClick.AddListener(() => Buy_AI());
+        //btnBuyMoreMine.thisButton.onClick.AddListener(() => Btn_BuyMoreMine());
+        //btnBuyAI.thisButton.onClick.AddListener(() => Buy_AI());
         //btnX.onClick.AddListener(() => Btn_X());
         objLock.GetComponent<Button>().onClick.AddListener(() => Btn_ShowUnlock());
         if (this.ID < 5)
         {
-            btnStore.type = MyButton.Type.GOLD;
-            btnStore.thisButton.onClick.AddListener(() => Upgrade_Store());
+            /*btnStore.type = MyButton.Type.GOLD;
+            btnStore.thisButton.onClick.AddListener(() => Upgrade_Store());*/
+            this.btnStore.Init(PriceType.GOLD, this.store.cost, () => Upgrade_Store());
         }
         btnUnlock_byGold.onClick.AddListener(() => Btn_Unlock(TypeUnlock.GOLD));
         btnUnlock_byCoin.onClick.AddListener(() => Btn_Unlock(TypeUnlock.COIN));
@@ -560,8 +561,9 @@ public class MineShaft : MonoBehaviour
         }
 
         this.properties.buyAI = GameConfig.Instance.lstPropertiesMap[ID].BuyAI;
-        btnBuyAI.type = MyButton.Type.GOLD;
-        btnBuyAI.thisPrice = this.properties.buyAI;
+        /*btnBuyAI.type = MyButton.Type.GOLD;
+        btnBuyAI.thisPrice = this.properties.buyAI;*/
+        this.btnBuyAI.Init(PriceType.GOLD, this.properties.buyAI, () => Buy_AI());
         this.store.mineShaft = this;
         this.txtLevel.text = "Level " + this.properties.level.ToString();
         this.properties.speedMining = 1;
@@ -621,8 +623,9 @@ public class MineShaft : MonoBehaviour
             pricePreMine = (long)_temp_2;
         }
 
-        btnBuyMoreMine.thisPrice = (long)_temp;
-        btnBuyMoreMine.type = MyButton.Type.GOLD;
+        this.btnBuyMoreMine.Init(PriceType.GOLD, (long)_temp, () => Btn_BuyMoreMine());
+        //btnBuyMoreMine.thisPrice = (long)_temp;
+        //btnBuyMoreMine.type = MyButton.Type.GOLD;
         GameManager.Instance.AddGold(0);
     }
 
@@ -1099,7 +1102,7 @@ public class MineShaft : MonoBehaviour
             AudioManager.Instance.Play("Click");
         }
 
-        GameManager.Instance.AddGold(-this.btnBuyMoreMine.thisPrice);
+        //GameManager.Instance.AddGold(-this.btnBuyMoreMine.thisPrice);
         BuyMoreMineComplete();
     }
 
@@ -1263,17 +1266,13 @@ public class MineShaft : MonoBehaviour
     void GetStoreCost()
     {
         double t = GameConfig.Instance.lstPropertiesMap[ID].Store_Cost_3 + this.store.cost + this.store.cost * GameConfig.Instance.lstPropertiesMap[ID].Store_Cost_2;
-        //if ((this.store.cost * GameConfig.Instance.Trans_Cost_2[0]) < 2)
-        //{
-        //    t = this.store.cost + 2;
-        //}
         if (t - (long)t > 0.5f)
         {
             t += 1;
         }
         this.store.cost = (long)t;
-        if (btnStore != null)
-            btnStore.thisPrice = this.store.cost;
+        /*if (btnStore != null)
+            btnStore.thisPrice = this.store.cost;*/
     }
 
     void GetSoreCapacity()

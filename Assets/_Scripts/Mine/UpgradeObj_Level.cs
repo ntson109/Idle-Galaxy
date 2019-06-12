@@ -31,7 +31,7 @@ public class UpgradeObj_Level : MonoBehaviour
     public Text txtUnitPrice_cur;
     public Text txtUnitPrice_next;
     public Text txtPrice;
-    public MyButton btnUpgrade;
+    public Button btnUpgrade;
     private MineShaft thisMineShaft;
     public Image CapLine, TimeLine;
     public Sprite CapDefaultSprite, TimeDefaultSprite;
@@ -65,15 +65,16 @@ public class UpgradeObj_Level : MonoBehaviour
             {
                 //btnUpgrade.thisPrice = thisMineShaft.properties.upgradePrice;
                 //txtPrice.text = "Upgrade";// +btnUpgrade.thisPrice;
-                btnUpgrade.thisPrice = 0;
+                //btnUpgrade.thisPrice = 0;
                 imgCondition.enabled = true;
                 animCondition.enabled = true;
                 animCondition.gameObject.GetComponent<Image>().sprite = sprConditionOn;
             }
             else
             {
-                btnUpgrade.thisPrice = long.MaxValue;
-                btnUpgrade.thisButton.interactable = false;
+                /*btnUpgrade.thisPrice = long.MaxValue;
+                btnUpgrade.thisButton.interactable = false;*/
+                this.btnUpgrade.interactable = false;
                 imgCondition.enabled = false;
                 animCondition.enabled = false;
                 animCondition.gameObject.GetComponent<Image>().sprite = sprConditionOff;
@@ -114,21 +115,21 @@ public class UpgradeObj_Level : MonoBehaviour
 
             txtUnitPrice_cur.text = UIManager.Instance.ToLongString(thisMineShaft.properties.unitPrice);
             txtUnitPrice_next.text = UIManager.Instance.ToLongString(thisMineShaft.properties.unitPrice);
-            btnUpgrade.type = MyButton.Type.GOLD;
+            //btnUpgrade.type = MyButton.Type.GOLD;
 
             if (type == Type.UPGRADING)
             {
-                btnUpgrade.thisButton.onClick.RemoveAllListeners();
-                btnUpgrade.thisButton.onClick.AddListener(() =>
+                btnUpgrade.onClick.RemoveAllListeners();
+                btnUpgrade.onClick.AddListener(() =>
                 {
-                    UIManager.Instance.ShowPanelCoinAds(10, () => UpgradeCoin());
+                    UIManager.Instance.ShowPanelCoinAds(10, thisMineShaft.timeUpgradeLevel, () => UpgradeCoin());
                 });
             }
         }
         else
         {
-            btnUpgrade.thisPrice = long.MaxValue;
-            btnUpgrade.thisButton.interactable = false;
+            //btnUpgrade.thisPrice = long.MaxValue;
+            btnUpgrade.interactable = false;
             txtPrice.text = "Max";
             txtDescription.text = "Max level";
         }
@@ -143,18 +144,17 @@ public class UpgradeObj_Level : MonoBehaviour
     {
         thisMineShaft.Btn_UpgradeLevel();
 
-        btnUpgrade.thisButton.onClick.RemoveAllListeners();
-        btnUpgrade.thisButton.onClick.AddListener(() =>
+        btnUpgrade.onClick.RemoveAllListeners();
+        btnUpgrade.onClick.AddListener(() =>
         {
-            UIManager.Instance.ShowPanelCoinAds(10, () => UpgradeCoin());
+            UIManager.Instance.ShowPanelCoinAds(10, thisMineShaft.timeUpgradeLevel, () => UpgradeCoin());
         });
     }
 
     void UpgradeCoin()
     {
         thisMineShaft.UpgradeLevel_Coin();
-
-        btnUpgrade.thisButton.onClick.RemoveAllListeners();
-        btnUpgrade.thisButton.onClick.AddListener(() => Upgrade());
+        btnUpgrade.onClick.RemoveAllListeners();
+        btnUpgrade.onClick.AddListener(() => Upgrade());
     }
 }

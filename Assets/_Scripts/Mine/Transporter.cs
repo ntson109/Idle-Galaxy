@@ -82,13 +82,14 @@ public class Transporter : MonoBehaviour
         GetCapacityUp();
         GetPriceUp();
         UIManager.Instance.SetActivePanel(UIManager.Instance.panelUpgradeTransporter);
-        UIManager.Instance.btnUpTrans.thisButton.onClick.RemoveAllListeners();
         UIManager.Instance.txtLevelTrans.text = "Level " + this.level + " -> " + (this.level + 1);
         UIManager.Instance.txtCapTrans.text = UIManager.Instance.ToLongString(this.capacity) + " -> " + UIManager.Instance.ToLongString(this.capacityWillUp);
-        UIManager.Instance.btnUpTrans.thisPrice = this.price;
         UIManager.Instance.txtPriceTrans.text = "Upgrade\n" + UIManager.Instance.ToLongString(this.price);
+        /*UIManager.Instance.btnUpTrans.thisButton.onClick.RemoveAllListeners();
+        UIManager.Instance.btnUpTrans.thisPrice = this.price;
         UIManager.Instance.btnUpTrans.type = MyButton.Type.GOLD;
-        UIManager.Instance.btnUpTrans.thisButton.onClick.AddListener(() => Upgrade());
+        UIManager.Instance.btnUpTrans.thisButton.onClick.AddListener(() => Upgrade());*/
+        UIManager.Instance.btnUpTrans.Init(PriceType.GOLD, this.price, () => Upgrade());
 
         if (PlayerPrefs.GetInt(KeyPrefs.TUTORIAL_DONE) == 0)
         {

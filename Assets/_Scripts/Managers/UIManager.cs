@@ -575,14 +575,15 @@ public class UIManager : MonoBehaviour
 
     #region === UI MAIN ===
 
-    public void ShowPanelCoinAds(int _coin, UnityEngine.Events.UnityAction _action)
+    public void ShowPanelCoinAds(int _coin, float time, UnityEngine.Events.UnityAction _action)
     {
         SetActivePanel(panelCoinAds);
-        btnCoin_panelCoinAds.thisButton.onClick.RemoveAllListeners();
+        this.btnCoin_panelCoinAds.Init(PriceType.COIN, (long)_coin, time, _action);
+        /*btnCoin_panelCoinAds.thisButton.onClick.RemoveAllListeners();
         btnCoin_panelCoinAds.thisPrice = _coin;
         txtCoin_panelCoinAds.text = btnCoin_panelCoinAds.thisPrice.ToString();
         btnCoin_panelCoinAds.type = MyButton.Type.COIN;
-        btnCoin_panelCoinAds.thisButton.onClick.AddListener(_action);
+        btnCoin_panelCoinAds.thisButton.onClick.AddListener(_action);*/
     }
 
     #region === OFFLINE ===
@@ -1025,11 +1026,12 @@ public class UIManager : MonoBehaviour
     public void Step_5_Tutorial()//upgrade lv2
     {
         panelShowUpgrade.transform.parent = panelTutorial.transform;
-        //GameObject.FindWithTag("CloseUp").GetComponent<Button>().interactable = false;
-        handTutorial.transform.position = GameObject.FindWithTag("TabLevel").transform.position;
+        var go = GameObject.FindWithTag("TabLevel");
+        handTutorial.transform.position = go.transform.position;
         handTutorial.transform.SetAsLastSibling();
         txtTutorial.text = GameConfig.Instance.lstTutorial[4];
         txtTutorial.transform.SetAsLastSibling();
+        //Tutorial(go, Vector3.zero, Vector3.zero, GameConfig.Instance.lstTutorial[4], () => Btn_Step_5_Tutorial());
     }
 
     public void Btn_Step_5_Tutorial()
@@ -1042,8 +1044,10 @@ public class UIManager : MonoBehaviour
 
     public void Step_6_Tutorial()//mua special upgrade
     {
-        handTutorial.transform.position = GameObject.FindWithTag("TabSpecial").transform.position;
+        var go = GameObject.FindWithTag("TabSpecial");
+        handTutorial.transform.position = go.transform.position;
         txtTutorial.text = GameConfig.Instance.lstTutorial[5];
+        //Tutorial(go, Vector3.zero, Vector3.zero, GameConfig.Instance.lstTutorial[5], () => Btn_Step_6_Tutorial());
     }
 
     public void Btn_Step_6_Tutorial()

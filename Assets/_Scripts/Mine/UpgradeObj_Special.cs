@@ -59,11 +59,13 @@ public class UpgradeObj_Special : MonoBehaviour
         txtPrice.text = UIManager.Instance.ToLongString(_price);
         type = _type;
         thisMineShaft = _mineShaft;
-        btnBuy.thisPrice = _price;
-        btnBuy.type = MyButton.Type.GOLD;
+        /*btnBuy.thisPrice = _price;
+        btnBuy.type = MyButton.Type.GOLD;*/
+        this.btnBuy.Init(PriceType.GOLD, _price, () => this.BtnBuy());
         coin = _coin;
-        btnBuyNow.thisPrice = coin;
-        btnBuyNow.type = MyButton.Type.COIN;
+        /*btnBuyNow.thisPrice = coin;
+        btnBuyNow.type = MyButton.Type.COIN;*/
+        this.btnBuyNow.Init(PriceType.COIN, coin, () => this.BtnBuyNow());
         txtCoin.text = UIManager.Instance.ToLongString(coin);
                 
         switch (type)
@@ -75,7 +77,7 @@ public class UpgradeObj_Special : MonoBehaviour
                 panelTime.SetActive(true);
                 break;
             case Type.UPGRADED:
-                btnBuy.thisPrice = long.MaxValue;
+                //btnBuy.thisPrice = long.MaxValue;
                 SetBought();
                 break;
             default:
@@ -88,7 +90,7 @@ public class UpgradeObj_Special : MonoBehaviour
     public void SetBought()
     {
         panelTime.SetActive(false);
-        btnBuy.thisButton.interactable = false;
+        btnBuy.PriceButton.interactable = false;
         txtDescription.text = "Bought !!!";
     }
 
