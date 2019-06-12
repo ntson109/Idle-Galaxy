@@ -69,6 +69,7 @@ public class LoadDataJson : MonoBehaviour
             GameConfig.Instance.UFO_rate_coin = new float[2];
             GameConfig.Instance.UFO_rate_coin[0] = objJson["UFO_rate_Coin"][0].AsFloat;
             GameConfig.Instance.UFO_rate_coin[1] = objJson["UFO_rate_Coin"][1].AsFloat;
+            GameConfig.Instance.TimeReductionByWatchAds = objJson["TimeReductionByWatchAds"].AsFloat;
 
             for (int i = 0; i < objJson["introduction"].Count; i++)
             {

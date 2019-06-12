@@ -83,6 +83,7 @@ public class GameConfig : MonoBehaviour
     public List<string> lstTutorial = new List<string>();
     public List<CoinPack> listCoinPacks;
     public List<GoldPack> listGoldPacks;
+    public float TimeReductionByWatchAds;
     #endregion
 
     #region === APP42 ===

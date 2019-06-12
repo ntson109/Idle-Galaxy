@@ -122,7 +122,7 @@ public class UpgradeObj_Level : MonoBehaviour
                 btnUpgrade.onClick.RemoveAllListeners();
                 btnUpgrade.onClick.AddListener(() =>
                 {
-                    UIManager.Instance.ShowPanelCoinAds(10, thisMineShaft.timeUpgradeLevel, () => UpgradeCoin());
+                    UIManager.Instance.ShowPanelCoinAds(10, thisMineShaft.timeUpgradeLevel, () => UpgradeCoin(), () => this.UpgradeByAds());
                 });
             }
         }
@@ -143,11 +143,10 @@ public class UpgradeObj_Level : MonoBehaviour
     public void Upgrade()
     {
         thisMineShaft.Btn_UpgradeLevel();
-
         btnUpgrade.onClick.RemoveAllListeners();
         btnUpgrade.onClick.AddListener(() =>
         {
-            UIManager.Instance.ShowPanelCoinAds(10, thisMineShaft.timeUpgradeLevel, () => UpgradeCoin());
+            UIManager.Instance.ShowPanelCoinAds(10, thisMineShaft.timeUpgradeLevel, () => UpgradeCoin(), () => this.UpgradeByAds());
         });
     }
 
@@ -156,5 +155,11 @@ public class UpgradeObj_Level : MonoBehaviour
         thisMineShaft.UpgradeLevel_Coin();
         btnUpgrade.onClick.RemoveAllListeners();
         btnUpgrade.onClick.AddListener(() => Upgrade());
+    }
+
+    void UpgradeByAds()
+    {
+        thisMineShaft.timeUpgradeLevel -= GameConfig.Instance.TimeReductionByWatchAds;
+        if (thisMineShaft.timeUpgradeLevel < 0f) thisMineShaft.timeUpgradeLevel = 0f;
     }
 }

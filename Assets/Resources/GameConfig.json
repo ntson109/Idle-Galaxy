@@ -660,5 +660,6 @@
       "price": 1000,
       "value": 300000
     }
-  }
+  },
+  "TimeReductionByWatchAds":  1800
 }

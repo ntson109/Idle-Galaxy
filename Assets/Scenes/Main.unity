@@ -1378,7 +1378,10 @@ MonoBehaviour:
   PriceButton: {fileID: 56206016}
   txtPrice: {fileID: 597371916}
   PriceValue: 0
+  MaxPriceValue: 0
   Type: 0
+  Time: 0
+  MaxTime: 0
 --- !u!222 &56206014
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2389,7 +2392,10 @@ MonoBehaviour:
   PriceButton: {fileID: 93035305}
   txtPrice: {fileID: 724819941}
   PriceValue: 0
+  MaxPriceValue: 0
   Type: 0
+  Time: 0
+  MaxTime: 0
 --- !u!114 &93035305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7934,7 +7940,10 @@ MonoBehaviour:
   PriceButton: {fileID: 270221472}
   txtPrice: {fileID: 0}
   PriceValue: 0
+  MaxPriceValue: 0
   Type: 0
+  Time: 0
+  MaxTime: 0
 --- !u!114 &270221472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12785,6 +12794,7 @@ MonoBehaviour:
   lstRewardSpin_Time: 
   lstRewardSpin_Coin: 
   lstTutorial: []
+  TimeReductionByWatchAds: 0
 --- !u!4 &383266274
 Transform:
   m_ObjectHideFlags: 0
@@ -13159,7 +13169,10 @@ MonoBehaviour:
   PriceButton: {fileID: 402392905}
   txtPrice: {fileID: 2133579659}
   PriceValue: 0
+  MaxPriceValue: 0
   Type: 0
+  Time: 0
+  MaxTime: 0
 --- !u!222 &402392903
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -20444,7 +20457,10 @@ MonoBehaviour:
   PriceButton: {fileID: 617493647}
   txtPrice: {fileID: 284009221}
   PriceValue: 0
+  MaxPriceValue: 0
   Type: 0
+  Time: 0
+  MaxTime: 0
 --- !u!222 &617493645
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -20655,7 +20671,10 @@ MonoBehaviour:
   PriceButton: {fileID: 618798845}
   txtPrice: {fileID: 1505423469}
   PriceValue: 0
+  MaxPriceValue: 0
   Type: 0
+  Time: 0
+  MaxTime: 0
 --- !u!222 &618798843
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -21893,7 +21912,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onSuccess:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2083362800}
+        m_MethodName: OnWatchAds_panelCoinAds
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: AdsButton+mEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   onFail:
@@ -24048,7 +24078,10 @@ MonoBehaviour:
   PriceButton: {fileID: 690347249}
   txtPrice: {fileID: 1991213135}
   PriceValue: 0
+  MaxPriceValue: 0
   Type: 0
+  Time: 0
+  MaxTime: 0
 --- !u!114 &690347249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40916,7 +40949,10 @@ MonoBehaviour:
   PriceButton: {fileID: 1247671786}
   txtPrice: {fileID: 134949106}
   PriceValue: 0
+  MaxPriceValue: 0
   Type: 0
+  Time: 0
+  MaxTime: 0
 --- !u!1 &1248258149
 GameObject:
   m_ObjectHideFlags: 0
@@ -44373,7 +44409,10 @@ MonoBehaviour:
   PriceButton: {fileID: 1341588293}
   txtPrice: {fileID: 309219961}
   PriceValue: 0
+  MaxPriceValue: 0
   Type: 0
+  Time: 0
+  MaxTime: 0
 --- !u!114 &1341588293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44707,7 +44746,10 @@ MonoBehaviour:
   PriceButton: {fileID: 1346939565}
   txtPrice: {fileID: 1648666943}
   PriceValue: 0
+  MaxPriceValue: 0
   Type: 0
+  Time: 0
+  MaxTime: 0
 --- !u!1 &1347980404
 GameObject:
   m_ObjectHideFlags: 0
@@ -44848,7 +44890,10 @@ MonoBehaviour:
   PriceButton: {fileID: 1347980406}
   txtPrice: {fileID: 312312360}
   PriceValue: 0
+  MaxPriceValue: 0
   Type: 0
+  Time: 0
+  MaxTime: 0
 --- !u!1 &1353618164
 GameObject:
   m_ObjectHideFlags: 0
@@ -50610,7 +50655,10 @@ MonoBehaviour:
   PriceButton: {fileID: 1536327911}
   txtPrice: {fileID: 0}
   PriceValue: 0
+  MaxPriceValue: 0
   Type: 0
+  Time: 0
+  MaxTime: 0
 --- !u!114 &1536327911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -55473,7 +55521,10 @@ MonoBehaviour:
   PriceButton: {fileID: 1655061822}
   txtPrice: {fileID: 0}
   PriceValue: 0
+  MaxPriceValue: 0
   Type: 0
+  Time: 0
+  MaxTime: 0
 --- !u!114 &1655061822
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56040,7 +56091,10 @@ MonoBehaviour:
   PriceButton: {fileID: 1664660338}
   txtPrice: {fileID: 803024975}
   PriceValue: 0
+  MaxPriceValue: 0
   Type: 0
+  Time: 0
+  MaxTime: 0
 --- !u!1 &1664691102
 GameObject:
   m_ObjectHideFlags: 0
@@ -57414,7 +57468,10 @@ MonoBehaviour:
   PriceButton: {fileID: 1707218060}
   txtPrice: {fileID: 226262006}
   PriceValue: 0
+  MaxPriceValue: 0
   Type: 0
+  Time: 0
+  MaxTime: 0
 --- !u!1 &1708373405
 GameObject:
   m_ObjectHideFlags: 0
@@ -63230,7 +63287,10 @@ MonoBehaviour:
   PriceButton: {fileID: 1931761822}
   txtPrice: {fileID: 69191971}
   PriceValue: 0
+  MaxPriceValue: 0
   Type: 0
+  Time: 0
+  MaxTime: 0
 --- !u!114 &1931761822
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65262,7 +65322,10 @@ MonoBehaviour:
   PriceButton: {fileID: 1985367899}
   txtPrice: {fileID: 0}
   PriceValue: 0
+  MaxPriceValue: 0
   Type: 0
+  Time: 0
+  MaxTime: 0
 --- !u!114 &1985367899
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66478,7 +66541,10 @@ MonoBehaviour:
   PriceButton: {fileID: 2012754324}
   txtPrice: {fileID: 0}
   PriceValue: 0
+  MaxPriceValue: 0
   Type: 0
+  Time: 0
+  MaxTime: 0
 --- !u!95 &2012754326
 Animator:
   serializedVersion: 3
@@ -68591,7 +68657,10 @@ MonoBehaviour:
   PriceButton: {fileID: 2070854244}
   txtPrice: {fileID: 1933982450}
   PriceValue: 0
+  MaxPriceValue: 0
   Type: 0
+  Time: 0
+  MaxTime: 0
 --- !u!1 &2071311843
 GameObject:
   m_ObjectHideFlags: 0
@@ -68747,6 +68816,7 @@ MonoBehaviour:
   panelCoinAds: {fileID: 288782169}
   txtCoin_panelCoinAds: {fileID: 312312360}
   btnCoin_panelCoinAds: {fileID: 1347980409}
+  btnAds_panelCoinAds: {fileID: 0}
   txtBoost: {fileID: 0}
   txtTimeBoost: {fileID: 0}
   sprMoreMine:
@@ -68938,7 +69008,10 @@ MonoBehaviour:
   PriceButton: {fileID: 2086327865}
   txtPrice: {fileID: 1605999286}
   PriceValue: 0
+  MaxPriceValue: 0
   Type: 0
+  Time: 0
+  MaxTime: 0
 --- !u!114 &2086327863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69551,7 +69624,10 @@ MonoBehaviour:
   PriceButton: {fileID: 2097680319}
   txtPrice: {fileID: 1151662095}
   PriceValue: 0
+  MaxPriceValue: 0
   Type: 0
+  Time: 0
+  MaxTime: 0
 --- !u!1 &2098757638
 GameObject:
   m_ObjectHideFlags: 0
@@ -70481,7 +70557,10 @@ MonoBehaviour:
   PriceButton: {fileID: 2117126170}
   txtPrice: {fileID: 0}
   PriceValue: 0
+  MaxPriceValue: 0
   Type: 0
+  Time: 0
+  MaxTime: 0
 --- !u!114 &2117126170
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -29,6 +29,7 @@ public class UIManager : MonoBehaviour
     public GameObject panelCoinAds;
     public Text txtCoin_panelCoinAds;
     public MyButton btnCoin_panelCoinAds;
+    public Button btnAds_panelCoinAds;
     public Text txtBoost;
     public Text txtTimeBoost;
     public Sprite[] sprMoreMine;
@@ -574,16 +575,18 @@ public class UIManager : MonoBehaviour
     #endregion
 
     #region === UI MAIN ===
+    private System.Action panelCoinAds_WatchAdsAction;
 
-    public void ShowPanelCoinAds(int _coin, float time, UnityEngine.Events.UnityAction _action)
+    public void ShowPanelCoinAds(int _coin, float time, UnityEngine.Events.UnityAction _action, System.Action watch_ads_action)
     {
         SetActivePanel(panelCoinAds);
         this.btnCoin_panelCoinAds.Init(PriceType.COIN, (long)_coin, time, _action);
-        /*btnCoin_panelCoinAds.thisButton.onClick.RemoveAllListeners();
-        btnCoin_panelCoinAds.thisPrice = _coin;
-        txtCoin_panelCoinAds.text = btnCoin_panelCoinAds.thisPrice.ToString();
-        btnCoin_panelCoinAds.type = MyButton.Type.COIN;
-        btnCoin_panelCoinAds.thisButton.onClick.AddListener(_action);*/
+        this.panelCoinAds_WatchAdsAction = watch_ads_action;
+    }
+
+    public void OnWatchAds_panelCoinAds()
+    {
+        if (this.panelCoinAds_WatchAdsAction != null) this.panelCoinAds_WatchAdsAction();
     }
 
     #region === OFFLINE ===
