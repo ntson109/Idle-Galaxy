@@ -57,6 +57,7 @@ public class UpgradeObj_Level : MonoBehaviour
 
     public void SetInfo(MineShaft _mine, Type _type)
     {
+        this.btnUpgrade.interactable = true;
         thisMineShaft = _mine;
         type = _type;
         if (thisMineShaft.properties.level < 6)

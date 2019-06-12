@@ -1036,7 +1036,7 @@ public class MineShaft : MonoBehaviour
 
     public void UpgradeLevel_Coin()
     {
-        GameManager.Instance.AddCoin(-10);
+        //GameManager.Instance.AddCoin(-10);
         UpgradeLevel_Complete();
     }
 
@@ -1074,7 +1074,7 @@ public class MineShaft : MonoBehaviour
     public void UpgradeCoin(int _id, int _coin)
     {
         this.timeUpgradeSpecial[_id] = 0;
-        GameManager.Instance.AddCoin(-_coin);
+        //GameManager.Instance.AddCoin(-_coin);
     }
 
     public bool CheckUpgrade()

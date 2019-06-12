@@ -27,6 +27,7 @@ public class MyButton : MonoBehaviour
         this.Type = price_type;
         this.SetPrice(price_value);
         this.PriceButton.onClick.RemoveAllListeners();
+        this.PriceButton.onClick.AddListener(() => this.ProcessBuy());
         this.PriceButton.onClick.AddListener(on_click);
     }
 
@@ -62,17 +63,18 @@ public class MyButton : MonoBehaviour
     {
         if (this.Type == PriceType.GOLD)
         {
-            GameManager.Instance.AddGold(this.PriceValue);
+            GameManager.Instance.AddGold(-this.PriceValue);
         }
         else if (this.Type == PriceType.COIN)
         {
-            GameManager.Instance.AddCoin(this.PriceValue);
+            GameManager.Instance.AddCoin(-this.PriceValue);
         }
         this.CheckEnoughGemCoin();
     }
 
     void CheckEnoughGemCoin()
     {
+        if (this == null) return;
         long current_value = 0;
         if (this.Type == PriceType.GOLD)
         {
