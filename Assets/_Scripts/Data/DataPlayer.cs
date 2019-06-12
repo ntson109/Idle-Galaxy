@@ -174,6 +174,9 @@ public class DataPlayer : MonoBehaviour
     {
         string _path = Path.Combine(Application.persistentDataPath, "DataPlayer.json");
         string dataAsJson = File.ReadAllText(_path);
+        //var txtAsset = Resources.Load<TextAsset>("PlayerData");
+        //dataAsJson = txtAsset.text;
+
         var objJson = SimpleJSON_DatDz.JSON.Parse(dataAsJson);
         Debug.Log(objJson);
         if (objJson != null)

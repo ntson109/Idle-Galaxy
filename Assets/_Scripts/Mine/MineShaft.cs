@@ -931,6 +931,7 @@ public class MineShaft : MonoBehaviour
 
     void SpecialUpgrade_Complete_1(int _id)
     {
+        if (this.lstUpgradeSpecial.Count == 0) return;
         if (this.lstUpgradeSpecial[_id].type == UpgradeObj_Special.Type.UPGRADING)
         {
             SpecialUpgrade_Complete_2(_id);
