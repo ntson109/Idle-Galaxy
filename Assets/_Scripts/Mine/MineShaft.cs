@@ -316,7 +316,7 @@ public class MineShaft : MonoBehaviour
 
                 //txtMoreMinePrice.text = UIManager.Instance.ToLongString(btnBuyMoreMine.thisPrice);
             }
-            
+
             if (tubeT != null)
             {
                 if (!tubeT.activeSelf)
@@ -407,7 +407,7 @@ public class MineShaft : MonoBehaviour
             this.panelUnlock.GetComponent<Image>().sprite = lockSprite;
         }
         this.imgMineBar.fillAmount = 0f;
-        
+
         if (this.state == StateMineShaft.LOCK)
         {
             UIManager.Instance.SetActivePanel(panelUnlock_Condition);

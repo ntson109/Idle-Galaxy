@@ -90,6 +90,7 @@ public class UpgradeObj_Special : MonoBehaviour
     public void SetBought()
     {
         panelTime.SetActive(false);
+        this.btnBuy.gameObject.SetActive(false);
         btnBuy.PriceButton.interactable = false;
         txtDescription.text = "Bought !!!";
     }

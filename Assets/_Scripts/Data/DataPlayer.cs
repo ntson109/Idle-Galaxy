@@ -210,18 +210,7 @@ public class DataPlayer : MonoBehaviour
                 GameManager.Instance.lstMap[i].transporter.SetInfo(0, 0, 0);
             }
 
-            if (objJson["boost"]["type"] == 1)
-            {
-                GameManager.Instance.boost.type = TypeBoost.NONE;
-            }
-            else if (objJson["boost"]["type"] == 2)
-            {
-                GameManager.Instance.boost.type = TypeBoost.GOLD;
-            }
-            else if (objJson["boost"]["type"] == 3)
-            {
-                GameManager.Instance.boost.type = TypeBoost.SPEED;
-            }
+            GameManager.Instance.boost.type = TypeBoost.NONE;
             GameManager.Instance.timeBoost = 0;
             GameManager.Instance.countSpin = 0;
 
@@ -236,37 +225,19 @@ public class DataPlayer : MonoBehaviour
                     GameManager.Instance.lstMap[0].lstMineShaft[i].properties.buyMoreMinePrice = objJson["lsMineShaft"][i]["buyMoreMinePrice"].AsLong;
                     GameManager.Instance.lstMap[0].lstMineShaft[i].properties.capacity = objJson["lsMineShaft"][i]["capacity"].AsInt;
                     GameManager.Instance.lstMap[0].lstMineShaft[i].properties.unitPrice = objJson["lsMineShaft"][i]["unitPrice"].AsInt;
-                    GameManager.Instance.lstMap[0].lstMineShaft[i].properties.miningTime = objJson["lsMineShaft"][i]["miningTime"].AsFloat;
+                    GameManager.Instance.lstMap[0].lstMineShaft[i].properties.miningTime = 0;
                     GameManager.Instance.lstMap[0].lstMineShaft[i].input = objJson["lsMineShaft"][i]["input"].AsInt;
-                    GameManager.Instance.lstMap[0].lstMineShaft[i].imgWorkBar.fillAmount = objJson["lsMineShaft"][i]["workBar"].AsFloat;
-                    if (objJson["lsMineShaft"][i]["state"].AsInt == 1)
-                        GameManager.Instance.lstMap[0].lstMineShaft[i].state = MineShaft.StateMineShaft.LOCK;
-                    else if (objJson["lsMineShaft"][i]["state"].AsInt == 2)
-                        GameManager.Instance.lstMap[0].lstMineShaft[i].state = MineShaft.StateMineShaft.UNLOCKING;
-                    else if (objJson["lsMineShaft"][i]["state"].AsInt == 3)
-                        GameManager.Instance.lstMap[0].lstMineShaft[i].state = MineShaft.StateMineShaft.IDLE;
-                    else if (objJson["lsMineShaft"][i]["state"].AsInt == 4)
-                        GameManager.Instance.lstMap[0].lstMineShaft[i].state = MineShaft.StateMineShaft.WORKING;
+                    GameManager.Instance.lstMap[0].lstMineShaft[i].imgWorkBar.fillAmount = 0;
+                    GameManager.Instance.lstMap[0].lstMineShaft[i].state = MineShaft.StateMineShaft.LOCK;
 
                     for (int j = 0; j < objJson["lsMineShaft"][i]["timeUpgradeSpecial"].Count; j++)
                     {
-                        GameManager.Instance.lstMap[0].lstMineShaft[i].timeUpgradeSpecial.Add(objJson["lsMineShaft"][i]["timeUpgradeSpecial"][j].AsFloat);
+                        GameManager.Instance.lstMap[0].lstMineShaft[i].timeUpgradeSpecial.Add(0);
                     }
 
                     for (int j = 0; j < objJson["lsMineShaft"][i]["stateUpgradeSpecial"].Count; j++)
                     {
-                        if (objJson["lsMineShaft"][i]["stateUpgradeSpecial"][j].AsInt == 1)
-                        {
-                            GameManager.Instance.lstMap[0].lstMineShaft[i].typeUpgradeSpecial.Add(UpgradeObj_Special.Type.NONE);
-                        }
-                        else if (objJson["lsMineShaft"][i]["stateUpgradeSpecial"][j].AsInt == 2)
-                        {
-                            GameManager.Instance.lstMap[0].lstMineShaft[i].typeUpgradeSpecial.Add(UpgradeObj_Special.Type.UPGRADING);
-                        }
-                        else if (objJson["lsMineShaft"][i]["stateUpgradeSpecial"][j].AsInt == 3)
-                        {
-                            GameManager.Instance.lstMap[0].lstMineShaft[i].typeUpgradeSpecial.Add(UpgradeObj_Special.Type.UPGRADED);
-                        }
+                        GameManager.Instance.lstMap[0].lstMineShaft[i].typeUpgradeSpecial.Add(UpgradeObj_Special.Type.NONE);
                     }
                     GameManager.Instance.lstMap[0].lstMineShaft[i].isAutoWorking = objJson["lsMineShaft"][i]["isAutoWorking"].AsBool;
                     GameManager.Instance.lstMap[0].lstMineShaft[i].timeUnlocking = objJson["lsMineShaft"][i]["timeUnlocking"].AsFloat;
