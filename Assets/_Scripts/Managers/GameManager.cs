@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Spin")]
     public int countSpin = 0;
-   
+
     void Start()
     {
         DontDestroyOnLoad(this.gameObject);
@@ -114,10 +114,20 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.txtMedal.text = UIManager.Instance.ToLongString(MEDAL);
     }
 
-    public void SaveExit(){
-		Debug.Log ("quit");
-		Application.Quit ();
-	}
+    public void SaveExit()
+    {
+        Debug.Log("quit");
+        Application.Quit();
+    }
+
+    private void OnDestroy()
+    {
+        if (this.stateGame == StateGame.PLAYING && DataPlayer.Instance)
+        {
+            DataPlayer.Instance.SaveDataPlayer();
+            PlayerPrefs.SetString(KeyPrefs.TIME_QUIT_GAME, System.DateTime.Now.ToString());
+        }
+    }
 }
 
 [System.Serializable]

@@ -401,6 +401,7 @@ public class MineShaft : MonoBehaviour
             isCanWork = true;
         }
 
+        if (this.state == StateMineShaft.WORKING) this.state = StateMineShaft.IDLE;
         if (this.lockSprite != null)
         {
             this.panelUnlock.GetComponent<Image>().sprite = lockSprite;

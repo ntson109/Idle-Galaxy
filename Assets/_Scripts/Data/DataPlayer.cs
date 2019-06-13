@@ -333,6 +333,7 @@ public class DataPlayer : MonoBehaviour
 
             for (int i = 0; i < objJson["lsMineShaft"].Count; i++)
             {
+                Debug.Log("Log i = " + i);
                 if (i < GameManager.Instance.lstMap[0].lstMineShaft.Count)
                 {
                     GameManager.Instance.lstMap[0].lstMineShaft[i].ID = objJson["lsMineShaft"][i]["ID"].AsInt;
