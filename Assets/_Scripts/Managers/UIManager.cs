@@ -972,7 +972,7 @@ public class UIManager : MonoBehaviour
 
     public void TestMoney()
     {
-        GameManager.Instance.AddGold(10000);
+        GameManager.Instance.AddGold(50000000);
         GameManager.Instance.AddCoin(100);
     }
     #endregion
