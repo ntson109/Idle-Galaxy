@@ -39,9 +39,9 @@
       4
     ],
     "Coin": [
-      10,
-      30,
-      100
+      2,
+      5,
+      10
     ]
   },
   "UFO_speed": 4,
@@ -80,7 +80,7 @@
   },
   "Map_Moon": {
     "M_1": {
-      "Name": "Machine1",
+      "Name": "MINING",
       "BuyAI": 100,
       "Unlock_condition": 0,
       "Unlock_time": 0,
@@ -170,10 +170,10 @@
       "Store_Capacity_2": 10
     },
     "M_2": {
-      "Name": "Machine2",
+      "Name": "POWDERING",
       "BuyAI": 100,
       "Unlock_condition": 0,
-      "Unlock_time": 5,
+      "Unlock_time": 1,
       "Unlock_cost": [
         10,
         500
@@ -260,12 +260,12 @@
       "Store_Capacity_2": 20
     },
     "M_3": {
-      "Name": "Machine3",
+      "Name": "LIQIDIFING",
       "BuyAI": 100,
       "Unlock_condition": 0,
-      "Unlock_time": 10,
+      "Unlock_time": 5,
       "Unlock_cost": [
-        20,
+        50,
         500000
       ],
       "Unlock_reward": {
@@ -350,12 +350,12 @@
       "Store_Capacity_2": 40
     },
     "M_4": {
-      "Name": "Machine4",
+      "Name": "DISTILLATING",
       "BuyAI": 100,
       "Unlock_condition": 0,
-      "Unlock_time": 20,
+      "Unlock_time": 30,
       "Unlock_cost": [
-        40,
+        100,
         50000000
       ],
       "Unlock_reward": {
@@ -440,12 +440,12 @@
       "Store_Capacity_2": 80
     },
     "M_5": {
-      "Name": "Machine5",
+      "Name": "SOLIDIFING",
       "BuyAI": 100,
       "Unlock_condition": 0,
-      "Unlock_time": 30,
+      "Unlock_time": 60,
       "Unlock_cost": [
-        70,
+        150,
         500000000
       ],
       "Unlock_reward": {
@@ -530,12 +530,12 @@
       "Store_Capacity_2": 160
     },
     "M_6": {
-      "Name": "Machine6",
+      "Name": "PRESSING",
       "BuyAI": 100,
       "Unlock_condition": 0,
-      "Unlock_time": 60,
+      "Unlock_time": 120,
       "Unlock_cost": [
-        100,
+        200,
         25000000000
       ],
       "Unlock_reward": {
