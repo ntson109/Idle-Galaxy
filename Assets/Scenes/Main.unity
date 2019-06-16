@@ -16816,7 +16816,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.25296444
+  m_Size: 0.25301003
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -70179,6 +70179,8 @@ MonoBehaviour:
   panelMedal: {fileID: 1162379502}
   txtMedalHave: {fileID: 1507715812}
   txtMedalNeed: {fileID: 490364970}
+  panelSkipTime: {fileID: 1298291864}
+  txtSkipTime: {fileID: 819212807}
   timeOffline: 0
   goldOffline: 0
   isSpinning: 0

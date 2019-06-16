@@ -131,6 +131,10 @@ public class UIManager : MonoBehaviour
     public GameObject panelMedal;
     public Text txtMedalHave, txtMedalNeed;
 
+    [Header("SKIP TIME")]
+    public GameObject panelSkipTime;
+    public Text txtSkipTime;
+
     void Awake()
     {
         if (Instance != null)
@@ -501,9 +505,11 @@ public class UIManager : MonoBehaviour
             GameManager.Instance.GOLD = 0;
             GameManager.Instance.COIN = 0;
             GameManager.Instance.MEDAL = 0;
+            GameManager.Instance.SKIP_TIME = 0;
             GameManager.Instance.AddGold(GameConfig.Instance.GoldStart);
             GameManager.Instance.AddCoin(GameConfig.Instance.CoinStart);
             GameManager.Instance.AddMedal(0);
+            GameManager.Instance.AddSkipTime(0);
             AudioManager.Instance.Play("GamePlay", true);
             //isMusicOn = true;
             if (PlayerPrefs.GetInt(KeyPrefs.TUTORIAL_DONE) == 0)
@@ -779,7 +785,8 @@ public class UIManager : MonoBehaviour
                 GameManager.Instance.AddGold(this.goldSpinReward);
                 break;
             case 1:
-                this.PostEvent(EventID.SKIP_TIME, this.timeSpinReward);
+                //this.PostEvent(EventID.SKIP_TIME, this.timeSpinReward);
+                GameManager.Instance.AddSkipTime(this.timeSpinReward);
                 break;
             case 2:
                 GameManager.Instance.AddCoin(this.coinSpinReward);

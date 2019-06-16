@@ -172,7 +172,8 @@ public class SpinManager : MonoBehaviour
                 GameManager.Instance.AddGold(goldReward);
                 break;
             case 1:
-                this.PostEvent(EventID.SKIP_TIME, timeReward);
+                //this.PostEvent(EventID.SKIP_TIME, timeReward);
+                GameManager.Instance.AddSkipTime(timeReward);
                 break;
             case 2:
                 GameManager.Instance.AddCoin(coinReward);

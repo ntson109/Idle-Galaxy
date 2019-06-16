@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     public long GOLD;
     public long COIN;
     public int MEDAL;
+    public long SKIP_TIME;
     public StateGame stateGame = StateGame.NONE;
     public List<Map> lstMap = new List<Map>();
     public Boost boost;
@@ -112,6 +113,14 @@ public class GameManager : MonoBehaviour
             MEDAL = 0;
 
         UIManager.Instance.txtMedal.text = UIManager.Instance.ToLongString(MEDAL);
+    }
+
+    public void AddSkipTime(long _value)
+    {
+        SKIP_TIME += _value;
+        if (SKIP_TIME <= 0)
+            SKIP_TIME = 0;
+        UIManager.Instance.txtSkipTime.text = UIManager.Instance.transformToTime(SKIP_TIME * 60);
     }
 
     public void SaveExit()
