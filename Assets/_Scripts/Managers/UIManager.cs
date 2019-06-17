@@ -174,7 +174,7 @@ public class UIManager : MonoBehaviour
     {
         if (GameManager.Instance.stateGame == StateGame.PLAYING)
         {
-            HideIfClickedOutside(panelCoinAds);
+            //HideIfClickedOutside(panelCoinAds);
 
             if (!animSpin.isActiveAndEnabled)
             {

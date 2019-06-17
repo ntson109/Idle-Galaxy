@@ -120,11 +120,7 @@ public class UpgradeObj_Level : MonoBehaviour
 
             if (type == Type.UPGRADING)
             {
-                btnUpgrade.onClick.RemoveAllListeners();
-                btnUpgrade.onClick.AddListener(() =>
-                {
-                    UIManager.Instance.ShowPanelCoinAds(10, thisMineShaft.timeUpgradeLevel, () => UpgradeCoin(), () => this.UpgradeByAds());
-                });
+                UIManager.Instance.ShowPanelCoinAds(10, thisMineShaft.timeUpgradeLevel, () => UpgradeCoin(), () => this.UpgradeByAds());
             }
         }
         else
@@ -145,10 +141,7 @@ public class UpgradeObj_Level : MonoBehaviour
     {
         thisMineShaft.Btn_UpgradeLevel();
         btnUpgrade.onClick.RemoveAllListeners();
-        btnUpgrade.onClick.AddListener(() =>
-        {
-            UIManager.Instance.ShowPanelCoinAds(10, thisMineShaft.timeUpgradeLevel, () => UpgradeCoin(), () => this.UpgradeByAds());
-        });
+        UIManager.Instance.ShowPanelCoinAds(10, thisMineShaft.timeUpgradeLevel, () => UpgradeCoin(), () => this.UpgradeByAds());
     }
 
     void UpgradeCoin()
