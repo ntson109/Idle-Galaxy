@@ -270,12 +270,10 @@ public class DataPlayer : MonoBehaviour
         }
         else
         {
-            var medal = 0;
-            
             GameManager.Instance.AddGold(objJson["gold"].AsLong);
             GameManager.Instance.AddCoin(objJson["coin"].AsLong);
             GameManager.Instance.AddMedal(objJson["medal"].AsInt);
-            GameManager.Instance.AddSkipTime(objJson["SkipTime"].AsLong);
+            GameManager.Instance.AddSkipTime(objJson["SkipTime"].AsInt);
 
             for (int i = 0; i < objJson["lstMap"].Count; i++)
             {

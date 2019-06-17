@@ -132,7 +132,7 @@ public class UIManager : MonoBehaviour
 
     [Header("SKIP TIME")]
     public GameObject panelSkipTime;
-    public Text txtSkipTime;
+    public Text txtSkipTime, txtSkipTimeInPanel;
 
     void Awake()
     {
@@ -1194,6 +1194,24 @@ public class UIManager : MonoBehaviour
         this.SetActivePanel(this.panelMedal);
         this.txtMedalHave.text = string.Format("You have collected {0} medals.", GameManager.Instance.MEDAL);
         this.txtMedalNeed.text = string.Format("Collect {0} more to unlock the next chapter.", 50 - GameManager.Instance.MEDAL);
+    }
+    #endregion
+
+    #region SKIP_TIME
+    public int x2SkipTime = 1;
+    public void OnUseSkipTimeClick()
+    {
+        var skipTime = GameManager.Instance.SKIP_TIME;
+        this.PostEvent(EventID.SKIP_TIME, skipTime * 60);
+        GameManager.Instance.AddSkipTime(-skipTime);
+        var addGold = DataPlayer.Instance.CapacityOffline() * skipTime * 60 * x2SkipTime;
+        GameManager.Instance.AddGold(addGold);
+        SetDeActivePanel(panelSkipTime);
+    }
+
+    public void OnX2SkipTimeSuccess()
+    {
+        this.x2SkipTime = 2;
     }
     #endregion
 }
