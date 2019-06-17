@@ -104,7 +104,6 @@ public class UIManager : MonoBehaviour
     public Text txtTittleUnlock;
     public GameObject unlock_1;
     public GameObject unlock_2;
-    public GameObject unlock_3;
     public Button btnOkUnlock;
 
     [Header("TUTORIAL")]
@@ -877,29 +876,25 @@ public class UIManager : MonoBehaviour
     }
 
     int countSpin_Unlock;
-    int timeSkip_Unlock;
     long gold_Unlock;
-    int coin_Unlock;
-    public void UnlockReward(long _gold, int _spin, int _time, int _coin)
+    public void UnlockReward(long _gold, int _spin)
     {
         btnOkUnlock.onClick.RemoveAllListeners();
-
-        gold_Unlock = _gold;
-        unlock_2.SetActive(true);
-        unlock_2.GetComponentInChildren<Text>().text = ToLongString(gold_Unlock);
 
         countSpin_Unlock = _spin;
         unlock_1.SetActive(true);
         unlock_1.GetComponentInChildren<Text>().text = countSpin_Unlock.ToString();
 
-        timeSkip_Unlock = _time;
-        coin_Unlock = _coin;
+        gold_Unlock = _gold;
+        unlock_2.SetActive(true);
+        unlock_2.GetComponentInChildren<Text>().text = ToLongString(gold_Unlock);
 
         btnOkUnlock.onClick.AddListener(() => Btn_OK_Unlock());
     }
 
     public void On_Success_Ad_Unlock()
     {
+        /*
         unlock_3.SetActive(true);
         int r = UnityEngine.Random.Range(0, 10);
         if (r > 5)
@@ -929,7 +924,7 @@ public class UIManager : MonoBehaviour
                 coin_Unlock = 5 * countMine;
             }
             unlock_3.GetComponentInChildren<Text>().text = coin_Unlock.ToString();
-        }
+        }*/
     }
 
     public void Btn_OK_Unlock()
@@ -937,19 +932,11 @@ public class UIManager : MonoBehaviour
         SetDeActivePanel(panelUnlockReward);
         unlock_1.SetActive(false);
         unlock_2.SetActive(false);
-        unlock_3.SetActive(false);
+
         GameManager.Instance.AddGold(gold_Unlock);
         GameManager.Instance.countSpin += countSpin_Unlock;
-        if (timeSkip_Unlock > 0)
-        {
-            this.PostEvent(EventID.SKIP_TIME, timeSkip_Unlock);
-        }
-        if (timeSkip_Unlock > 0)
-        {
-            GameManager.Instance.AddCoin(coin_Unlock);
-        }
 
-        countSpin_Unlock = timeSkip_Unlock = coin_Unlock = 0;
+        countSpin_Unlock = 0;
         gold_Unlock = 0;
     }
     #endregion

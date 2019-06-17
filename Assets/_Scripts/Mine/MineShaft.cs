@@ -1241,7 +1241,7 @@ public class MineShaft : MonoBehaviour
             timeSkip_Unlock = 0;
             coin_Unlock = 0;
         }
-        UIManager.Instance.UnlockReward(gold_Unlock, countSpin_Unlock, timeSkip_Unlock, coin_Unlock);
+        UIManager.Instance.UnlockReward(gold_Unlock, countSpin_Unlock);
         GameManager.Instance.AddMedal(1);
     }
     #endregion
