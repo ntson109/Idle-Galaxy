@@ -132,7 +132,8 @@ public class UIManager : MonoBehaviour
 
     [Header("SKIP TIME")]
     public GameObject panelSkipTime;
-    public Text txtSkipTime, txtSkipTimeInPanel;
+    public Text txtSkipTime, txtSkipTimeInPanel, txtGoldFromSkipTime;
+    public Button btnX2SkipTime;
 
     void Awake()
     {
@@ -1199,19 +1200,32 @@ public class UIManager : MonoBehaviour
 
     #region SKIP_TIME
     public int x2SkipTime = 1;
+    public long goldFromSkipTime = 0;
+
+    public void ShowSkipTime()
+    {
+        this.x2SkipTime = 1;
+        var capacity = DataPlayer.Instance.CapacityOffline();
+        this.goldFromSkipTime = capacity  * GameManager.Instance.SKIP_TIME * 60 * x2SkipTime;
+        this.txtGoldFromSkipTime.text = this.ToLongString(this.goldFromSkipTime * this.x2SkipTime);
+        this.btnX2SkipTime.interactable = true;
+        this.SetActivePanel(this.panelSkipTime);
+    }
+
     public void OnUseSkipTimeClick()
     {
         var skipTime = GameManager.Instance.SKIP_TIME;
         this.PostEvent(EventID.SKIP_TIME, skipTime * 60);
         GameManager.Instance.AddSkipTime(-skipTime);
-        var addGold = DataPlayer.Instance.CapacityOffline() * skipTime * 60 * x2SkipTime;
-        GameManager.Instance.AddGold(addGold);
+        GameManager.Instance.AddGold(this.goldFromSkipTime * this.x2SkipTime);
         SetDeActivePanel(panelSkipTime);
     }
 
     public void OnX2SkipTimeSuccess()
     {
         this.x2SkipTime = 2;
+        this.txtGoldFromSkipTime.text = this.ToLongString(this.goldFromSkipTime * this.x2SkipTime);
+        this.btnX2SkipTime.interactable = false;
     }
     #endregion
 }
