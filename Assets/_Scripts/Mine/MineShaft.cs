@@ -540,11 +540,14 @@ public class MineShaft : MonoBehaviour
             this.isAutoWorking = false;
             this.properties.capacity = GameConfig.Instance.lstPropertiesMap[ID].Productivity;
             this.properties.miningTime = GameConfig.Instance.lstPropertiesMap[ID].miningTime;
+
+            this.typeUpgradeSpecial = new List<UpgradeObj_Special.Type>();
             for (int i = 0; i < GameConfig.Instance.lstPropertiesMap[ID].Upgrade_Special.Count; i++)
             {
                 this.typeUpgradeSpecial.Add(UpgradeObj_Special.Type.NONE);
             }
 
+            this.timeUpgradeSpecial = new List<float>();
             for (int i = 0; i < GameConfig.Instance.lstPropertiesMap[ID].Upgrade_Special.Count; i++)
             {
                 this.timeUpgradeSpecial.Add(GameConfig.Instance.lstPropertiesMap[ID].Upgrade_Special[i].time);

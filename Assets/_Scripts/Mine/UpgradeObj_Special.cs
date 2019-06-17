@@ -72,6 +72,7 @@ public class UpgradeObj_Special : MonoBehaviour
         {
             case Type.NONE:
                 panelTime.SetActive(false);
+                this.btnBuy.gameObject.SetActive(true);
                 break;
             case Type.UPGRADING:
                 panelTime.SetActive(true);

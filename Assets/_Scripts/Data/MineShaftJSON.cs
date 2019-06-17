@@ -34,7 +34,7 @@ public class MineShaftJSON
     public bool isAutoWorking;
 
     public float timeUnlocking;
-
+    public int typeUpgradeLevel;
     public float timeUpgradeLevel;
 
     public float workBar;

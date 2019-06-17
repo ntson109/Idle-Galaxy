@@ -530,8 +530,7 @@ public class UIManager : MonoBehaviour
         {
             this.PostEvent(EventID.START_GAME);
             GameManager.Instance.stateGame = StateGame.PLAYING;
-            GameManager.Instance.AddGold(GameConfig.Instance.GoldStart);
-            GameManager.Instance.AddCoin(GameConfig.Instance.CoinStart);
+            DataPlayer.Instance.LoadDataPlayer(true);
             AudioManager.Instance.Play("GamePlay", true);
             //isMusicOn = true;
         });

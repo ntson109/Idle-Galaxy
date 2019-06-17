@@ -155,6 +155,7 @@ public class DataPlayer : MonoBehaviour
 
                 m.isAutoWorking = GameManager.Instance.lstMap[i].lstMineShaft[j].isAutoWorking;
                 m.timeUnlocking = GameManager.Instance.lstMap[i].lstMineShaft[j].timeUnlocking;
+                m.typeUpgradeLevel = (int)GameManager.Instance.lstMap[i].lstMineShaft[j].typeUpgradeLevel;
                 m.timeUpgradeLevel = GameManager.Instance.lstMap[i].lstMineShaft[j].timeUpgradeLevel;
 
                 m.store = new StoreJSON();
@@ -304,11 +305,9 @@ public class DataPlayer : MonoBehaviour
             GameManager.Instance.timeBoost = objJson["boost"]["time"].AsFloat;
 
             GameManager.Instance.countSpin = objJson["boost"]["countSpin"].AsInt;
-            GameManager.Instance.countSpin = 10;
 
             for (int i = 0; i < objJson["lsMineShaft"].Count; i++)
             {
-                Debug.Log("Log i = " + i);
                 if (i < GameManager.Instance.lstMap[0].lstMineShaft.Count)
                 {
                     GameManager.Instance.lstMap[0].lstMineShaft[i].ID = objJson["lsMineShaft"][i]["ID"].AsInt;
@@ -352,6 +351,7 @@ public class DataPlayer : MonoBehaviour
                     }
                     GameManager.Instance.lstMap[0].lstMineShaft[i].isAutoWorking = objJson["lsMineShaft"][i]["isAutoWorking"].AsBool;
                     GameManager.Instance.lstMap[0].lstMineShaft[i].timeUnlocking = objJson["lsMineShaft"][i]["timeUnlocking"].AsFloat;
+                    GameManager.Instance.lstMap[0].lstMineShaft[i].typeUpgradeLevel = (UpgradeObj_Level.Type) objJson["lsMineShaft"][i]["typeUpgradeLevel"].AsInt;
                     GameManager.Instance.lstMap[0].lstMineShaft[i].timeUpgradeLevel = objJson["lsMineShaft"][i]["timeUpgradeLevel"].AsFloat;
                     GameManager.Instance.lstMap[0].lstMineShaft[i].store.level = objJson["lsMineShaft"][i]["store"]["level"].AsInt;
                     GameManager.Instance.lstMap[0].lstMineShaft[i].store.value = objJson["lsMineShaft"][i]["store"]["value"].AsInt;
