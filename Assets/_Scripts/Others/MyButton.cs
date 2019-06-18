@@ -31,13 +31,13 @@ public class MyButton : MonoBehaviour
         this.PriceButton.onClick.AddListener(on_click);
     }
 
-    public void Init(PriceType price_type, long price_value, float time, UnityAction on_click)
+    public void Init(PriceType price_type, long price_value, float maxTime, float currentTime, UnityAction on_click)
     {
         this.Type = price_type;
         this.SetPrice(price_value);
         this.MaxPriceValue = price_value;
-        this.Time = time;
-        this.MaxTime = time;
+        this.Time = currentTime;
+        this.MaxTime = maxTime;
         this.PriceButton.onClick.RemoveAllListeners();
         this.PriceButton.onClick.AddListener(() => this.ProcessBuy());
         this.PriceButton.onClick.AddListener(on_click);

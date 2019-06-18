@@ -99,6 +99,7 @@ public class MineShaft : MonoBehaviour
     public List<UpgradeObj_Special> lstUpgradeSpecial;
     public List<UpgradeObj_Special.Type> typeUpgradeSpecial = new List<UpgradeObj_Special.Type>();
     public List<float> timeUpgradeSpecial = new List<float>();
+    public List<float> maxTimeUpgradeSpecial = new List<float>();
     public int[] timeUpgradeSpecial_Max;
     public bool isAutoWorking = false;
     public MineShaft nextMineShaft; //mỏ tiếp theo
@@ -118,7 +119,7 @@ public class MineShaft : MonoBehaviour
 
     public UpgradeObj_Level.Type typeUpgradeLevel;
     public float timeUpgradeLevel;
-    private float timeUpgradeLevel_Max;
+    public float maxTimeUpgradeLevel;
 
     public Store store;
     public MyButton btnStore;
@@ -533,6 +534,13 @@ public class MineShaft : MonoBehaviour
 
     void GetInfo()
     {
+        this.maxTimeUpgradeLevel = GameConfig.Instance.lstPropertiesMap[ID].Upgrade_time[this.properties.level - 1];
+        this.maxTimeUpgradeSpecial = new List<float>();
+        for (int i = 0; i < GameConfig.Instance.lstPropertiesMap[ID].Upgrade_Special.Count; i++)
+        {
+            this.maxTimeUpgradeSpecial.Add(GameConfig.Instance.lstPropertiesMap[ID].Upgrade_Special[i].time);
+        }
+
         if (UIManager.Instance.isNewPlayer)
         {
             this.properties.level = 1;
@@ -547,11 +555,7 @@ public class MineShaft : MonoBehaviour
                 this.typeUpgradeSpecial.Add(UpgradeObj_Special.Type.NONE);
             }
 
-            this.timeUpgradeSpecial = new List<float>();
-            for (int i = 0; i < GameConfig.Instance.lstPropertiesMap[ID].Upgrade_Special.Count; i++)
-            {
-                this.timeUpgradeSpecial.Add(GameConfig.Instance.lstPropertiesMap[ID].Upgrade_Special[i].time);
-            }
+            this.timeUpgradeSpecial = this.maxTimeUpgradeSpecial;
             this.properties.buyMoreMinePrice = GameConfig.Instance.lstPropertiesMap[ID].MoreMine_cost_1;
             this.state = StateMineShaft.LOCK;
             this.store.level = 1;
@@ -1033,7 +1037,7 @@ public class MineShaft : MonoBehaviour
         if (typeUpgradeLevel == UpgradeObj_Level.Type.NONE)
         {
             //GameManager.Instance.AddGold(-this.properties.upgradePrice);
-            timeUpgradeLevel = GameConfig.Instance.lstPropertiesMap[ID].Upgrade_time[this.properties.level - 1];
+            timeUpgradeLevel = this.maxTimeUpgradeLevel;
             typeUpgradeLevel = UpgradeObj_Level.Type.UPGRADING;
             GameManager.Instance.upgradeLevel.Upgrading();
         }

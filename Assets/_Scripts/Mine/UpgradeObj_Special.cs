@@ -65,7 +65,7 @@ public class UpgradeObj_Special : MonoBehaviour
         coin = _coin;
         /*btnBuyNow.thisPrice = coin;
         btnBuyNow.type = MyButton.Type.COIN;*/
-        this.btnBuyNow.Init(PriceType.COIN, coin, () => this.BtnBuyNow());
+        this.btnBuyNow.Init(PriceType.COIN, coin, thisMineShaft.maxTimeUpgradeSpecial[this.ID], thisMineShaft.timeUpgradeSpecial[this.ID], () => this.BtnBuyNow());
         txtCoin.text = UIManager.Instance.ToLongString(coin);
                 
         switch (type)

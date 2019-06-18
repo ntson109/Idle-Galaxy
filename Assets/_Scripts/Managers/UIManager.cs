@@ -582,10 +582,10 @@ public class UIManager : MonoBehaviour
     #region === UI MAIN ===
     private System.Action panelCoinAds_WatchAdsAction;
 
-    public void ShowPanelCoinAds(int _coin, float time, UnityEngine.Events.UnityAction _action, System.Action watch_ads_action)
+    public void ShowPanelCoinAds(int _coin, float maxTime, float currentTime, UnityEngine.Events.UnityAction _action, System.Action watch_ads_action)
     {
         SetActivePanel(panelCoinAds);
-        this.btnCoin_panelCoinAds.Init(PriceType.COIN, (long)_coin, time, _action);
+        this.btnCoin_panelCoinAds.Init(PriceType.COIN, (long)_coin, maxTime, currentTime, _action);
         this.panelCoinAds_WatchAdsAction = watch_ads_action;
     }
 
